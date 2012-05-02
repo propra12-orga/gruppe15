@@ -1,3 +1,4 @@
+import game.Debug;
 import graphics.Image;
 import graphics.Sprite;
 
@@ -9,6 +10,7 @@ public class SpriteTest {
 	@Test
 	public void testLoading() {
 
+		Debug.setMode(Debug.NONE);
 		Image[][] sprite = Sprite.load("sonic.png", 32, 39);
 
 		Assert.assertNotNull(sprite);
