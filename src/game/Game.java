@@ -24,6 +24,7 @@ public class Game extends Canvas implements Runnable {
 	private long frameTimeNs = 1000000000 / this.updateRate;
 	public int fps_static = 0;
 	public int fps = 0;
+	private InputHandler keys;
 
 	public Game() {
 		Dimension d = new Dimension(Game.GAME_WIDTH * Game.SCALE, Game.GAME_HEIGHT * Game.SCALE);
@@ -31,6 +32,8 @@ public class Game extends Canvas implements Runnable {
 		this.setMinimumSize(d);
 		this.setMaximumSize(d);
 		this.setBackground(new Color(255, 255, 255));
+		this.keys = new InputHandler();
+		this.addKeyListener(this.keys);
 	}
 
 	@Override
