@@ -15,7 +15,7 @@ import entities.Entity;
 public class Game extends Canvas implements Runnable {
 
 	public static final int GAME_WIDTH = 512;
-	public static final int GAME_HEIGHT = Game.GAME_WIDTH * 3 / 4;
+	public static final int GAME_HEIGHT = (Game.GAME_WIDTH * 3) / 4;
 	public static final int SCALE = 1;
 	private static ArrayList<Entity> entities = new ArrayList<Entity>();
 	private boolean running;
@@ -98,11 +98,12 @@ public class Game extends Canvas implements Runnable {
 
 	private void draw(Graphics g) {
 		g.setColor(this.getBackground());
-		g.fillRect(0, 0, Game.GAME_WIDTH * Game.SCALE + 10, Game.GAME_HEIGHT * Game.SCALE + 10);
+		g.fillRect(0, 0, (Game.GAME_WIDTH * Game.SCALE) + 10, (Game.GAME_HEIGHT * Game.SCALE) + 10);
 		for (Entity e : Game.entities) {
 			e.draw(g);
 		}
 		g.setColor(Color.BLACK);
+		g.drawString("FPS: " + this.fps_static, 0, 10);
 	}
 
 	public static List<Entity> getEntities(int x1, int y1, int x2, int y2) {
