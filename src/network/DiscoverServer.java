@@ -24,8 +24,7 @@ public class DiscoverServer implements Runnable {
 			try {
 				this.announceSocket.receive(wait);
 
-				DatagramPacket response = new DatagramPacket(DiscoverServer.KEYWORD_ANNOUNCE.getBytes(),
-						DiscoverServer.KEYWORD_ANNOUNCE.length(), wait.getAddress(), 1338);
+				DatagramPacket response = new DatagramPacket(buffer, buffer.length, wait.getAddress(), 1338);
 
 				this.announceSocket.send(response);
 			} catch (IOException e) {

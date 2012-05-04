@@ -22,10 +22,10 @@ public class Discover implements Runnable {
 		this.waitSocket = new DatagramSocket(1338);
 		this.servers = new ArrayList<Server>();
 		this.broadcast = new DatagramSocket();
-		byte[] buffer = new byte[256];
+		byte[] buffer = new byte[1];
 		try {
-			this.broadcastPacket = new DatagramPacket(buffer, buffer.length, InetAddress.getByName("255.255.255.255"),
-					DiscoverServer.BROADCAST_PORT);
+			InetAddress broadcastIP = InetAddress.getByName("255.255.255.255");
+			this.broadcastPacket = new DatagramPacket(buffer, buffer.length, broadcastIP, DiscoverServer.BROADCAST_PORT);
 		} catch (UnknownHostException e) {
 			Debug.log(Debug.DEBUG, "Can't create Broadcast");
 		}
@@ -44,7 +44,9 @@ public class Discover implements Runnable {
 			DatagramPacket wait = new DatagramPacket(buffer, buffer.length);
 			try {
 				this.waitSocket.receive(wait);
+
 				if (new String(wait.getData()).equals(DiscoverServer.KEYWORD_ANNOUNCE)) {
+
 					Server s = new Server(wait.getAddress(), GameServer.GAME_PORT);
 					if (this.servers.isEmpty() || (Collections.binarySearch(this.servers, s) < 0)) {
 						this.servers.add(s);
@@ -54,7 +56,6 @@ public class Discover implements Runnable {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
 		}
 	}
 }
