@@ -7,8 +7,7 @@ import java.util.List;
 
 public class InputHandler implements KeyListener {
 	public class Key {
-		public int presses, absorbs;
-		public boolean down, clicked;
+		public boolean down;
 
 		public Key() {
 			InputHandler.this.keys.add(this);
@@ -17,9 +16,6 @@ public class InputHandler implements KeyListener {
 		public void toggle(boolean pressed) {
 			if (pressed != this.down) {
 				this.down = pressed;
-			}
-			if (pressed) {
-				this.presses++;
 			}
 		}
 
