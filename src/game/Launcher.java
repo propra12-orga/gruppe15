@@ -10,6 +10,7 @@ public class Launcher extends JFrame {
 	private Game game;
 
 	public Launcher() {
+		this.setTitle("Bomberman");
 		this.game = new Game();
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(this.game);
