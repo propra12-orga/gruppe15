@@ -1,20 +1,20 @@
 package entities;
 
-import java.awt.Graphics;
+import game.Game;
+import graphics.Sprite;
 
+import java.awt.Graphics;
 
 public class Wall extends Entity {
 
-	public int size;;
-	
 	public Wall(int x, int y) {
-		super (x,y);
+		super(x, y);
 		this.isBlocking = true;
-		this.size = 5;
+		this.images = Sprite.load("brick_solid_small.png", 100, 100);
 	}
-	
-	public void draw(Graphics g){
-		g.setColor(null);
-		g.drawRect(x,y,x+size,y+size);
+
+	@Override
+	public void draw(Graphics g) {
+		g.drawImage((this.images[0][0]).image, this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
 	}
 }
