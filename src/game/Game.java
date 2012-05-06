@@ -11,19 +11,27 @@ import java.util.List;
 
 import level.Box;
 import entities.Entity;
+import entities.Wall;
 
 public class Game extends Canvas implements Runnable {
 
-	public static final int GAME_WIDTH = 512;
-	public static final int GAME_HEIGHT = (Game.GAME_WIDTH * 3) / 4;
+	public static final int BLOCK_SIZE = 30;
+
+	public static int FIELD_WIDTH = 15;
+
+	public static final int GAME_WIDTH = Game.FIELD_WIDTH * Game.BLOCK_SIZE;
+	public static final int GAME_HEIGHT = ((Game.FIELD_WIDTH * 3) / 4) * Game.BLOCK_SIZE;
+
 	public static final int SCALE = 1;
 	private static ArrayList<Entity> entities = new ArrayList<Entity>();
 	private boolean running;
 
-	private int updateRate = 60;
-	private long frameTimeNs = 1000000000 / this.updateRate;
+	private int maxUpdateRate = 60;
+	private long frameTimeNs = 1000000000 / this.maxUpdateRate;
+	private int minSleepTime = 1000 / this.maxUpdateRate;
 	public int fps_static = 0;
 	public int fps = 0;
+
 	private InputHandler keys;
 
 	public Game() {
@@ -34,6 +42,9 @@ public class Game extends Canvas implements Runnable {
 		this.setBackground(new Color(255, 255, 255));
 		this.keys = new InputHandler();
 		this.addKeyListener(this.keys);
+		for (int x = 0; x < Game.FIELD_WIDTH; x++) {
+			Game.entities.add(new Wall(x * Game.BLOCK_SIZE, 0));
+		}
 	}
 
 	@Override
@@ -45,7 +56,7 @@ public class Game extends Canvas implements Runnable {
 			long now = System.nanoTime();
 			long updateLength = now - lastLoopTime;
 			lastLoopTime = now;
-			double delta = updateLength / ((double) this.frameTimeNs);
+			double delta = updateLength / this.frameTimeNs;
 
 			lastFpsTime += updateLength;
 			this.fps++;
@@ -61,13 +72,12 @@ public class Game extends Canvas implements Runnable {
 			BufferStrategy bs = this.getBufferStrategy();
 			Graphics g = bs.getDrawGraphics();
 			this.draw(g);
-
 			bs.show();
 			Toolkit.getDefaultToolkit().sync();
 
-			sleepTime = (lastLoopTime - System.nanoTime()) / 1000000;
-			if (sleepTime < 10) {
-				sleepTime = 10;
+			sleepTime = (lastLoopTime - System.nanoTime()) / this.frameTimeNs;
+			if (sleepTime < this.minSleepTime) {
+				sleepTime = this.minSleepTime;
 			}
 			try {
 				Thread.sleep(sleepTime);

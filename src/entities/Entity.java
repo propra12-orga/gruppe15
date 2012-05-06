@@ -18,7 +18,7 @@ public class Entity {
 	public Entity(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.box = new Box(x, y, x, y);
+		this.box = new Box(x, y, x + Game.BLOCK_SIZE, y + Game.BLOCK_SIZE);
 	}
 
 	public boolean blocks(Entity e) {
