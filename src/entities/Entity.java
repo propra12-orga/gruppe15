@@ -1,6 +1,7 @@
 package entities;
 
 import game.Game;
+import graphics.Image;
 
 import java.awt.Graphics;
 import java.util.List;
@@ -9,9 +10,10 @@ import level.Box;
 
 public class Entity {
 	public Box box;
-	private int y;
-	private int x;
-	private boolean isBlocking;
+	protected int y;
+	protected int x;
+	protected boolean isBlocking;
+	protected Image[][] images;
 
 	public Entity(int x, int y) {
 		this.x = x;
