@@ -28,4 +28,9 @@ public class Box {
 		return this.intersect(b.x1, b.y1, b.x2, b.y2);
 	}
 
+	@Override
+	public String toString() {
+		return "Box [x1=" + this.x1 + ", x2=" + this.x2 + ", y1=" + this.y1 + ", y2=" + this.y2 + "]";
+	}
+
 }
