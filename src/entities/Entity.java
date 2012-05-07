@@ -14,11 +14,13 @@ public class Entity {
 	protected int x;
 	protected boolean isBlocking;
 	protected Image[][] images;
+	public boolean removed;
 
 	public Entity(int x, int y) {
 		this.x = x;
 		this.y = y;
 		this.box = new Box(x, y, x + Game.BLOCK_SIZE, y + Game.BLOCK_SIZE);
+		this.removed = false;
 	}
 
 	public boolean blocks(Entity e) {
