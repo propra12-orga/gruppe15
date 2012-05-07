@@ -2,15 +2,12 @@ package game;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
-import java.util.List;
 
 public class InputHandler implements KeyListener {
 	public class Key {
 		public boolean down;
 
 		public Key() {
-			InputHandler.this.keys.add(this);
 		}
 
 		public void toggle(boolean pressed) {
@@ -18,10 +15,7 @@ public class InputHandler implements KeyListener {
 				this.down = pressed;
 			}
 		}
-
 	}
-
-	public List<Key> keys = new ArrayList<Key>();
 
 	public Key up = new Key();
 	public Key down = new Key();
