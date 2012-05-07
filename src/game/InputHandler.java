@@ -24,8 +24,8 @@ public class InputHandler implements KeyListener {
 	public Key bomb = new Key();
 	public Key pause = new Key();
 
-	public InputHandler(Game game) {
-		game.addKeyListener(this);
+	public InputHandler() {
+
 	}
 
 	private void toggle(KeyEvent ke, boolean pressed) {

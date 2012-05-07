@@ -42,7 +42,8 @@ public class Game extends Canvas implements Runnable {
 		this.setMinimumSize(d);
 		this.setMaximumSize(d);
 		this.setBackground(new Color(255, 255, 255));
-		this.keys = new InputHandler(this);
+		this.keys = new InputHandler();
+		this.addKeyListener(this.keys);
 		for (int x = 0; x < Game.FIELD_WIDTH; x++) {
 			Game.entities.add(new BreakeableWall(x * Game.BLOCK_SIZE, x * Game.BLOCK_SIZE));
 		}
