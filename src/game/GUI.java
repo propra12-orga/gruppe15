@@ -6,8 +6,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 public class GUI {
-	private Game game;
-
 	private JMenuBar menubar;
 	private JMenu spiel;
 	private JMenuItem starten;
