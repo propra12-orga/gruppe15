@@ -15,6 +15,9 @@ public class GUI {
 	private JMenu optionen;
 	private JMenuItem spname;
 	private JMenuItem groesse;
+	private JMenuItem startserver;
+	private JMenuItem stopserver;
+	private JMenuItem findserver;
 
 	public GUI(JFrame frame) {
 		this.menubar = new JMenuBar();
@@ -28,6 +31,12 @@ public class GUI {
 
 		// Netzwerk
 		this.netzwerk = new JMenu("Netzwerk");
+		this.startserver = new JMenuItem("Server starten");
+		this.stopserver = new JMenuItem("Server beenden");
+		this.findserver = new JMenuItem("Server suchen");
+		this.netzwerk.add(this.startserver);
+		this.netzwerk.add(this.stopserver);
+		this.netzwerk.add(this.findserver);
 		this.menubar.add(this.netzwerk);
 
 		// Optionen
