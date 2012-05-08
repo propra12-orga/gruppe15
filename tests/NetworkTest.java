@@ -8,7 +8,7 @@ import network.DiscoverServer;
 
 import org.junit.Test;
 
-public class NetworrkTest {
+public class NetworkTest {
 
 	@Test
 	public void test() {
