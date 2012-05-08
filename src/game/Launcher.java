@@ -9,6 +9,9 @@ public class Launcher extends JFrame {
 
 	private Game game;
 
+	/**
+	 * Create Window with Game Canvas Element
+	 */
 	public Launcher() {
 		this.setTitle("Bomberman");
 		this.game = new Game();
