@@ -6,6 +6,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 public class GUI {
+	private Game game;
 
 	private JMenuBar menubar;
 	private JMenu spiel;
@@ -20,8 +21,11 @@ public class GUI {
 	private JMenuItem findserver;
 
 	public GUI(JFrame frame) {
+
+		// Create Menubar
 		this.menubar = new JMenuBar();
-		// Spiel
+
+		// Buttons for "Spiel"
 		this.spiel = new JMenu("Spiel");
 		this.starten = new JMenuItem("Neustarten");
 		this.beenden = new JMenuItem("Beenden");
@@ -29,7 +33,7 @@ public class GUI {
 		this.spiel.add(this.beenden);
 		this.menubar.add(this.spiel);
 
-		// Netzwerk
+		// Buttons for "Netzwerk"
 		this.netzwerk = new JMenu("Netzwerk");
 		this.startserver = new JMenuItem("Server starten");
 		this.stopserver = new JMenuItem("Server beenden");
@@ -39,7 +43,7 @@ public class GUI {
 		this.netzwerk.add(this.findserver);
 		this.menubar.add(this.netzwerk);
 
-		// Optionen
+		// Buttons for "Optionen"
 		this.optionen = new JMenu("Optionen");
 		this.spname = new JMenuItem("Spielername");
 		this.groesse = new JMenuItem("Größe");
@@ -47,6 +51,7 @@ public class GUI {
 		this.optionen.add(this.groesse);
 		this.menubar.add(this.optionen);
 
+		// set Menubar
 		frame.setJMenuBar(this.menubar);
 
 	}
