@@ -3,7 +3,6 @@ package level;
 public class Loader {
 
 	public boolean isBlocking(String S, int zeilen, int spalten) {
-
 		int i, j, l, k = 0;
 		char arr[][] = new char[zeilen][spalten];
 		for (i = 0; i < zeilen; i++) {
