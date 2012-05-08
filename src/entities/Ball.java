@@ -14,8 +14,6 @@ public class Ball extends Entity {
 	private int speedY;
 	public int speedX;
 	private Color color;
-	private int oldX;
-	private int oldY;
 
 	public Ball(int x, int y) {
 		super(x, y);
@@ -55,10 +53,9 @@ public class Ball extends Entity {
 			if (e != this) {
 				e.collide(this);
 				this.collide(e);
+				this.box.update(this.x, this.y, this.x + this.radius, this.y + this.radius);
 			}
 		}
-
-		this.box.update(this.x, this.y, this.x + this.radius, this.y + this.radius);
 
 	}
 
