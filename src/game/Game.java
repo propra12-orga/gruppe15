@@ -13,6 +13,7 @@ import level.Box;
 import entities.Ball;
 import entities.BreakeableWall;
 import entities.Entity;
+import entities.background;
 
 public class Game extends Canvas implements Runnable {
 
@@ -46,6 +47,15 @@ public class Game extends Canvas implements Runnable {
 		this.setBackground(new Color(255, 255, 255));
 		this.keys = new InputHandler();
 		this.addKeyListener(this.keys);
+		// draw background
+		for (int i = 0; i < (Game.FIELD_WIDTH * 40); i = i + Game.BLOCK_SIZE) {
+			for (int j = 0; j < (Game.FIELD_WIDTH * 50); j = j
+					+ Game.BLOCK_SIZE) {
+				Game.entities.add(new background(j, i));
+			}
+
+		}
+
 		for (int x = 0; x < Game.FIELD_WIDTH; x++) {
 			Game.entities.add(new BreakeableWall(x * Game.BLOCK_SIZE, x
 					* Game.BLOCK_SIZE));
