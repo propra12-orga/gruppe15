@@ -13,6 +13,7 @@ import level.Box;
 import entities.Ball;
 import entities.BreakableWall;
 import entities.Entity;
+import entities.background;
 
 public class Game extends Canvas implements Runnable {
 
@@ -53,7 +54,7 @@ public class Game extends Canvas implements Runnable {
 		// draw background
 		for (int i = 0; i < (Game.GAME_WIDTH); i = i + Game.BLOCK_SIZE) {
 			for (int j = 0; j < (Game.GAME_HEIGHT); j = j + Game.BLOCK_SIZE) {
-				// Game.entities.add(new background(j, i));
+				Game.entities.add(new background(j, i));
 			}
 
 		}
