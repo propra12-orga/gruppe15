@@ -10,10 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import level.Box;
+import entities.Background;
 import entities.Ball;
 import entities.BreakableWall;
 import entities.Entity;
-import entities.background;
 
 public class Game extends Canvas implements Runnable {
 
@@ -27,9 +27,10 @@ public class Game extends Canvas implements Runnable {
 
 	public static final int SCALE = 1;
 	public static ArrayList<Entity> entities = new ArrayList<Entity>();
+	public static ArrayList<Entity> staticBackground = new ArrayList<Entity>();
 	private boolean running;
 
-	private int maxUpdateRate = 90;
+	private int maxUpdateRate = 50;
 	private long frameTimeNs = 1000000000 / this.maxUpdateRate;
 	private int minSleepTime = 1000 / this.maxUpdateRate;
 	public int fps_static = 0;
@@ -43,32 +44,33 @@ public class Game extends Canvas implements Runnable {
 	 */
 	public Game() {
 		Debug.setMode(Debug.DEBUG);
-		Dimension d = new Dimension(Game.GAME_WIDTH * Game.SCALE,
-				Game.GAME_HEIGHT * Game.SCALE);
+
+		Dimension d = new Dimension(Game.GAME_WIDTH - 10, Game.GAME_HEIGHT - 10);
 		this.setPreferredSize(d);
 		this.setMinimumSize(d);
 		this.setMaximumSize(d);
-		this.setBackground(new Color(255, 255, 255));
+
 		this.keys = new InputHandler();
 		this.addKeyListener(this.keys);
+
 		// draw background
-		for (int i = 0; i < (Game.GAME_HEIGHT); i = i + Game.BLOCK_SIZE) {
-			for (int j = 0; j < (Game.GAME_WIDTH); j = j + Game.BLOCK_SIZE) {
-				Game.entities.add(new background(j, i));
+		for (int i = 0; i < Game.FIELD_HEIGHT; i++) {
+			for (int j = 0; j < Game.FIELD_WIDTH; j++) {
+				Game.staticBackground.add(new Background(j * Game.BLOCK_SIZE, i * Game.BLOCK_SIZE));
 			}
 
 		}
 
 		// Test routine
 		for (int x = 0; x < Game.FIELD_WIDTH; x++) {
-			Game.entities.add(new BreakableWall(x * Game.BLOCK_SIZE, x
-					* Game.BLOCK_SIZE));
+			Game.entities.add(new BreakableWall(x * Game.BLOCK_SIZE, x * Game.BLOCK_SIZE));
 
 		}
 
 		for (int i = 0; i < 10; i++) {
-			Game.entities.add(new Ball(10, (Game.BLOCK_SIZE * i) + 1));
+			Game.entities.add(new Ball(10, (Game.BLOCK_SIZE * i)));
 		}
+
 	}
 
 	/**
@@ -153,7 +155,7 @@ public class Game extends Canvas implements Runnable {
 	private void step(double delta) {
 
 		for (Entity e : Game.entities) {
-			if (e.removed == false) {
+			if ((e.removed == false) && (e.needsStep == true)) {
 				e.step(delta);
 			}
 		}
@@ -166,14 +168,16 @@ public class Game extends Canvas implements Runnable {
 	 */
 	private void draw(Graphics g) {
 		g.setColor(this.getBackground());
-		g.fillRect(0, 0, (Game.GAME_WIDTH * Game.SCALE) + 10,
-				(Game.GAME_HEIGHT * Game.SCALE) + 10);
+		g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
+		for (Entity e : Game.staticBackground) {
+			e.draw(g);
+		}
 		for (Entity e : Game.entities) {
 			if (e.removed == false) {
 				e.draw(g);
 			}
 		}
-		g.setColor(Color.BLACK);
+		g.setColor(Color.WHITE);
 		g.drawString("FPS: " + this.fps_static, 0, 10);
 	}
 
@@ -188,8 +192,7 @@ public class Game extends Canvas implements Runnable {
 	 */
 	public static List<Entity> getEntities(int x1, int y1, int x2, int y2) {
 		List<Entity> result = new ArrayList<Entity>();
-		Box b = new Box(Math.max(0, x1), Math.max(0, y1), Math.min(x2,
-				Game.GAME_WIDTH), Math.min(y2, Game.GAME_HEIGHT));
+		Box b = new Box(Math.max(0, x1), Math.max(0, y1), Math.min(x2, Game.GAME_WIDTH), Math.min(y2, Game.GAME_HEIGHT));
 
 		for (Entity e : Game.entities) {
 			if (e.removed == false) {

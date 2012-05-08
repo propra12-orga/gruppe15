@@ -17,8 +17,8 @@ public class Ball extends Entity {
 
 	public Ball(int x, int y) {
 		super(x, y);
-		this.speedX = (int) (Math.random() * 5);
-		this.speedY = (int) (Math.random() * 5);
+		this.speedX = (int) (Math.random() * 10);
+		this.speedY = (int) (Math.random() * 10);
 		this.isBlocking = true;
 		this.box = new Box(this.x, this.y, this.x + this.radius, this.y + this.radius);
 		this.color = Color.RED;
