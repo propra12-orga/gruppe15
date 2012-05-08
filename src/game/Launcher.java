@@ -17,13 +17,14 @@ public class Launcher extends JFrame {
 		this.game = new Game();
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(this.game);
-
+		new GUI(this);
 		this.setContentPane(panel);
 		this.pack();
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
+
 	}
 
 	public void start() {
