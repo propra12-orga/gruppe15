@@ -25,7 +25,7 @@ public class Game extends Canvas implements Runnable {
 	public static final int GAME_HEIGHT = Game.FIELD_HEIGHT * Game.BLOCK_SIZE;
 
 	public static final int SCALE = 1;
-	private static ArrayList<Entity> entities = new ArrayList<Entity>();
+	public static ArrayList<Entity> entities = new ArrayList<Entity>();
 	private boolean running;
 
 	private int maxUpdateRate = 90;
@@ -42,7 +42,8 @@ public class Game extends Canvas implements Runnable {
 	 */
 	public Game() {
 		Debug.setMode(Debug.DEBUG);
-		Dimension d = new Dimension(Game.GAME_WIDTH * Game.SCALE, Game.GAME_HEIGHT * Game.SCALE);
+		Dimension d = new Dimension(Game.GAME_WIDTH * Game.SCALE,
+				Game.GAME_HEIGHT * Game.SCALE);
 		this.setPreferredSize(d);
 		this.setMinimumSize(d);
 		this.setMaximumSize(d);
@@ -58,7 +59,8 @@ public class Game extends Canvas implements Runnable {
 		}
 
 		for (int x = 0; x < Game.FIELD_WIDTH; x++) {
-			Game.entities.add(new BreakeableWall(x * Game.BLOCK_SIZE, x * Game.BLOCK_SIZE));
+			Game.entities.add(new BreakeableWall(x * Game.BLOCK_SIZE, x
+					* Game.BLOCK_SIZE));
 
 		}
 
@@ -162,7 +164,8 @@ public class Game extends Canvas implements Runnable {
 	 */
 	private void draw(Graphics g) {
 		g.setColor(this.getBackground());
-		g.fillRect(0, 0, (Game.GAME_WIDTH * Game.SCALE) + 10, (Game.GAME_HEIGHT * Game.SCALE) + 10);
+		g.fillRect(0, 0, (Game.GAME_WIDTH * Game.SCALE) + 10,
+				(Game.GAME_HEIGHT * Game.SCALE) + 10);
 		for (Entity e : Game.entities) {
 			if (e.removed == false) {
 				e.draw(g);
@@ -183,7 +186,8 @@ public class Game extends Canvas implements Runnable {
 	 */
 	public static List<Entity> getEntities(int x1, int y1, int x2, int y2) {
 		List<Entity> result = new ArrayList<Entity>();
-		Box b = new Box(Math.max(0, x1), Math.max(0, y1), Math.min(x2, Game.GAME_WIDTH), Math.min(y2, Game.GAME_HEIGHT));
+		Box b = new Box(Math.max(0, x1), Math.max(0, y1), Math.min(x2,
+				Game.GAME_WIDTH), Math.min(y2, Game.GAME_HEIGHT));
 
 		for (Entity e : Game.entities) {
 			if (e.removed == false) {

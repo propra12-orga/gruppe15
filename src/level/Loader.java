@@ -1,8 +1,13 @@
 package level;
 
+import entities.BreakeableWall;
+import entities.Wall;
+import game.Game;
+
 public class Loader {
 
-	public boolean isBlocking(String S, int zeilen, int spalten) {
+	public void addWalls(String S, int zeilen, int spalten) {
+
 		int i, j, l, k = 0;
 		char arr[][] = new char[zeilen][spalten];
 		for (i = 0; i < zeilen; i++) {
@@ -10,10 +15,10 @@ public class Loader {
 				arr[i][j] = S.charAt(k);
 				l = (arr[i][j] - '0');
 				if (l == 1) {
-					return true;
+					Game.entities.add(new BreakeableWall(i, j));
 				}
 				if (l == 2) {
-					return false;
+					Game.entities.add(new Wall(i, j));
 				}
 				k++;
 			}
