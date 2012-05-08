@@ -52,13 +52,14 @@ public class Game extends Canvas implements Runnable {
 		this.keys = new InputHandler();
 		this.addKeyListener(this.keys);
 		// draw background
-		for (int i = 0; i < (Game.GAME_WIDTH); i = i + Game.BLOCK_SIZE) {
-			for (int j = 0; j < (Game.GAME_HEIGHT); j = j + Game.BLOCK_SIZE) {
+		for (int i = 0; i < (Game.GAME_HEIGHT); i = i + Game.BLOCK_SIZE) {
+			for (int j = 0; j < (Game.GAME_WIDTH); j = j + Game.BLOCK_SIZE) {
 				Game.entities.add(new background(j, i));
 			}
 
 		}
 
+		// Test routine
 		for (int x = 0; x < Game.FIELD_WIDTH; x++) {
 			Game.entities.add(new BreakableWall(x * Game.BLOCK_SIZE, x
 					* Game.BLOCK_SIZE));
