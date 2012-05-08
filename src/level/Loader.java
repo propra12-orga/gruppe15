@@ -1,6 +1,6 @@
 package level;
 
-import entities.BreakeableWall;
+import entities.BreakableWall;
 import entities.Wall;
 import game.Game;
 
@@ -15,7 +15,7 @@ public class Loader {
 				arr[i][j] = S.charAt(k);
 				l = (arr[i][j] - '0');
 				if (l == 1) {
-					Game.entities.add(new BreakeableWall(i, j));
+					Game.entities.add(new BreakableWall(i, j));
 				}
 				if (l == 2) {
 					Game.entities.add(new Wall(i, j));

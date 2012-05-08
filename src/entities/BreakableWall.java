@@ -2,9 +2,9 @@ package entities;
 
 import graphics.Sprite;
 
-public class BreakeableWall extends Wall {
+public class BreakableWall extends Wall {
 
-	public BreakeableWall(int x, int y) {
+	public BreakableWall(int x, int y) {
 		super(x, y);
 		this.images = Sprite.load("brick_break_small.png", 100, 100);
 	}

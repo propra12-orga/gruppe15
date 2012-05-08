@@ -11,7 +11,7 @@ import java.util.List;
 
 import level.Box;
 import entities.Ball;
-import entities.BreakeableWall;
+import entities.BreakableWall;
 import entities.Entity;
 
 public class Game extends Canvas implements Runnable {
@@ -59,7 +59,7 @@ public class Game extends Canvas implements Runnable {
 		}
 
 		for (int x = 0; x < Game.FIELD_WIDTH; x++) {
-			Game.entities.add(new BreakeableWall(x * Game.BLOCK_SIZE, x
+			Game.entities.add(new BreakableWall(x * Game.BLOCK_SIZE, x
 					* Game.BLOCK_SIZE));
 
 		}
