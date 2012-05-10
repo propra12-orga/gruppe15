@@ -12,8 +12,6 @@ import java.util.List;
 import level.Box;
 import level.Loader;
 import entities.Background;
-import entities.Ball;
-import entities.BreakableWall;
 import entities.Entity;
 
 public class Game extends Canvas implements Runnable {
@@ -23,8 +21,10 @@ public class Game extends Canvas implements Runnable {
 	public static int FIELD_WIDTH = 16;
 	public static int FIELD_HEIGHT = ((Game.FIELD_WIDTH * 3) / 4);
 
-	public static final int GAME_WIDTH = Game.FIELD_WIDTH * Game.BLOCK_SIZE;
-	public static final int GAME_HEIGHT = Game.FIELD_HEIGHT * Game.BLOCK_SIZE;
+	public static final int GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE)
+			+ (Game.BLOCK_SIZE / 4);
+	public static final int GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE)
+			+ (Game.BLOCK_SIZE / 4);
 
 	public static final int SCALE = 1;
 	public static ArrayList<Entity> entities = new ArrayList<Entity>();
@@ -64,19 +64,13 @@ public class Game extends Canvas implements Runnable {
 		}
 		Loader l1 = new Loader();
 		l1.addWalls(
-				"222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222221111222211111222222222222222",
+				"222222222222200000000002200000000002200000000002200000000002200000000002200000000002200000000002200000000002200000000002200000000002200000000002200000000002000000000002200000000002222222222222",
 				12, 16);
 
-		// Test routine
-		for (int x = 9; x < Game.FIELD_WIDTH; x++) {
-			Game.entities.add(new BreakableWall(x * Game.BLOCK_SIZE, x
-					* Game.BLOCK_SIZE));
-
-		}
-
-		for (int i = 0; i < 10; i++) {
-			Game.entities.add(new Ball(50, (Game.BLOCK_SIZE * i)));
-		}
+		/*
+		 * for (int i = 0; i < 10; i++) { Game.entities.add(new Ball(50,
+		 * (Game.BLOCK_SIZE * i))); }
+		 */
 	}
 
 	/**
