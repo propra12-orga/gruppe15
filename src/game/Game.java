@@ -56,7 +56,6 @@ public class Game extends Canvas implements Runnable {
 			for (int j = 0; j < (Game.GAME_WIDTH); j = j + Game.BLOCK_SIZE) {
 				Game.entities.add(new background(j, i));
 			}
-
 		}
 
 		// Test routine
