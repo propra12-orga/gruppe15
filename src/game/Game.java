@@ -24,9 +24,9 @@ public class Game extends Canvas implements Runnable {
 	// Das Folgende ist Absicht, das Fenster ist sonst zu klein um alle Blöcke
 	// darstellen zu können
 	public static final int GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE)
-			+ (Game.BLOCK_SIZE / 4);
+			+ ((Game.FIELD_WIDTH * Game.BLOCK_SIZE) / 200 / 3);
 	public static final int GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE)
-			+ (Game.BLOCK_SIZE / 4);
+			+ ((Game.FIELD_WIDTH * Game.BLOCK_SIZE) / 200 / 3);
 
 	public static final int SCALE = 1;
 	public static ArrayList<Entity> entities = new ArrayList<Entity>();
