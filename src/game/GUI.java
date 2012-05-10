@@ -44,7 +44,7 @@ public class GUI {
 		// Buttons for "Optionen"
 		this.optionen = new JMenu("Optionen");
 		this.spname = new JMenuItem("Spielername");
-		this.groesse = new JMenuItem("Größe");
+		this.groesse = new JMenuItem("Groesse");
 		this.optionen.add(this.spname);
 		this.optionen.add(this.groesse);
 		this.menubar.add(this.optionen);

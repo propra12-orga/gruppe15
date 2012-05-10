@@ -15,10 +15,12 @@ public class Loader {
 				arr[i][j] = S.charAt(k);
 				l = arr[i][j];
 				if (l == 1) {
-					Game.entities.add(new BreakableWall(i * Game.BLOCK_SIZE, j * Game.BLOCK_SIZE));
+					Game.entities.add(new BreakableWall(i * Game.BLOCK_SIZE, j
+							* Game.BLOCK_SIZE));
 				}
 				if (l == 2) {
-					Game.entities.add(new Wall(i * Game.BLOCK_SIZE, j * Game.BLOCK_SIZE));
+					Game.entities.add(new Wall(i * Game.BLOCK_SIZE, j
+							* Game.BLOCK_SIZE));
 				}
 				k++;
 			}

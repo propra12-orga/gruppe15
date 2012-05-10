@@ -54,20 +54,31 @@ public class Game extends Canvas implements Runnable {
 		this.addKeyListener(this.keys);
 
 		// draw background
+
 		for (int i = 0; i < Game.FIELD_HEIGHT; i++) {
 			for (int j = 0; j < Game.FIELD_WIDTH; j++) {
-				Game.staticBackground.add(new Background(j * Game.BLOCK_SIZE, i * Game.BLOCK_SIZE));
+				Game.staticBackground.add(new Background(j * Game.BLOCK_SIZE, i
+						* Game.BLOCK_SIZE));
 			}
 		}
 
+		// test area
+		/*
+		 * for (int i = 0; i < (Game.FIELD_WIDTH - Game.BLOCK_SIZE); i++) {
+		 * Game.entities.add(new Wall(i * Game.BLOCK_SIZE, 0));
+		 * Game.entities.add(new Wall(i * Game.BLOCK_SIZE, (Game.BLOCK_SIZE *
+		 * Game.FIELD_HEIGHT) - (Game.BLOCK_SIZE * 2))); }
+		 */
+
 		// Test routine
-		for (int x = 0; x < Game.FIELD_WIDTH; x++) {
-			Game.entities.add(new BreakableWall(x * Game.BLOCK_SIZE, x * Game.BLOCK_SIZE));
+		for (int x = 9; x < Game.FIELD_WIDTH; x++) {
+			Game.entities.add(new BreakableWall(x * Game.BLOCK_SIZE, x
+					* Game.BLOCK_SIZE));
 
 		}
 
 		for (int i = 0; i < 10; i++) {
-			Game.entities.add(new Ball(10, (Game.BLOCK_SIZE * i)));
+			Game.entities.add(new Ball(50, (Game.BLOCK_SIZE * i)));
 		}
 
 	}
@@ -191,7 +202,8 @@ public class Game extends Canvas implements Runnable {
 	 */
 	public static List<Entity> getEntities(int x1, int y1, int x2, int y2) {
 		List<Entity> result = new ArrayList<Entity>();
-		Box b = new Box(Math.max(0, x1), Math.max(0, y1), Math.min(x2, Game.GAME_WIDTH), Math.min(y2, Game.GAME_HEIGHT));
+		Box b = new Box(Math.max(0, x1), Math.max(0, y1), Math.min(x2,
+				Game.GAME_WIDTH), Math.min(y2, Game.GAME_HEIGHT));
 
 		for (Entity e : Game.entities) {
 			if (e.removed == false) {
