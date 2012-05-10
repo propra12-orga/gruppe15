@@ -12,8 +12,6 @@ import java.util.List;
 import level.Box;
 import level.Loader;
 import entities.Background;
-import entities.Ball;
-import entities.BreakableWall;
 import entities.Entity;
 
 public class Game extends Canvas implements Runnable {
@@ -67,16 +65,10 @@ public class Game extends Canvas implements Runnable {
 				"222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222221111222211111222222222222222",
 				12, 16);
 
-		// Test routine
-		for (int x = 9; x < Game.FIELD_WIDTH; x++) {
-			Game.entities.add(new BreakableWall(x * Game.BLOCK_SIZE, x
-					* Game.BLOCK_SIZE));
-
-		}
-
-		for (int i = 0; i < 10; i++) {
-			Game.entities.add(new Ball(50, (Game.BLOCK_SIZE * i)));
-		}
+		/*
+		 * for (int i = 0; i < 10; i++) { Game.entities.add(new Ball(50,
+		 * (Game.BLOCK_SIZE * i))); }
+		 */
 	}
 
 	/**
