@@ -6,13 +6,11 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 import level.Box;
 import level.Loader;
-import entities.Background;
 import entities.Entity;
 
 public class Game extends Canvas implements Runnable {
@@ -23,19 +21,16 @@ public class Game extends Canvas implements Runnable {
 	public static int FIELD_HEIGHT = ((Game.FIELD_WIDTH * 3) / 4);
 	// Das Folgende ist Absicht, das Fenster ist sonst zu klein um alle Blöcke
 	// darstellen zu können
-	public static final int GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE)
-			+ (Game.BLOCK_SIZE / 4);
-	public static final int GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE)
-			+ (Game.BLOCK_SIZE / 4);
+	public static final int GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE) + (Game.BLOCK_SIZE / 4);
+	public static final int GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE) + (Game.BLOCK_SIZE / 4);
 
-	public static final int SCALE = 1;
 	public static ArrayList<Entity> entities = new ArrayList<Entity>();
 	public static ArrayList<Entity> staticBackground = new ArrayList<Entity>();
 	private boolean running;
 
-	private int maxUpdateRate = 40;
+	private int maxUpdateRate = 50;
 	private long frameTimeNs = 1000000000 / this.maxUpdateRate;
-	private int minSleepTime = 1000 / (this.maxUpdateRate * 1);
+	private int minSleepTime = 1000 / (this.maxUpdateRate * 3);
 	public int fps_static = 0;
 	public int fps = 0;
 
@@ -45,7 +40,6 @@ public class Game extends Canvas implements Runnable {
 	 * Constructor to set Canvas size and create important objects and add some
 	 * Test objects
 	 * 
-	 * @throws FileNotFoundException
 	 */
 	public Game() {
 		Debug.setMode(Debug.DEBUG);
@@ -58,17 +52,8 @@ public class Game extends Canvas implements Runnable {
 		this.keys = new InputHandler();
 		this.addKeyListener(this.keys);
 
-		// draw background
-
-		for (int i = 0; i < Game.FIELD_HEIGHT; i++) {
-			for (int j = 0; j < Game.FIELD_WIDTH; j++) {
-				Game.staticBackground.add(new Background(j * Game.BLOCK_SIZE, i
-						* Game.BLOCK_SIZE));
-			}
-		}
-
 		Loader l1 = new Loader();
-		l1.addWalls("Map", 12, 16);
+		l1.addWalls("Map");
 
 	}
 
@@ -191,8 +176,7 @@ public class Game extends Canvas implements Runnable {
 	 */
 	public static List<Entity> getEntities(int x1, int y1, int x2, int y2) {
 		List<Entity> result = new ArrayList<Entity>();
-		Box b = new Box(Math.max(0, x1), Math.max(0, y1), Math.min(x2,
-				Game.GAME_WIDTH), Math.min(y2, Game.GAME_HEIGHT));
+		Box b = new Box(Math.max(0, x1), Math.max(0, y1), Math.min(x2, Game.GAME_WIDTH), Math.min(y2, Game.GAME_HEIGHT));
 
 		for (Entity e : Game.entities) {
 			if (e.removed == false) {

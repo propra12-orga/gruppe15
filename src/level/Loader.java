@@ -1,5 +1,6 @@
 package level;
 
+import entities.Background;
 import entities.BreakableWall;
 import entities.Wall;
 import game.Game;
@@ -9,33 +10,28 @@ import java.util.Scanner;
 
 public class Loader {
 
-	public void addWalls(String filename, int zeilen, int spalten) {
+	public void addWalls(String filename) {
 
-		int i, j, k = 0;
+		int x, type, y = 0;
 
 		Scanner maps;
 		try {
 
-			maps = new Scanner(
-					Main.class.getResourceAsStream("/ressources/maps/"
-							+ filename));
+			maps = new Scanner(Main.class.getResourceAsStream("/ressources/maps/" + filename));
 			while (maps.hasNextLine()) {
 				String text = maps.nextLine();
+				for (x = 0; x < text.length(); x++) {
+					type = Integer.parseInt("" + text.charAt(x));
 
-				for (i = 0; i < spalten; i++) {
-					j = Integer.parseInt("" + text.charAt(i));
-
-					if (j == 1) {
-						Game.entities.add(new BreakableWall(
-								i * Game.BLOCK_SIZE, k * Game.BLOCK_SIZE));
-					}
-					if (j == 2) {
-						Game.entities.add(new Wall(i * Game.BLOCK_SIZE, k
-								* Game.BLOCK_SIZE));
-
+					if (type == 1) {
+						Game.entities.add(new BreakableWall(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
+					} else if (type == 2) {
+						Game.entities.add(new Wall(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
+					} else if (type == 0) {
+						Game.staticBackground.add(new Background(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
 					}
 				}
-				k++;
+				y++;
 			}
 
 		} catch (Exception e) {

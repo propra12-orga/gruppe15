@@ -30,17 +30,17 @@ public class Ball extends Entity {
 		this.x += this.speedX;
 		this.y += this.speedY;
 
-		if ((this.x + (this.radius / 2)) >= (Game.GAME_WIDTH * Game.SCALE)) {
+		if ((this.x + (this.radius / 2)) >= (Game.GAME_WIDTH)) {
 			this.speedX *= -1;
-			this.x = (Game.GAME_WIDTH * Game.SCALE) - (this.radius / 2);
+			this.x = (Game.GAME_WIDTH) - (this.radius / 2);
 		} else if ((this.x - (this.radius / 2)) <= 0) {
 			this.speedX *= -1;
 			this.x = this.radius / 2;
 		}
 
-		if (this.y >= (Game.GAME_HEIGHT * Game.SCALE)) {
+		if (this.y >= (Game.GAME_HEIGHT)) {
 			this.speedY *= -1;
-			this.y = (Game.GAME_HEIGHT * Game.SCALE) - (this.radius / 2);
+			this.y = (Game.GAME_HEIGHT) - (this.radius / 2);
 		} else if ((this.y - (this.radius / 2)) <= 0) {
 			this.speedY *= -1;
 			this.y = this.radius / 2;
