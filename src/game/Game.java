@@ -18,11 +18,13 @@ public class Game extends Canvas implements Runnable {
 
 	public static final int BLOCK_SIZE = 50;
 
-	public static int FIELD_WIDTH = 15;
+	public static int FIELD_WIDTH = 16;
 	public static int FIELD_HEIGHT = ((Game.FIELD_WIDTH * 3) / 4);
 
-	public static final int GAME_WIDTH = Game.FIELD_WIDTH * Game.BLOCK_SIZE;
-	public static final int GAME_HEIGHT = Game.FIELD_HEIGHT * Game.BLOCK_SIZE;
+	public static final int GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE)
+			+ (Game.BLOCK_SIZE / 4);
+	public static final int GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE)
+			+ (Game.BLOCK_SIZE / 4);
 
 	public static final int SCALE = 1;
 	public static ArrayList<Entity> entities = new ArrayList<Entity>();
@@ -62,7 +64,7 @@ public class Game extends Canvas implements Runnable {
 		}
 		Loader l1 = new Loader();
 		l1.addWalls(
-				"222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222221111222211111222222222222222",
+				"222222222222200000000002200000000002200000000002200000000002200000000002200000000002200000000002200000000002200000000002200000000002200000000002200000000002000000000002200000000002222222222222",
 				12, 16);
 
 		/*
