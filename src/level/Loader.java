@@ -3,40 +3,42 @@ package level;
 import entities.BreakableWall;
 import entities.Wall;
 import game.Game;
+import game.Main;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Loader {
 
 	public void addWalls(String filename, int zeilen, int spalten) {
 
-		int i, j, l, k = 0;
-		int[][] arr = new int[zeilen][spalten];
+		int i, j, k = 0;
+
 		Scanner maps;
 		try {
 
-			maps = new Scanner(new FileInputStream("/ressources/maps/"
-					+ filename));
-			String text = maps.toString();
-			for (i = 0; i < zeilen; i++) {
-				for (j = 0; j < spalten; j++) {
-					arr[i][j] = Integer.parseInt("" + text.charAt(k));
-					l = arr[i][j];
+			maps = new Scanner(
+					Main.class.getResourceAsStream("/ressources/maps/"
+							+ filename));
+			while (maps.hasNextLine()) {
+				String text = maps.nextLine();
 
-					if (l == 1) {
+				for (i = 0; i < spalten; i++) {
+					j = Integer.parseInt("" + text.charAt(i));
+
+					if (j == 1) {
 						Game.entities.add(new BreakableWall(
-								j * Game.BLOCK_SIZE, i * Game.BLOCK_SIZE));
+								i * Game.BLOCK_SIZE, k * Game.BLOCK_SIZE));
 					}
-					if (l == 2) {
-						Game.entities.add(new Wall(j * Game.BLOCK_SIZE, i
+					if (j == 2) {
+						Game.entities.add(new Wall(i * Game.BLOCK_SIZE, k
 								* Game.BLOCK_SIZE));
+
 					}
-					k++;
 				}
+				k++;
 			}
-		} catch (FileNotFoundException e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
