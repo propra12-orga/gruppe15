@@ -14,11 +14,11 @@ public class Loader {
 
 		int i, j, l, k = 0;
 		int[][] arr = new int[zeilen][spalten];
-		Scanner scanner;
+		Scanner maps;
 		try {
-			scanner = new Scanner(new FileInputStream("/ressources/maps/"
+			maps = new Scanner(new FileInputStream("/ressources/maps/"
 					+ filename));
-			String text = scanner.nextLine();
+			String text = maps.toString();
 			for (i = 0; i < zeilen; i++) {
 				for (j = 0; j < spalten; j++) {
 					arr[i][j] = Integer.parseInt("" + text.charAt(k));

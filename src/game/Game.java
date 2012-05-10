@@ -21,9 +21,12 @@ public class Game extends Canvas implements Runnable {
 
 	public static int FIELD_WIDTH = 16;
 	public static int FIELD_HEIGHT = ((Game.FIELD_WIDTH * 3) / 4);
-
-	public static final int GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE);
-	public static final int GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE);
+	// Das Folgende ist Absicht, das Fenster ist sonst zu klein um alle Blöcke
+	// darstellen zu können
+	public static final int GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE)
+			+ (Game.BLOCK_SIZE / 4);
+	public static final int GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE)
+			+ (Game.BLOCK_SIZE / 4);
 
 	public static final int SCALE = 1;
 	public static ArrayList<Entity> entities = new ArrayList<Entity>();
@@ -59,7 +62,8 @@ public class Game extends Canvas implements Runnable {
 
 		for (int i = 0; i < Game.FIELD_HEIGHT; i++) {
 			for (int j = 0; j < Game.FIELD_WIDTH; j++) {
-				Game.staticBackground.add(new Background(j * Game.BLOCK_SIZE, i * Game.BLOCK_SIZE));
+				Game.staticBackground.add(new Background(j * Game.BLOCK_SIZE, i
+						* Game.BLOCK_SIZE));
 			}
 		}
 		Loader l1 = new Loader();
@@ -185,7 +189,8 @@ public class Game extends Canvas implements Runnable {
 	 */
 	public static List<Entity> getEntities(int x1, int y1, int x2, int y2) {
 		List<Entity> result = new ArrayList<Entity>();
-		Box b = new Box(Math.max(0, x1), Math.max(0, y1), Math.min(x2, Game.GAME_WIDTH), Math.min(y2, Game.GAME_HEIGHT));
+		Box b = new Box(Math.max(0, x1), Math.max(0, y1), Math.min(x2,
+				Game.GAME_WIDTH), Math.min(y2, Game.GAME_HEIGHT));
 
 		for (Entity e : Game.entities) {
 			if (e.removed == false) {
