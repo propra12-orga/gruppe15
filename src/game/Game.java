@@ -20,7 +20,7 @@ public class Game extends Canvas implements Runnable {
 
 	public static final int BLOCK_SIZE = 50;
 
-	public static int FIELD_WIDTH = 15;
+	public static int FIELD_WIDTH = 16;
 	public static int FIELD_HEIGHT = ((Game.FIELD_WIDTH * 3) / 4);
 
 	public static final int GAME_WIDTH = Game.FIELD_WIDTH * Game.BLOCK_SIZE;
