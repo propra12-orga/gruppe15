@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +41,8 @@ public class Game extends Canvas implements Runnable {
 	/**
 	 * Constructor to set Canvas size and create important objects and add some
 	 * Test objects
+	 * 
+	 * @throws FileNotFoundException
 	 */
 	public Game() {
 		Debug.setMode(Debug.DEBUG);
@@ -60,9 +63,7 @@ public class Game extends Canvas implements Runnable {
 			}
 		}
 		Loader l1 = new Loader();
-		l1.addWalls(
-				"222222222222220220000000000000022000000000000002200000000000000220000000000000022000000000000002200000000000000220000000000000022000000000000002200000000000000220000000000000022222222222222222",
-				12, 16);
+		l1.addWalls("Map", 12, 16);
 	}
 
 	/**
