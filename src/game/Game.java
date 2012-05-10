@@ -14,6 +14,7 @@ import level.Box;
 import level.Loader;
 import entities.Background;
 import entities.Entity;
+import entities.Explosion;
 
 public class Game extends Canvas implements Runnable {
 
@@ -66,8 +67,10 @@ public class Game extends Canvas implements Runnable {
 						* Game.BLOCK_SIZE));
 			}
 		}
+
 		Loader l1 = new Loader();
 		l1.addWalls("Map", 12, 16);
+		Game.entities.add(new Explosion(100, 100));
 	}
 
 	/**

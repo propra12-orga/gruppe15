@@ -16,6 +16,7 @@ public class Loader {
 		int[][] arr = new int[zeilen][spalten];
 		Scanner maps;
 		try {
+
 			maps = new Scanner(new FileInputStream("/ressources/maps/"
 					+ filename));
 			String text = maps.toString();
