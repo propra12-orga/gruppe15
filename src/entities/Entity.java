@@ -12,7 +12,8 @@ public class Entity {
 	public Box box;
 	protected int y;
 	protected int x;
-	protected boolean isBlocking = true;
+	public boolean isBlocking = true;
+	public boolean needsStep = true;
 	protected Image[][] images;
 	public boolean removed = false;
 
@@ -78,8 +79,7 @@ public class Entity {
 	 * @param delta
 	 */
 	public void step(double delta) {
-		List<Entity> es = Game.getEntities(this.box.x1, this.box.y1,
-				this.box.x2, this.box.y2);
+		List<Entity> es = Game.getEntities(this.box.x1, this.box.y1, this.box.x2, this.box.y2);
 		for (Entity e : es) {
 			if (e != this) {
 				e.collide(this);

@@ -13,12 +13,12 @@ public class Loader {
 		for (i = 0; i < zeilen; i++) {
 			for (j = 0; j < spalten; j++) {
 				arr[i][j] = S.charAt(k);
-				l = (arr[i][j] - '0');
+				l = arr[i][j];
 				if (l == 1) {
-					Game.entities.add(new BreakableWall(i, j));
+					Game.entities.add(new BreakableWall(i * Game.BLOCK_SIZE, j * Game.BLOCK_SIZE));
 				}
 				if (l == 2) {
-					Game.entities.add(new Wall(i, j));
+					Game.entities.add(new Wall(i * Game.BLOCK_SIZE, j * Game.BLOCK_SIZE));
 				}
 				k++;
 			}
