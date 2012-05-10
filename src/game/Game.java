@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import level.Box;
+import level.Loader;
 import entities.Background;
 import entities.Ball;
 import entities.BreakableWall;
@@ -61,14 +62,8 @@ public class Game extends Canvas implements Runnable {
 						* Game.BLOCK_SIZE));
 			}
 		}
-
-		// test area
-		/*
-		 * for (int i = 0; i < (Game.FIELD_WIDTH - Game.BLOCK_SIZE); i++) {
-		 * Game.entities.add(new Wall(i * Game.BLOCK_SIZE, 0));
-		 * Game.entities.add(new Wall(i * Game.BLOCK_SIZE, (Game.BLOCK_SIZE *
-		 * Game.FIELD_HEIGHT) - (Game.BLOCK_SIZE * 2))); }
-		 */
+		Loader l1 = new Loader();
+		l1.addWalls("221111", 3, 2);
 
 		// Test routine
 		for (int x = 9; x < Game.FIELD_WIDTH; x++) {
@@ -80,7 +75,6 @@ public class Game extends Canvas implements Runnable {
 		for (int i = 0; i < 10; i++) {
 			Game.entities.add(new Ball(50, (Game.BLOCK_SIZE * i)));
 		}
-
 	}
 
 	/**
