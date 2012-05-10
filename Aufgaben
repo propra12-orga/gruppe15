@@ -2,12 +2,14 @@ Input Handler
 - Netzwerk
 
 Level laden
-- aus Txt (Pakan)
+- aus Txt (Pakan)   -- done
 -- Zahlen
 
 Elemente
 - Spieler (Kyra)
 - Bombe (Oktay)
+- Zielfeld
+- Startfeld
 
 
 Gui
@@ -16,4 +18,7 @@ Gui
 -- Spiel (Neustarten / Beenden)
 -- Netzwerk (erstmal egal)
 -- Optionen (Spielername, Größe)
+
+
+Bildprobleme beim Mac l�sen
 
