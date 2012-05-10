@@ -1,6 +1,7 @@
 package game;
 
 import java.awt.BorderLayout;
+import java.io.FileNotFoundException;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -14,7 +15,12 @@ public class Launcher extends JFrame {
 	 */
 	public Launcher() {
 		this.setTitle("Bomberman");
-		this.game = new Game();
+		try {
+			this.game = new Game();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(this.game);
 		new GUI(this);
