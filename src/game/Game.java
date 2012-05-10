@@ -66,7 +66,7 @@ public class Game extends Canvas implements Runnable {
 			}
 		}
 		Loader l1 = new Loader();
-		l1.addWalls("Map.txt", 12, 16);
+		l1.addWalls("Map", 12, 16);
 	}
 
 	/**
