@@ -8,7 +8,7 @@ import java.awt.Graphics;
 public class Explosion extends Entity {
 	public Explosion(int x, int y) {
 		super(x, y);
-		this.images = Sprite.load("explosion.png", 100, 100);
+		this.images = Sprite.load("explosion_h.png", 100, 100);
 	}
 
 	@Override
