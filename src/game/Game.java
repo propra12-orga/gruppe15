@@ -20,8 +20,8 @@ public class Game extends Canvas implements Runnable {
 	public static int FIELD_WIDTH = 16;
 	public static int FIELD_HEIGHT = ((Game.FIELD_WIDTH * 3) / 4);
 
-	public static final int GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE);
-	public static final int GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE);
+	public static int GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE);
+	public static int GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE);
 
 	public static ArrayList<Entity> entities = new ArrayList<Entity>();
 	public static ArrayList<Entity> staticBackground = new ArrayList<Entity>();
@@ -43,6 +43,11 @@ public class Game extends Canvas implements Runnable {
 	public Game() {
 		Debug.setMode(Debug.DEBUG);
 
+		Loader l1 = new Loader();
+		l1.addWalls("Map2");
+		Game.GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE);
+		Game.GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE);
+
 		Dimension d = new Dimension(Game.GAME_WIDTH, Game.GAME_HEIGHT);
 		this.setPreferredSize(d);
 		this.setMinimumSize(d);
@@ -50,9 +55,6 @@ public class Game extends Canvas implements Runnable {
 
 		this.keys = new InputHandler();
 		this.addKeyListener(this.keys);
-
-		Loader l1 = new Loader();
-		l1.addWalls("Map");
 
 	}
 
