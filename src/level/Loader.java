@@ -10,6 +10,16 @@ import java.util.Scanner;
 
 public class Loader {
 
+	/**
+	 * Creates a level from a map file
+	 * Types:
+	 * 1 = Breakable Wall
+	 * 2 = Solid Wall
+	 * 3 = Spawnpoint
+	 * 0 = empty Background
+	 * 
+	 * @param filename
+	 */
 	public void addWalls(String filename) {
 
 		int x, type, y = 0;
