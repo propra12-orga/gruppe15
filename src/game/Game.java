@@ -33,7 +33,7 @@ public class Game extends Canvas implements Runnable {
 	public int fps_static = 0;
 	public int fps = 0;
 
-	private InputHandler keys;
+	public static InputHandler keys = new InputHandler();
 
 	/**
 	 * Constructor to set Canvas size and create important objects and add some
@@ -53,8 +53,7 @@ public class Game extends Canvas implements Runnable {
 		this.setMinimumSize(d);
 		this.setMaximumSize(d);
 
-		this.keys = new InputHandler();
-		this.addKeyListener(this.keys);
+		this.addKeyListener(Game.keys);
 
 	}
 
