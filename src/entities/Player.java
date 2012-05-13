@@ -8,7 +8,7 @@ import java.awt.Graphics;
 
 public class Player extends Entity {
 
-	public InputHandler key = new InputHandler();
+	public InputHandler input = new InputHandler();
 
 	public Player(int x, int y) {
 		super(x, y);
@@ -23,19 +23,19 @@ public class Player extends Entity {
 
 	public void step() {
 
-		if (input.up.down) {
+		if (this.input.up.down) {
 			this.y = this.y + 1;
 		}
 
-		if (input.down.down) {
+		if (this.input.down.down) {
 			this.y = this.y - 1;
 		}
 
-		if (input.left.down) {
+		if (this.input.left.down) {
 			this.x = this.x - 1;
 		}
 
-		if (input.right.down) {
+		if (this.input.right.down) {
 			this.x = this.x + 1;
 		}
 
