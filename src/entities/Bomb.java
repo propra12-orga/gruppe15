@@ -14,7 +14,7 @@ public class Bomb extends Entity {
 		super(x, y);
 		this.activation = activation;
 		this.images = Sprite.load("bomb_small.png", 100, 100);
-		this.box = new Box(this.x, this.y, this.x * 2, this.y * 2);
+		this.box = new Box(this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE);
 	}
 
 	public void explode() {
