@@ -25,26 +25,27 @@ public class Player extends Entity {
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(Color.GREEN);
-		g.drawImage((this.images[0][0]).image, this.x, this.y, (int) this.width, (int) this.height, null);
+		g.drawImage((this.images[0][0]).image, this.x, this.y,
+				(int) this.width, (int) this.height, null);
 	}
 
 	@Override
 	public void step(double delta) {
 
 		if (Game.keys.up.down) {
-			this.y = this.y - 1;
+			this.y = this.y - 3;
 		}
 
 		if (Game.keys.down.down) {
-			this.y = this.y + 1;
+			this.y = this.y + 3;
 		}
 
 		if (Game.keys.left.down) {
-			this.x = this.x - 1;
+			this.x = this.x - 3;
 		}
 
 		if (Game.keys.right.down) {
-			this.x = this.x + 1;
+			this.x = this.x + 3;
 		}
 
 		this.box.update(this.x, this.y);
@@ -65,19 +66,19 @@ public class Player extends Entity {
 		if (e instanceof Wall) {
 			ArrayList<Integer> dir = this.box.collideDirection(e.box);
 			if (dir.contains(Box.COLLIDE_LEFT)) {
-				this.x++;
+				this.x = this.x + 3;
 			}
 
 			if (dir.contains(Box.COLLIDE_RIGHT)) {
-				this.x--;
+				this.x = this.x - 3;
 			}
 
 			if (dir.contains(Box.COLLIDE_DOWN)) {
-				this.y--;
+				this.y = this.y - 3;
 			}
 
 			if (dir.contains(Box.COLLIDE_UP)) {
-				this.y++;
+				this.y = this.y + 3;
 			}
 		}
 	}
