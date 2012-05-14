@@ -20,7 +20,7 @@ public class Ball extends Entity {
 		this.speedX = (int) (Math.random() * 10);
 		this.speedY = (int) (Math.random() * 10);
 		this.isBlocking = true;
-		this.box = new Box(this.x, this.y, this.x + this.radius, this.y + this.radius);
+		this.box = new Box(this.x, this.y, this.radius, this.radius);
 		this.color = Color.RED;
 	}
 
@@ -46,14 +46,14 @@ public class Ball extends Entity {
 			this.y = this.radius / 2;
 		}
 
-		this.box.update(this.x, this.y, this.x + this.radius, this.y + this.radius);
+		this.box.update(this.x, this.y);
 
-		List<Entity> es = Game.getEntities(this.box.x1, this.box.y1, this.box.x2, this.box.y2);
+		List<Entity> es = Game.getEntities(this.box);
 		for (Entity e : es) {
 			if (e != this) {
 				e.collide(this);
 				this.collide(e);
-				this.box.update(this.x, this.y, this.x + this.radius, this.y + this.radius);
+				this.box.update(this.x, this.y);
 			}
 		}
 

@@ -28,7 +28,7 @@ public class Entity {
 	public Entity(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.box = new Box(x, y, x + Game.BLOCK_SIZE, y + Game.BLOCK_SIZE);
+		this.box = new Box(x, y, Game.BLOCK_SIZE, Game.BLOCK_SIZE);
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class Entity {
 	 * @return boolean
 	 */
 	public boolean intersect(Entity e) {
-		return this.box.intersect(e.box);
+		return this.box.intersects(e.box);
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class Entity {
 	 * @param delta
 	 */
 	public void step(double delta) {
-		List<Entity> es = Game.getEntities(this.box.x1, this.box.y1, this.box.x2, this.box.y2);
+		List<Entity> es = Game.getEntities(this.box);
 		for (Entity e : es) {
 			if (e != this) {
 				e.collide(this);

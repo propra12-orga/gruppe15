@@ -45,8 +45,8 @@ public class Game extends Canvas implements Runnable {
 
 		Loader l1 = new Loader();
 		l1.addWalls("Map2");
-		Game.GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE);
-		Game.GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE);
+		Game.GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE) + 1;
+		Game.GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE) + 1;
 
 		Dimension d = new Dimension(Game.GAME_WIDTH, Game.GAME_HEIGHT);
 		this.setPreferredSize(d);
@@ -168,19 +168,14 @@ public class Game extends Canvas implements Runnable {
 	/**
 	 * Get all Entities in a Box
 	 * 
-	 * @param x1
-	 * @param y1
-	 * @param x2
-	 * @param y2
 	 * @return List<Entity> Found entities
 	 */
-	public static List<Entity> getEntities(int x1, int y1, int x2, int y2) {
+	public static List<Entity> getEntities(Box b) {
 		List<Entity> result = new ArrayList<Entity>();
-		Box b = new Box(Math.max(0, x1), Math.max(0, y1), Math.min(x2, Game.GAME_WIDTH), Math.min(y2, Game.GAME_HEIGHT));
 
 		for (Entity e : Game.entities) {
 			if (e.removed == false) {
-				if (e.box.intersect(b)) {
+				if (e.box.intersects(b)) {
 					result.add(e);
 				}
 			}
