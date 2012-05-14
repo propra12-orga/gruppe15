@@ -16,9 +16,9 @@ public class Player extends Entity {
 
 	public Player(int x, int y) {
 		super(x + 1, y + 1);
-		this.images = Sprite.load("bomberman_small.png", 31, 70);
-		this.width = (31 / 2);
-		this.height = (70 / 2);
+		this.images = Sprite.load("bomberman_small.png", 55, 90);
+		this.width = (55 / 2);
+		this.height = (90 / 2);
 		this.box = new Box(this.x, this.y, (int) this.width, (int) this.height);
 	}
 
