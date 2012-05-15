@@ -29,7 +29,7 @@ public class Player extends Entity {
 		this.width = (55 / 2);
 		this.height = (90 / 2);
 		this.box = new Box(this.x, this.y, (int) this.width, (int) this.height);
-		this.speed = 3;
+		this.speed = 10;
 	}
 
 	@Override
@@ -112,6 +112,7 @@ public class Player extends Entity {
 		// TODO: Player shouldn't be instantly kicked off the bomb
 		if (e instanceof Bomb) {
 			ArrayList<Integer> dir = this.box.collideDirection(e.box);
+
 			if (dir.contains(Box.COLLIDE_LEFT)) {
 				this.x = this.x + this.speed;
 			}
