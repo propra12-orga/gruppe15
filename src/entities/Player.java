@@ -47,9 +47,11 @@ public class Player extends Entity {
 			this.facing_current = this.facing_up;
 			moved = true;
 		}
-
+		// TODO: Bombs shouldn't be able to be planted with pressed space
+		// button.Need just one bomb per press.
 		if (Game.keys.bomb.down) {
 			Game.entities.add(new Bomb(this.x, this.y));
+
 		}
 
 		if (Game.keys.down.down) {
@@ -106,6 +108,26 @@ public class Player extends Entity {
 			if (dir.contains(Box.COLLIDE_UP)) {
 				this.y = this.y + this.speed;
 			}
+		}
+		// TODO: Player shouldn't be instantly kicked off the bomb
+		if (e instanceof Bomb) {
+			ArrayList<Integer> dir = this.box.collideDirection(e.box);
+			if (dir.contains(Box.COLLIDE_LEFT)) {
+				this.x = this.x + this.speed;
+			}
+
+			if (dir.contains(Box.COLLIDE_RIGHT)) {
+				this.x = this.x - this.speed;
+			}
+
+			if (dir.contains(Box.COLLIDE_DOWN)) {
+				this.y = this.y - this.speed;
+			}
+
+			if (dir.contains(Box.COLLIDE_UP)) {
+				this.y = this.y + this.speed;
+			}
+
 		}
 	}
 }

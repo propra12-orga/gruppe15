@@ -9,6 +9,7 @@ public class BreakableWall extends Wall {
 		this.images = Sprite.load("brick_break_small.png", 100, 100);
 	}
 
+	// @Override
 	// public void collide(Entity e) {
 	// if (e instanceof Player) {
 	// this.removed = true;
