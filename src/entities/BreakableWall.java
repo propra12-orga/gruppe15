@@ -1,5 +1,6 @@
 package entities;
 
+import game.Game;
 import graphics.Sprite;
 
 public class BreakableWall extends Wall {
@@ -11,9 +12,9 @@ public class BreakableWall extends Wall {
 
 	@Override
 	public void collide(Entity e) {
-		if (e instanceof Ball) {
+		if (e instanceof Player) {
 			this.removed = true;
+			Game.staticBackground.add(new Background(this.x, this.y));
 		}
 	}
-
 }
