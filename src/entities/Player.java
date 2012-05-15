@@ -40,12 +40,16 @@ public class Player extends Entity {
 	}
 
 	@Override
-	public void step(double delta) {
+	public void action(double delta) {
 		boolean moved = false;
 		if (Game.keys.up.down) {
 			this.y = this.y - this.speed;
 			this.facing_current = this.facing_up;
 			moved = true;
+		}
+
+		if (Game.keys.bomb.down) {
+			Game.entities.add(new Bomb(this.x, this.y));
 		}
 
 		if (Game.keys.down.down) {
@@ -65,6 +69,7 @@ public class Player extends Entity {
 			this.facing_current = this.facing_right;
 			moved = true;
 		}
+
 		if (moved == false) {
 			this.facing_current = this.facing_down;
 		}

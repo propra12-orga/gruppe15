@@ -89,8 +89,9 @@ public class Game extends Canvas implements Runnable {
 			/**
 			 * Move all objects
 			 */
+			this.action(delta);
 			long test1 = System.nanoTime();
-			this.step(delta);
+			this.action(delta);
 			Debug.log(Debug.DEBUG, "Steptime:"
 					+ ((System.nanoTime() - test1) / 1000000));
 
@@ -149,11 +150,11 @@ public class Game extends Canvas implements Runnable {
 	 * 
 	 * @param delta
 	 */
-	private void step(double delta) {
+	private void action(double delta) {
 
 		for (Entity e : Game.entities) {
 			if ((e.removed == false) && (e.needsStep == true)) {
-				e.step(delta);
+				e.action(delta);
 			}
 		}
 	}

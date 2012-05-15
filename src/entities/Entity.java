@@ -78,7 +78,7 @@ public class Entity {
 	 * 
 	 * @param delta
 	 */
-	public void step(double delta) {
+	public void action(double delta) {
 		List<Entity> es = Game.getEntities(this.box);
 		for (Entity e : es) {
 			if (e != this) {
@@ -87,4 +87,5 @@ public class Entity {
 			}
 		}
 	}
+
 }

@@ -25,7 +25,7 @@ public class Ball extends Entity {
 	}
 
 	@Override
-	public void step(double delta) {
+	public void action(double delta) {
 
 		this.x += this.speedX;
 		this.y += this.speedY;

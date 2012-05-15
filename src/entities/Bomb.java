@@ -10,9 +10,8 @@ import level.Box;
 public class Bomb extends Entity {
 	private boolean activation;
 
-	public Bomb(int x, int y, boolean activation) {
+	public Bomb(int x, int y) {
 		super(x, y);
-		this.activation = activation;
 		this.images = Sprite.load("bomb_small.png", 100, 100);
 		this.box = new Box(this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE);
 	}
