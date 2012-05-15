@@ -17,6 +17,7 @@ public class Player extends Entity {
 
 	private Image[][] facing_down, facing_up, facing_left, facing_right,
 			facing_current;
+	private int speed;
 
 	public Player(int x, int y) {
 		super(x + 1, y + 1);
@@ -28,6 +29,7 @@ public class Player extends Entity {
 		this.width = (55 / 2);
 		this.height = (90 / 2);
 		this.box = new Box(this.x, this.y, (int) this.width, (int) this.height);
+		this.speed = 10;
 	}
 
 	@Override
@@ -39,25 +41,32 @@ public class Player extends Entity {
 
 	@Override
 	public void step(double delta) {
-
+		boolean moved = false;
 		if (Game.keys.up.down) {
-			this.y = this.y - 3;
+			this.y = this.y - this.speed;
 			this.facing_current = this.facing_up;
+			moved = true;
 		}
 
 		if (Game.keys.down.down) {
-			this.y = this.y + 3;
+			this.y = this.y + this.speed;
 			this.facing_current = this.facing_down;
+			moved = true;
 		}
 
 		if (Game.keys.left.down) {
-			this.x = this.x - 3;
+			this.x = this.x - this.speed;
 			this.facing_current = this.facing_left;
+			moved = true;
 		}
 
 		if (Game.keys.right.down) {
-			this.x = this.x + 3;
+			this.x = this.x + 10;
 			this.facing_current = this.facing_right;
+			moved = true;
+		}
+		if (moved == false) {
+			this.facing_current = this.facing_down;
 		}
 
 		this.box.update(this.x, this.y);
@@ -78,19 +87,19 @@ public class Player extends Entity {
 		if (e instanceof Wall) {
 			ArrayList<Integer> dir = this.box.collideDirection(e.box);
 			if (dir.contains(Box.COLLIDE_LEFT)) {
-				this.x = this.x + 3;
+				this.x = this.x + this.speed;
 			}
 
 			if (dir.contains(Box.COLLIDE_RIGHT)) {
-				this.x = this.x - 3;
+				this.x = this.x - this.speed;
 			}
 
 			if (dir.contains(Box.COLLIDE_DOWN)) {
-				this.y = this.y - 3;
+				this.y = this.y - this.speed;
 			}
 
 			if (dir.contains(Box.COLLIDE_UP)) {
-				this.y = this.y + 3;
+				this.y = this.y + this.speed;
 			}
 		}
 	}

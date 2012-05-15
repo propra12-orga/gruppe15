@@ -1,6 +1,5 @@
 package entities;
 
-import game.Game;
 import graphics.Sprite;
 
 public class BreakableWall extends Wall {
@@ -10,11 +9,10 @@ public class BreakableWall extends Wall {
 		this.images = Sprite.load("brick_break_small.png", 100, 100);
 	}
 
-	@Override
-	public void collide(Entity e) {
-		if (e instanceof Player) {
-			this.removed = true;
-			Game.staticBackground.add(new Background(this.x, this.y));
-		}
-	}
+	// public void collide(Entity e) {
+	// if (e instanceof Player) {
+	// this.removed = true;
+	// Game.staticBackground.add(new Background(this.x, this.y));
+	// }
+	// }
 }
