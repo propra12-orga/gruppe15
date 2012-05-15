@@ -29,7 +29,7 @@ public class Player extends Entity {
 		this.width = (55 / 2);
 		this.height = (90 / 2);
 		this.box = new Box(this.x, this.y, (int) this.width, (int) this.height);
-		this.speed = 10;
+		this.speed = 3;
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class Player extends Entity {
 		}
 
 		if (Game.keys.right.down) {
-			this.x = this.x + 10;
+			this.x = this.x + this.speed;
 			this.facing_current = this.facing_right;
 			moved = true;
 		}
