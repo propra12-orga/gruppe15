@@ -29,7 +29,7 @@ public class Game extends Canvas implements Runnable {
 
 	private int maxUpdateRate = 50;
 	private long frameTimeNs = 1000000000 / this.maxUpdateRate;
-	private int minSleepTime = 1000 / (this.maxUpdateRate * 5);
+	private int minSleepTime = 1000 / (this.maxUpdateRate * 2);
 	public int fps_static = 0;
 	public int fps = 0;
 
@@ -54,6 +54,8 @@ public class Game extends Canvas implements Runnable {
 		this.setMaximumSize(d);
 
 		this.addKeyListener(Game.keys);
+		this.requestFocus();
+		this.setFocusable(true);
 
 	}
 
