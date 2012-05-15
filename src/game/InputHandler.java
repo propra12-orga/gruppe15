@@ -61,7 +61,7 @@ public class InputHandler implements KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent ke) {
-
+		this.toggle(ke, true);
 	}
 
 }

@@ -29,7 +29,7 @@ public class Game extends Canvas implements Runnable {
 
 	private int maxUpdateRate = 50;
 	private long frameTimeNs = 1000000000 / this.maxUpdateRate;
-	private int minSleepTime = 1000 / (this.maxUpdateRate * 2);
+	private int minSleepTime = 10;
 	public int fps_static = 0;
 	public int fps = 0;
 
@@ -89,13 +89,24 @@ public class Game extends Canvas implements Runnable {
 			/**
 			 * Move all objects
 			 */
+			long test1 = System.nanoTime();
 			this.step(delta);
+			Debug.log(Debug.DEBUG, "Steptime:"
+					+ ((System.nanoTime() - test1) / 1000000));
 
 			/**
 			 * Redraw all objects
 			 */
-			Graphics g = bs.getDrawGraphics();
-			this.draw(g);
+			Graphics g = null;
+			try {
+				g = bs.getDrawGraphics();
+				long test2 = System.nanoTime();
+				this.draw(g);
+				Debug.log(Debug.DEBUG, "Drawtime:"
+						+ ((System.nanoTime() - test2) / 1000000));
+			} finally {
+				g.dispose();
+			}
 			bs.show();
 			Toolkit.getDefaultToolkit().sync();
 
