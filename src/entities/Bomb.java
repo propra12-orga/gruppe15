@@ -12,7 +12,7 @@ public class Bomb extends Entity {
 
 	public Bomb(int x, int y) {
 		super(x, y);
-		this.images = Sprite.load("bomb_small.png", 100, 100);
+		this.images = Sprite.load("bomb_small.png", 50, 49);
 		this.box = new Box(this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE);
 	}
 
