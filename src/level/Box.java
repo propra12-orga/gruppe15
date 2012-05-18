@@ -1,5 +1,7 @@
 package level;
 
+import game.Game;
+
 import java.awt.Rectangle;
 import java.awt.geom.Line2D;
 import java.util.ArrayList;
@@ -54,6 +56,10 @@ public class Box extends Rectangle {
 	@Override
 	public String toString() {
 		return "Box [x1=" + this.getX() + ", y1=" + this.getY() + "]";
+	}
+
+	public static int fitToBlock(int i) {
+		return i - (i % Game.BLOCK_SIZE);
 	}
 
 }

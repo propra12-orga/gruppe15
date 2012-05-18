@@ -11,8 +11,7 @@ public class Sprite {
 
 	public static Image[][] load(String filename, int w, int h) {
 		try {
-			BufferedImage image = ImageIO.read(Main.class
-					.getResource("/ressources/" + filename));
+			BufferedImage image = ImageIO.read(Main.class.getResource("/ressources/" + filename));
 			int partsX = image.getWidth() / w;
 			int partsY = image.getHeight() / h;
 			Image[][] parts = new Image[partsX][partsY];
@@ -25,6 +24,7 @@ public class Sprite {
 			return parts;
 		} catch (Exception e) {
 			Debug.log(Debug.ERROR, "[Sprite]-Error: Can't load " + filename);
+			e.printStackTrace();
 			return null;
 		}
 	}

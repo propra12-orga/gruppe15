@@ -10,6 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import level.Box;
 import level.Loader;
 import entities.Entity;
@@ -26,6 +30,7 @@ public class Game extends Canvas implements Runnable {
 
 	public static CopyOnWriteArrayList<Entity> entities = new CopyOnWriteArrayList<Entity>();
 	public static CopyOnWriteArrayList<Entity> staticBackground = new CopyOnWriteArrayList<Entity>();
+	public static CopyOnWriteArrayList<Entity> players = new CopyOnWriteArrayList<Entity>();
 	private boolean running;
 
 	private int maxUpdateRate = 50;
@@ -43,16 +48,7 @@ public class Game extends Canvas implements Runnable {
 	 */
 	public Game() {
 		Debug.setMode(Debug.DEBUG);
-
-		Loader l1 = new Loader();
-		l1.addWalls("Map2");
-		Game.GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE) + 1;
-		Game.GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE) + 1;
-
-		Dimension d = new Dimension(Game.GAME_WIDTH, Game.GAME_HEIGHT);
-		this.setPreferredSize(d);
-		this.setMinimumSize(d);
-		this.setMaximumSize(d);
+		this.init();
 
 		this.addKeyListener(Game.keys);
 		this.requestFocus();
@@ -126,12 +122,30 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 
+	public void init() {
+		Game.entities = new CopyOnWriteArrayList<Entity>();
+		Game.staticBackground = new CopyOnWriteArrayList<Entity>();
+		Game.players = new CopyOnWriteArrayList<Entity>();
+
+		Loader l1 = new Loader();
+		l1.addWalls("Map2");
+		Game.GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE) + 1;
+		Game.GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE) + 1;
+
+		Dimension d = new Dimension(Game.GAME_WIDTH, Game.GAME_HEIGHT);
+		this.setPreferredSize(d);
+		this.setMinimumSize(d);
+		this.setMaximumSize(d);
+	}
+
 	/**
 	 * Gets called form Launcher to start the game;
 	 */
 	public void start() {
 		this.running = true;
+		this.init();
 		this.createBufferStrategy(2);
+
 		this.run();
 		this.requestFocusInWindow();
 		this.requestFocus();
@@ -154,6 +168,13 @@ public class Game extends Canvas implements Runnable {
 		for (Entity e : Game.entities) {
 			if ((e.removed == false) && (e.needsStep == true)) {
 				e.action(delta);
+			}
+		}
+
+		for (Entity e : Game.players) {
+			if (e.removed) {
+				this.gameEnd();
+				break;
 			}
 		}
 	}
@@ -194,5 +215,22 @@ public class Game extends Canvas implements Runnable {
 			}
 		}
 		return result;
+	}
+
+	private void gameEnd() {
+		this.stop();
+		Object[] options = { "Neustart", "Beenden" };
+		JOptionPane question = new JOptionPane("Du hast verloren.");
+		question.setOptions(options);
+		JDialog dialog = question.createDialog(new JFrame(), "Spielende");
+		dialog.setVisible(true);
+		Object obj = question.getValue();
+		if (obj.equals(options[0])) {
+			// Spiel neustarten
+			this.start();
+		} else {
+			// Spiel beenden;
+			System.exit(0);
+		}
 	}
 }

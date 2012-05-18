@@ -8,25 +8,25 @@ import java.awt.Graphics;
 import level.Box;
 
 public class Bomb extends Entity {
-	private boolean activation;
-
-	public Bomb(int x, int y) {
+	public Bomb(int x, int y, Player owner) {
 		super(x, y);
 		this.images = Sprite.load("bomb_small.png", 50, 49);
 		this.box = new Box(this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE);
+		this.owner = owner;
+		this.explosionDelay = 50;
 	}
 
-	public void explode() {
-		int timer;
-		timer = 5;
-		while (this.activation) {
-			for (int i = 0; i < timer; i++) {
+	public Player owner;
+	private int explosionDelay;
 
-			}
-
-			this.activation = false;
+	@Override
+	public void action(double delta) {
+		if (this.explosionDelay == 0) {
+			this.removed = true;
+			Game.entities.add(new BombAnimation(this.x, this.y));
+		} else {
+			this.explosionDelay--;
 		}
-
 	}
 
 	@Override

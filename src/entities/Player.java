@@ -15,8 +15,7 @@ public class Player extends Entity {
 	private float width;
 	private float height;
 
-	private Image[][] facing_down, facing_up, facing_left, facing_right,
-			facing_current;
+	private Image[][] facing_down, facing_up, facing_left, facing_right, facing_current;
 	private int speed;
 
 	public Player(int x, int y) {
@@ -35,8 +34,7 @@ public class Player extends Entity {
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(Color.GREEN);
-		g.drawImage((this.facing_current[0][0]).image, this.x, this.y,
-				(int) this.width, (int) this.height, null);
+		g.drawImage((this.facing_current[0][0]).image, this.x, this.y, (int) this.width, (int) this.height, null);
 	}
 
 	@Override
@@ -50,7 +48,7 @@ public class Player extends Entity {
 		// TODO: Bombs shouldn't be able to be planted with pressed space
 		// button.Need just one bomb per press.
 		if (Game.keys.bomb.down) {
-			Game.entities.add(new Bomb(this.x, this.y));
+			Game.entities.add(new Bomb(Box.fitToBlock(this.x), Box.fitToBlock(this.y), this));
 
 		}
 
@@ -110,7 +108,7 @@ public class Player extends Entity {
 			}
 		}
 		// TODO: Player shouldn't be instantly kicked off the bomb
-		if (e instanceof Bomb) {
+		if ((e instanceof Bomb) && (((Bomb) e).owner != this)) {
 			ArrayList<Integer> dir = this.box.collideDirection(e.box);
 
 			if (dir.contains(Box.COLLIDE_LEFT)) {

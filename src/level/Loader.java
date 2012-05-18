@@ -35,7 +35,9 @@ public class Loader {
 					} else if (type == 2) {
 						Game.entities.add(new Wall(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
 					} else if (type == 3) {
-						Game.entities.add(new Player(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
+						Player p = new Player(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE);
+						Game.entities.add(p);
+						Game.players.add(p);
 						Game.staticBackground.add(new Background(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
 					} else if (type == 0) {
 						Game.staticBackground.add(new Background(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
