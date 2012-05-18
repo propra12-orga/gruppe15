@@ -7,7 +7,6 @@ import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -94,8 +93,7 @@ public class Game extends Canvas implements Runnable {
 			this.action(delta);
 			long test1 = System.nanoTime();
 			this.action(delta);
-			Debug.log(Debug.DEBUG, "Steptime:"
-					+ ((System.nanoTime() - test1) / 1000000));
+			Debug.log(Debug.VERBOSE, "Steptime:" + ((System.nanoTime() - test1) / 1000000));
 
 			/**
 			 * Redraw all objects
@@ -105,8 +103,7 @@ public class Game extends Canvas implements Runnable {
 				g = bs.getDrawGraphics();
 				long test2 = System.nanoTime();
 				this.draw(g);
-				Debug.log(Debug.DEBUG, "Drawtime:"
-						+ ((System.nanoTime() - test2) / 1000000));
+				Debug.log(Debug.VERBOSE, "Drawtime:" + ((System.nanoTime() - test2) / 1000000));
 			} finally {
 				g.dispose();
 			}
@@ -154,8 +151,7 @@ public class Game extends Canvas implements Runnable {
 	 */
 	private void action(double delta) {
 
-		for (Iterator<Entity> it = Game.entities.iterator(); it.hasNext();) {
-			Entity e = it.next();
+		for (Entity e : Game.entities) {
 			if ((e.removed == false) && (e.needsStep == true)) {
 				e.action(delta);
 			}
@@ -170,13 +166,10 @@ public class Game extends Canvas implements Runnable {
 	private void draw(Graphics g) {
 		g.setColor(this.getBackground());
 		g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
-		for (Iterator<Entity> it = Game.staticBackground.iterator(); it
-				.hasNext();) {
-			Entity e = it.next();
+		for (Entity e : Game.staticBackground) {
 			e.draw(g);
 		}
-		for (Iterator<Entity> it = Game.entities.iterator(); it.hasNext();) {
-			Entity e = it.next();
+		for (Entity e : Game.entities) {
 			if (e.removed == false) {
 				e.draw(g);
 			}
@@ -193,8 +186,7 @@ public class Game extends Canvas implements Runnable {
 	public static List<Entity> getEntities(Box b) {
 		List<Entity> result = new ArrayList<Entity>();
 
-		for (Iterator<Entity> it = Game.entities.iterator(); it.hasNext();) {
-			Entity e = it.next();
+		for (Entity e : Game.entities) {
 			if (e.removed == false) {
 				if (e.box.intersects(b)) {
 					result.add(e);

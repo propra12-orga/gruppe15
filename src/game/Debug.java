@@ -3,6 +3,7 @@ package game;
 public class Debug {
 	public static int ERROR = 1;
 	public static int DEBUG = 2;
+	public static int VERBOSE = 3;
 	public static int NONE = 0;
 
 	static int mode = Debug.NONE;
