@@ -2,6 +2,7 @@ package level;
 
 import entities.Background;
 import entities.BreakableWall;
+import entities.Finishpoint;
 import entities.Player;
 import entities.Wall;
 import game.Game;
@@ -38,6 +39,9 @@ public class Loader {
 						Player p = new Player(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE);
 						Game.entities.add(p);
 						Game.players.add(p);
+						Game.staticBackground.add(new Background(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
+					} else if (type == 4) {
+						Game.entities.add(new Finishpoint(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
 						Game.staticBackground.add(new Background(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
 					} else if (type == 0) {
 						Game.staticBackground.add(new Background(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));

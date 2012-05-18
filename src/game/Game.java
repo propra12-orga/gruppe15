@@ -20,6 +20,8 @@ import entities.Entity;
 
 public class Game extends Canvas implements Runnable {
 
+	private static Game instance = null;
+
 	public static final int BLOCK_SIZE = 50;
 
 	public static int FIELD_WIDTH = 16;
@@ -41,12 +43,19 @@ public class Game extends Canvas implements Runnable {
 
 	public static InputHandler keys = new InputHandler();
 
+	public static Game getInstance() {
+		if (Game.instance == null) {
+			Game.instance = new Game();
+		}
+		return Game.instance;
+	}
+
 	/**
 	 * Constructor to set Canvas size and create important objects and add some
 	 * Test objects
 	 * 
 	 */
-	public Game() {
+	private Game() {
 		Debug.setMode(Debug.DEBUG);
 		this.init();
 
@@ -173,7 +182,7 @@ public class Game extends Canvas implements Runnable {
 
 		for (Entity e : Game.players) {
 			if (e.removed) {
-				this.gameEnd();
+				this.gameEnd(false);
 				break;
 			}
 		}
@@ -217,10 +226,15 @@ public class Game extends Canvas implements Runnable {
 		return result;
 	}
 
-	private void gameEnd() {
+	public void gameEnd(boolean win) {
 		this.stop();
 		Object[] options = { "Neustart", "Beenden" };
-		JOptionPane question = new JOptionPane("Du hast verloren.");
+		JOptionPane question;
+		if (win == true) {
+			question = new JOptionPane("Du hast gewonnen!");
+		} else {
+			question = new JOptionPane("Du hast verloren.");
+		}
 		question.setOptions(options);
 		JDialog dialog = question.createDialog(new JFrame(), "Spielende");
 		dialog.setVisible(true);

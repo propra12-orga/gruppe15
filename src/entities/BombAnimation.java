@@ -36,7 +36,8 @@ public class BombAnimation extends Entity {
 		if ((this.playerKilled != null)) {
 			this.killDelay--;
 			if (this.killDelay == 0) {
-				this.playerKilled.removed = true;
+				// this.playerKilled.removed = true;
+				Game.getInstance().gameEnd(false);
 			}
 		}
 
