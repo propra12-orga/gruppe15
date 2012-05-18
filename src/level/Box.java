@@ -62,4 +62,14 @@ public class Box extends Rectangle {
 		return i - (i % Game.BLOCK_SIZE);
 	}
 
+	public int getDistance(Box b, int mode) {
+		int tmp;
+		if (mode == 1) {
+			tmp = Box.fitToBlock(b.x) - Box.fitToBlock(this.x);
+			return tmp / Game.BLOCK_SIZE;
+		} else {
+			tmp = Box.fitToBlock(b.y) - Box.fitToBlock(this.y);
+			return tmp / Game.BLOCK_SIZE;
+		}
+	}
 }
