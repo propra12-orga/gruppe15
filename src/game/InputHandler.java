@@ -29,7 +29,6 @@ public class InputHandler implements KeyListener {
 	}
 
 	private void toggle(KeyEvent ke, boolean pressed) {
-		Debug.log(Debug.DEBUG, "key pressed");
 		if (ke.getKeyCode() == KeyEvent.VK_UP) {
 			this.up.toggle(pressed);
 		}
