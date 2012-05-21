@@ -36,7 +36,7 @@ public class GUI implements ActionListener {
 		this.starten.addActionListener(this);
 		this.beenden = new JMenuItem("Beenden");
 		this.beenden.addActionListener(this);
-		this.spiel.add(this.starten);
+		// this.spiel.add(this.starten);
 		this.spiel.add(this.beenden);
 		this.menubar.add(this.spiel);
 
