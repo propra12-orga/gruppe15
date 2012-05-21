@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 
 public class Launcher extends JFrame {
 
-	private Game game;
+	public Game game;
 
 	/**
 	 * Create Window with Game Canvas Element
@@ -27,14 +27,7 @@ public class Launcher extends JFrame {
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.pack();
 		this.setVisible(true);
-	}
-
-	public void start() {
 		this.game.start();
-	}
-
-	public void stop() {
-		this.game.stop();
 	}
 
 }

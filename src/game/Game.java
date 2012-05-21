@@ -58,11 +58,6 @@ public class Game extends Canvas implements Runnable {
 	private Game() {
 		Debug.setMode(Debug.DEBUG);
 		this.init();
-
-		this.addKeyListener(Game.keys);
-		this.requestFocus();
-		this.setFocusable(true);
-
 	}
 
 	/**
@@ -96,22 +91,12 @@ public class Game extends Canvas implements Runnable {
 			 * Move all objects
 			 */
 			this.action(delta);
-			long test1 = System.nanoTime();
-			this.action(delta);
-			Debug.log(Debug.VERBOSE, "Steptime:" + ((System.nanoTime() - test1) / 1000000));
 
 			/**
 			 * Redraw all objects
 			 */
-			Graphics g = null;
-			try {
-				g = bs.getDrawGraphics();
-				long test2 = System.nanoTime();
-				this.draw(g);
-				Debug.log(Debug.VERBOSE, "Drawtime:" + ((System.nanoTime() - test2) / 1000000));
-			} finally {
-				g.dispose();
-			}
+			Graphics g = bs.getDrawGraphics();
+			this.draw(g);
 			bs.show();
 			Toolkit.getDefaultToolkit().sync();
 
@@ -145,19 +130,23 @@ public class Game extends Canvas implements Runnable {
 		this.setPreferredSize(d);
 		this.setMinimumSize(d);
 		this.setMaximumSize(d);
+
+		this.requestFocus();
+		this.setFocusable(true);
+		Game.keys = new InputHandler();
+		this.addKeyListener(Game.keys);
 	}
 
 	/**
 	 * Gets called form Launcher to start the game;
 	 */
 	public void start() {
-		this.running = true;
 		this.init();
 		this.createBufferStrategy(2);
 
+		this.running = true;
+
 		this.run();
-		this.requestFocusInWindow();
-		this.requestFocus();
 	}
 
 	/**
