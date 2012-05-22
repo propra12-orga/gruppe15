@@ -16,11 +16,12 @@ Meilenstein 2:
 -- Schon im Meilenstein 1
 
 - Bombe muss andere Bombe sofort zünden können
--- Ist nur ne kleine Änderung in den Kollisionsabfragen für Bombenanimation (sollte schnell und einfach gehn)
+-- Ist nur ne kleine Änderung in den Kollisionsabfragen für Bombenanimation (sollte schnell und einfach gehn) 
+-- Ferig :P
 
 - 2 Spieler Modus
 -- Guiänderung und einfügen neuer Tasten in den Input-Handler 
--- Ergänzung: Input-Handler für 2 lokale Spieler modifiziert
+-- Ergänzung: Input-Handler für 2 lokale Spieler modifiziert (done)
 
 - Map aus einer Text-Datei laden 
 -- Schon im Meilenstein 1
