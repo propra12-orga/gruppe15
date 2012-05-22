@@ -9,3 +9,24 @@ Referate:
 - Threads Oktay
 - XML / XSLZ Pakan
 - Netzwerk Philipp
+
+
+Meilenstein 2:
+- Bombe muss Spieler töten können
+-- Schon im Meilenstein 1
+
+- Bombe muss andere Bombe sofort zünden können
+-- Ist nur ne kleine Änderung in den Kollisionsabfragen für Bombenanimation (sollte schnell und einfach gehn)
+
+- 2 Spieler Modus
+-- Guiänderung und einfügen neuer Tasten in den Input-Handler
+
+- Map aus einer Text-Datei laden 
+-- Schon im Meilenstein 1
+
+- Ausgang hinter einer Mauer verstecken (sollte schnell und einfach gehn)
+-- Neuer Mauerntyp, der beim zerstören einen ausgang platziert
+-- Neuen Mauerntyp im Map-Loader einfügen
+
+- Dokumentation per Javadoc
+-- Alle mal Javadoc angucken und ihren Code damit kommentieren (hauptsächlich class-Blöcke, Methoden und Klassenattribute)
