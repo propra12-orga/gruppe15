@@ -25,26 +25,35 @@ public class Loader {
 		Scanner maps;
 		try {
 
-			maps = new Scanner(Main.class.getResourceAsStream("/ressources/maps/" + filename));
+			maps = new Scanner(
+					Main.class.getResourceAsStream("/ressources/maps/"
+							+ filename));
 			while (maps.hasNextLine()) {
 				String text = maps.nextLine();
 				for (x = 0; x < text.length(); x++) {
 					type = Integer.parseInt("" + text.charAt(x));
 
 					if (type == 1) {
-						Game.entities.add(new BreakableWall(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
+						Game.entities.add(new BreakableWall(
+								x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
 					} else if (type == 2) {
-						Game.entities.add(new Wall(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
+						Game.entities.add(new Wall(x * Game.BLOCK_SIZE, y
+								* Game.BLOCK_SIZE));
 					} else if (type == 3) {
-						Player p = new Player(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE);
+						Player p = new Player(x * Game.BLOCK_SIZE, y
+								* Game.BLOCK_SIZE);
 						Game.entities.add(p);
 						Game.players.add(p);
-						Game.staticBackground.add(new Background(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
-					} else if (type == 4) {
-						Game.entities.add(new Finishpoint(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
-						Game.staticBackground.add(new Background(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
+						Game.staticBackground.add(new Background(x
+								* Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
+					} else if (type == 5) {
+						Game.entities.add(new Finishpoint(x * Game.BLOCK_SIZE,
+								y * Game.BLOCK_SIZE));
+						Game.staticBackground.add(new Background(x
+								* Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
 					} else if (type == 0) {
-						Game.staticBackground.add(new Background(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
+						Game.staticBackground.add(new Background(x
+								* Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
 					}
 
 				}
