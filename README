@@ -19,7 +19,8 @@ Meilenstein 2:
 -- Ist nur ne kleine Änderung in den Kollisionsabfragen für Bombenanimation (sollte schnell und einfach gehn)
 
 - 2 Spieler Modus
--- Guiänderung und einfügen neuer Tasten in den Input-Handler
+-- Guiänderung und einfügen neuer Tasten in den Input-Handler 
+-- Ergänzung: Input-Handler für 2 lokale Spieler modifiziert
 
 - Map aus einer Text-Datei laden 
 -- Schon im Meilenstein 1
