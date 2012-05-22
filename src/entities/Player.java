@@ -5,7 +5,6 @@ import game.KeySettings;
 import graphics.Image;
 import graphics.Sprite;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,18 +14,14 @@ import level.Box;
 public class Player extends Entity {
 	private float width;
 	private float height;
-
-	private Image[][] facing_down, facing_up, facing_left, facing_right, facing_current;
 	private int speed;
 	private KeySettings keys;
+	private Image[][] facings;
+	private int facing = 0;
 
 	public Player(int x, int y) {
 		super(x + 1, y + 1);
-		this.facing_left = Sprite.load("bomberman_l_small.png", 55, 90);
-		this.facing_right = Sprite.load("bomberman_r_small.png", 55, 90);
-		this.facing_down = Sprite.load("bomberman_v_small.png", 55, 90);
-		this.facing_up = Sprite.load("bomberman_h_small.png", 55, 90);
-		this.facing_current = this.facing_down;
+		this.facings = Sprite.load("bomberman.png", 55, 90);
 		this.width = (55 / 2);
 		this.height = (90 / 2);
 		this.box = new Box(this.x, this.y, (int) this.width, (int) this.height);
@@ -35,8 +30,7 @@ public class Player extends Entity {
 
 	@Override
 	public void draw(Graphics g) {
-		g.setColor(Color.GREEN);
-		g.drawImage((this.facing_current[0][0]).image, this.x, this.y, (int) this.width, (int) this.height, null);
+		g.drawImage((this.facings[this.facing][0]).image, this.x, this.y, (int) this.width, (int) this.height, null);
 	}
 
 	@Override
@@ -44,30 +38,30 @@ public class Player extends Entity {
 		boolean moved = false;
 		if (this.keys.up.down) {
 			this.y = this.y - this.speed;
-			this.facing_current = this.facing_up;
+			this.facing = 1;
 			moved = true;
 		}
 
 		if (this.keys.down.down) {
 			this.y = this.y + this.speed;
-			this.facing_current = this.facing_down;
+			this.facing = 0;
 			moved = true;
 		}
 
 		if (this.keys.left.down) {
 			this.x = this.x - this.speed;
-			this.facing_current = this.facing_left;
+			this.facing = 2;
 			moved = true;
 		}
 
 		if (this.keys.right.down) {
 			this.x = this.x + this.speed;
-			this.facing_current = this.facing_right;
+			this.facing = 3;
 			moved = true;
 		}
 
 		if (moved == false) {
-			this.facing_current = this.facing_down;
+			this.facing = 0;
 		}
 
 		this.box.update(this.x, this.y);
