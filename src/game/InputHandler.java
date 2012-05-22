@@ -22,6 +22,11 @@ public class InputHandler implements KeyListener {
 	public Key left = new Key();
 	public Key right = new Key();
 	public Key bomb = new Key();
+	public Key up2 = new Key();
+	public Key down2 = new Key();
+	public Key left2 = new Key();
+	public Key right2 = new Key();
+	public Key bomb2 = new Key();
 	public Key pause = new Key();
 
 	public InputHandler() {
@@ -41,8 +46,23 @@ public class InputHandler implements KeyListener {
 		if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
 			this.right.toggle(pressed);
 		}
-		if (ke.getKeyCode() == KeyEvent.VK_SPACE) {
+		if (ke.getKeyCode() == KeyEvent.VK_P) {
 			this.bomb.toggle(pressed);
+		}
+		if (ke.getKeyCode() == KeyEvent.VK_W) {
+			this.up2.toggle(pressed);
+		}
+		if (ke.getKeyCode() == KeyEvent.VK_S) {
+			this.down2.toggle(pressed);
+		}
+		if (ke.getKeyCode() == KeyEvent.VK_A) {
+			this.left2.toggle(pressed);
+		}
+		if (ke.getKeyCode() == KeyEvent.VK_D) {
+			this.right2.toggle(pressed);
+		}
+		if (ke.getKeyCode() == KeyEvent.VK_T) {
+			this.bomb2.toggle(pressed);
 		}
 		if (ke.getKeyCode() == KeyEvent.VK_P) {
 			this.pause.toggle(pressed);
