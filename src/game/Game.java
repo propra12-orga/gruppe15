@@ -19,7 +19,7 @@ import level.Box;
 import level.Loader;
 import entities.Entity;
 
-public class Game extends Canvas implements Runnable {
+public class Game extends Canvas {
 
 	private static Game instance = null;
 
@@ -62,7 +62,13 @@ public class Game extends Canvas implements Runnable {
 	 * 
 	 */
 	private Game() {
-		Debug.setMode(Debug.DEBUG);
+		Game.keys = new InputHandler();
+		this.addKeyListener(Game.keys);
+
+		KeySettings.createKeySettings();
+
+		this.requestFocus();
+		this.setFocusable(true);
 		this.init();
 	}
 
@@ -72,7 +78,6 @@ public class Game extends Canvas implements Runnable {
 	 * 
 	 * @see java.lang.Runnable#run()
 	 */
-	@Override
 	public void run() {
 		long lastLoopTime = System.nanoTime();
 		int lastFpsTime = 0;
@@ -126,9 +131,6 @@ public class Game extends Canvas implements Runnable {
 		Game.entities = new CopyOnWriteArrayList<Entity>();
 		Game.staticBackground = new CopyOnWriteArrayList<Entity>();
 		Game.players = new CopyOnWriteArrayList<Entity>();
-		Game.key_settings = new ArrayList<KeySettings>();
-
-		KeySettings.createKeySettings();
 
 		Loader l1 = new Loader();
 		l1.loadMap("Map2");
@@ -139,22 +141,20 @@ public class Game extends Canvas implements Runnable {
 		this.setPreferredSize(d);
 		this.setMinimumSize(d);
 		this.setMaximumSize(d);
+	}
 
-		this.requestFocus();
-		this.setFocusable(true);
-		Game.keys = new InputHandler();
-		this.addKeyListener(Game.keys);
+	public void restart() {
+		this.init();
+		this.running = true;
+		this.run();
 	}
 
 	/**
 	 * Gets called form Launcher to start the game;
 	 */
 	public void start() {
-		this.init();
 		this.createBufferStrategy(2);
-
 		this.running = true;
-
 		this.run();
 	}
 
@@ -249,7 +249,7 @@ public class Game extends Canvas implements Runnable {
 		Object obj = question.getValue();
 		if (obj.equals(options[0])) {
 			// Spiel neustarten
-			this.start();
+			this.restart();
 		} else {
 			// Spiel beenden;
 			System.exit(0);
