@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -42,7 +43,11 @@ public class Game extends Canvas implements Runnable {
 	public int fps_static = 0;
 	public int fps = 0;
 
+	private int oldBackgroundElems;
+
 	public static InputHandler keys = new InputHandler();
+
+	public static BufferedImage background;
 
 	public static Game getInstance() {
 		if (Game.instance == null) {
@@ -189,14 +194,24 @@ public class Game extends Canvas implements Runnable {
 	private void draw(Graphics g) {
 		g.setColor(this.getBackground());
 		g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
-		for (Entity e : Game.staticBackground) {
-			e.draw(g);
+
+		if (this.oldBackgroundElems != Game.staticBackground.size()) {
+
+			Game.background = new BufferedImage(Game.GAME_WIDTH, Game.GAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+			for (Entity e : Game.staticBackground) {
+				e.draw(Game.background.getGraphics());
+			}
+			this.oldBackgroundElems = Game.staticBackground.size();
 		}
+
+		g.drawImage(Game.background, 0, 0, null);
+
 		for (Entity e : Game.entities) {
 			if (e.removed == false) {
 				e.draw(g);
 			}
 		}
+
 		g.setColor(Color.WHITE);
 		g.drawString("FPS: " + this.fps_static, 0, 10);
 	}
