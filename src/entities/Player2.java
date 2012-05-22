@@ -11,7 +11,7 @@ import java.util.List;
 
 import level.Box;
 
-public class Player extends Entity {
+public class Player2 extends Entity {
 	private float width;
 	private float height;
 
@@ -19,7 +19,7 @@ public class Player extends Entity {
 			facing_current;
 	private int speed;
 
-	public Player(int x, int y) {
+	public Player2(int x, int y) {
 		super(x + 1, y + 1);
 		this.facing_left = Sprite.load("bomberman_l_small.png", 55, 90);
 		this.facing_right = Sprite.load("bomberman_r_small.png", 55, 90);
@@ -42,32 +42,32 @@ public class Player extends Entity {
 	@Override
 	public void action(double delta) {
 		boolean moved = false;
-		if (Game.keys.up.down) {
+		if (Game.keys.up2.down) {
 			this.y = this.y - this.speed;
 			this.facing_current = this.facing_up;
 			moved = true;
 		}
 		// TODO: Bombs shouldn't be able to be planted with pressed space
 		// button.Need just one bomb per press.
-		if (Game.keys.bomb.down) {
+		if (Game.keys.bomb2.down) {
 			Game.entities.add(new Bomb(Box.fitToBlock(this.x), Box
 					.fitToBlock(this.y), this));
 
 		}
 
-		if (Game.keys.down.down) {
+		if (Game.keys.down2.down) {
 			this.y = this.y + this.speed;
 			this.facing_current = this.facing_down;
 			moved = true;
 		}
 
-		if (Game.keys.left.down) {
+		if (Game.keys.left2.down) {
 			this.x = this.x - this.speed;
 			this.facing_current = this.facing_left;
 			moved = true;
 		}
 
-		if (Game.keys.right.down) {
+		if (Game.keys.right2.down) {
 			this.x = this.x + this.speed;
 			this.facing_current = this.facing_right;
 			moved = true;
@@ -111,7 +111,7 @@ public class Player extends Entity {
 			}
 		}
 		// TODO: Player shouldn't be instantly kicked off the bomb
-		if ((e instanceof Bomb) && (((Bomb) e).owner != this)) {
+		if ((e instanceof Bomb) && (((Bomb) e).owner2 != this)) {
 			ArrayList<Integer> dir = this.box.collideDirection(e.box);
 
 			if (dir.contains(Box.COLLIDE_LEFT)) {

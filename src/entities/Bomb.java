@@ -8,7 +8,7 @@ import java.awt.Graphics;
 import level.Box;
 
 public class Bomb extends Entity {
-	public Bomb(int x, int y, Player owner) {
+	public Bomb(int x, int y, Player1 owner) {
 		super(x, y);
 		this.images = Sprite.load("bomb_small.png", 50, 49);
 		this.box = new Box(this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE);
@@ -16,7 +16,16 @@ public class Bomb extends Entity {
 		this.explosionDelay = 50;
 	}
 
-	public Player owner;
+	public Bomb(int a, int b, Player2 owner2) {
+		super(a, b);
+		this.images = Sprite.load("bomb_small.png", 50, 49);
+		this.box = new Box(this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE);
+		this.owner = this.owner;
+		this.explosionDelay = 50;
+	}
+
+	public Player1 owner;
+	public Player2 owner2;
 	private int explosionDelay;
 
 	@Override

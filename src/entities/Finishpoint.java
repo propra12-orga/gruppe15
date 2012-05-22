@@ -30,7 +30,7 @@ public class Finishpoint extends Entity {
 
 	@Override
 	public void collide(Entity e) {
-		if (e instanceof Player) {
+		if (e instanceof Player1) {
 			this.player = e;
 		}
 	}

@@ -3,7 +3,8 @@ package level;
 import entities.Background;
 import entities.BreakableWall;
 import entities.Finishpoint;
-import entities.Player;
+import entities.Player1;
+import entities.Player2;
 import entities.Wall;
 import entities.WallWithFinishingPoint;
 import game.Game;
@@ -41,10 +42,17 @@ public class Loader {
 						Game.entities.add(new Wall(x * Game.BLOCK_SIZE, y
 								* Game.BLOCK_SIZE));
 					} else if (type == 3) {
-						Player p = new Player(x * Game.BLOCK_SIZE, y
+						Player1 p1 = new Player1(x * Game.BLOCK_SIZE, y
 								* Game.BLOCK_SIZE);
-						Game.entities.add(p);
-						Game.players.add(p);
+						Game.entities.add(p1);
+						Game.players.add(p1);
+						Game.staticBackground.add(new Background(x
+								* Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
+					} else if (type == 4) {
+						Player2 p2 = new Player2(x * Game.BLOCK_SIZE, y
+								* Game.BLOCK_SIZE);
+						Game.entities.add(p2);
+						Game.players.add(p2);
 						Game.staticBackground.add(new Background(x
 								* Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
 					} else if (type == 5) {
