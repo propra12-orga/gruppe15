@@ -122,7 +122,7 @@ public class Game extends Canvas implements Runnable {
 		Game.players = new CopyOnWriteArrayList<Entity>();
 
 		Loader l1 = new Loader();
-		l1.addWalls("Map2");
+		l1.loadMap("Map2");
 		Game.GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE) + 1;
 		Game.GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE) + 1;
 

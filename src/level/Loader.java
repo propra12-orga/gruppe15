@@ -5,6 +5,7 @@ import entities.BreakableWall;
 import entities.Finishpoint;
 import entities.Player;
 import entities.Wall;
+import entities.WallWithFinishingPoint;
 import game.Game;
 import game.Main;
 
@@ -14,11 +15,11 @@ public class Loader {
 
 	/**
 	 * Creates a level from a map file Types: 1 = Breakable Wall 2 = Solid Wall
-	 * 3 = Spawnpoint 0 = empty Background
+	 * 3 = Spawnpoint 0 = empty Background 5 = Finishpoint
 	 * 
 	 * @param filename
 	 */
-	public void addWalls(String filename) {
+	public void loadMap(String filename) {
 
 		int x = 0, type, y = 0;
 
@@ -54,6 +55,10 @@ public class Loader {
 					} else if (type == 0) {
 						Game.staticBackground.add(new Background(x
 								* Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
+					} else if (type == 6) {
+						Game.entities.add(new WallWithFinishingPoint(x
+								* Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
+
 					}
 
 				}
