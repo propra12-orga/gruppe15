@@ -2,12 +2,31 @@ package game;
 
 import game.InputHandler.Key;
 
+/**
+ * @author Philipp
+ * 
+ */
 public class KeySettings {
 
+	/**
+	 * The key the player uses for placing the bomb
+	 */
 	public Key bomb;
+	/**
+	 * the key for moving left
+	 */
 	public Key left;
+	/**
+	 * the key for moving right
+	 */
 	public Key right;
+	/**
+	 * the key for moving up
+	 */
 	public Key up;
+	/**
+	 * the key for moving down
+	 */
 	public Key down;
 
 	/**
