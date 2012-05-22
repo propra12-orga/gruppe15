@@ -47,12 +47,6 @@ public class Player extends Entity {
 			this.facing_current = this.facing_up;
 			moved = true;
 		}
-		// TODO: Bombs shouldn't be able to be planted with pressed space
-		// button.Need just one bomb per press.
-		if (this.keys.bomb.down) {
-			Game.entities.add(new Bomb(Box.fitToBlock(this.x), Box.fitToBlock(this.y), this));
-
-		}
 
 		if (this.keys.down.down) {
 			this.y = this.y + this.speed;
@@ -87,6 +81,10 @@ public class Player extends Entity {
 			}
 		}
 
+		if (this.keys.bomb.down) {
+			Game.entities.add(new Bomb(Box.fitToBlock(this.x), Box.fitToBlock(this.y), this));
+
+		}
 	}
 
 	@Override
