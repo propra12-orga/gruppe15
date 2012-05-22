@@ -3,7 +3,7 @@ package entities;
 import game.Game;
 import graphics.Sprite;
 
-public class WallWithFinishingPoint extends Wall {
+public class WallWithFinishingPoint extends BreakableWall {
 
 	public WallWithFinishingPoint(int x, int y) {
 		super(x, y);
@@ -15,7 +15,7 @@ public class WallWithFinishingPoint extends Wall {
 		if (e instanceof BombAnimation) {
 			this.removed = true;
 			Game.staticBackground.add(new Background(this.x, this.y));
-			Game.staticBackground.add(new Finishpoint(this.x, this.y));
+			Game.entities.add(new Finishpoint(this.x, this.y));
 		}
 	}
 }
