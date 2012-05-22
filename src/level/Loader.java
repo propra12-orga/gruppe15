@@ -5,6 +5,7 @@ import entities.BreakableWall;
 import entities.Finishpoint;
 import entities.Player;
 import entities.Wall;
+import entities.WallWithFinishingPoint;
 import game.Game;
 import game.Main;
 
@@ -55,13 +56,10 @@ public class Loader {
 						Game.staticBackground.add(new Background(x
 								* Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
 					} else if (type == 6) {
-						Game.entities.add(new Finishpoint(x * Game.BLOCK_SIZE,
-								y * Game.BLOCK_SIZE));
-						Game.staticBackground.add(new Background(x
+						Game.entities.add(new WallWithFinishingPoint(x
 								* Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
-						Game.entities.add(new BreakableWall(
-								x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
-					} 
+
+					}
 
 				}
 				y++;
