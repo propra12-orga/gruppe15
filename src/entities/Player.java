@@ -1,6 +1,7 @@
 package entities;
 
 import game.Game;
+import game.KeySettings;
 import graphics.Image;
 import graphics.Sprite;
 
@@ -11,15 +12,15 @@ import java.util.List;
 
 import level.Box;
 
-public class Player2 extends Entity {
+public class Player extends Entity {
 	private float width;
 	private float height;
 
-	private Image[][] facing_down, facing_up, facing_left, facing_right,
-			facing_current;
+	private Image[][] facing_down, facing_up, facing_left, facing_right, facing_current;
 	private int speed;
+	private KeySettings keys;
 
-	public Player2(int x, int y) {
+	public Player(int x, int y) {
 		super(x + 1, y + 1);
 		this.facing_left = Sprite.load("bomberman_l_small.png", 55, 90);
 		this.facing_right = Sprite.load("bomberman_r_small.png", 55, 90);
@@ -35,39 +36,37 @@ public class Player2 extends Entity {
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(Color.GREEN);
-		g.drawImage((this.facing_current[0][0]).image, this.x, this.y,
-				(int) this.width, (int) this.height, null);
+		g.drawImage((this.facing_current[0][0]).image, this.x, this.y, (int) this.width, (int) this.height, null);
 	}
 
 	@Override
 	public void action(double delta) {
 		boolean moved = false;
-		if (Game.keys.up2.down) {
+		if (this.keys.up.down) {
 			this.y = this.y - this.speed;
 			this.facing_current = this.facing_up;
 			moved = true;
 		}
 		// TODO: Bombs shouldn't be able to be planted with pressed space
 		// button.Need just one bomb per press.
-		if (Game.keys.bomb2.down) {
-			Game.entities.add(new Bomb(Box.fitToBlock(this.x), Box
-					.fitToBlock(this.y), this));
+		if (this.keys.bomb.down) {
+			Game.entities.add(new Bomb(Box.fitToBlock(this.x), Box.fitToBlock(this.y), this));
 
 		}
 
-		if (Game.keys.down2.down) {
+		if (this.keys.down.down) {
 			this.y = this.y + this.speed;
 			this.facing_current = this.facing_down;
 			moved = true;
 		}
 
-		if (Game.keys.left2.down) {
+		if (this.keys.left.down) {
 			this.x = this.x - this.speed;
 			this.facing_current = this.facing_left;
 			moved = true;
 		}
 
-		if (Game.keys.right2.down) {
+		if (this.keys.right.down) {
 			this.x = this.x + this.speed;
 			this.facing_current = this.facing_right;
 			moved = true;
@@ -111,7 +110,7 @@ public class Player2 extends Entity {
 			}
 		}
 		// TODO: Player shouldn't be instantly kicked off the bomb
-		if ((e instanceof Bomb) && (((Bomb) e).owner2 != this)) {
+		if ((e instanceof Bomb) && (((Bomb) e).owner != this)) {
 			ArrayList<Integer> dir = this.box.collideDirection(e.box);
 
 			if (dir.contains(Box.COLLIDE_LEFT)) {
@@ -131,5 +130,9 @@ public class Player2 extends Entity {
 			}
 
 		}
+	}
+
+	public void setKeys(KeySettings keys) {
+		this.keys = keys;
 	}
 }

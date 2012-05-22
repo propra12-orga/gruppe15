@@ -33,6 +33,7 @@ public class Game extends Canvas implements Runnable {
 	public static CopyOnWriteArrayList<Entity> entities = new CopyOnWriteArrayList<Entity>();
 	public static CopyOnWriteArrayList<Entity> staticBackground = new CopyOnWriteArrayList<Entity>();
 	public static CopyOnWriteArrayList<Entity> players = new CopyOnWriteArrayList<Entity>();
+	public static ArrayList<KeySettings> key_settings = new ArrayList<KeySettings>();
 	private boolean running;
 
 	private int maxUpdateRate = 50;
@@ -120,6 +121,9 @@ public class Game extends Canvas implements Runnable {
 		Game.entities = new CopyOnWriteArrayList<Entity>();
 		Game.staticBackground = new CopyOnWriteArrayList<Entity>();
 		Game.players = new CopyOnWriteArrayList<Entity>();
+		Game.key_settings = new ArrayList<KeySettings>();
+
+		KeySettings.createKeySettings();
 
 		Loader l1 = new Loader();
 		l1.loadMap("Map2");
@@ -234,6 +238,14 @@ public class Game extends Canvas implements Runnable {
 		} else {
 			// Spiel beenden;
 			System.exit(0);
+		}
+	}
+
+	public static KeySettings getKeySettings(int player_count) throws Exception {
+		if (player_count < Game.key_settings.size()) {
+			return Game.key_settings.get(player_count);
+		} else {
+			throw new Exception("Unkown key settings");
 		}
 	}
 }

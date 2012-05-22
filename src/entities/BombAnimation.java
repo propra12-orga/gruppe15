@@ -126,8 +126,11 @@ public class BombAnimation extends Entity {
 
 	@Override
 	public void collide(Entity e) {
-		if (e instanceof Player1) {
+		if (e instanceof Player) {
 			this.playerKilled = e;
+		}
+		if (e instanceof Bomb) {
+			((Bomb) e).forceExplosion();
 		}
 		if (e instanceof BreakableWall) {
 			e.removed = true;
