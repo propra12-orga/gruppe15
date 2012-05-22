@@ -38,7 +38,7 @@ public class Finishpoint extends Entity {
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(Color.RED);
-		g.drawOval(this.x, this.y, 48, 48);
+		g.drawOval(this.x+5, this.y+5, 40, 40);
 
 	}
 

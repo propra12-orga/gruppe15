@@ -54,7 +54,14 @@ public class Loader {
 					} else if (type == 0) {
 						Game.staticBackground.add(new Background(x
 								* Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
-					}
+					} else if (type == 6) {
+						Game.entities.add(new Finishpoint(x * Game.BLOCK_SIZE,
+								y * Game.BLOCK_SIZE));
+						Game.staticBackground.add(new Background(x
+								* Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
+						Game.entities.add(new BreakableWall(
+								x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
+					} 
 
 				}
 				y++;
