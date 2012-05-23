@@ -123,8 +123,9 @@ public class GUI implements ActionListener {
 	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
-	// this method is called if a Button is pressed
+	// this method is called if a button is pressed
 	public void actionPerformed(ActionEvent arg0) {
+		// If the "restart"-button is pressed the game asks to restart the game
 		if (arg0.getSource() == this.starten) {
 			Object[] options = { "Neustart", "abbrechen" };
 			JOptionPane question = new JOptionPane(
@@ -134,7 +135,7 @@ public class GUI implements ActionListener {
 			dialog.setVisible(true);
 			Object obj = question.getValue();
 			if (obj.equals(options[0])) {
-				// Spiel neustarten
+				// restarts the game (not working yet)
 
 				this.frame.game.stop();
 				this.frame.game.start();
