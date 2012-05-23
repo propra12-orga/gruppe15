@@ -9,20 +9,63 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+/**
+ * @author mauriceschleusinger
+ * 
+ */
 public class GUI implements ActionListener {
+	/**
+	 * 
+	 */
 	private JMenuBar menubar;
+	/**
+	 * new MenuBar which contains the menu-tabs and elements
+	 */
 	private JMenu spiel;
+	/**
+	 * new tab named "Spiel"
+	 */
 	private JMenuItem starten;
+	/**
+	 * new item in Tab "Spiel" named "starten"
+	 */
 	private JMenuItem beenden;
-	private JMenu netzwerk;
+	/**
+	 * new item in Tab "Spiel" named "beenden"
+	 */
 	private JMenu optionen;
+	/**
+	 * new tab named "Optionen"
+	 */
 	private JMenuItem spname;
+	/**
+	 * new item in Tab "Optionen" named "spname"
+	 */
 	private JMenuItem groesse;
+	/**
+	 * new item in Tab "Optionen" named "groesse"
+	 */
+	private JMenu netzwerk;
+	/**
+	 * new tab named "Netzwerk"
+	 */
 	private JMenuItem startserver;
+	/**
+	 * new item in Tab "Netzwerk" named "startserver"
+	 */
 	private JMenuItem stopserver;
+	/**
+	 * new item in Tab "Netzwerk" named "stopserver"
+	 */
 	private JMenuItem findserver;
+	/**
+	 * new item in Tab "Netzwerk" named "findserver"
+	 */
 	private Launcher frame;
 
+	/**
+	 * @param frame
+	 */
 	public GUI(Launcher frame) {
 
 		this.frame = frame;
@@ -67,11 +110,24 @@ public class GUI implements ActionListener {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
+	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == this.starten) {
 			Object[] options = { "Neustart", "abbrechen" };
-			JOptionPane question = new JOptionPane("Spiel neustarten? Der aktuelle fortschritt geht verloren");
+			JOptionPane question = new JOptionPane(
+					"Spiel neustarten? Der aktuelle fortschritt geht verloren");
 			question.setOptions(options);
 			JDialog dialog = question.createDialog(this.frame, "Achtung");
 			dialog.setVisible(true);
@@ -86,7 +142,8 @@ public class GUI implements ActionListener {
 			question.disable();
 		} else if (arg0.getSource() == this.beenden) {
 			Object[] options = { "beenden", "abbrechen" };
-			JOptionPane question = new JOptionPane("Spiel beenden? Der aktuelle fortschritt geht verloren");
+			JOptionPane question = new JOptionPane(
+					"Spiel beenden? Der aktuelle fortschritt geht verloren");
 			question.setOptions(options);
 			JDialog dialog = question.createDialog(this.frame, "Achtung");
 			dialog.setVisible(true);
