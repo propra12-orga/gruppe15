@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class GUI implements ActionListener {
 	/**
-	 * 
+	 * Using the Java Actionlistener
 	 */
 	private JMenuBar menubar;
 	/**
@@ -123,6 +123,7 @@ public class GUI implements ActionListener {
 	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
+	// this method is called if a Button is pressed
 	public void actionPerformed(ActionEvent arg0) {
 		if (arg0.getSource() == this.starten) {
 			Object[] options = { "Neustart", "abbrechen" };
@@ -140,6 +141,7 @@ public class GUI implements ActionListener {
 			}
 			dialog.dispose();
 			question.disable();
+			// If the exit-button is pressed the game asks to exit the game
 		} else if (arg0.getSource() == this.beenden) {
 			Object[] options = { "beenden", "abbrechen" };
 			JOptionPane question = new JOptionPane(
@@ -148,8 +150,8 @@ public class GUI implements ActionListener {
 			JDialog dialog = question.createDialog(this.frame, "Achtung");
 			dialog.setVisible(true);
 			Object obj = question.getValue();
+			// ends the game and closes the JFrame
 			if (obj.equals(options[0])) {
-				// Spiel beenden
 				System.exit(0);
 			}
 			dialog.dispose();
