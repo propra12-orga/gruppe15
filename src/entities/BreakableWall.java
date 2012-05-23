@@ -7,7 +7,7 @@ public class BreakableWall extends Wall {
 
 	public BreakableWall(int x, int y) {
 		super(x, y);
-		this.images = Sprite.load("brick_break_small.png", 100, 100);
+		this.images = Sprite.load("wall_des.png", 100, 100);
 	}
 
 	@Override

@@ -197,7 +197,8 @@ public class Game extends Canvas {
 
 		if (this.oldBackgroundElems != Game.staticBackground.size()) {
 
-			Game.background = new BufferedImage(Game.GAME_WIDTH, Game.GAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+			Game.background = new BufferedImage(Game.GAME_WIDTH,
+					Game.GAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
 			for (Entity e : Game.staticBackground) {
 				e.draw(Game.background.getGraphics());
 			}

@@ -7,7 +7,7 @@ public class WallWithFinishingPoint extends BreakableWall {
 
 	public WallWithFinishingPoint(int x, int y) {
 		super(x, y);
-		this.images = Sprite.load("brick_break_small.png", 100, 100);
+		this.images = Sprite.load("wall.png", 100, 100);
 	}
 
 	@Override

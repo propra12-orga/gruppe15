@@ -25,12 +25,14 @@ public class Player extends Entity {
 		this.width = (55 / 2);
 		this.height = (90 / 2);
 		this.box = new Box(this.x, this.y, (int) this.width, (int) this.height);
+
 		this.speed = 10;
 	}
 
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage((this.facings[this.facing][0]).image, this.x, this.y, (int) this.width, (int) this.height, null);
+		g.drawImage((this.facings[this.facing][0]).image, this.x, this.y,
+				(int) this.width, (int) this.height, null);
 	}
 
 	@Override
@@ -76,7 +78,8 @@ public class Player extends Entity {
 		}
 
 		if (this.keys.bomb.down) {
-			Game.entities.add(new Bomb(Box.fitToBlock(this.x), Box.fitToBlock(this.y), this));
+			Game.entities.add(new Bomb(Box.fitToBlock(this.x), Box
+					.fitToBlock(this.y), this));
 
 		}
 	}
