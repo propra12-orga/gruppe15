@@ -10,7 +10,7 @@ public class Wall extends Entity {
 
 	public Wall(int x, int y) {
 		super(x, y);
-		this.images = Sprite.load("brick_solid_small.png", 100, 100);
+		this.images = Sprite.load("wall.png", 100, 100);
 	}
 
 	@Override
