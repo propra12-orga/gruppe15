@@ -19,36 +19,101 @@ import level.Box;
 import level.Loader;
 import entities.Entity;
 
+/**
+ *
+ */
 public class Game extends Canvas {
 
+	/**
+	 * Static var for Singleton
+	 */
 	private static Game instance = null;
 
+	/**
+	 * Size for each block
+	 */
 	public static final int BLOCK_SIZE = 50;
 
+	/**
+	 * Width in "Blocks" for the game
+	 */
 	public static int FIELD_WIDTH = 16;
+	/**
+	 * Height in "Blocks" for the game
+	 */
 	public static int FIELD_HEIGHT = ((Game.FIELD_WIDTH * 3) / 4);
 
+	/**
+	 * Width in px
+	 */
 	public static int GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE);
+	/**
+	 * Height in px
+	 */
 	public static int GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE);
 
-	public static CopyOnWriteArrayList<Entity> entities = new CopyOnWriteArrayList<Entity>();
-	public static CopyOnWriteArrayList<Entity> staticBackground = new CopyOnWriteArrayList<Entity>();
-	public static CopyOnWriteArrayList<Entity> players = new CopyOnWriteArrayList<Entity>();
+	/**
+	 * Array with all entities in the game
+	 */
+	public static CopyOnWriteArrayList<Entity> entities;
+	/**
+	 * Array with all static entities like Wall and Background
+	 */
+	public static CopyOnWriteArrayList<Entity> staticBackground;
+	/**
+	 * Array with all players
+	 */
+	public static CopyOnWriteArrayList<Entity> players;
+	/**
+	 * Array with all possible key settings
+	 */
 	public static ArrayList<KeySettings> key_settings = new ArrayList<KeySettings>();
+	/**
+	 * 
+	 */
 	private boolean running;
 
-	private int maxUpdateRate = 50;
+	/**
+	 * Max FPS of the game
+	 */
+	private int maxUpdateRate = 80;
+	/**
+	 * Time each frame should take
+	 */
 	private long frameTimeNs = 1000000000 / this.maxUpdateRate;
+	/**
+	 * Min time the thread should wait
+	 */
 	private int minSleepTime = 10;
+	/**
+	 * FPS shown in gui
+	 */
 	public int fps_static = 0;
-	public int fps = 0;
+	/**
+	 * FPS counter
+	 */
+	private int fps = 0;
 
+	/**
+	 * Counter to check if static elements have changed
+	 */
 	private int oldBackgroundElems;
 
+	/**
+	 * Key Listener
+	 */
 	public static InputHandler keys = new InputHandler();
 
+	/**
+	 * Buffered image for static elements
+	 */
 	public static BufferedImage background;
 
+	/**
+	 * Get Singleton-Instance
+	 * 
+	 * @return Game
+	 */
 	public static Game getInstance() {
 		if (Game.instance == null) {
 			Game.instance = new Game();
@@ -57,8 +122,8 @@ public class Game extends Canvas {
 	}
 
 	/**
-	 * Constructor to set Canvas size and create important objects and add some
-	 * Test objects
+	 * Constructor to set Canvas size and create important objects and load the
+	 * default map
 	 * 
 	 */
 	private Game() {
@@ -127,6 +192,9 @@ public class Game extends Canvas {
 		}
 	}
 
+	/**
+	 * Create all arrays, load the map and set size of gamefield
+	 */
 	public void init() {
 		Game.entities = new CopyOnWriteArrayList<Entity>();
 		Game.staticBackground = new CopyOnWriteArrayList<Entity>();
@@ -143,6 +211,9 @@ public class Game extends Canvas {
 		this.setMaximumSize(d);
 	}
 
+	/**
+	 * Restart the current map
+	 */
 	public void restart() {
 		this.init();
 		this.running = true;
@@ -220,6 +291,8 @@ public class Game extends Canvas {
 	/**
 	 * Get all Entities in a Box
 	 * 
+	 * @param b
+	 *            Box to check
 	 * @return List<Entity> Found entities
 	 */
 	public static List<Entity> getEntities(Box b) {
@@ -235,6 +308,11 @@ public class Game extends Canvas {
 		return result;
 	}
 
+	/**
+	 * End the game and show dialog to end / restart
+	 * 
+	 * @param win
+	 */
 	public void gameEnd(boolean win) {
 		this.stop();
 		Object[] options = { "Neustart", "Beenden" };
@@ -257,6 +335,13 @@ public class Game extends Canvas {
 		}
 	}
 
+	/**
+	 * Get a input configuration for a player
+	 * 
+	 * @param player_count
+	 * @return KeySettings
+	 * @throws Exception
+	 */
 	public static KeySettings getKeySettings(int player_count) throws Exception {
 		if (player_count < Game.key_settings.size()) {
 			return Game.key_settings.get(player_count);
