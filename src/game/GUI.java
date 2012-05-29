@@ -92,7 +92,7 @@ public class GUI implements ActionListener {
 		 * this.netzwerk.add(this.stopserver);
 		 * this.netzwerk.add(this.findserver);
 		 */
-		this.netzwerk.add(new JMenuItem("noch nicht verfügbar"));
+		this.netzwerk.add(new JMenuItem("noch nicht verfÃ¼gbar"));
 		this.menubar.add(this.netzwerk);
 
 		// Buttons for "Optionen"
@@ -102,7 +102,7 @@ public class GUI implements ActionListener {
 		 * JMenuItem("Groesse"); this.optionen.add(this.spname);
 		 * this.optionen.add(this.groesse);
 		 */
-		this.optionen.add(new JMenuItem("noch nicht verfügbar"));
+		this.optionen.add(new JMenuItem("noch nicht verfÃ¼gbar"));
 		this.menubar.add(this.optionen);
 
 		// set Menubar
