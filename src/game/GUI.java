@@ -137,9 +137,9 @@ public class GUI implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		// If the "restart"-button is pressed the game asks to restart the game
 		if (arg0.getSource() == this.starten) {
-			Object[] options = { "Neustart", "abbrechen" };
+			Object[] options = { "Neustart", "Abbrechen" };
 			JOptionPane question = new JOptionPane(
-					"Spiel neustarten? Der aktuelle fortschritt geht verloren");
+					"Spiel neustarten? Der aktuelle Fortschritt geht verloren");
 			question.setOptions(options);
 			JDialog dialog = question.createDialog(this.frame, "Achtung");
 			dialog.setVisible(true);
@@ -154,9 +154,9 @@ public class GUI implements ActionListener {
 			question.disable();
 			// If the exit-button is pressed the game asks to exit the game
 		} else if (arg0.getSource() == this.beenden) {
-			Object[] options = { "beenden", "abbrechen" };
+			Object[] options = { "Beenden", "Abbrechen" };
 			JOptionPane question = new JOptionPane(
-					"Spiel beenden? Der aktuelle fortschritt geht verloren");
+					"Spiel beenden? Der aktuelle Fortschritt geht verloren");
 			question.setOptions(options);
 			JDialog dialog = question.createDialog(this.frame, "Achtung");
 			dialog.setVisible(true);
