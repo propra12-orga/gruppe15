@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -33,6 +34,12 @@ public class GUI implements ActionListener {
 	/**
 	 * new item in Tab "Spiel" named "beenden"
 	 */
+
+	private JMenuItem level;
+	/**
+	 * new item in Tab "Spiel" named "level"
+	 */
+
 	private JMenu optionen;
 	/**
 	 * new tab named "Optionen"
@@ -79,9 +86,12 @@ public class GUI implements ActionListener {
 		this.starten.addActionListener(this);
 		this.beenden = new JMenuItem("Beenden");
 		this.beenden.addActionListener(this);
+		this.level = new JMenuItem("Levelauswahl");
+		this.level.addActionListener(this);
 		// this.spiel.add(this.starten);
 		this.spiel.add(this.beenden);
 		this.menubar.add(this.spiel);
+		this.spiel.add(this.level);
 
 		// Buttons for "Netzwerk"
 		this.netzwerk = new JMenu("Netzwerk");
@@ -157,6 +167,12 @@ public class GUI implements ActionListener {
 			}
 			dialog.dispose();
 		}
+		// if "Levelauswahl" is pressed (not working yet)
 
+		if (arg0.getSource() == this.level) {
+			JFrame levelframe = new JFrame();
+			levelframe.setVisible(true);
+			levelframe.setResizable(true);
+		}
 	}
 }
