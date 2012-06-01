@@ -12,12 +12,23 @@ import java.util.List;
 import level.Box;
 
 public class Player extends Entity {
+
+	/*
+	 * Create variables for width, height, speed, key settings Create array for
+	 * images
+	 */
+
 	private float width;
 	private float height;
 	private int speed;
 	private KeySettings keys;
 	private Image[][] facings;
 	private int facing = 0;
+
+	/*
+	 * Constructor for default Player sets position, speed, images, height and
+	 * width
+	 */
 
 	public Player(int x, int y) {
 		super(x + 1, y + 1);
@@ -29,20 +40,35 @@ public class Player extends Entity {
 		this.speed = 10;
 	}
 
+	/*
+	 * draws Player on canvas
+	 */
+
 	@Override
 	public void draw(Graphics g) {
 		g.drawImage((this.facings[this.facing][0]).image, this.x, this.y,
 				(int) this.width, (int) this.height, null);
 	}
 
+	/*
+	 * determines what happens if a key is pressed
+	 */
 	@Override
 	public void action(double delta) {
 		boolean moved = false;
+
+		/*
+		 * if key "down" is pressed
+		 */
 		if (this.keys.up.down) {
 			this.y = this.y - this.speed;
 			this.facing = 1;
 			moved = true;
 		}
+
+		/*
+		 * if key "up" is pressed
+		 */
 
 		if (this.keys.down.down) {
 			this.y = this.y + this.speed;
@@ -50,18 +76,27 @@ public class Player extends Entity {
 			moved = true;
 		}
 
+		/*
+		 * if key "left" is pressed
+		 */
 		if (this.keys.left.down) {
 			this.x = this.x - this.speed;
 			this.facing = 2;
 			moved = true;
 		}
 
+		/*
+		 * if key "right" is pressed
+		 */
 		if (this.keys.right.down) {
 			this.x = this.x + this.speed;
 			this.facing = 3;
 			moved = true;
 		}
 
+		/*
+		 * if no key is pressed
+		 */
 		if (moved == false) {
 			this.facing = 0;
 		}
@@ -77,12 +112,20 @@ public class Player extends Entity {
 			}
 		}
 
+		/*
+		 * if key "bomb" is pressed
+		 */
+
 		if (this.keys.bomb.down) {
 			Game.entities.add(new Bomb(Box.fitToBlock(this.x), Box
 					.fitToBlock(this.y), this));
 
 		}
 	}
+
+	/*
+	 * checks if Player collides with an Entity
+	 */
 
 	@Override
 	public void collide(Entity e) {
@@ -127,6 +170,9 @@ public class Player extends Entity {
 		}
 	}
 
+	/*
+	 * sets KeySettings
+	 */
 	public void setKeys(KeySettings keys) {
 		this.keys = keys;
 	}
