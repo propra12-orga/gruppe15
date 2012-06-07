@@ -13,7 +13,7 @@ import level.Box;
 
 public class Player extends Entity {
 
-	/*
+	/**
 	 * Create variables for width, height, speed, key settings Create array for
 	 * images
 	 */
@@ -25,7 +25,7 @@ public class Player extends Entity {
 	private Image[][] facings;
 	private int facing = 0;
 
-	/*
+	/**
 	 * Constructor for default Player sets position, speed, images, height and
 	 * width
 	 */
@@ -40,7 +40,7 @@ public class Player extends Entity {
 		this.speed = 10;
 	}
 
-	/*
+	/**
 	 * draws Player on canvas
 	 */
 
@@ -50,14 +50,14 @@ public class Player extends Entity {
 				(int) this.width, (int) this.height, null);
 	}
 
-	/*
+	/**
 	 * determines what happens if a key is pressed
 	 */
 	@Override
 	public void action(double delta) {
 		boolean moved = false;
 
-		/*
+		/**
 		 * if key "down" is pressed
 		 */
 		if (this.keys.up.down) {
@@ -66,7 +66,7 @@ public class Player extends Entity {
 			moved = true;
 		}
 
-		/*
+		/**
 		 * if key "up" is pressed
 		 */
 
@@ -76,7 +76,7 @@ public class Player extends Entity {
 			moved = true;
 		}
 
-		/*
+		/**
 		 * if key "left" is pressed
 		 */
 		if (this.keys.left.down) {
@@ -85,7 +85,7 @@ public class Player extends Entity {
 			moved = true;
 		}
 
-		/*
+		/**
 		 * if key "right" is pressed
 		 */
 		if (this.keys.right.down) {
@@ -94,7 +94,7 @@ public class Player extends Entity {
 			moved = true;
 		}
 
-		/*
+		/**
 		 * if no key is pressed
 		 */
 		if (moved == false) {
@@ -112,7 +112,7 @@ public class Player extends Entity {
 			}
 		}
 
-		/*
+		/**
 		 * if key "bomb" is pressed
 		 */
 
@@ -123,7 +123,7 @@ public class Player extends Entity {
 		}
 	}
 
-	/*
+	/**
 	 * checks if Player collides with an Entity
 	 */
 
@@ -170,7 +170,7 @@ public class Player extends Entity {
 		}
 	}
 
-	/*
+	/**
 	 * sets KeySettings
 	 */
 	public void setKeys(KeySettings keys) {

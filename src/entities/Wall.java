@@ -8,8 +8,8 @@ import java.awt.Graphics;
 
 public class Wall extends Entity {
 
-	/*
-	 * Constructor for default Wall Sets position and image
+	/**
+	 * Constructor for default Wall. Sets position and image
 	 */
 
 	public Wall(int x, int y) {
@@ -17,7 +17,7 @@ public class Wall extends Entity {
 		this.images = Sprite.load("wall.png", 100, 100);
 	}
 
-	/*
+	/**
 	 * draws Wall on canvas
 	 */
 
