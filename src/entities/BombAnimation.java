@@ -1,6 +1,7 @@
 package entities;
 
 import game.Game;
+import game.Gameend;
 import graphics.Image;
 import graphics.Sprite;
 
@@ -16,7 +17,7 @@ public class BombAnimation extends Entity {
 	private int explosionTime;
 	private int exposionTimeDefault;
 	private int[][] collideMap;
-	private Entity playerKilled;
+	private Player playerKilled;
 	private int killDelay;
 
 	public BombAnimation(int x, int y) {
@@ -37,7 +38,7 @@ public class BombAnimation extends Entity {
 			this.killDelay--;
 			if (this.killDelay == 0) {
 				// this.playerKilled.removed = true;
-				Game.getInstance().gameEnd(false);
+				Game.getInstance().gameEnd(this.playerKilled, Gameend.dead);
 			}
 		}
 
@@ -127,7 +128,7 @@ public class BombAnimation extends Entity {
 	@Override
 	public void collide(Entity e) {
 		if (e instanceof Player) {
-			this.playerKilled = e;
+			this.playerKilled = (Player) e;
 		}
 		if (e instanceof Bomb) {
 			((Bomb) e).forceExplosion();

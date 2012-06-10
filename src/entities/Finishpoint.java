@@ -1,13 +1,14 @@
 package entities;
 
 import game.Game;
+import game.Gameend;
 
 import java.awt.Color;
 import java.awt.Graphics;
 
 public class Finishpoint extends Entity {
 
-	private Entity player;
+	private Player player;
 	private int winDelay = 10;
 
 	public Finishpoint(int x, int y) {
@@ -23,7 +24,7 @@ public class Finishpoint extends Entity {
 		if ((this.player != null)) {
 			this.winDelay--;
 			if (this.winDelay == 0) {
-				Game.getInstance().gameEnd(true);
+				Game.getInstance().gameEnd(this.player, Gameend.finishReached);
 			}
 		}
 	}
@@ -31,14 +32,14 @@ public class Finishpoint extends Entity {
 	@Override
 	public void collide(Entity e) {
 		if (e instanceof Player) {
-			this.player = e;
+			this.player = (Player) e;
 		}
 	}
 
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(Color.RED);
-		g.drawOval(this.x+5, this.y+5, 40, 40);
+		g.drawOval(this.x + 5, this.y + 5, 40, 40);
 
 	}
 

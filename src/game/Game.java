@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import level.Box;
 import level.Loader;
 import entities.Entity;
+import entities.Player;
 
 /**
  *
@@ -249,12 +250,10 @@ public class Game extends Canvas {
 			}
 		}
 
-		for (Entity e : Game.players) {
-			if (e.removed) {
-				this.gameEnd(false);
-				break;
-			}
-		}
+		/*
+		 * for (Entity e : Game.players) { if (e.removed) { this.gameEnd(false);
+		 * break; } }
+		 */
 	}
 
 	/**
@@ -268,8 +267,7 @@ public class Game extends Canvas {
 
 		if (this.oldBackgroundElems != Game.staticBackground.size()) {
 
-			Game.background = new BufferedImage(Game.GAME_WIDTH,
-					Game.GAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+			Game.background = new BufferedImage(Game.GAME_WIDTH, Game.GAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
 			for (Entity e : Game.staticBackground) {
 				e.draw(Game.background.getGraphics());
 			}
@@ -313,15 +311,33 @@ public class Game extends Canvas {
 	 * 
 	 * @param win
 	 */
-	public void gameEnd(boolean win) {
+	public void gameEnd(Player p, Gameend type) {
 		this.stop();
-		Object[] options = { "Neustart", "Beenden" };
 		JOptionPane question;
-		if (win == true) {
-			question = new JOptionPane("Du hast gewonnen!");
+		int index;
+		if (Game.players.size() == 2) {
+			index = Game.players.indexOf(p) + 1;
+			if (type == Gameend.finishReached) {
+				question = new JOptionPane("Spieler " + index + " ist im Ziel und hat gewonnen!");
+			} else {
+				int otherplayer;
+				if (index == 1) {
+					otherplayer = 2;
+				} else {
+					otherplayer = 1;
+				}
+				question = new JOptionPane("Spieler " + index + " ist tot. Somit hat Spieler " + otherplayer
+						+ " gewonnen.");
+			}
 		} else {
-			question = new JOptionPane("Du hast verloren.");
+			if (type == Gameend.finishReached) {
+				question = new JOptionPane("Du hast gewonnen!");
+			} else {
+				question = new JOptionPane("Du hast verloren.");
+			}
 		}
+
+		Object[] options = { "Neustart", "Beenden" };
 		question.setOptions(options);
 		JDialog dialog = question.createDialog(new JFrame(), "Spielende");
 		dialog.setVisible(true);
