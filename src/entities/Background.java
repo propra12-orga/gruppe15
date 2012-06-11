@@ -7,6 +7,12 @@ import java.awt.Graphics;
 
 public class Background extends Entity {
 
+	/**
+	 * Class for background graphics
+	 * 
+	 * @param x
+	 * @param y
+	 */
 	public Background(int x, int y) {
 		super(x, y);
 		this.isBlocking = false;
@@ -14,9 +20,15 @@ public class Background extends Entity {
 		this.needsStep = false;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see entities.Entity#draw(java.awt.Graphics)
+	 */
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage((this.images[0][0]).image, this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
+		g.drawImage((this.images[0][0]).image, this.x, this.y, Game.BLOCK_SIZE,
+				Game.BLOCK_SIZE, null);
 	}
 
 }
