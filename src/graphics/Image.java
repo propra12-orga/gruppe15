@@ -9,10 +9,15 @@ public class Image {
 	public int w;
 	public BufferedImage image;
 
+	/**
+	 * @param w
+	 * @param h
+	 */
 	public Image(int w, int h) {
 		this.w = w;
 		this.h = h;
 		this.image = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-		this.pixels = ((DataBufferInt) this.image.getRaster().getDataBuffer()).getData();
+		this.pixels = ((DataBufferInt) this.image.getRaster().getDataBuffer())
+				.getData();
 	}
 }
