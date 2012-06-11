@@ -17,10 +17,10 @@ Meilenstein 2:
 
 - Bombe muss andere Bombe sofort zünden können
 -- Ist nur ne kleine Änderung in den Kollisionsabfragen für Bombenanimation (sollte schnell und einfach gehn) 
--- Ferig :P
+-- Fertig :P
 
 - 2 Spieler Modus
--- Guiänderung und einfügen neuer Tasten in den Input-Handler 
+-- Guiänderung und einfügen neuer Tasten in den Input-Handler (done)
 -- Ergänzung: Input-Handler für 2 lokale Spieler modifiziert (done)
 
 - Map aus einer Text-Datei laden 
@@ -32,3 +32,6 @@ Meilenstein 2:
 
 - Dokumentation per Javadoc
 -- Alle mal Javadoc angucken und ihren Code damit kommentieren (hauptsächlich class-Blöcke, Methoden und Klassenattribute)
+
+
+Meilenstein 3:
