@@ -44,7 +44,7 @@ public class BombAnimation extends Entity {
 	 */
 	public BombAnimation(int x, int y) {
 		super(x, y);
-		this.explosionImages = Sprite.load("bombe_all.png", 100, 100);
+		this.explosionImages = Sprite.load("explosion_temp.png", 100, 100);
 		this.exposionTimeDefault = 40;
 		this.explosionTime = this.exposionTimeDefault;
 		this.collideMap = new int[][] { { 0, 0, 1, 0, 0 }, { 0, 0, 1, 0, 0 },
