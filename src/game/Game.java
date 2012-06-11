@@ -309,7 +309,10 @@ public class Game extends Canvas {
 	/**
 	 * End the game and show dialog to end / restart
 	 * 
-	 * @param win
+	 * @param p
+	 *            Player
+	 * @param type
+	 *            Gameend enum
 	 */
 	public void gameEnd(Player p, Gameend type) {
 		this.stop();

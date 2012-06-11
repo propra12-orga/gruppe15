@@ -44,34 +44,33 @@ public class Box extends Rectangle {
 
 	/**
 	 * @param b
-	 * @return
+	 *            Box
+	 * @return ArrayList<Integer>
 	 */
 	public ArrayList<Integer> collideDirection(Box b) {
 		ArrayList<Integer> theArray = new ArrayList<Integer>();
 
-		Line2D oben = new Line2D.Double(b.getX(), b.getY(),
-				(b.getX() + b.getWidth()), b.getY());
+		Line2D oben = new Line2D.Double(b.getX(), b.getY(), (b.getX() + b.getWidth()), b.getY());
 
 		if (this.intersectsLine(oben)) {
 			theArray.add(Box.COLLIDE_DOWN);
 		}
 
-		Line2D unten = new Line2D.Double(b.getX(), b.getY() + b.getHeight(),
-				(b.getX() + b.getWidth()), b.getY() + b.getHeight());
+		Line2D unten = new Line2D.Double(b.getX(), b.getY() + b.getHeight(), (b.getX() + b.getWidth()), b.getY()
+				+ b.getHeight());
 
 		if (this.intersectsLine(unten)) {
 			theArray.add(Box.COLLIDE_UP);
 		}
 
-		Line2D links = new Line2D.Double(b.getX(), b.getY(), b.getX(), b.getY()
-				+ b.getHeight());
+		Line2D links = new Line2D.Double(b.getX(), b.getY(), b.getX(), b.getY() + b.getHeight());
 
 		if (this.intersectsLine(links)) {
 			theArray.add(Box.COLLIDE_RIGHT);
 		}
 
-		Line2D rechts = new Line2D.Double(b.getX() + b.getWidth(), b.getY(),
-				b.getX() + b.getWidth(), b.getY() + b.getHeight());
+		Line2D rechts = new Line2D.Double(b.getX() + b.getWidth(), b.getY(), b.getX() + b.getWidth(), b.getY()
+				+ b.getHeight());
 
 		if (this.intersectsLine(rechts)) {
 			theArray.add(Box.COLLIDE_LEFT);
@@ -93,7 +92,7 @@ public class Box extends Rectangle {
 
 	/**
 	 * @param i
-	 * @return
+	 * @return int
 	 */
 	public static int fitToBlock(int i) {
 		return i - (i % Game.BLOCK_SIZE);
@@ -102,7 +101,7 @@ public class Box extends Rectangle {
 	/**
 	 * @param b
 	 * @param mode
-	 * @return
+	 * @return int
 	 */
 	public int getDistance(Box b, int mode) {
 		int tmp;

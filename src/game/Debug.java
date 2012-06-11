@@ -39,7 +39,8 @@ public class Debug {
 	/**
 	 * Output a message if current mode is <= message mode
 	 * 
-	 * @param int DEBUG.[ERROR|DEBUG|VERBOSE|NONDE]
+	 * @param m
+	 *            int DEBUG.[ERROR|DEBUG|VERBOSE|NONDE]
 	 * @param message
 	 *            The message to be print
 	 */
