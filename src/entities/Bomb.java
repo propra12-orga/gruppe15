@@ -9,8 +9,6 @@ import level.Box;
 
 public class Bomb extends Entity {
 	/**
-	 * Class for the bombs
-	 * 
 	 * @param x
 	 * @param y
 	 * @param owner

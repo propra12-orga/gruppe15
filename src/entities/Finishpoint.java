@@ -8,9 +8,19 @@ import java.awt.Graphics;
 
 public class Finishpoint extends Entity {
 
+	/**
+	 * Player who reaches finish point
+	 */
 	private Player player;
+	/**
+	 * Time before win message is shown
+	 */
 	private int winDelay = 10;
 
+	/**
+	 * @param x
+	 * @param y
+	 */
 	public Finishpoint(int x, int y) {
 		super(x, y);
 		this.isBlocking = false;
@@ -18,6 +28,11 @@ public class Finishpoint extends Entity {
 		this.player = null;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see entities.Entity#action(double)
+	 */
 	@Override
 	public void action(double delta) {
 
@@ -29,6 +44,11 @@ public class Finishpoint extends Entity {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see entities.Entity#collide(entities.Entity)
+	 */
 	@Override
 	public void collide(Entity e) {
 		if (e instanceof Player) {
@@ -36,6 +56,11 @@ public class Finishpoint extends Entity {
 		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see entities.Entity#draw(java.awt.Graphics)
+	 */
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(Color.RED);

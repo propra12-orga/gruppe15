@@ -8,8 +8,6 @@ import java.awt.Graphics;
 public class Background extends Entity {
 
 	/**
-	 * Class for background graphics
-	 * 
 	 * @param x
 	 * @param y
 	 */
