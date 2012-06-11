@@ -2,8 +2,8 @@ package entities;
 
 import game.Game;
 import game.Gameend;
+import graphics.Sprite;
 
-import java.awt.Color;
 import java.awt.Graphics;
 
 public class Finishpoint extends Entity {
@@ -25,7 +25,9 @@ public class Finishpoint extends Entity {
 		super(x, y);
 		this.isBlocking = false;
 		this.needsStep = true;
+		this.images = Sprite.load("finish.png", 100, 100);
 		this.player = null;
+
 	}
 
 	/*
@@ -63,8 +65,8 @@ public class Finishpoint extends Entity {
 	 */
 	@Override
 	public void draw(Graphics g) {
-		g.setColor(Color.RED);
-		g.drawOval(this.x + 5, this.y + 5, 40, 40);
+		g.drawImage((this.images[0][0]).image, this.x, this.y, Game.BLOCK_SIZE,
+				Game.BLOCK_SIZE, null);
 
 	}
 
