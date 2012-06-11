@@ -3,6 +3,8 @@ package entities;
 import game.Game;
 import graphics.Sprite;
 
+import java.util.Random;
+
 public class BreakableWall extends Wall {
 
 	/**
@@ -11,7 +13,8 @@ public class BreakableWall extends Wall {
 	 */
 	public BreakableWall(int x, int y) {
 		super(x, y);
-		int z = (int) (Math.random() * 10);
+		int z = new Random().nextInt(10);
+		// int z = (int) (Math.random() * 10);
 		if (z < 4) {
 			this.images = Sprite.load("w1.png", 100, 100);
 		} else if ((z >= 3) && (z < 8)) {
