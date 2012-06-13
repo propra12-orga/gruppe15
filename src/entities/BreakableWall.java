@@ -17,9 +17,9 @@ public class BreakableWall extends Wall {
 		// int z = (int) (Math.random() * 10);
 		if (z < 4) {
 			this.images = Sprite.load("w1.png", 100, 100);
-		} else if ((z >= 4) && (z < 8)) {
+		} else if (z < 8) {
 			this.images = Sprite.load("w2.png", 100, 100);
-		} else if (z >= 8) {
+		} else {
 			this.images = Sprite.load("w3.png", 100, 100);
 		}
 
