@@ -24,7 +24,7 @@ public class WallWithFinishingPoint extends BreakableWall {
 		if (e instanceof BombAnimation) {
 			this.removed = true;
 			Game.staticBackground.add(new Background(this.x, this.y));
-			Game.entities.add(new Finishpoint(this.x, this.y));
+			((BombAnimation) e).addAfterExplosion(new Finishpoint(this.x, this.y));
 		}
 	}
 }
