@@ -17,8 +17,11 @@ import javax.swing.JOptionPane;
 
 import level.Box;
 import level.Loader;
+import network.Server;
 import entities.Entity;
 import entities.Player;
+import enums.Gameend;
+import enums.Gamemode;
 
 /**
  *
@@ -34,6 +37,8 @@ public class Game extends Canvas {
 	 * Size for each block
 	 */
 	public static final int BLOCK_SIZE = 50;
+
+	public static Gamemode gamemode = null;
 
 	/**
 	 * Width in "Blocks" for the game
@@ -99,6 +104,8 @@ public class Game extends Canvas {
 	 * Counter to check if static elements have changed
 	 */
 	private int oldBackgroundElems;
+
+	public static NetworkManager network;
 
 	/**
 	 * Key Listener
@@ -197,12 +204,16 @@ public class Game extends Canvas {
 	 * Create all arrays, load the map and set size of gamefield
 	 */
 	public void init() {
+		this.init("Map3");
+	}
+
+	public void init(String map) {
 		Game.entities = new CopyOnWriteArrayList<Entity>();
 		Game.staticBackground = new CopyOnWriteArrayList<Entity>();
 		Game.players = new CopyOnWriteArrayList<Entity>();
 
 		Loader l1 = new Loader();
-		l1.loadMap("Map3");
+		l1.loadMap(map);
 		Game.GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE) + 1;
 		Game.GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE) + 1;
 
@@ -367,5 +378,17 @@ public class Game extends Canvas {
 		} else {
 			throw new Exception("Unkown key settings");
 		}
+	}
+
+	/**
+	 * 
+	 * @param selectedValue
+	 */
+	public void connectServer(Server server) {
+		Debug.log(Debug.DEBUG, "Connecting to server");
+		Debug.log(Debug.DEBUG, server);
+		Game.network = new NetworkManager(server);
+		Game.network.connect();
+		Game.network.start();
 	}
 }

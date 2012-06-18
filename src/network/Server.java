@@ -6,10 +6,12 @@ public class Server implements Comparable<Server> {
 
 	public InetAddress host;
 	public int port;
+	private String name;
 
-	public Server(InetAddress host, int port) {
+	public Server(InetAddress host, int port, String name) {
 		this.host = host;
 		this.port = port;
+		this.name = name.trim();
 	}
 
 	@Override
@@ -19,6 +21,11 @@ public class Server implements Comparable<Server> {
 		} else {
 			return 0;
 		}
+	}
+
+	@Override
+	public String toString() {
+		return this.name + " (" + this.host.getHostAddress() + ")";
 	}
 
 }

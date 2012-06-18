@@ -21,6 +21,10 @@ public class Bomb extends Entity {
 		this.explosionDelay = 50;
 	}
 
+	public Bomb(int x, int y, int playerID) {
+		this(x, y, (Player) Game.players.get(playerID));
+	}
+
 	/**
 	 * Player who drops a bomb
 	 */

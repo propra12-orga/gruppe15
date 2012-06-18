@@ -1,8 +1,11 @@
-package game;
+package gui;
+
+import game.Launcher;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -10,6 +13,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import level.Editor;
+import network.Discover;
 
 /**
  * @author mauriceschleusinger
@@ -76,6 +80,9 @@ public class GUI implements ActionListener {
 	 */
 
 	private Launcher frame;
+	private Discover discover;
+	private Object[] old_list;
+	private JButton connectButton;
 
 	/**
 	 * @param frame
@@ -107,7 +114,10 @@ public class GUI implements ActionListener {
 		 * this.netzwerk.add(this.stopserver);
 		 * this.netzwerk.add(this.findserver);
 		 */
-		this.netzwerk.add(new JMenuItem("noch nicht verfügbar"));
+		this.findserver = new JMenuItem("Server suchen");
+		this.findserver.addActionListener(this);
+		this.netzwerk.add(this.findserver);
+		// this.netzwerk.add(new JMenuItem("noch nicht verfügbar"));
 		this.menubar.add(this.netzwerk);
 
 		// Buttons for "Optionen"
@@ -136,23 +146,17 @@ public class GUI implements ActionListener {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see
-	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
-	 */
-	/*
-	 * (non-Javadoc)
+	 * this method is called if a button is pressed
 	 * 
 	 * @see
 	 * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)
 	 */
 	@Override
-	// this method is called if a button is pressed
 	public void actionPerformed(ActionEvent arg0) {
 		// If the "restart"-button is pressed the game asks to restart the game
 		if (arg0.getSource() == this.starten) {
 			Object[] options = { "Neustart", "Abbrechen" };
-			JOptionPane question = new JOptionPane(
-					"Spiel neustarten? Der aktuelle Fortschritt geht verloren");
+			JOptionPane question = new JOptionPane("Spiel neustarten? Der aktuelle Fortschritt geht verloren");
 			question.setOptions(options);
 			JDialog dialog = question.createDialog(this.frame, "Achtung");
 			dialog.setVisible(true);
@@ -168,8 +172,7 @@ public class GUI implements ActionListener {
 			// If the exit-button is pressed the game asks to exit the game
 		} else if (arg0.getSource() == this.beenden) {
 			Object[] options = { "Beenden", "Abbrechen" };
-			JOptionPane question = new JOptionPane(
-					"Spiel beenden? Der aktuelle Fortschritt geht verloren");
+			JOptionPane question = new JOptionPane("Spiel beenden? Der aktuelle Fortschritt geht verloren");
 			question.setOptions(options);
 			JDialog dialog = question.createDialog(this.frame, "Achtung");
 			dialog.setVisible(true);
@@ -183,10 +186,15 @@ public class GUI implements ActionListener {
 
 		// if "offnen" is pressed
 
-		if (arg0.getSource() == this.offnen) {
+		else if (arg0.getSource() == this.offnen) {
 
 			Editor ed = new Editor();
 
 		}
+
+		else if (arg0.getSource() == this.findserver) {
+			new Serverbrowser();
+		}
+
 	}
 }

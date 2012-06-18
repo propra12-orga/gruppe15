@@ -1,6 +1,5 @@
 package game;
 
-import game.InputHandler.Key;
 
 /**
  * @author Philipp

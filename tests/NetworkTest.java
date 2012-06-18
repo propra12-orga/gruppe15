@@ -15,7 +15,7 @@ public class NetworkTest {
 		Debug.setMode(Debug.DEBUG);
 		Thread t1 = null, t2 = null;
 		try {
-			DiscoverServer server = new DiscoverServer();
+			DiscoverServer server = new DiscoverServer("Mein Test Server");
 			t1 = new Thread(server);
 			t1.start();
 		} catch (SocketException e) {
@@ -23,13 +23,9 @@ public class NetworkTest {
 		}
 
 		Discover discover = null;
-		try {
-			discover = new Discover();
-			t2 = new Thread(discover);
-			t2.start();
-		} catch (SocketException e) {
-			e.printStackTrace();
-		}
+		discover = new Discover();
+		t2 = new Thread(discover);
+		t2.start();
 
 		try {
 			Thread.sleep(1000);

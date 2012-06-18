@@ -1,5 +1,7 @@
 package entities;
 
+import enums.Gamemode;
+import enums.NetworkInputType;
 import game.Game;
 import game.KeySettings;
 import graphics.Image;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import level.Box;
+import network.Input;
 
 public class Player extends Entity {
 
@@ -46,8 +49,7 @@ public class Player extends Entity {
 
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage((this.facings[this.facing][0]).image, this.x, this.y,
-				(int) this.width, (int) this.height, null);
+		g.drawImage((this.facings[this.facing][0]).image, this.x, this.y, (int) this.width, (int) this.height, null);
 	}
 
 	/**
@@ -112,14 +114,29 @@ public class Player extends Entity {
 			}
 		}
 
+		if (Game.gamemode == Gamemode.NETWORK) {
+			Input input = new Input();
+			input.x = this.x;
+			input.y = this.y;
+			input.type = NetworkInputType.PLAYER;
+			Game.network.send(input);
+		}
+
 		/**
 		 * if key "bomb" is pressed
 		 */
 
 		if (this.keys.bomb.down) {
-			Game.entities.add(new Bomb(Box.fitToBlock(this.x), Box
-					.fitToBlock(this.y), this));
-
+			int b_x = Box.fitToBlock(this.x);
+			int b_y = Box.fitToBlock(this.y);
+			Game.entities.add(new Bomb(b_x, b_y, this));
+			if (Game.gamemode == Gamemode.NETWORK) {
+				Input input_b = new Input();
+				input_b.x = b_x;
+				input_b.y = b_y;
+				input_b.type = NetworkInputType.BOMB;
+				Game.network.send(input_b);
+			}
 		}
 	}
 

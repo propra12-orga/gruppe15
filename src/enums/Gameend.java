@@ -1,4 +1,4 @@
-package game;
+package enums;
 
 public enum Gameend {
 	dead, finishReached;

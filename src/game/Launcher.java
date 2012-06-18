@@ -1,5 +1,7 @@
 package game;
 
+import gui.GUI;
+
 import java.awt.GridLayout;
 
 import javax.swing.JFrame;
@@ -22,7 +24,7 @@ public class Launcher extends JFrame {
 
 		this.setContentPane(panel);
 
-		this.setResizable(false);
+		// this.setResizable(false);
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.pack();
