@@ -13,7 +13,7 @@ public class DiscoverServer implements Runnable {
 	private DatagramSocket announceSocket;
 
 	public DiscoverServer() throws SocketException {
-		this.announceSocket = new DatagramSocket(1337);
+		this.announceSocket = new DatagramSocket(DiscoverServer.BROADCAST_PORT);
 	}
 
 	@Override
@@ -24,7 +24,8 @@ public class DiscoverServer implements Runnable {
 			try {
 				this.announceSocket.receive(wait);
 
-				DatagramPacket response = new DatagramPacket(buffer, buffer.length, wait.getAddress(), 1338);
+				DatagramPacket response = new DatagramPacket(buffer, buffer.length, wait.getAddress(),
+						Discover.CALLBACK_PORT);
 
 				this.announceSocket.send(response);
 			} catch (IOException e) {

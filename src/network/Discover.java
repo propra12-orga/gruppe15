@@ -17,9 +17,10 @@ public class Discover implements Runnable {
 	public ArrayList<Server> servers;
 	private DatagramSocket broadcast;
 	private DatagramPacket broadcastPacket;
+	public final static int CALLBACK_PORT = 1338;
 
 	public Discover() throws SocketException {
-		this.waitSocket = new DatagramSocket(1338);
+		this.waitSocket = new DatagramSocket(Discover.CALLBACK_PORT);
 		this.servers = new ArrayList<Server>();
 		this.broadcast = new DatagramSocket();
 		byte[] buffer = new byte[1];
