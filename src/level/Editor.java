@@ -1,14 +1,16 @@
 package level;
 
-//import level.Loader;
-//import ressources.maps.*;
+import game.Game;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 /**
  * 
@@ -65,6 +67,9 @@ public class Editor implements ActionListener {
 
 	private int element;
 
+	private Game game;
+	String filename;
+
 	/**
 	 * default constructor for Editor, sets frame and buttons
 	 */
@@ -92,13 +97,13 @@ public class Editor implements ActionListener {
 		 */
 		this.level = new JMenu("Level");
 
-		this.laden = new JMenuItem("laden");
+		this.laden = new JMenuItem("Laden");
 		this.laden.addActionListener(this);
 
-		this.speichern = new JMenuItem("speichern");
+		this.speichern = new JMenuItem("Speichern");
 		this.speichern.addActionListener(this);
 
-		this.neu = new JMenuItem("neu");
+		this.neu = new JMenuItem("Neu");
 		this.neu.addActionListener(this);
 
 		this.level.add(this.laden);
@@ -135,6 +140,7 @@ public class Editor implements ActionListener {
 		 */
 
 		editorframe.setJMenuBar(this.menubar);
+		this.run();
 	}
 
 	/**
@@ -146,21 +152,38 @@ public class Editor implements ActionListener {
 
 		// if "laden" is pressed, start load()
 		if (arg0.getSource() == this.laden) {
-
-			this.load();
+			JFileChooser chooser = new JFileChooser();
+			int returnVal = chooser.showOpenDialog(this.editorframe);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				// loadMap(chooser.getSelectedFile().getName());
+			} else {
+				JOptionPane.showMessageDialog(this.editorframe,
+						"Die Datei ist nicht gültig.");
+			}
+			// this.load();
 
 		}
 
 		// if "speichern" is pressed, start save()
 
 		if (arg0.getSource() == this.speichern) {
+			JFileChooser fileChooser = new JFileChooser(
+					System.getProperty("user.dir"));
+			int returnVal = fileChooser.showSaveDialog(this.editorframe);
 
-			this.save();
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				// save file
+			} else {
+				JOptionPane
+						.showMessageDialog(this.editorframe, "Nicht gültig.");
+			}
+			// this.save();
 		}
 
 		// if "neu" is pressed, start reset()
 		if (arg0.getSource() == this.neu) {
-			this.reset();
+			// loadMap(Map);
+
 		}
 
 		// if "unbreakable" is pressed
@@ -191,27 +214,11 @@ public class Editor implements ActionListener {
 	}
 
 	/**
-	 * method to load an existing Map
+	 * 
 	 */
-	private void load() {
-		// TODO Auto-generated method stub
+
+	public void run() {
+		// Karte zeichnen, wenn klick und element=0-4 jeweilige grafik zeichnen
 
 	}
-
-	/**
-	 * method to save a generated Map in a textfile
-	 */
-	private void save() {
-		// TODO Auto-generated method stub
-
-	}
-
-	/**
-	 * called to set map to empty map
-	 */
-	private void reset() {
-		// loadMap(Map);
-
-	}
-
 }
