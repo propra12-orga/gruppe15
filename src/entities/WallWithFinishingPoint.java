@@ -29,7 +29,7 @@ public class WallWithFinishingPoint extends BreakableWall {
 			((BombAnimation) e).addAfterExplosion(new Finishpoint(this.x,
 					this.y));
 			this.s.setScore(200);
-			System.out.println(this.s.getScore());
+			// System.out.println(this.s.getScore());
 		}
 	}
 
