@@ -2,6 +2,7 @@ package level;
 
 import game.Game;
 import game.Main;
+import game.MouseHandler;
 import graphics.Image;
 import graphics.Sprite;
 
