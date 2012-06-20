@@ -1,18 +1,20 @@
 package level;
 
 import game.Game;
+import game.Main;
+import graphics.Image;
+import graphics.Sprite;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.Scanner;
 
-import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 /**
  * 
@@ -70,7 +72,8 @@ public class Editor implements ActionListener {
 	private int element;
 
 	private Game game;
-	String filename;
+	private String filename;
+	private Image images[][];
 
 	/**
 	 * default constructor for Editor, sets frame and buttons
@@ -142,7 +145,7 @@ public class Editor implements ActionListener {
 		 */
 
 		editorframe.setJMenuBar(this.menubar);
-		this.run();
+		this.drawMap("Map");
 	}
 
 	/**
@@ -152,69 +155,40 @@ public class Editor implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 
-		// if "laden" is pressed, start load()
+		// if "laden" is pressed, create FileChooser
 		if (arg0.getSource() == this.laden) {
-			/*
-			 * JFileChooser chooser = new JFileChooser(); int returnVal =
-			 * chooser.showOpenDialog(this.editorframe); if (returnVal ==
-			 * JFileChooser.APPROVE_OPTION) { //
-			 * loadMap(chooser.getSelectedFile().getName()); } else {
-			 * JOptionPane.showMessageDialog(this.editorframe,
-			 * "Die Datei ist nicht gültig."); }
-			 */
-			// this.load();
+			JFileChooser fileChooser = new JFileChooser();
 
-			JFrame dialog = new JFrame();
-			dialog.setTitle("Karte laden");
-			dialog.setSize(200, 100);
-			JPanel panel = new JPanel();
+			File f = new File(Main.class.getResource("/ressources/maps/")
+					.getPath());
+			fileChooser.setCurrentDirectory(f);
+			int returnVal = fileChooser.showOpenDialog(this.editorframe);
 
-			JLabel label = new JLabel("Karte (Bsp: Map1): ");
-			panel.add(label);
-			JTextField tfield = new JTextField("Map", 10);
-			panel.add(tfield);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				// loadMap(chooser.getSelectedFile().getName());
+			}
 
-			JButton loadOK = new JButton("OK");
-			panel.add(loadOK);
-
-			dialog.add(panel);
-			dialog.setVisible(true);
 		}
 
-		// if "speichern" is pressed, start save()
+		// if "speichern" is pressed, create FileChooser
 
 		if (arg0.getSource() == this.speichern) {
-			/*
-			 * JFileChooser fileChooser = new JFileChooser(
-			 * System.getProperty("user.dir")); int returnVal =
-			 * fileChooser.showSaveDialog(this.editorframe);
-			 * 
-			 * if (returnVal == JFileChooser.APPROVE_OPTION) { // save file }
-			 * else { JOptionPane .showMessageDialog(this.editorframe,
-			 * "Nicht gültig."); }
-			 */
-			// this.save();
 
-			JFrame dialog = new JFrame();
-			dialog.setTitle("Level speichern");
-			dialog.setSize(200, 100);
-			JPanel panel = new JPanel();
+			JFileChooser fileChooser = new JFileChooser();
 
-			JLabel label = new JLabel("Name (Bsp: Map1): ");
-			panel.add(label);
-			JTextField tfield = new JTextField("Map", 10);
-			panel.add(tfield);
+			File f = new File(Main.class.getResource("/ressources/maps/")
+					.getPath());
+			fileChooser.setCurrentDirectory(f);
+			int returnVal = fileChooser.showSaveDialog(this.editorframe);
 
-			JButton saveOK = new JButton("OK");
-			panel.add(saveOK);
-
-			dialog.add(panel);
-			dialog.setVisible(true);
+			if (returnVal == JFileChooser.APPROVE_OPTION) {
+				// save file
+			}
 		}
 
 		// if "neu" is pressed, start reset()
 		if (arg0.getSource() == this.neu) {
-			// loadMap(Map);
+			this.drawMap("Map");
 
 		}
 
@@ -250,8 +224,47 @@ public class Editor implements ActionListener {
 	 * 
 	 */
 
-	public void run() {
-		// Karte zeichnen, wenn klick und element=0-4 jeweilige grafik zeichnen
+	public void drawMap(String filename) {
+
+		int x = 0, type, y = 0;
+
+		Scanner maps;
+		try {
+
+			maps = new Scanner(
+					Main.class.getResourceAsStream("/ressources/maps/"
+							+ filename));
+			while (maps.hasNextLine()) {
+				String text = maps.nextLine();
+				for (x = 0; x < text.length(); x++) {
+					type = Integer.parseInt("" + text.charAt(x));
+					if (type == 0) {
+						this.images = Sprite.load("background.png", 100, 100);
+					} else if (type == 1) {
+						this.images = Sprite.load("w1.png", 100, 100);
+					} else if (type == 2) {
+						this.images = Sprite.load("wall.png", 100, 100);
+					} else if (type == 3) {
+						this.images = Sprite.load("bomberman.png", 55, 90);
+
+						// Game.staticBackground.add(this.images =
+						// Sprite.load("background.png", 100, 100));
+					} else if (type == 4) {
+						this.images = Sprite.load("finish.png", 100, 100);
+					} else if (type == 5) {
+						//
+
+					}
+
+				}
+				y++;
+			}
+			// Game.FIELD_HEIGHT = y;
+			// Game.FIELD_WIDTH = x;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 
 	}
 }
