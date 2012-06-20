@@ -176,4 +176,5 @@ public class Player extends Entity {
 	public void setKeys(KeySettings keys) {
 		this.keys = keys;
 	}
+
 }

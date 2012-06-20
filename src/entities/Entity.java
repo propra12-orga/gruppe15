@@ -29,6 +29,7 @@ public class Entity {
 		this.x = x;
 		this.y = y;
 		this.box = new Box(x, y, Game.BLOCK_SIZE, Game.BLOCK_SIZE);
+
 	}
 
 	/**
