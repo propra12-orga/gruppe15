@@ -5,6 +5,8 @@ import game.Main;
 import graphics.Image;
 import graphics.Sprite;
 
+import java.awt.Canvas;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -22,7 +24,7 @@ import javax.swing.JMenuItem;
  * 
  */
 
-public class Editor implements ActionListener {
+public class Editor extends Canvas implements ActionListener {
 
 	/**
 	 * new MenuBar named "menubar"
@@ -74,6 +76,14 @@ public class Editor implements ActionListener {
 	private Game game;
 	private String filename;
 	private Image images[][];
+	int x = 0, type, y = 0;
+	private Graphics g;
+
+	private Scanner maps;
+
+	private int oldBackgroundElems;
+
+	private String fps_static;
 
 	/**
 	 * default constructor for Editor, sets frame and buttons
@@ -90,6 +100,9 @@ public class Editor implements ActionListener {
 		editorframe.setTitle("Leveleditor");
 		editorframe.setSize(500, 500);
 		editorframe.setVisible(true);
+
+		MouseHandler mousehandler = new MouseHandler();
+		editorframe.addMouseListener(mousehandler);
 
 		/**
 		 * create new JMenuBar
@@ -145,7 +158,9 @@ public class Editor implements ActionListener {
 		 */
 
 		editorframe.setJMenuBar(this.menubar);
-		this.drawMap("Map");
+
+		this.loadMap("Map3");
+
 	}
 
 	/**
@@ -188,7 +203,7 @@ public class Editor implements ActionListener {
 
 		// if "neu" is pressed, start reset()
 		if (arg0.getSource() == this.neu) {
-			this.drawMap("Map");
+			this.loadMap("Map");
 
 		}
 
@@ -221,43 +236,40 @@ public class Editor implements ActionListener {
 	}
 
 	/**
-	 * 
+	 * method to draw Map
 	 */
 
-	public void drawMap(String filename) {
+	public void loadMap(String filename) {
 
-		int x = 0, type, y = 0;
-
-		Scanner maps;
 		try {
 
-			maps = new Scanner(
+			this.maps = new Scanner(
 					Main.class.getResourceAsStream("/ressources/maps/"
 							+ filename));
-			while (maps.hasNextLine()) {
-				String text = maps.nextLine();
-				for (x = 0; x < text.length(); x++) {
-					type = Integer.parseInt("" + text.charAt(x));
-					if (type == 0) {
+			while (this.maps.hasNextLine()) {
+				String text = this.maps.nextLine();
+				for (this.x = 0; this.x < text.length(); this.x++) {
+					this.element = Integer.parseInt("" + text.charAt(this.x));
+					if (this.element == 0) {
 						this.images = Sprite.load("background.png", 100, 100);
-					} else if (type == 1) {
+					} else if (this.element == 1) {
 						this.images = Sprite.load("w1.png", 100, 100);
-					} else if (type == 2) {
+					} else if (this.element == 2) {
 						this.images = Sprite.load("wall.png", 100, 100);
-					} else if (type == 3) {
+					} else if (this.element == 3) {
 						this.images = Sprite.load("bomberman.png", 55, 90);
 
 						// Game.staticBackground.add(this.images =
 						// Sprite.load("background.png", 100, 100));
-					} else if (type == 4) {
+					} else if (this.element == 4) {
 						this.images = Sprite.load("finish.png", 100, 100);
-					} else if (type == 5) {
+					} else if (this.element == 5) {
 						//
 
 					}
 
 				}
-				y++;
+				this.y++;
 			}
 			// Game.FIELD_HEIGHT = y;
 			// Game.FIELD_WIDTH = x;
@@ -267,4 +279,27 @@ public class Editor implements ActionListener {
 		}
 
 	}
+
+	public void setComponent(int x, int y) {
+		this.x = x;
+		this.y = y;
+
+		// set position
+		if (this.element == 0) {
+			this.images = Sprite.load("background.png", 100, 100);
+		} else if (this.element == 1) {
+			this.images = Sprite.load("w1.png", 100, 100);
+		} else if (this.element == 2) {
+			this.images = Sprite.load("wall.png", 100, 100);
+		} else if (this.element == 3) {
+			this.images = Sprite.load("bomberman.png", 55, 90);
+		} else if (this.element == 4) {
+			this.images = Sprite.load("finish.png", 100, 100);
+		} else if (this.element == 5) {
+			//
+
+		}
+
+	}
+
 }
