@@ -1,6 +1,7 @@
 package entities;
 
 import game.Game;
+import game.Sounds;
 import graphics.Sprite;
 
 import java.awt.Graphics;
@@ -62,5 +63,7 @@ public class Bomb extends Entity {
 	public void forceExplosion() {
 		this.removed = true;
 		Game.entities.add(new BombAnimation(this.x, this.y));
+		Sounds s1 = new Sounds();
+		s1.playSound("Explosion.wav");
 	}
 }
