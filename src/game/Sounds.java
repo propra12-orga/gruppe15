@@ -14,7 +14,7 @@ public class Sounds {
 
 		try {
 			AudioInputStream audioInputStream = AudioSystem
-					.getAudioInputStream(new File(filename));
+					.getAudioInputStream(new File("/ressources/" + filename));
 			AudioFormat af = audioInputStream.getFormat();
 			int size = (int) (af.getFrameSize() * audioInputStream
 					.getFrameLength());
