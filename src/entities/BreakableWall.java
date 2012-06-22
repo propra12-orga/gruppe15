@@ -1,7 +1,7 @@
 package entities;
 
 import game.Game;
-import game.Score;
+import game.highscore.PointManager;
 import graphics.Sprite;
 
 import java.util.Random;
@@ -12,7 +12,7 @@ public class BreakableWall extends Wall {
 	 * @param x
 	 * @param y
 	 */
-	Score s = new Score();
+	PointManager p = new PointManager();
 
 	public BreakableWall(int x, int y) {
 		super(x, y);
@@ -38,7 +38,7 @@ public class BreakableWall extends Wall {
 		if (e instanceof BombAnimation) {
 			this.removed = true;
 			Game.staticBackground.add(new Background(this.x, this.y));
-			this.s.setScore(200);
+			this.p.addPoints(200);
 			// System.out.println(this.s.getScore());
 		}
 	}

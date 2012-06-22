@@ -19,6 +19,8 @@ import level.Box;
 import level.Loader;
 import entities.Entity;
 import entities.Player;
+import game.highscore.HighscoreManager;
+import game.highscore.PointManager;
 
 /**
  *
@@ -99,6 +101,9 @@ public class Game extends Canvas {
 	 * Counter to check if static elements have changed
 	 */
 	private int oldBackgroundElems;
+
+	HighscoreManager hm = new HighscoreManager();
+	PointManager pm = new PointManager();
 
 	/**
 	 * Key Listener
@@ -324,6 +329,8 @@ public class Game extends Canvas {
 			if (type == Gameend.finishReached) {
 				question = new JOptionPane("Spieler " + index
 						+ " ist im Ziel und hat gewonnen!");
+				this.hm.addScore("Paul", this.pm.getPoints());
+				System.out.println(this.hm.getHighscoreString());
 			} else {
 				int otherplayer;
 				if (index == 1) {
@@ -334,6 +341,8 @@ public class Game extends Canvas {
 				question = new JOptionPane("Spieler " + index
 						+ " ist tot. Somit hat Spieler " + otherplayer
 						+ " gewonnen.");
+				this.hm.addScore("Paul", this.pm.getPoints());
+				System.out.println(this.hm.getHighscoreString());
 			}
 		} else {
 			if (type == Gameend.finishReached) {
