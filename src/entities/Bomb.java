@@ -41,8 +41,8 @@ public class Bomb extends Entity {
 		if (this.explosionDelay <= 0) {
 			this.removed = true;
 			Game.entities.add(new BombAnimation(this.x, this.y));
-			Sounds s1 = new Sounds();
-			s1.playSound("Explosion.wav");
+			Sounds s1 = new Sounds("explosion.wav");
+			s1.start();
 		} else {
 			this.explosionDelay--;
 		}
@@ -66,6 +66,8 @@ public class Bomb extends Entity {
 	public void forceExplosion() {
 		this.removed = true;
 		Game.entities.add(new BombAnimation(this.x, this.y));
+		Sounds s1 = new Sounds("explosion.wav");
+		s1.start();
 
 	}
 }

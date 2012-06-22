@@ -6,14 +6,20 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 
-public class Sounds {
+public class Sounds extends Thread {
+	public Sounds(String filename) {
+		this.filename = filename;
 
-	public void playSound(String filename) {
+	}
 
+	private String filename;
+
+	@Override
+	public void run() {
 		try {
 			AudioInputStream audioInputStream = AudioSystem
 					.getAudioInputStream(Main.class.getResource("/ressources/"
-							+ filename));
+							+ this.filename));
 			AudioFormat af = audioInputStream.getFormat();
 			int size = (int) (af.getFrameSize() * audioInputStream
 					.getFrameLength());
