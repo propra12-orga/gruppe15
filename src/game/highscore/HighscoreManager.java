@@ -34,12 +34,10 @@ public class HighscoreManager {
 
 	public void addScore(String name, int score) {
 		this.loadScoreFile();
-		Score s = new Score(name, score);
-		this.scores.add(s);
+		this.scores.add(new Score(name, score));
 		this.sort();
 		if (this.scores.size() > 10) {
-			s = this.scores.remove(10);
-			this.scores.remove(s);
+			this.scores.remove(10);
 		}
 		this.updateScoreFile();
 	}

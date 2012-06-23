@@ -39,7 +39,6 @@ public class BreakableWall extends Wall {
 			this.removed = true;
 			Game.staticBackground.add(new Background(this.x, this.y));
 			this.p.addPoints(200);
-			// System.out.println(this.s.getScore());
 		}
 	}
 

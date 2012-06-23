@@ -187,7 +187,6 @@ public class BombAnimation extends Entity {
 		if (e instanceof Player) {
 			this.playerKilled = (Player) e;
 			// this.p.addPoints(1000);
-
 		}
 		if (e instanceof Bomb) {
 			((Bomb) e).forceExplosion();
