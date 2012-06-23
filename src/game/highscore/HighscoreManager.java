@@ -24,7 +24,7 @@ public class HighscoreManager {
 
 	public ArrayList<Score> getScores() {
 		this.loadScoreFile();
-		this.sort();
+		// this.sort();
 		return this.scores;
 	}
 
@@ -34,10 +34,14 @@ public class HighscoreManager {
 	}
 
 	public void addScore(String name, int score) {
+		if (this.scores.size() > 10) {
+			for (int i = 11; i < this.scores.size(); i++) {
+				this.scores.remove(i);
+			}
+		}
 		this.loadScoreFile();
-		// if (score >= this.scores.) {
 		this.scores.add(new Score(name, score));
-
+		this.sort();
 		this.updateScoreFile();
 	}
 
@@ -47,7 +51,10 @@ public class HighscoreManager {
 					HighscoreManager.HIGHSCORE_FILE));
 			this.scores = (ArrayList<Score>) this.inputStream.readObject();
 		} catch (FileNotFoundException e) {
-			System.out.println("[Laad] FNF Error: " + e.getMessage());
+			System.out
+					.println("[Laad] FNF Error: "
+							+ e.getMessage()
+							+ " Das Programm wird versuchen eine neue Datei zu erstellen.");
 		} catch (IOException e) {
 			System.out.println("[Laad] IO Error: " + e.getMessage());
 		} catch (ClassNotFoundException e) {
@@ -70,8 +77,7 @@ public class HighscoreManager {
 					HighscoreManager.HIGHSCORE_FILE));
 			this.outputStream.writeObject(this.scores);
 		} catch (FileNotFoundException e) {
-			System.out.println("[Update] FNF Error: " + e.getMessage()
-					+ ",the program will try and make a new file");
+			System.out.println("[Update] FNF Error: " + e.getMessage());
 		} catch (IOException e) {
 			System.out.println("[Update] IO Error: " + e.getMessage());
 		} finally {

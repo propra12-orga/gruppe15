@@ -12,7 +12,7 @@ public class ScoreComparator implements Comparator<Score> {
 		if (sc1 > sc2) {
 			return -1;
 		} else if (sc1 < sc2) {
-			return +1;
+			return 1;
 		} else {
 			return 0;
 		}
