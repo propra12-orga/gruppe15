@@ -4,18 +4,19 @@ import java.io.Serializable;
 
 public class Score implements Serializable {
 	private int score;
-	private String naam;
+	private String name;
 
 	public int getScore() {
 		return this.score;
 	}
 
-	public String getNaam() {
-		return this.naam;
+	public String getName() {
+		return this.name;
 	}
 
-	public Score(String naam, int score) {
+	public Score(String name, int score) {
 		this.score = score;
-		this.naam = naam;
+		this.name = name;
 	}
+
 }
