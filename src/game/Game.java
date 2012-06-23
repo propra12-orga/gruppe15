@@ -329,7 +329,7 @@ public class Game extends Canvas {
 			if (type == Gameend.finishReached) {
 				question = new JOptionPane("Spieler " + index
 						+ " ist im Ziel und hat gewonnen!");
-				this.hm.addScore("Paul", this.pm.getPoints());
+				this.hm.addScore("Leroy Jenkins", this.pm.getPoints());
 				System.out.println(this.hm.getHighscoreString());
 			} else {
 				int otherplayer;
@@ -341,7 +341,7 @@ public class Game extends Canvas {
 				question = new JOptionPane("Spieler " + index
 						+ " ist tot. Somit hat Spieler " + otherplayer
 						+ " gewonnen.");
-				this.hm.addScore("Paul", this.pm.getPoints());
+				this.hm.addScore("Leroy Jenkins", this.pm.getPoints());
 				System.out.println(this.hm.getHighscoreString());
 			}
 		} else {

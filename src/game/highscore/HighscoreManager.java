@@ -24,7 +24,6 @@ public class HighscoreManager {
 
 	public ArrayList<Score> getScores() {
 		this.loadScoreFile();
-		// this.sort();
 		return this.scores;
 	}
 
@@ -39,6 +38,7 @@ public class HighscoreManager {
 		this.scores.add(s);
 		this.sort();
 		if (this.scores.size() > 10) {
+			s = this.scores.remove(10);
 			this.scores.remove(s);
 		}
 		this.updateScoreFile();

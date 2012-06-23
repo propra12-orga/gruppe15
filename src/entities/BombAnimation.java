@@ -2,6 +2,7 @@ package entities;
 
 import game.Game;
 import game.Gameend;
+import game.highscore.PointManager;
 import graphics.Image;
 import graphics.Sprite;
 
@@ -39,6 +40,8 @@ public class BombAnimation extends Entity {
 	private int killDelay;
 
 	private ArrayList<Entity> toPlace = new ArrayList<Entity>();
+
+	PointManager p = new PointManager();
 
 	/**
 	 * @param x
@@ -183,6 +186,8 @@ public class BombAnimation extends Entity {
 	public void collide(Entity e) {
 		if (e instanceof Player) {
 			this.playerKilled = (Player) e;
+			// this.p.addPoints(1000);
+
 		}
 		if (e instanceof Bomb) {
 			((Bomb) e).forceExplosion();
