@@ -68,6 +68,5 @@ public class Bomb extends Entity {
 		Game.entities.add(new BombAnimation(this.x, this.y));
 		Sounds s1 = new Sounds("Explosion.wav");
 		s1.start();
-
 	}
 }
