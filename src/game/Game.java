@@ -327,9 +327,10 @@ public class Game extends Canvas {
 		if (Game.players.size() == 2) {
 			index = Game.players.indexOf(p) + 1;
 			if (type == Gameend.finishReached) {
+				this.pm.addPoints(5000);
 				question = new JOptionPane("Spieler " + index
 						+ " ist im Ziel und hat gewonnen!");
-				this.hm.addScore("Leroy Jenkins", this.pm.getPoints());
+				this.hm.addScore("Chuck Norris", this.pm.getPoints());
 				System.out.println(this.hm.getHighscoreString());
 			} else {
 				int otherplayer;
@@ -338,10 +339,11 @@ public class Game extends Canvas {
 				} else {
 					otherplayer = 1;
 				}
+				this.pm.addPoints(1000);
 				question = new JOptionPane("Spieler " + index
 						+ " ist tot. Somit hat Spieler " + otherplayer
 						+ " gewonnen.");
-				this.hm.addScore("Leroy Jenkins", this.pm.getPoints());
+				this.hm.addScore("Chuck Norris", this.pm.getPoints());
 				System.out.println(this.hm.getHighscoreString());
 			}
 		} else {
