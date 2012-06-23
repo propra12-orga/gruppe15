@@ -10,19 +10,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class HighscoreManager {
-	// An arraylist of the type "score" we will use to work with the scores
-	// inside the class
+
 	private ArrayList<Score> scores;
 
-	// The name of the file where the highscores will be saved
 	private static final String HIGHSCORE_FILE = "src/ressources/scores.dat";
 
-	// Initialising an in and outputStream for working with the file
 	ObjectOutputStream outputStream = null;
 	ObjectInputStream inputStream = null;
 
 	public HighscoreManager() {
-		// initialising the scores-arraylist
 		this.scores = new ArrayList<Score>();
 	}
 
