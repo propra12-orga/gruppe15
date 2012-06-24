@@ -136,12 +136,13 @@ public class NetworkManager extends Thread {
 			try {
 				this.outStream.write(("input:" + this.playerID + "," + in.type + "," + in.x + "," + in.y + ";\n")
 						.getBytes());
+				Debug.log(Debug.VERBOSE, in);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-
+		this.out_queue.clear();
 	}
 
 	public void send(Input in) {

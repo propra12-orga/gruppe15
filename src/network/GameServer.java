@@ -99,7 +99,7 @@ public class GameServer implements Runnable {
 					}
 				}
 			}
-			this.queue = new CopyOnWriteArrayList<Input>();
+			this.queue.clear();
 		}
 	}
 }
