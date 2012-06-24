@@ -11,4 +11,10 @@ public class Input {
 
 	public Input() {
 	}
+
+	@Override
+	public String toString() {
+		return "Input [playerID=" + this.playerID + ", type=" + this.type + ", x=" + this.x + ", y=" + this.y
+				+ ", done=" + this.done + "]";
+	}
 }

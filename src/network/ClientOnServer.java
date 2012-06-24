@@ -1,13 +1,14 @@
 package network;
 
+import enums.NetworkInputType;
+import game.Debug;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import enums.NetworkInputType;
 
 public class ClientOnServer extends Thread {
 
@@ -32,6 +33,7 @@ public class ClientOnServer extends Thread {
 
 	public void sendInput(Input in) throws IOException {
 		this.outStream.write(("input:" + in.playerID + "," + in.type + "," + in.x + "," + in.y + ";\n").getBytes());
+		Debug.log(Debug.VERBOSE, "Send data to " + this.playernumber);
 	}
 
 	@Override

@@ -69,10 +69,10 @@ public class NetworkManager extends Thread {
 					String[] parts = command.split(",");
 					in.playerID = Integer.valueOf(parts[0]);
 					in.type = NetworkInputType.valueOf(parts[1]);
-					if ((in.type == NetworkInputType.PLAYER) || (in.type == NetworkInputType.BOMB)) {
-						in.x = Integer.valueOf(parts[2]);
-						in.y = Integer.valueOf(parts[3]);
-					}
+					in.x = Integer.valueOf(parts[2]);
+					in.y = Integer.valueOf(parts[3]);
+
+					Debug.log(Debug.VERBOSE, in);
 
 					if (in.type == NetworkInputType.BOMB) {
 						Game.entities.add(new Bomb(in.x, in.y, in.playerID));
@@ -115,7 +115,7 @@ public class NetworkManager extends Thread {
 							p = new Player(po.x * Game.BLOCK_SIZE, po.y * Game.BLOCK_SIZE);
 							p.setKeys(keys);
 						}
-						Debug.log(Debug.VERBOSE, "Player " + i + " spawned at" + po);
+						Debug.log(Debug.VERBOSE, "Player " + i + " spawned at " + po);
 						p.setKeys(keys);
 						p.networkID = i;
 						Game.players.add(p);
