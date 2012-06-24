@@ -20,7 +20,6 @@ import level.Loader;
 import entities.Entity;
 import entities.Player;
 import game.highscore.HighscoreManager;
-import game.highscore.PointManager;
 
 /**
  *
@@ -103,7 +102,7 @@ public class Game extends Canvas {
 	private int oldBackgroundElems;
 
 	HighscoreManager hm = new HighscoreManager();
-	PointManager pm = new PointManager();
+	// PointManager pm = new PointManager();
 
 	/**
 	 * Key Listener
@@ -324,26 +323,56 @@ public class Game extends Canvas {
 		this.stop();
 		JOptionPane question;
 		int index;
+		Player otherP;
+
 		if (Game.players.size() == 2) {
+			if (p == (Player) Game.players.get(0)) {
+				otherP = (Player) Game.players.get(1);
+			} else {
+				otherP = (Player) Game.players.get(0);
+			}
 			index = Game.players.indexOf(p) + 1;
 			if (type == Gameend.finishReached) {
-				this.pm.addPoints(5000);
+
+				// p.pm.addPoints(5000);
 				question = new JOptionPane("Spieler " + index
 						+ " ist im Ziel und hat gewonnen!");
-				this.hm.addScore("Chuck Norris", this.pm.getPoints());
+				if (p.pm.getPoints() > otherP.pm.getPoints()) {
+					this.hm.addScore("Tobuscus", p.pm.getPoints());
+				} else if (p.pm.getPoints() < otherP.pm.getPoints()) {
+					this.hm.addScore("Ray William Johnson",
+							otherP.pm.getPoints());
+				} else {
+					this.hm.addScore("Tobuscus", p.pm.getPoints());
+					this.hm.addScore("Ray William Johnson",
+							otherP.pm.getPoints());
+				}
+
 				System.out.println(this.hm.getHighscoreString());
 			} else {
 				int otherplayer;
 				if (index == 1) {
 					otherplayer = 2;
+					// Game.players.get(0).pm.addPoints(1000);
+
 				} else {
 					otherplayer = 1;
 				}
-				this.pm.addPoints(1000);
+				// p.pm.addPoints(1000);
 				question = new JOptionPane("Spieler " + index
 						+ " ist tot. Somit hat Spieler " + otherplayer
 						+ " gewonnen.");
-				this.hm.addScore("Chuck Norris", this.pm.getPoints());
+				if (p.pm.getPoints() > otherP.pm.getPoints()) {
+					this.hm.addScore("Tobuscus", p.pm.getPoints());
+				} else if (p.pm.getPoints() < otherP.pm.getPoints()) {
+					this.hm.addScore("Ray William Johnson",
+							otherP.pm.getPoints());
+				} else {
+					this.hm.addScore("Tobuscus", p.pm.getPoints());
+					this.hm.addScore("Ray William Johnson",
+							otherP.pm.getPoints());
+				}
+
 				System.out.println(this.hm.getHighscoreString());
 			}
 		} else {
