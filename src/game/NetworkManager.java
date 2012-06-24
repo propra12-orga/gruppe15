@@ -61,6 +61,7 @@ public class NetworkManager extends Thread {
 			try {
 				String command = this.inStream.readLine();
 				Input in = null;
+				Debug.log(Debug.VERBOSE, command);
 				if (command.startsWith("input:")) {
 					in = new Input();
 					command = command.replace("input:", "").replace(";", "");
@@ -109,6 +110,7 @@ public class NetworkManager extends Thread {
 							p = new Player(po.x * Game.BLOCK_SIZE, po.y * Game.BLOCK_SIZE);
 							p.setKeys(keys);
 						}
+						Debug.log(Debug.VERBOSE, "Player " + i + " spawned at" + po);
 						p.setKeys(keys);
 						Game.players.add(p);
 						Game.entities.add(p);

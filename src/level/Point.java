@@ -8,4 +8,9 @@ public class Point {
 		this.x = x;
 		this.y = y;
 	}
+
+	@Override
+	public String toString() {
+		return "Point [x=" + this.x + ", y=" + this.y + "]";
+	}
 }
