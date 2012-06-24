@@ -3,7 +3,11 @@ package game;
 public class NetworkPlayerKeys extends KeySettings {
 
 	public NetworkPlayerKeys(int i) {
-		// TODO Auto-generated constructor stub
+		this.bomb = new Key();
+		this.down = new Key();
+		this.up = new Key();
+		this.left = new Key();
+		this.right = new Key();
 	}
 
 }

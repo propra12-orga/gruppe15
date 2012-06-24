@@ -6,6 +6,7 @@ import entities.Finishpoint;
 import entities.Player;
 import entities.Wall;
 import entities.WallWithFinishingPoint;
+import enums.Gamemode;
 import game.Game;
 import game.KeySettings;
 import game.Main;
@@ -43,11 +44,13 @@ public class Loader {
 						Game.entities.add(new Wall(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
 					} else if (type == 3) {
 						Player p = new Player(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE);
-						KeySettings keys = Game.getKeySettings(player_count);
-						p.setKeys(keys);
-						player_count++;
-						Game.entities.add(p);
-						Game.players.add(p);
+						if (Game.gamemode != Gamemode.NETWORK) {
+							KeySettings keys = Game.getKeySettings(player_count);
+							p.setKeys(keys);
+							player_count++;
+							Game.entities.add(p);
+							Game.players.add(p);
+						}
 						Game.staticBackground.add(new Background(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
 					} else if (type == 4) {
 						Game.entities.add(new Finishpoint(x * Game.BLOCK_SIZE, y * Game.BLOCK_SIZE));
