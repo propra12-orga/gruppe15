@@ -84,6 +84,13 @@ public class NetworkManager extends Thread {
 								break;
 							}
 						}
+					} else if (in.type == NetworkInputType.PLAYER_DEAD) {
+						for (Entity e : Game.players) {
+							Player player = (Player) e;
+							if (player.networkID == in.playerID) {
+								player.removed = true;
+							}
+						}
 					}
 				} else if (command.startsWith("me:")) {
 					this.playerID = Integer.valueOf(command.replace("me:", "").replace(";", ""));

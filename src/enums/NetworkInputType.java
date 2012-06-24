@@ -1,6 +1,6 @@
 package enums;
 
 public enum NetworkInputType {
-	PLAYER, BOMB
+	PLAYER, BOMB, PLAYER_DEAD
 
 }

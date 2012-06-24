@@ -329,28 +329,35 @@ public class Game extends Canvas {
 		this.stop();
 		JOptionPane question;
 		int index;
-		if (Game.players.size() == 2) {
-			index = Game.players.indexOf(p) + 1;
-			if (type == Gameend.finishReached) {
-				question = new JOptionPane("Spieler " + index + " ist im Ziel und hat gewonnen!");
-			} else {
-				int otherplayer;
-				if (index == 1) {
-					otherplayer = 2;
-				} else {
-					otherplayer = 1;
-				}
-				question = new JOptionPane("Spieler " + index + " ist tot. Somit hat Spieler " + otherplayer
-						+ " gewonnen.");
-			}
-		} else {
+		if (Game.gamemode == Gamemode.NETWORK) {
 			if (type == Gameend.finishReached) {
 				question = new JOptionPane("Du hast gewonnen!");
 			} else {
 				question = new JOptionPane("Du hast verloren.");
 			}
+		} else {
+			if (Game.players.size() == 2) {
+				index = Game.players.indexOf(p) + 1;
+				if (type == Gameend.finishReached) {
+					question = new JOptionPane("Spieler " + index + " ist im Ziel und hat gewonnen!");
+				} else {
+					int otherplayer;
+					if (index == 1) {
+						otherplayer = 2;
+					} else {
+						otherplayer = 1;
+					}
+					question = new JOptionPane("Spieler " + index + " ist tot. Somit hat Spieler " + otherplayer
+							+ " gewonnen.");
+				}
+			} else {
+				if (type == Gameend.finishReached) {
+					question = new JOptionPane("Du hast gewonnen!");
+				} else {
+					question = new JOptionPane("Du hast verloren.");
+				}
+			}
 		}
-
 		Object[] options = { "Neustart", "Beenden" };
 		question.setOptions(options);
 		JDialog dialog = question.createDialog(new JFrame(), "Spielende");
