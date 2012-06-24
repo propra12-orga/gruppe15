@@ -206,7 +206,7 @@ public class Game extends Canvas {
 		Game.players = new CopyOnWriteArrayList<Entity>();
 
 		Loader l1 = new Loader();
-		l1.loadMap("Map3");
+		l1.loadMap("DebugMap");
 		Game.GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE) + 1;
 		Game.GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE) + 1;
 
