@@ -17,12 +17,10 @@ public class Sounds extends Thread {
 	@Override
 	public void run() {
 		try {
-			AudioInputStream audioInputStream = AudioSystem
-					.getAudioInputStream(Main.class.getResource("/ressources/"
-							+ this.filename));
+			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(Main.class
+					.getResource("/ressources/sound/" + this.filename));
 			AudioFormat af = audioInputStream.getFormat();
-			int size = (int) (af.getFrameSize() * audioInputStream
-					.getFrameLength());
+			int size = (int) (af.getFrameSize() * audioInputStream.getFrameLength());
 			byte[] audio = new byte[size];
 			DataLine.Info info = new DataLine.Info(Clip.class, af, size);
 			audioInputStream.read(audio, 0, size);
