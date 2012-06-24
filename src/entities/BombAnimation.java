@@ -46,7 +46,7 @@ public class BombAnimation extends Entity {
 	 * @param x
 	 * @param y
 	 */
-	public BombAnimation(int x, int y) {
+	public BombAnimation(int x, int y, Player owner) {
 		super(x, y);
 		this.explosionImages = Sprite.load("explosion_temp.png", 100, 100);
 		this.exposionTimeDefault = 40;
@@ -55,6 +55,7 @@ public class BombAnimation extends Entity {
 				{ 1, 1, 1, 1, 1 }, { 0, 0, 1, 0, 0 }, { 0, 0, 1, 0, 0 } };
 		this.playerKilled = null;
 		this.killDelay = 10;
+		this.owner = owner;
 	}
 
 	/*
