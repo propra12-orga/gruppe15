@@ -93,7 +93,7 @@ public class GUI implements ActionListener {
 		this.starten.addActionListener(this);
 		this.beenden = new JMenuItem("Beenden");
 		this.beenden.addActionListener(this);
-		;
+
 		// this.spiel.add(this.starten);
 		this.spiel.add(this.beenden);
 		this.menubar.add(this.spiel);
@@ -107,7 +107,7 @@ public class GUI implements ActionListener {
 		 * this.netzwerk.add(this.stopserver);
 		 * this.netzwerk.add(this.findserver);
 		 */
-		this.netzwerk.add(new JMenuItem("noch nicht verfÃ¼gbar"));
+		this.netzwerk.add(new JMenuItem("noch nicht verfügbar"));
 		this.menubar.add(this.netzwerk);
 
 		// Buttons for "Optionen"
@@ -117,13 +117,13 @@ public class GUI implements ActionListener {
 		 * JMenuItem("Groesse"); this.optionen.add(this.spname);
 		 * this.optionen.add(this.groesse);
 		 */
-		this.optionen.add(new JMenuItem("noch nicht verfÃ¼gbar"));
+		this.optionen.add(new JMenuItem("noch nicht verfügbar"));
 		this.menubar.add(this.optionen);
 
 		// Buttons for "Leveleditor"
 
 		this.leveleditor = new JMenu("Leveleditor");
-		this.offnen = new JMenuItem("Ã–ffnen");
+		this.offnen = new JMenuItem("öffnen");
 		this.offnen.addActionListener(this);
 		this.leveleditor.add(this.offnen);
 
@@ -151,8 +151,7 @@ public class GUI implements ActionListener {
 		// If the "restart"-button is pressed the game asks to restart the game
 		if (arg0.getSource() == this.starten) {
 			Object[] options = { "Neustart", "Abbrechen" };
-			JOptionPane question = new JOptionPane(
-					"Spiel neustarten? Der aktuelle Fortschritt geht verloren");
+			JOptionPane question = new JOptionPane("Spiel neustarten? Der aktuelle Fortschritt geht verloren");
 			question.setOptions(options);
 			JDialog dialog = question.createDialog(this.frame, "Achtung");
 			dialog.setVisible(true);
@@ -168,8 +167,7 @@ public class GUI implements ActionListener {
 			// If the exit-button is pressed the game asks to exit the game
 		} else if (arg0.getSource() == this.beenden) {
 			Object[] options = { "Beenden", "Abbrechen" };
-			JOptionPane question = new JOptionPane(
-					"Spiel beenden? Der aktuelle Fortschritt geht verloren");
+			JOptionPane question = new JOptionPane("Spiel beenden? Der aktuelle Fortschritt geht verloren");
 			question.setOptions(options);
 			JDialog dialog = question.createDialog(this.frame, "Achtung");
 			dialog.setVisible(true);
