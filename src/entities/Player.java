@@ -24,7 +24,7 @@ public class Player extends Entity {
 	private int speed;
 	private KeySettings keys;
 	private Image[][] facings;
-	private int facing = 0;
+	private int facing = 0, facing1 = 1, drawdelay = 0;
 	public PointManager pm = new PointManager();
 
 	/**
@@ -34,11 +34,11 @@ public class Player extends Entity {
 
 	public Player(int x, int y) {
 		super(x + 1, y + 1);
-		this.facings = Sprite.load("bomberman.png", 55, 90);
-		this.width = (55 / 2);
-		this.height = (90 / 2);
+		this.facings = Sprite.load("player1.png", 67, 100);
+		this.width = (67 / 2);
+		this.height = (100 / 2);
 		this.box = new Box(this.x, this.y, (int) this.width, (int) this.height);
-
+		this.drawdelay = 7;
 		this.speed = 10;
 	}
 
@@ -48,8 +48,8 @@ public class Player extends Entity {
 
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage((this.facings[this.facing][0]).image, this.x, this.y,
-				(int) this.width, (int) this.height, null);
+		g.drawImage((this.facings[this.facing][this.facing1]).image, this.x,
+				this.y, (int) this.width, (int) this.height, null);
 	}
 
 	/**
@@ -60,11 +60,36 @@ public class Player extends Entity {
 		boolean moved = false;
 
 		/**
-		 * if key "down" is pressed
+		 * if key "up" is pressed
 		 */
 		if (this.keys.up.down) {
 			this.y = this.y - this.speed;
-			this.facing = 1;
+			this.facing1 = 1;
+			if (this.drawdelay <= 0) {
+				this.drawdelay = 7;
+			} else if (this.drawdelay <= 1) {
+				this.facing = 5;
+				this.drawdelay--;
+			} else if (this.drawdelay <= 2) {
+				this.facing = 9;
+				this.drawdelay--;
+			} else if (this.drawdelay <= 3) {
+				this.facing = 8;
+				this.drawdelay--;
+			} else if (this.drawdelay <= 4) {
+				this.facing = 5;
+				this.drawdelay--;
+			} else if (this.drawdelay <= 5) {
+				this.facing = 7;
+				this.drawdelay--;
+			} else if (this.drawdelay <= 6) {
+				this.facing = 6;
+				this.drawdelay--;
+			} else {
+				this.drawdelay--;
+				this.facing = 5;
+
+			}
 			moved = true;
 		}
 
@@ -74,7 +99,32 @@ public class Player extends Entity {
 
 		if (this.keys.down.down) {
 			this.y = this.y + this.speed;
-			this.facing = 0;
+			this.facing1 = 1;
+			if (this.drawdelay <= 0) {
+				this.drawdelay = 7;
+			} else if (this.drawdelay <= 1) {
+				this.facing = 0;
+				this.drawdelay--;
+			} else if (this.drawdelay <= 2) {
+				this.facing = 4;
+				this.drawdelay--;
+			} else if (this.drawdelay <= 3) {
+				this.facing = 3;
+				this.drawdelay--;
+			} else if (this.drawdelay <= 4) {
+				this.facing = 0;
+				this.drawdelay--;
+			} else if (this.drawdelay <= 5) {
+				this.facing = 2;
+				this.drawdelay--;
+			} else if (this.drawdelay <= 6) {
+				this.facing = 1;
+				this.drawdelay--;
+			} else {
+				this.drawdelay--;
+				this.facing = 0;
+
+			}
 			moved = true;
 		}
 
@@ -83,7 +133,32 @@ public class Player extends Entity {
 		 */
 		if (this.keys.left.down) {
 			this.x = this.x - this.speed;
-			this.facing = 2;
+			this.facing1 = 0;
+			if (this.drawdelay <= 0) {
+				this.drawdelay = 7;
+			} else if (this.drawdelay <= 1) {
+				this.facing = 5;
+				this.drawdelay--;
+			} else if (this.drawdelay <= 2) {
+				this.facing = 9;
+				this.drawdelay--;
+			} else if (this.drawdelay <= 3) {
+				this.facing = 8;
+				this.drawdelay--;
+			} else if (this.drawdelay <= 4) {
+				this.facing = 5;
+				this.drawdelay--;
+			} else if (this.drawdelay <= 5) {
+				this.facing = 7;
+				this.drawdelay--;
+			} else if (this.drawdelay <= 6) {
+				this.facing = 6;
+				this.drawdelay--;
+			} else {
+				this.drawdelay--;
+				this.facing = 5;
+
+			}
 			moved = true;
 		}
 
@@ -92,7 +167,32 @@ public class Player extends Entity {
 		 */
 		if (this.keys.right.down) {
 			this.x = this.x + this.speed;
-			this.facing = 3;
+			this.facing1 = 0;
+			if (this.drawdelay <= 0) {
+				this.drawdelay = 7;
+			} else if (this.drawdelay <= 1) {
+				this.facing = 0;
+				this.drawdelay--;
+			} else if (this.drawdelay <= 2) {
+				this.facing = 4;
+				this.drawdelay--;
+			} else if (this.drawdelay <= 3) {
+				this.facing = 3;
+				this.drawdelay--;
+			} else if (this.drawdelay <= 4) {
+				this.facing = 0;
+				this.drawdelay--;
+			} else if (this.drawdelay <= 5) {
+				this.facing = 2;
+				this.drawdelay--;
+			} else if (this.drawdelay <= 6) {
+				this.facing = 1;
+				this.drawdelay--;
+			} else {
+				this.drawdelay--;
+				this.facing = 0;
+
+			}
 			moved = true;
 		}
 
@@ -101,6 +201,7 @@ public class Player extends Entity {
 		 */
 		if (moved == false) {
 			this.facing = 0;
+			this.facing1 = 1;
 		}
 
 		this.box.update(this.x, this.y);
