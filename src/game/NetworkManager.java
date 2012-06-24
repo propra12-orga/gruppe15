@@ -89,6 +89,8 @@ public class NetworkManager extends Thread {
 					Game.getInstance().init(mapname);
 					ArrayList<Point> spawns = new Loader().getSpawnPoints(mapname);
 					for (int i = 0; i < spawns.size(); i++) {
+						KeySettings keys;
+						Player p;
 						Point po = spawns.get(i);
 						if (i == this.playerID) {
 							/*
@@ -99,16 +101,17 @@ public class NetworkManager extends Thread {
 							 * Game.key_settings.add(s1);
 							 */
 
-							Player p = new Player(po.x * Game.BLOCK_SIZE, po.y * Game.BLOCK_SIZE);
-							KeySettings keys = Game.getKeySettings(0);
+							p = new Player(po.x * Game.BLOCK_SIZE, po.y * Game.BLOCK_SIZE);
+							keys = Game.getKeySettings(0);
 							p.setKeys(keys);
-							Game.players.add(p);
 						} else {
-							NetworkPlayerKeys keys = new NetworkPlayerKeys(i);
-							Player p = new Player(po.x * Game.BLOCK_SIZE, po.y * Game.BLOCK_SIZE);
+							keys = new NetworkPlayerKeys(i);
+							p = new Player(po.x * Game.BLOCK_SIZE, po.y * Game.BLOCK_SIZE);
 							p.setKeys(keys);
-							Game.players.add(p);
 						}
+						p.setKeys(keys);
+						Game.players.add(p);
+						Game.entities.add(p);
 					}
 				}
 
