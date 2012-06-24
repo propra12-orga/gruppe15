@@ -9,6 +9,8 @@ import java.awt.Graphics;
 import level.Box;
 
 public class Bomb extends Entity {
+	private Sounds sound;
+
 	/**
 	 * @param x
 	 * @param y
@@ -20,6 +22,7 @@ public class Bomb extends Entity {
 		this.box = new Box(this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE);
 		this.owner = owner;
 		this.explosionDelay = 50;
+		this.sound = new Sounds("Explosion.wav");
 	}
 
 	/**
@@ -41,8 +44,7 @@ public class Bomb extends Entity {
 		if (this.explosionDelay <= 0) {
 			this.removed = true;
 			Game.entities.add(new BombAnimation(this.x, this.y));
-			Sounds s1 = new Sounds("Explosion.wav");
-			s1.start();
+			this.sound.play();
 		} else {
 			this.explosionDelay--;
 		}
@@ -66,7 +68,6 @@ public class Bomb extends Entity {
 	public void forceExplosion() {
 		this.removed = true;
 		Game.entities.add(new BombAnimation(this.x, this.y));
-		Sounds s1 = new Sounds("Explosion.wav");
-		s1.start();
+		this.sound.play();
 	}
 }
