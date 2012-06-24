@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="" href="">
+    <information>
+        <title>Bomberman</title>
+        <vendor>Progra Gruppe 15 </vendor>
+    </information>
+    <resources>
+        <!-- Application Resources -->
+        <java version="1.6+" />
+        <jar href="Bomberman.jar" main="true" />
+
+    </resources>
+    <applet-desc 
+         name="Bomberman Applet"
+         main-class="game.Applet"
+         width="640"
+         height="480">
+     </applet-desc>
+</jnlp>

@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Main-Class: game.Applet
+
+Name: game/highscore/
+Sealed: true
+
+Name: level/
+Sealed: true
+
+Name: entities/
+Sealed: true
+
+Name: network/
+Sealed: true
+
+Name: game/
+Sealed: true
+
+Name: graphics/
+Sealed: true
+
