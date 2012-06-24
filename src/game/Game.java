@@ -334,7 +334,6 @@ public class Game extends Canvas {
 			index = Game.players.indexOf(p) + 1;
 			if (type == Gameend.finishReached) {
 
-				// p.pm.addPoints(5000);
 				question = new JOptionPane("Spieler " + index
 						+ " ist im Ziel und hat gewonnen!");
 				if (p.pm.getPoints() > otherP.pm.getPoints()) {
@@ -353,24 +352,21 @@ public class Game extends Canvas {
 				int otherplayer;
 				if (index == 1) {
 					otherplayer = 2;
-					// Game.players.get(0).pm.addPoints(1000);
 
 				} else {
 					otherplayer = 1;
 				}
-				// p.pm.addPoints(1000);
+
 				question = new JOptionPane("Spieler " + index
 						+ " ist tot. Somit hat Spieler " + otherplayer
 						+ " gewonnen.");
 				if (p.pm.getPoints() > otherP.pm.getPoints()) {
-					this.hm.addScore("Tobuscus", p.pm.getPoints());
+					this.hm.addScore("Ray William Johnson", p.pm.getPoints());
 				} else if (p.pm.getPoints() < otherP.pm.getPoints()) {
-					this.hm.addScore("Ray William Johnson",
-							otherP.pm.getPoints());
+					this.hm.addScore("Tobuscus", otherP.pm.getPoints());
 				} else {
-					this.hm.addScore("Tobuscus", p.pm.getPoints());
-					this.hm.addScore("Ray William Johnson",
-							otherP.pm.getPoints());
+					this.hm.addScore("Tobuscus", otherP.pm.getPoints());
+					this.hm.addScore("Ray William Johnson", p.pm.getPoints());
 				}
 
 				System.out.println(this.hm.getHighscoreString());
