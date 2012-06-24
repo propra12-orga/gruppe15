@@ -83,23 +83,25 @@ public class GameServer implements Runnable {
 				Debug.log(Debug.ERROR, "Can't send Data to player, maybe disconnected");
 			}
 		}
-
+		this.status = GameServerStatus.RUNNING;
 	}
 
 	public void sendInputs() {
 		int i = 0;
-		for (Input in : this.queue) {
-			for (ClientOnServer c : this.connected_players) {
-				if (in.playerID != i) {
-					try {
-						c.sendInput(in);
-					} catch (IOException e) {
-						Debug.log(Debug.ERROR, "Can't send Data to player, maybe disconnected");
+		if (this.queue.isEmpty() == false) {
+			for (Input in : this.queue) {
+				for (ClientOnServer c : this.connected_players) {
+					if (in.playerID != i) {
+						try {
+							c.sendInput(in);
+						} catch (IOException e) {
+							Debug.log(Debug.ERROR, "Can't send Data to player, maybe disconnected");
+						}
 					}
 				}
+				i++;
 			}
-			i++;
+			this.queue = new CopyOnWriteArrayList<Input>();
 		}
-		this.queue = new CopyOnWriteArrayList<Input>();
 	}
 }

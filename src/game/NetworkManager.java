@@ -63,8 +63,8 @@ public class NetworkManager extends Thread {
 				Input in = null;
 				if (command.startsWith("input:")) {
 					in = new Input();
-					command = command.replace("input:", "");
-					String[] parts = command.split("/;/si");
+					command = command.replace("input:", "").replace(";", "");
+					String[] parts = command.split(",");
 					in.playerID = Integer.valueOf(parts[0]);
 					in.type = NetworkInputType.valueOf(parts[1]);
 					if ((in.type == NetworkInputType.PLAYER) || (in.type == NetworkInputType.BOMB)) {
@@ -74,11 +74,15 @@ public class NetworkManager extends Thread {
 
 					if (in.type == NetworkInputType.BOMB) {
 						Game.entities.add(new Bomb(in.x, in.y, in.playerID));
+						Debug.log(Debug.VERBOSE, "Bomb received");
 					} else if (in.type == NetworkInputType.PLAYER) {
-
+						Player p = (Player) Game.players.get(in.playerID);
+						p.setPosition(in.x, in.y);
+						Debug.log(Debug.VERBOSE, "Got new player position");
 					}
 				} else if (command.startsWith("me:")) {
 					this.playerID = Integer.valueOf(command.replace("me:", "").replace(";", ""));
+					Debug.log(Debug.VERBOSE, "PlayerID: " + this.playerID);
 				} else if (command.startsWith("m:")) {
 					String mapname = command.replace("m:", "").replace(";", "");
 					// Game.key_settings = new ArrayList<KeySettings>();
@@ -87,13 +91,13 @@ public class NetworkManager extends Thread {
 					for (int i = 0; i < new Loader().parseForMultiplayer(mapname); i++) {
 						Point po = spawns.get(i);
 						if (i == this.playerID) {
-							KeySettings s1 = new KeySettings();
-							s1.bomb = Game.keys.bomb;
-							s1.left = Game.keys.left;
-							s1.right = Game.keys.right;
-							s1.up = Game.keys.up;
-							s1.down = Game.keys.down;
-							Game.key_settings.add(s1);
+							/*
+							 * KeySettings s1 = new KeySettings(); s1.bomb =
+							 * Game.keys.bomb; s1.left = Game.keys.left;
+							 * s1.right = Game.keys.right; s1.up = Game.keys.up;
+							 * s1.down = Game.keys.down;
+							 * Game.key_settings.add(s1);
+							 */
 
 							Player p = new Player(po.x * Game.BLOCK_SIZE, po.y * Game.BLOCK_SIZE);
 							KeySettings keys = Game.getKeySettings(0);

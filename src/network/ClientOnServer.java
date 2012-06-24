@@ -5,7 +5,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import enums.NetworkInputType;
@@ -29,12 +28,6 @@ public class ClientOnServer extends Thread {
 	public void sendMap(String map) throws IOException {
 		this.outStream.write(("m:" + map + ";\n").getBytes());
 		this.outStream.write(("me:" + this.playernumber + ";\n").getBytes());
-	}
-
-	public void sendPositions(ArrayList<NetworkEntity> elements) {
-		for (NetworkEntity e : elements) {
-
-		}
 	}
 
 	public void sendInput(Input in) throws IOException {
