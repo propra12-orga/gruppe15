@@ -34,6 +34,7 @@ public class ClientOnServer extends Thread {
 	public void sendInput(Input in) throws IOException {
 		this.outStream.write(("input:" + in.playerID + "," + in.type + "," + in.x + "," + in.y + ";\n").getBytes());
 		Debug.log(Debug.VERBOSE, "Send data to " + this.playernumber);
+		Debug.log(Debug.VERBOSE, in);
 	}
 
 	@Override

@@ -31,7 +31,6 @@ public class NetworkManager extends Thread {
 	public NetworkManager(Server server) {
 		this.server = server;
 		this.out_queue = new CopyOnWriteArrayList<Input>();
-		this.in_queue = new CopyOnWriteArrayList<Input>();
 		this.networkplayer = new CopyOnWriteArrayList<NetworkPlayerKeys>();
 	}
 
@@ -91,7 +90,7 @@ public class NetworkManager extends Thread {
 					Debug.log(Debug.VERBOSE, "PlayerID: " + this.playerID);
 				} else if (command.startsWith("m:")) {
 					String mapname = command.replace("m:", "").replace(";", "");
-					// Game.key_settings = new ArrayList<KeySettings>();
+
 					Game.getInstance().init(mapname);
 					ArrayList<Point> spawns = new Loader().getSpawnPoints(mapname);
 					for (int i = 0; i < spawns.size(); i++) {
@@ -99,13 +98,6 @@ public class NetworkManager extends Thread {
 						Player p;
 						Point po = spawns.get(i);
 						if (i == this.playerID) {
-							/*
-							 * KeySettings s1 = new KeySettings(); s1.bomb =
-							 * Game.keys.bomb; s1.left = Game.keys.left;
-							 * s1.right = Game.keys.right; s1.up = Game.keys.up;
-							 * s1.down = Game.keys.down;
-							 * Game.key_settings.add(s1);
-							 */
 
 							p = new Player(po.x * Game.BLOCK_SIZE, po.y * Game.BLOCK_SIZE);
 							keys = Game.getKeySettings(0);
@@ -121,10 +113,6 @@ public class NetworkManager extends Thread {
 						Game.players.add(p);
 						Game.entities.add(p);
 					}
-				}
-
-				if (in != null) {
-					this.in_queue.add(in);
 				}
 
 				try {

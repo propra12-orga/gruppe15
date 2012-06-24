@@ -7,14 +7,12 @@ public class Input {
 	public NetworkInputType type;
 	public int x;
 	public int y;
-	public boolean done;
 
 	public Input() {
 	}
 
 	@Override
 	public String toString() {
-		return "Input [playerID=" + this.playerID + ", type=" + this.type + ", x=" + this.x + ", y=" + this.y
-				+ ", done=" + this.done + "]";
+		return "Input [playerID=" + this.playerID + ", type=" + this.type + ", x=" + this.x + ", y=" + this.y + "]";
 	}
 }
