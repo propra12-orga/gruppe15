@@ -91,7 +91,7 @@ public class GameServer implements Runnable {
 		if (this.queue.isEmpty() == false) {
 			for (Input in : this.queue) {
 				for (ClientOnServer c : this.connected_players) {
-					if (in.playerID != i) {
+					if (in.playerID != c.playernumber) {
 						try {
 							c.sendInput(in);
 						} catch (IOException e) {

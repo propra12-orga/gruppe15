@@ -61,7 +61,7 @@ public class NetworkManager extends Thread {
 			try {
 				String command = this.inStream.readLine();
 				Input in = null;
-				Debug.log(Debug.VERBOSE, command);
+				// Debug.log(Debug.VERBOSE, command);
 				if (command.startsWith("input:")) {
 					in = new Input();
 					command = command.replace("input:", "").replace(";", "");

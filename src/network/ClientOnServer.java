@@ -11,7 +11,7 @@ import enums.NetworkInputType;
 
 public class ClientOnServer extends Thread {
 
-	private int playernumber;
+	public int playernumber;
 	private Socket socket;
 	private BufferedReader inStream;
 	private DataOutputStream outStream;
@@ -40,24 +40,26 @@ public class ClientOnServer extends Thread {
 			try {
 				String command = this.inStream.readLine();
 				Input in = null;
-				if (command.startsWith("input")) {
-					in = new Input();
-					command = command.replace("input:", "").replace(";", "");
-					String[] parts = command.split(",");
-					in.playerID = Integer.valueOf(parts[0]);
-					in.type = NetworkInputType.valueOf(parts[1]);
-					if ((in.type == NetworkInputType.PLAYER) || (in.type == NetworkInputType.BOMB)) {
-						in.x = Integer.valueOf(parts[2]);
-						in.y = Integer.valueOf(parts[3]);
+				if (command != null) {
+					if (command.startsWith("input")) {
+						in = new Input();
+						command = command.replace("input:", "").replace(";", "");
+						String[] parts = command.split(",");
+						in.playerID = Integer.valueOf(parts[0]);
+						in.type = NetworkInputType.valueOf(parts[1]);
+						if ((in.type == NetworkInputType.PLAYER) || (in.type == NetworkInputType.BOMB)) {
+							in.x = Integer.valueOf(parts[2]);
+							in.y = Integer.valueOf(parts[3]);
+						}
+					}
+
+					if (in != null) {
+						this.queue.add(in);
 					}
 				}
-
-				if (in != null) {
-					this.queue.add(in);
-				}
-			} catch (IOException e) {
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				// e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 	}
