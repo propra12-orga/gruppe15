@@ -71,7 +71,7 @@ public class NetworkManager extends Thread {
 					in.x = Integer.valueOf(parts[2]);
 					in.y = Integer.valueOf(parts[3]);
 
-					Debug.log(Debug.VERBOSE, in);
+					// Debug.log(Debug.VERBOSE, in);
 
 					if (in.type == NetworkInputType.BOMB) {
 						Game.entities.add(new Bomb(in.x, in.y, in.playerID));
@@ -143,7 +143,7 @@ public class NetworkManager extends Thread {
 			try {
 				this.outStream.write(("input:" + this.playerID + "," + in.type + "," + in.x + "," + in.y + ";\n")
 						.getBytes());
-				Debug.log(Debug.VERBOSE, in);
+				// Debug.log(Debug.VERBOSE, in);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
