@@ -41,6 +41,7 @@ public class Finishpoint extends Entity {
 		if ((this.player != null)) {
 			this.winDelay--;
 			if (this.winDelay == 0) {
+				this.player.pm.addPoints(5000);
 				Game.getInstance().gameEnd(this.player, Gameend.finishReached);
 			}
 		}

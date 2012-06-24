@@ -38,7 +38,9 @@ public class BombAnimation extends Entity {
 	 */
 	private int killDelay;
 
-	private Player owner;
+	public Player owner;
+
+	private Player livingPlayers;
 
 	private ArrayList<Entity> toPlace = new ArrayList<Entity>();
 
@@ -56,6 +58,7 @@ public class BombAnimation extends Entity {
 		this.playerKilled = null;
 		this.killDelay = 10;
 		this.owner = owner;
+
 	}
 
 	/*
@@ -70,6 +73,12 @@ public class BombAnimation extends Entity {
 			this.killDelay--;
 			if (this.killDelay == 0) {
 				// this.playerKilled.removed = true;
+				for (int i = 0; i < Game.players.size(); i++) {
+					this.livingPlayers = (Player) Game.players.get(i);
+					if (this.playerKilled != this.livingPlayers) {
+						this.livingPlayers.pm.addPoints(1000);
+					}
+				}
 				Game.getInstance().gameEnd(this.playerKilled, Gameend.dead);
 			}
 		}

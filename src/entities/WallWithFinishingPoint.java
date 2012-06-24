@@ -1,10 +1,9 @@
 package entities;
 
 import game.Game;
-import game.highscore.PointManager;
 
 public class WallWithFinishingPoint extends BreakableWall {
-	PointManager p = new PointManager();
+	// PointManager p = new PointManager();
 
 	/*
 	 * @param x
@@ -28,7 +27,8 @@ public class WallWithFinishingPoint extends BreakableWall {
 			Game.staticBackground.add(new Background(this.x, this.y));
 			((BombAnimation) e).addAfterExplosion(new Finishpoint(this.x,
 					this.y));
-			this.p.addPoints(200);
+			// this.p.addPoints(200);
+			((BombAnimation) e).owner.pm.addPoints(200);
 		}
 	}
 

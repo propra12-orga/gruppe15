@@ -2,6 +2,7 @@ package entities;
 
 import game.Game;
 import game.KeySettings;
+import game.highscore.PointManager;
 import graphics.Image;
 import graphics.Sprite;
 
@@ -24,6 +25,7 @@ public class Player extends Entity {
 	private KeySettings keys;
 	private Image[][] facings;
 	private int facing = 0;
+	public PointManager pm = new PointManager();
 
 	/**
 	 * Constructor for default Player sets position, speed, images, height and
