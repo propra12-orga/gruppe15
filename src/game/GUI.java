@@ -197,6 +197,7 @@ public class GUI implements ActionListener {
 		if (arg0.getSource() == this.highscore) {
 
 			HighscoreGui hg = new HighscoreGui();
+			hg.createAndShowGUI();
 		}
 	}
 }
