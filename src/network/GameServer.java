@@ -87,7 +87,6 @@ public class GameServer implements Runnable {
 	}
 
 	public void sendInputs() {
-		int i = 0;
 		if (this.queue.isEmpty() == false) {
 			for (Input in : this.queue) {
 				for (ClientOnServer c : this.connected_players) {
@@ -99,7 +98,6 @@ public class GameServer implements Runnable {
 						}
 					}
 				}
-				i++;
 			}
 			this.queue = new CopyOnWriteArrayList<Input>();
 		}

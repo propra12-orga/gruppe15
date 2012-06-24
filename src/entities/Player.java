@@ -27,6 +27,7 @@ public class Player extends Entity {
 	private KeySettings keys;
 	private Image[][] facings;
 	private int facing = 0;
+	public int networkID;
 
 	/**
 	 * Constructor for default Player sets position, speed, images, height and
@@ -119,6 +120,7 @@ public class Player extends Entity {
 			input.x = this.x;
 			input.y = this.y;
 			input.type = NetworkInputType.PLAYER;
+			input.playerID = this.networkID;
 			Game.network.send(input);
 		}
 
@@ -135,6 +137,7 @@ public class Player extends Entity {
 				input_b.x = b_x;
 				input_b.y = b_y;
 				input_b.type = NetworkInputType.BOMB;
+				input_b.playerID = this.networkID;
 				Game.network.send(input_b);
 			}
 		}

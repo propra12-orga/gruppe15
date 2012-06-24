@@ -112,6 +112,7 @@ public class NetworkManager extends Thread {
 						}
 						Debug.log(Debug.VERBOSE, "Player " + i + " spawned at" + po);
 						p.setKeys(keys);
+						p.networkID = i;
 						Game.players.add(p);
 						Game.entities.add(p);
 					}

@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import enums.NetworkInputType;
+import game.Debug;
 
 public class ClientOnServer extends Thread {
 
@@ -50,6 +51,7 @@ public class ClientOnServer extends Thread {
 						if ((in.type == NetworkInputType.PLAYER) || (in.type == NetworkInputType.BOMB)) {
 							in.x = Integer.valueOf(parts[2]);
 							in.y = Integer.valueOf(parts[3]);
+							Debug.log(Debug.VERBOSE, in.playerID + " send data");
 						}
 					}
 
