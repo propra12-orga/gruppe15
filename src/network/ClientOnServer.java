@@ -26,8 +26,8 @@ public class ClientOnServer extends Thread {
 	}
 
 	public void sendMap(String map) throws IOException {
-		this.outStream.write(("m:" + map + ";\n").getBytes());
 		this.outStream.write(("me:" + this.playernumber + ";\n").getBytes());
+		this.outStream.write(("m:" + map + ";\n").getBytes());
 	}
 
 	public void sendInput(Input in) throws IOException {

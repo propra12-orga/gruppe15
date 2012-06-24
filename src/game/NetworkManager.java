@@ -88,7 +88,7 @@ public class NetworkManager extends Thread {
 					// Game.key_settings = new ArrayList<KeySettings>();
 					Game.getInstance().init(mapname);
 					ArrayList<Point> spawns = new Loader().getSpawnPoints(mapname);
-					for (int i = 0; i < new Loader().parseForMultiplayer(mapname); i++) {
+					for (int i = 0; i < spawns.size(); i++) {
 						Point po = spawns.get(i);
 						if (i == this.playerID) {
 							/*
