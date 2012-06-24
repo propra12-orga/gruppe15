@@ -13,6 +13,7 @@ import level.Point;
 import network.Input;
 import network.Server;
 import entities.Bomb;
+import entities.Entity;
 import entities.Player;
 import enums.Gamemode;
 import enums.NetworkInputType;
@@ -77,9 +78,13 @@ public class NetworkManager extends Thread {
 						Game.entities.add(new Bomb(in.x, in.y, in.playerID));
 						Debug.log(Debug.VERBOSE, "Bomb received");
 					} else if (in.type == NetworkInputType.PLAYER) {
-						Player p = (Player) Game.players.get(in.playerID);
-						p.setPosition(in.x, in.y);
-						Debug.log(Debug.VERBOSE, "Got new player position");
+						for (Entity e : Game.players) {
+							Player player = (Player) e;
+							if (player.networkID == in.playerID) {
+								player.setPosition(in.x, in.y);
+								break;
+							}
+						}
 					}
 				} else if (command.startsWith("me:")) {
 					this.playerID = Integer.valueOf(command.replace("me:", "").replace(";", ""));
