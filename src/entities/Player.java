@@ -115,7 +115,7 @@ public class Player extends Entity {
 			}
 		}
 
-		if (Game.gamemode == Gamemode.NETWORK) {
+		if ((Game.gamemode == Gamemode.NETWORK) && (this.networkID == Game.network.playerID)) {
 			Input input = new Input();
 			input.x = this.x;
 			input.y = this.y;
@@ -132,7 +132,7 @@ public class Player extends Entity {
 			int b_x = Box.fitToBlock(this.x);
 			int b_y = Box.fitToBlock(this.y);
 			Game.entities.add(new Bomb(b_x, b_y, this));
-			if (Game.gamemode == Gamemode.NETWORK) {
+			if ((Game.gamemode == Gamemode.NETWORK) && (this.networkID == Game.network.playerID)) {
 				Input input_b = new Input();
 				input_b.x = b_x;
 				input_b.y = b_y;

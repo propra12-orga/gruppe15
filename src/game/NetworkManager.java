@@ -24,7 +24,7 @@ public class NetworkManager extends Thread {
 	private Socket socket;
 	private BufferedReader inStream;
 	private DataOutputStream outStream;
-	private CopyOnWriteArrayList<Input> out_queue, in_queue;
+	private CopyOnWriteArrayList<Input> out_queue;
 	public int playerID;
 	public CopyOnWriteArrayList<NetworkPlayerKeys> networkplayer;
 
