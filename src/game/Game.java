@@ -319,7 +319,6 @@ public class Game extends Canvas {
 	 */
 	public void gameEnd(Player p, Gameend type) {
 		this.stop();
-		// JOptionPane question;
 		int index;
 		Player otherP;
 		String winner;

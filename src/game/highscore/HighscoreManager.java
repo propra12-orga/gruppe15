@@ -108,4 +108,5 @@ public class HighscoreManager {
 		}
 		return highscoreString;
 	}
+
 }
