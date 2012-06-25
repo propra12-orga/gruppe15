@@ -1,5 +1,5 @@
 package enums;
 
 public enum Gameend {
-	dead, finishReached;
+	dead, finishReached, lastAlive;
 }

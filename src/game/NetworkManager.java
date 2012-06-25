@@ -15,6 +15,7 @@ import network.Server;
 import entities.Bomb;
 import entities.Entity;
 import entities.Player;
+import enums.Gameend;
 import enums.Gamemode;
 import enums.NetworkInputType;
 
@@ -84,11 +85,22 @@ public class NetworkManager extends Thread {
 								break;
 							}
 						}
+						Debug.log(Debug.VERBOSE, "Position received");
 					} else if (in.type == NetworkInputType.PLAYER_DEAD) {
+						ArrayList<Player> alive = new ArrayList<Player>();
 						for (Entity e : Game.players) {
 							Player player = (Player) e;
 							if (player.networkID == in.playerID) {
 								player.removed = true;
+							}
+
+							if (player.removed == false) {
+								alive.add(player);
+							}
+						}
+						if (alive.size() == 1) {
+							if (alive.get(0).networkID == this.playerID) {
+								Game.getInstance().gameEnd(alive.get(0), Gameend.lastAlive);
 							}
 						}
 					}
@@ -146,7 +158,8 @@ public class NetworkManager extends Thread {
 				// Debug.log(Debug.VERBOSE, in);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				// e.printStackTrace();
+				Debug.log(Debug.ERROR, "Can't send to Server. Server down ?");
 			}
 		}
 		this.out_queue.clear();

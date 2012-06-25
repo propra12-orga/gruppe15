@@ -115,7 +115,7 @@ public class Player extends Entity {
 			}
 		}
 
-		if ((Game.gamemode == Gamemode.NETWORK) && (this.networkID == Game.network.playerID)) {
+		if ((Game.gamemode == Gamemode.NETWORK) && (this.networkID == Game.network.playerID) && (moved == true)) {
 			Input input = new Input();
 			input.x = this.x;
 			input.y = this.y;
