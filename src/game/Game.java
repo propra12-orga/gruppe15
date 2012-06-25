@@ -189,7 +189,11 @@ public class Game extends Canvas {
 			 */
 			sleepTime = (lastLoopTime - System.nanoTime()) / this.frameTimeNs;
 			if (sleepTime < this.minSleepTime) {
-				sleepTime = this.minSleepTime;
+				if (this.fps_static < 20) {
+					sleepTime = 0;
+				} else {
+					sleepTime = this.minSleepTime;
+				}
 			}
 			try {
 				Thread.sleep(sleepTime);
@@ -278,7 +282,8 @@ public class Game extends Canvas {
 
 		if (this.oldBackgroundElems != Game.staticBackground.size()) {
 
-			Game.background = new BufferedImage(Game.GAME_WIDTH, Game.GAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+			Game.background = new BufferedImage(Game.GAME_WIDTH,
+					Game.GAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
 			for (Entity e : Game.staticBackground) {
 				e.draw(Game.background.getGraphics());
 			}
@@ -339,7 +344,8 @@ public class Game extends Canvas {
 			if (Game.players.size() == 2) {
 				index = Game.players.indexOf(p) + 1;
 				if (type == Gameend.finishReached) {
-					question = new JOptionPane("Spieler " + index + " ist im Ziel und hat gewonnen!");
+					question = new JOptionPane("Spieler " + index
+							+ " ist im Ziel und hat gewonnen!");
 				} else {
 					int otherplayer;
 					if (index == 1) {
@@ -347,7 +353,8 @@ public class Game extends Canvas {
 					} else {
 						otherplayer = 1;
 					}
-					question = new JOptionPane("Spieler " + index + " ist tot. Somit hat Spieler " + otherplayer
+					question = new JOptionPane("Spieler " + index
+							+ " ist tot. Somit hat Spieler " + otherplayer
 							+ " gewonnen.");
 				}
 			} else {
