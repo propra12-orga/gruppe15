@@ -101,7 +101,6 @@ public class Game extends Canvas {
 	private int oldBackgroundElems;
 
 	HighscoreManager hm = new HighscoreManager();
-	// PointManager pm = new PointManager();
 
 	/**
 	 * Key Listener
@@ -179,7 +178,6 @@ public class Game extends Canvas {
 			this.draw(g);
 			bs.show();
 			Toolkit.getDefaultToolkit().sync();
-
 			/**
 			 * Let the thread sleep
 			 */
@@ -206,7 +204,7 @@ public class Game extends Canvas {
 		Generator g1 = new Generator(200, 320);
 		Loader l1 = new Loader();
 		g1.generateMap();
-		l1.loadMap("Map3");
+		l1.loadMap("DebugMap");
 		Game.GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE) + 1;
 		Game.GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE) + 1;
 
