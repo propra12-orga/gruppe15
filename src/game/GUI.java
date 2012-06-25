@@ -198,6 +198,7 @@ public class GUI implements ActionListener {
 
 			HighscoreGui hg = new HighscoreGui();
 			hg.createAndShowHighscore();
+
 		}
 	}
 }

@@ -324,6 +324,7 @@ public class Game extends Canvas {
 		JOptionPane question;
 		int index;
 		Player otherP;
+		String winner;
 
 		if (Game.players.size() == 2) {
 			if (p == (Player) Game.players.get(0)) {
@@ -333,18 +334,23 @@ public class Game extends Canvas {
 			}
 			index = Game.players.indexOf(p) + 1;
 			if (type == Gameend.finishReached) {
-
+				winner = JOptionPane
+						.showInputDialog(
+								null,
+								"Spieler "
+										+ index
+										+ ", bitte geben Sie ihren Namen ein und bestätigen Sie ihre Eingabe mit einem Klick auf OK",
+								null, JOptionPane.PLAIN_MESSAGE);
 				question = new JOptionPane("Spieler " + index
 						+ " ist im Ziel und hat gewonnen!");
 				if (p.pm.getPoints() > otherP.pm.getPoints()) {
-					this.hm.addScore("Tobuscus", p.pm.getPoints());
+					this.hm.addScore(winner, p.pm.getPoints());
 				} else if (p.pm.getPoints() < otherP.pm.getPoints()) {
-					this.hm.addScore("Ray William Johnson",
-							otherP.pm.getPoints());
+					this.hm.addScore(winner, otherP.pm.getPoints());
 				} else {
-					this.hm.addScore("Tobuscus", p.pm.getPoints());
-					this.hm.addScore("Ray William Johnson",
-							otherP.pm.getPoints());
+					// this.hm.addScore("Tobuscus", p.pm.getPoints());
+					// this.hm.addScore("Ray William Johnson",
+					// otherP.pm.getPoints());
 				}
 
 				System.out.println(this.hm.getHighscoreString());
@@ -356,17 +362,27 @@ public class Game extends Canvas {
 				} else {
 					otherplayer = 1;
 				}
+				winner = JOptionPane
+						.showInputDialog(
+								null,
+								"Spieler "
+										+ otherplayer
+										+ ", bitte geben Sie ihren Namen ein und bestätigen Sie ihre Eingabe mit einem Klick auf OK",
+								null, JOptionPane.PLAIN_MESSAGE);
+				question = new JOptionPane("Spieler " + index
+						+ " ist im Ziel und hat gewonnen!");
 
 				question = new JOptionPane("Spieler " + index
 						+ " ist tot. Somit hat Spieler " + otherplayer
 						+ " gewonnen.");
 				if (p.pm.getPoints() > otherP.pm.getPoints()) {
-					this.hm.addScore("Ray William Johnson", p.pm.getPoints());
+					this.hm.addScore(winner, p.pm.getPoints());
 				} else if (p.pm.getPoints() < otherP.pm.getPoints()) {
-					this.hm.addScore("Tobuscus", otherP.pm.getPoints());
+					this.hm.addScore(winner, otherP.pm.getPoints());
 				} else {
-					this.hm.addScore("Tobuscus", otherP.pm.getPoints());
-					this.hm.addScore("Ray William Johnson", p.pm.getPoints());
+					// this.hm.addScore("Tobuscus", otherP.pm.getPoints());
+					// this.hm.addScore("Ray William Johnson",
+					// p.pm.getPoints());
 				}
 
 				System.out.println(this.hm.getHighscoreString());
