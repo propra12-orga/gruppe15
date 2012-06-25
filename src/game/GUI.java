@@ -1,6 +1,7 @@
 package game;
 
 import game.highscore.HighscoreGui;
+import game.highscore.HighscoreManager;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,6 +44,7 @@ public class GUI implements ActionListener {
 	/**
 	 * new tab named "Optionen"
 	 */
+	private JMenuItem delScore;
 	private JMenuItem spname;
 	/**
 	 * new item in Tab "Optionen" named "spname"
@@ -113,23 +115,25 @@ public class GUI implements ActionListener {
 		 * this.netzwerk.add(this.stopserver);
 		 * this.netzwerk.add(this.findserver);
 		 */
-		this.netzwerk.add(new JMenuItem("noch nicht verf�gbar"));
+		this.netzwerk.add(new JMenuItem("noch nicht verf\u00FCgbar"));
 		this.menubar.add(this.netzwerk);
 
 		// Buttons for "Optionen"
 		this.optionen = new JMenu("Optionen");
+		this.delScore = new JMenuItem("Highscore l\u00F6schen");
+		this.delScore.addActionListener(this);
 		/*
 		 * this.spname = new JMenuItem("Spielername"); this.groesse = new
 		 * JMenuItem("Groesse"); this.optionen.add(this.spname);
 		 * this.optionen.add(this.groesse);
 		 */
-		this.optionen.add(new JMenuItem("noch nicht verf�gbar"));
+		this.optionen.add(this.delScore);
 		this.menubar.add(this.optionen);
 
 		// Buttons for "Leveleditor"
 
 		this.leveleditor = new JMenu("Leveleditor");
-		this.offnen = new JMenuItem("�ffnen");
+		this.offnen = new JMenuItem("\u00D6ffnen");
 		this.offnen.addActionListener(this);
 		this.leveleditor.add(this.offnen);
 
@@ -191,14 +195,27 @@ public class GUI implements ActionListener {
 
 		if (arg0.getSource() == this.offnen) {
 
-			Editor ed = new Editor();
+			Editor ed = new Editor(this.frame);
 
 		}
 		if (arg0.getSource() == this.highscore) {
 
-			HighscoreGui hg = new HighscoreGui();
+			HighscoreGui hg = new HighscoreGui(this.frame);
 			hg.createAndShowHighscore();
 
+		}
+		if (arg0.getSource() == this.delScore) {
+			int choice;
+			choice = JOptionPane
+					.showConfirmDialog(
+							this.frame,
+							"Sind Sie sicher, dass sie den Highscore l\u00F6schen m\u00F6chten?",
+							"Highscore l\u00F6schen", JOptionPane.YES_NO_OPTION);
+			if (choice == 0) {
+				HighscoreManager hm = new HighscoreManager();
+				hm.getScores().clear();
+				hm.updateScoreFile();
+			}
 		}
 	}
 }

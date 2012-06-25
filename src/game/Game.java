@@ -321,7 +321,6 @@ public class Game extends Canvas {
 	 */
 	public void gameEnd(Player p, Gameend type) {
 		this.stop();
-		// JOptionPane question;
 		int index;
 		Player otherP;
 		String winner;
@@ -344,7 +343,9 @@ public class Game extends Canvas {
 										+ index
 										+ ", bitte geben Sie ihren Namen ein und best\u00E4tigen Sie ihre Eingabe mit einem Klick auf OK",
 								null, JOptionPane.PLAIN_MESSAGE);
-				this.hm.addScore(winner, p.pm.getPoints());
+				if (winner != null) {
+					this.hm.addScore(winner, p.pm.getPoints());
+				}
 			} else {
 				int otherplayer;
 				if (index == 1) {
@@ -363,7 +364,9 @@ public class Game extends Canvas {
 										+ otherplayer
 										+ ", bitte geben Sie ihren Namen ein und best\u00E4tigen Sie ihre Eingabe mit einem Klick auf OK",
 								null, JOptionPane.PLAIN_MESSAGE);
-				this.hm.addScore(winner, otherP.pm.getPoints());
+				if (winner != null) {
+					this.hm.addScore(winner, otherP.pm.getPoints());
+				}
 			}
 		} else {
 			if (type == Gameend.finishReached) {
@@ -373,7 +376,7 @@ public class Game extends Canvas {
 			}
 		}
 		choice = JOptionPane.showConfirmDialog(this,
-				"Möchten Sie das Spiel neustarten ?", "Spielende",
+				"M\u00F6chten Sie das Spiel neustarten ?", "Spielende",
 				JOptionPane.YES_NO_OPTION);
 
 		if (choice == 0) {
