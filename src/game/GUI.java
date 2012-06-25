@@ -191,7 +191,7 @@ public class GUI implements ActionListener {
 
 		if (arg0.getSource() == this.offnen) {
 
-			Editor ed = new Editor();
+			Editor ed = new Editor(this.frame);
 
 		}
 		if (arg0.getSource() == this.highscore) {

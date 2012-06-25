@@ -1,6 +1,7 @@
 package level;
 
 import game.Game;
+import game.Launcher;
 import game.Main;
 import game.MouseHandler;
 import graphics.Image;
@@ -90,7 +91,7 @@ public class Editor extends Canvas implements ActionListener {
 	 * default constructor for Editor, sets frame and buttons
 	 */
 
-	public Editor() {
+	public Editor(Launcher lframe) {
 
 		/**
 		 * create new JFrame called "Leveleditor" and set properties
@@ -100,6 +101,7 @@ public class Editor extends Canvas implements ActionListener {
 
 		editorframe.setTitle("Leveleditor");
 		editorframe.setSize(500, 500);
+		editorframe.setLocationRelativeTo(lframe);
 		editorframe.setVisible(true);
 
 		MouseHandler mousehandler = new MouseHandler();
