@@ -41,6 +41,7 @@ public class Generator {
 
 			this.fw.write(test);
 			this.fw.flush();
+
 		} catch (IOException e) {
 
 			e.printStackTrace();

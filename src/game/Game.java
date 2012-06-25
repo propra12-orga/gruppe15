@@ -342,7 +342,7 @@ public class Game extends Canvas {
 								this,
 								"Spieler "
 										+ index
-										+ ", bitte geben Sie ihren Namen ein und bestätigen Sie ihre Eingabe mit einem Klick auf OK",
+										+ ", bitte geben Sie ihren Namen ein und best\u00E4tigen Sie ihre Eingabe mit einem Klick auf OK",
 								null, JOptionPane.PLAIN_MESSAGE);
 				this.hm.addScore(winner, p.pm.getPoints());
 			} else {
@@ -361,7 +361,7 @@ public class Game extends Canvas {
 								this,
 								"Spieler "
 										+ otherplayer
-										+ ", bitte geben Sie ihren Namen ein und bestätigen Sie ihre Eingabe mit einem Klick auf OK",
+										+ ", bitte geben Sie ihren Namen ein und best\u00E4tigen Sie ihre Eingabe mit einem Klick auf OK",
 								null, JOptionPane.PLAIN_MESSAGE);
 				this.hm.addScore(winner, otherP.pm.getPoints());
 			}
