@@ -34,6 +34,7 @@ public class Loader {
 							+ filename));
 			while (maps.hasNextLine()) {
 				String text = maps.nextLine();
+
 				for (x = 0; x < text.length(); x++) {
 					type = Integer.parseInt("" + text.charAt(x));
 					if (type == 0) {

@@ -24,7 +24,7 @@ public class Player extends Entity {
 	private int speed;
 	private KeySettings keys;
 	private Image[][] facings;
-	private int facing = 0, facing1 = 1, drawdelay = 0;
+	private int facing, facing1, drawdelay, defaultdrawdelay;
 	public PointManager pm = new PointManager();
 
 	/**
@@ -35,11 +35,13 @@ public class Player extends Entity {
 	public Player(int x, int y) {
 		super(x + 1, y + 1);
 		this.facings = Sprite.load("player1.png", 67, 100);
-		this.width = (67 / 2);
-		this.height = (100 / 2);
+		this.width = (float) (53.6 / 2);
+		this.height = (80 / 2);
 		this.box = new Box(this.x, this.y, (int) this.width, (int) this.height);
-		this.drawdelay = 7;
-		this.speed = 10;
+		this.defaultdrawdelay = 28;
+		this.facing = 0;
+		this.facing1 = 0;
+		this.speed = 6;
 	}
 
 	/**
@@ -66,23 +68,23 @@ public class Player extends Entity {
 			this.y = this.y - this.speed;
 			this.facing1 = 1;
 			if (this.drawdelay <= 0) {
-				this.drawdelay = 7;
-			} else if (this.drawdelay <= 1) {
+				this.drawdelay = this.defaultdrawdelay;
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .142857143)) {
 				this.facing = 5;
 				this.drawdelay--;
-			} else if (this.drawdelay <= 2) {
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .285714286)) {
 				this.facing = 9;
 				this.drawdelay--;
-			} else if (this.drawdelay <= 3) {
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .428571429)) {
 				this.facing = 8;
 				this.drawdelay--;
-			} else if (this.drawdelay <= 4) {
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .571428571)) {
 				this.facing = 5;
 				this.drawdelay--;
-			} else if (this.drawdelay <= 5) {
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .714285714)) {
 				this.facing = 7;
 				this.drawdelay--;
-			} else if (this.drawdelay <= 6) {
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .857142857)) {
 				this.facing = 6;
 				this.drawdelay--;
 			} else {
@@ -101,23 +103,23 @@ public class Player extends Entity {
 			this.y = this.y + this.speed;
 			this.facing1 = 1;
 			if (this.drawdelay <= 0) {
-				this.drawdelay = 7;
-			} else if (this.drawdelay <= 1) {
+				this.drawdelay = this.defaultdrawdelay;
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .142857143)) {
 				this.facing = 0;
 				this.drawdelay--;
-			} else if (this.drawdelay <= 2) {
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .285714286)) {
 				this.facing = 4;
 				this.drawdelay--;
-			} else if (this.drawdelay <= 3) {
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .428571429)) {
 				this.facing = 3;
 				this.drawdelay--;
-			} else if (this.drawdelay <= 4) {
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .571428571)) {
 				this.facing = 0;
 				this.drawdelay--;
-			} else if (this.drawdelay <= 5) {
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .714285714)) {
 				this.facing = 2;
 				this.drawdelay--;
-			} else if (this.drawdelay <= 6) {
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .857142857)) {
 				this.facing = 1;
 				this.drawdelay--;
 			} else {
@@ -135,23 +137,23 @@ public class Player extends Entity {
 			this.x = this.x - this.speed;
 			this.facing1 = 0;
 			if (this.drawdelay <= 0) {
-				this.drawdelay = 7;
-			} else if (this.drawdelay <= 1) {
+				this.drawdelay = this.defaultdrawdelay;
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .142857143)) {
 				this.facing = 5;
 				this.drawdelay--;
-			} else if (this.drawdelay <= 2) {
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .285714286)) {
 				this.facing = 9;
 				this.drawdelay--;
-			} else if (this.drawdelay <= 3) {
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .428571429)) {
 				this.facing = 8;
 				this.drawdelay--;
-			} else if (this.drawdelay <= 4) {
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .571428571)) {
 				this.facing = 5;
 				this.drawdelay--;
-			} else if (this.drawdelay <= 5) {
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .714285714)) {
 				this.facing = 7;
 				this.drawdelay--;
-			} else if (this.drawdelay <= 6) {
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .857142857)) {
 				this.facing = 6;
 				this.drawdelay--;
 			} else {
@@ -169,23 +171,23 @@ public class Player extends Entity {
 			this.x = this.x + this.speed;
 			this.facing1 = 0;
 			if (this.drawdelay <= 0) {
-				this.drawdelay = 7;
-			} else if (this.drawdelay <= 1) {
+				this.drawdelay = this.defaultdrawdelay;
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .142857143)) {
 				this.facing = 0;
 				this.drawdelay--;
-			} else if (this.drawdelay <= 2) {
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .285714286)) {
 				this.facing = 4;
 				this.drawdelay--;
-			} else if (this.drawdelay <= 3) {
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .428571429)) {
 				this.facing = 3;
 				this.drawdelay--;
-			} else if (this.drawdelay <= 4) {
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .571428571)) {
 				this.facing = 0;
 				this.drawdelay--;
-			} else if (this.drawdelay <= 5) {
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .714285714)) {
 				this.facing = 2;
 				this.drawdelay--;
-			} else if (this.drawdelay <= 6) {
+			} else if (this.drawdelay <= (this.defaultdrawdelay * .857142857)) {
 				this.facing = 1;
 				this.drawdelay--;
 			} else {

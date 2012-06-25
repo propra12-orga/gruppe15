@@ -16,6 +16,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import level.Box;
+import level.Generator;
 import level.Loader;
 import entities.Entity;
 import entities.Player;
@@ -204,9 +205,10 @@ public class Game extends Canvas {
 		Game.entities = new CopyOnWriteArrayList<Entity>();
 		Game.staticBackground = new CopyOnWriteArrayList<Entity>();
 		Game.players = new CopyOnWriteArrayList<Entity>();
-
+		Generator g1 = new Generator(200, 320);
 		Loader l1 = new Loader();
-		l1.loadMap("DebugMap");
+		g1.generateMap();
+		l1.loadMap("Map3");
 		Game.GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE) + 1;
 		Game.GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE) + 1;
 
