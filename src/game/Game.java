@@ -341,7 +341,9 @@ public class Game extends Canvas {
 										+ index
 										+ ", bitte geben Sie ihren Namen ein und best\u00E4tigen Sie ihre Eingabe mit einem Klick auf OK",
 								null, JOptionPane.PLAIN_MESSAGE);
-				this.hm.addScore(winner, p.pm.getPoints());
+				if (winner != null) {
+					this.hm.addScore(winner, p.pm.getPoints());
+				}
 			} else {
 				int otherplayer;
 				if (index == 1) {
@@ -360,7 +362,9 @@ public class Game extends Canvas {
 										+ otherplayer
 										+ ", bitte geben Sie ihren Namen ein und best\u00E4tigen Sie ihre Eingabe mit einem Klick auf OK",
 								null, JOptionPane.PLAIN_MESSAGE);
-				this.hm.addScore(winner, otherP.pm.getPoints());
+				if (winner != null) {
+					this.hm.addScore(winner, otherP.pm.getPoints());
+				}
 			}
 		} else {
 			if (type == Gameend.finishReached) {

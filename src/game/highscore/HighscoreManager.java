@@ -95,16 +95,20 @@ public class HighscoreManager {
 
 		ArrayList<Score> scores;
 		scores = this.getScores();
+		if (scores.size() > 0) {
 
-		int i = 0;
-		int x = scores.size();
-		if (x > max) {
-			x = max;
-		}
-		while (i < x) {
-			highscoreString += (i + 1) + ".\t" + scores.get(i).getName()
-					+ "\t\t" + scores.get(i).getScore() + "\n";
-			i++;
+			int i = 0;
+			int x = scores.size();
+			if (x > max) {
+				x = max;
+			}
+			while (i < x) {
+				highscoreString += (i + 1) + ".\t" + scores.get(i).getName()
+						+ "\t\t" + scores.get(i).getScore() + "\n";
+				i++;
+			}
+		} else {
+			highscoreString = "Es sind bisher keine Einträge vorhanden!";
 		}
 		return highscoreString;
 	}
