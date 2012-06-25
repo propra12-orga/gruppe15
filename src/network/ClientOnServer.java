@@ -1,14 +1,14 @@
 package network;
 
+import enums.NetworkInputType;
+import game.Debug;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import enums.NetworkInputType;
-import game.Debug;
 
 public class ClientOnServer extends Thread {
 
@@ -42,6 +42,7 @@ public class ClientOnServer extends Thread {
 		while (true) {
 			try {
 				String command = this.inStream.readLine();
+				Debug.log(Debug.VERBOSE, "<< " + command);
 				Input in = null;
 				if (command != null) {
 					if (command.startsWith("input")) {
@@ -64,6 +65,11 @@ public class ClientOnServer extends Thread {
 				// TODO Auto-generated catch block
 				// e.printStackTrace();
 				Debug.log(Debug.ERROR, "Can't read from Client. Disconnected?");
+			}
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e) {
+				// e.printStackTrace();
 			}
 		}
 	}

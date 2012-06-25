@@ -1,5 +1,13 @@
 package game;
 
+import entities.Bomb;
+import entities.Entity;
+import entities.Player;
+import enums.Gameend;
+import enums.Gamemode;
+import enums.NetworkInputType;
+import gui.ServerJoinInfo;
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -8,16 +16,12 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import javax.swing.JFrame;
+
 import level.Loader;
 import level.Point;
 import network.Input;
 import network.Server;
-import entities.Bomb;
-import entities.Entity;
-import entities.Player;
-import enums.Gameend;
-import enums.Gamemode;
-import enums.NetworkInputType;
 
 public class NetworkManager extends Thread {
 
@@ -28,6 +32,7 @@ public class NetworkManager extends Thread {
 	private CopyOnWriteArrayList<Input> out_queue;
 	public int playerID;
 	public CopyOnWriteArrayList<NetworkPlayerKeys> networkplayer;
+	private JFrame infoWindow;
 
 	public NetworkManager(Server server) {
 		this.server = server;
@@ -48,12 +53,12 @@ public class NetworkManager extends Thread {
 		} catch (IOException e) {
 			Debug.log(Debug.ERROR, "Can't get input/output stream");
 		}
+		this.infoWindow = new ServerJoinInfo();
 		return true;
 	}
 
 	@Override
 	public void run() {
-		Game.gamemode = Gamemode.NETWORK;
 		while (true) {
 			if (this.out_queue.isEmpty() == false) {
 				this.sendCommand();
@@ -62,7 +67,7 @@ public class NetworkManager extends Thread {
 			try {
 				String command = this.inStream.readLine();
 				Input in = null;
-				// Debug.log(Debug.VERBOSE, command);
+				Debug.log(Debug.VERBOSE, command);
 				if (command.startsWith("input:")) {
 					in = new Input();
 					command = command.replace("input:", "").replace(";", "");
@@ -108,6 +113,8 @@ public class NetworkManager extends Thread {
 					this.playerID = Integer.valueOf(command.replace("me:", "").replace(";", ""));
 					Debug.log(Debug.VERBOSE, "PlayerID: " + this.playerID);
 				} else if (command.startsWith("m:")) {
+					Game.gamemode = Gamemode.NETWORK;
+
 					String mapname = command.replace("m:", "").replace(";", "");
 
 					Game.getInstance().init(mapname);
@@ -132,14 +139,17 @@ public class NetworkManager extends Thread {
 						Game.players.add(p);
 						Game.entities.add(p);
 					}
-				}
 
+					this.infoWindow.setVisible(false);
+					this.infoWindow.dispose();
+					this.infoWindow = null;
+				}
 				try {
-					Thread.sleep(20);
+					Thread.sleep(50);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					// e.printStackTrace();
 				}
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
