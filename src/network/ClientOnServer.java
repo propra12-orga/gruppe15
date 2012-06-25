@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import enums.NetworkInputType;
+import game.Debug;
 
 public class ClientOnServer extends Thread {
 
@@ -61,7 +62,8 @@ public class ClientOnServer extends Thread {
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				// e.printStackTrace();
+				Debug.log(Debug.ERROR, "Can't read from Client. Disconnected?");
 			}
 		}
 	}
