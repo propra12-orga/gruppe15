@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import level.Box;
@@ -321,10 +319,11 @@ public class Game extends Canvas {
 	 */
 	public void gameEnd(Player p, Gameend type) {
 		this.stop();
-		JOptionPane question;
+		// JOptionPane question;
 		int index;
 		Player otherP;
 		String winner;
+		int choice;
 
 		if (Game.players.size() == 2) {
 			if (p == (Player) Game.players.get(0)) {
@@ -334,26 +333,16 @@ public class Game extends Canvas {
 			}
 			index = Game.players.indexOf(p) + 1;
 			if (type == Gameend.finishReached) {
+				JOptionPane.showMessageDialog(this, "Spieler " + index
+						+ " ist im Ziel und hat gewonnen!");
 				winner = JOptionPane
 						.showInputDialog(
-								null,
+								this,
 								"Spieler "
 										+ index
 										+ ", bitte geben Sie ihren Namen ein und bestätigen Sie ihre Eingabe mit einem Klick auf OK",
 								null, JOptionPane.PLAIN_MESSAGE);
-				question = new JOptionPane("Spieler " + index
-						+ " ist im Ziel und hat gewonnen!");
-				if (p.pm.getPoints() > otherP.pm.getPoints()) {
-					this.hm.addScore(winner, p.pm.getPoints());
-				} else if (p.pm.getPoints() < otherP.pm.getPoints()) {
-					this.hm.addScore(winner, otherP.pm.getPoints());
-				} else {
-					// this.hm.addScore("Tobuscus", p.pm.getPoints());
-					// this.hm.addScore("Ray William Johnson",
-					// otherP.pm.getPoints());
-				}
-
-				System.out.println(this.hm.getHighscoreString());
+				this.hm.addScore(winner, p.pm.getPoints());
 			} else {
 				int otherplayer;
 				if (index == 1) {
@@ -362,45 +351,30 @@ public class Game extends Canvas {
 				} else {
 					otherplayer = 1;
 				}
+				JOptionPane.showMessageDialog(this, "Spieler " + index
+						+ " ist tot. Somit hat Spieler " + otherplayer
+						+ " gewonnen.");
 				winner = JOptionPane
 						.showInputDialog(
-								null,
+								this,
 								"Spieler "
 										+ otherplayer
 										+ ", bitte geben Sie ihren Namen ein und bestätigen Sie ihre Eingabe mit einem Klick auf OK",
 								null, JOptionPane.PLAIN_MESSAGE);
-				question = new JOptionPane("Spieler " + index
-						+ " ist im Ziel und hat gewonnen!");
-
-				question = new JOptionPane("Spieler " + index
-						+ " ist tot. Somit hat Spieler " + otherplayer
-						+ " gewonnen.");
-				if (p.pm.getPoints() > otherP.pm.getPoints()) {
-					this.hm.addScore(winner, p.pm.getPoints());
-				} else if (p.pm.getPoints() < otherP.pm.getPoints()) {
-					this.hm.addScore(winner, otherP.pm.getPoints());
-				} else {
-					// this.hm.addScore("Tobuscus", otherP.pm.getPoints());
-					// this.hm.addScore("Ray William Johnson",
-					// p.pm.getPoints());
-				}
-
-				System.out.println(this.hm.getHighscoreString());
+				this.hm.addScore(winner, otherP.pm.getPoints());
 			}
 		} else {
 			if (type == Gameend.finishReached) {
-				question = new JOptionPane("Du hast gewonnen!");
+				JOptionPane.showMessageDialog(this, "Du hast gewonnen!");
 			} else {
-				question = new JOptionPane("Du hast verloren.");
+				JOptionPane.showMessageDialog(this, "Du hast verloren!");
 			}
 		}
+		choice = JOptionPane.showConfirmDialog(this,
+				"Möchten Sie das Spiel neustarten ?", "Spielende",
+				JOptionPane.YES_NO_OPTION);
 
-		Object[] options = { "Neustart", "Beenden" };
-		question.setOptions(options);
-		JDialog dialog = question.createDialog(new JFrame(), "Spielende");
-		dialog.setVisible(true);
-		Object obj = question.getValue();
-		if (obj.equals(options[0])) {
+		if (choice == 0) {
 			// Spiel neustarten
 			this.restart();
 		} else {
