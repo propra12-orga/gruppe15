@@ -340,7 +340,7 @@ public class Game extends Canvas {
 								this,
 								"Spieler "
 										+ index
-										+ ", bitte geben Sie ihren Namen ein und bestätigen Sie ihre Eingabe mit einem Klick auf OK",
+										+ ", bitte geben Sie ihren Namen ein und best\u00E4tigen Sie ihre Eingabe mit einem Klick auf OK",
 								null, JOptionPane.PLAIN_MESSAGE);
 				this.hm.addScore(winner, p.pm.getPoints());
 			} else {
@@ -359,7 +359,7 @@ public class Game extends Canvas {
 								this,
 								"Spieler "
 										+ otherplayer
-										+ ", bitte geben Sie ihren Namen ein und bestätigen Sie ihre Eingabe mit einem Klick auf OK",
+										+ ", bitte geben Sie ihren Namen ein und best\u00E4tigen Sie ihre Eingabe mit einem Klick auf OK",
 								null, JOptionPane.PLAIN_MESSAGE);
 				this.hm.addScore(winner, otherP.pm.getPoints());
 			}
@@ -371,7 +371,7 @@ public class Game extends Canvas {
 			}
 		}
 		choice = JOptionPane.showConfirmDialog(this,
-				"Möchten Sie das Spiel neustarten ?", "Spielende",
+				"M\u00F6chten Sie das Spiel neustarten ?", "Spielende",
 				JOptionPane.YES_NO_OPTION);
 
 		if (choice == 0) {

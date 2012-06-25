@@ -113,7 +113,7 @@ public class GUI implements ActionListener {
 		 * this.netzwerk.add(this.stopserver);
 		 * this.netzwerk.add(this.findserver);
 		 */
-		this.netzwerk.add(new JMenuItem("noch nicht verf�gbar"));
+		this.netzwerk.add(new JMenuItem("noch nicht verf\u00FCgbar"));
 		this.menubar.add(this.netzwerk);
 
 		// Buttons for "Optionen"
@@ -123,13 +123,13 @@ public class GUI implements ActionListener {
 		 * JMenuItem("Groesse"); this.optionen.add(this.spname);
 		 * this.optionen.add(this.groesse);
 		 */
-		this.optionen.add(new JMenuItem("noch nicht verf�gbar"));
+		this.optionen.add(new JMenuItem("noch nicht verf\u00FCgbar"));
 		this.menubar.add(this.optionen);
 
 		// Buttons for "Leveleditor"
 
 		this.leveleditor = new JMenu("Leveleditor");
-		this.offnen = new JMenuItem("�ffnen");
+		this.offnen = new JMenuItem("\u00D6ffnen");
 		this.offnen.addActionListener(this);
 		this.leveleditor.add(this.offnen);
 
