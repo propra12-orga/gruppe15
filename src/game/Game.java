@@ -112,6 +112,8 @@ public class Game extends Canvas {
 	 */
 	public static BufferedImage background;
 
+	public Player drawPoints;
+
 	/**
 	 * Get Singleton-Instance
 	 * 
@@ -286,6 +288,12 @@ public class Game extends Canvas {
 		}
 
 		g.setColor(Color.WHITE);
+		for (int i = 0; i < Game.players.size(); i++) {
+			this.drawPoints = (Player) Game.players.get(i);
+			g.drawString(
+					"Spieler " + (i + 1) + ":" + this.drawPoints.pm.getPoints(),
+					100 * (i + 1), 10);
+		}
 		g.drawString("FPS: " + this.fps_static, 0, 10);
 	}
 
