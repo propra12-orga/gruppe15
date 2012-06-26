@@ -20,6 +20,7 @@ public class ClientOnServer extends Thread {
 
 	public ClientOnServer(Socket socket, int playernumber, CopyOnWriteArrayList<Input> queue) throws IOException {
 		this.socket = socket;
+		this.socket.setSoTimeout(30);
 		this.playernumber = playernumber;
 		this.inStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 		this.outStream = new DataOutputStream(socket.getOutputStream());
@@ -42,9 +43,9 @@ public class ClientOnServer extends Thread {
 		while (true) {
 			try {
 				String command = this.inStream.readLine();
-				Debug.log(Debug.VERBOSE, "<< " + command);
 				Input in = null;
 				if (command != null) {
+					Debug.log(Debug.VERBOSE, "<< " + command);
 					if (command.startsWith("input")) {
 						in = new Input();
 						command = command.replace("input:", "").replace(";", "");
@@ -61,13 +62,15 @@ public class ClientOnServer extends Thread {
 						this.queue.add(in);
 					}
 				}
+			} catch (java.net.SocketTimeoutException ex) {
+
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				// e.printStackTrace();
 				Debug.log(Debug.ERROR, "Can't read from Client. Disconnected?");
 			}
 			try {
-				Thread.sleep(50);
+				Thread.sleep(10);
 			} catch (InterruptedException e) {
 				// e.printStackTrace();
 			}

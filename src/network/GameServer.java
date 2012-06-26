@@ -60,7 +60,7 @@ public class GameServer implements Runnable {
 				}
 
 				try {
-					Thread.sleep(20);
+					Thread.sleep(10);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					// e.printStackTrace();
@@ -84,22 +84,21 @@ public class GameServer implements Runnable {
 			}
 		}
 		this.status = GameServerStatus.RUNNING;
+		Debug.log(Debug.DEBUG, "Match started");
 	}
 
 	public void sendInputs() {
-		if (this.queue.isEmpty() == false) {
-			for (Input in : this.queue) {
-				for (ClientOnServer c : this.connected_players) {
-					if (in.playerID != c.playernumber) {
-						try {
-							c.sendInput(in);
-						} catch (IOException e) {
-							Debug.log(Debug.ERROR, "Can't send Data to player, maybe disconnected");
-						}
+		for (Input in : this.queue) {
+			for (ClientOnServer c : this.connected_players) {
+				if (in.playerID != c.playernumber) {
+					try {
+						c.sendInput(in);
+					} catch (IOException e) {
+						Debug.log(Debug.ERROR, "Can't send Data to player, maybe disconnected");
 					}
 				}
 			}
-			this.queue.clear();
 		}
+		this.queue.clear();
 	}
 }

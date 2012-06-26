@@ -43,6 +43,7 @@ public class NetworkManager extends Thread {
 	public boolean connect() {
 		try {
 			this.socket = new Socket(this.server.host, this.server.port);
+			this.socket.setSoTimeout(30);
 		} catch (IOException e) {
 			Debug.log(Debug.ERROR, "Can't connect to gameserver");
 			return false;
@@ -67,7 +68,7 @@ public class NetworkManager extends Thread {
 			try {
 				String command = this.inStream.readLine();
 				Input in = null;
-				Debug.log(Debug.VERBOSE, command);
+				// Debug.log(Debug.VERBOSE, command);
 				if (command.startsWith("input:")) {
 					in = new Input();
 					command = command.replace("input:", "").replace(";", "");
@@ -90,7 +91,7 @@ public class NetworkManager extends Thread {
 								break;
 							}
 						}
-						Debug.log(Debug.VERBOSE, "Position received");
+						// Debug.log(Debug.VERBOSE, "Position received");
 					} else if (in.type == NetworkInputType.PLAYER_DEAD) {
 						ArrayList<Player> alive = new ArrayList<Player>();
 						for (Entity e : Game.players) {
@@ -124,7 +125,6 @@ public class NetworkManager extends Thread {
 						Player p;
 						Point po = spawns.get(i);
 						if (i == this.playerID) {
-
 							p = new Player(po.x * Game.BLOCK_SIZE, po.y * Game.BLOCK_SIZE);
 							keys = Game.getKeySettings(0);
 							p.setKeys(keys);
@@ -145,10 +145,12 @@ public class NetworkManager extends Thread {
 					this.infoWindow = null;
 				}
 				try {
-					Thread.sleep(50);
+					Thread.sleep(1);
 				} catch (InterruptedException e) {
 					// e.printStackTrace();
 				}
+
+			} catch (java.net.SocketTimeoutException ex) {
 
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
