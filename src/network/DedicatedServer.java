@@ -5,6 +5,10 @@ import game.Debug;
 import java.io.IOException;
 import java.net.SocketException;
 
+/**
+ * @author Philipp
+ * 
+ */
 public class DedicatedServer {
 
 	/**

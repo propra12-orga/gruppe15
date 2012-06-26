@@ -77,7 +77,7 @@ public class Loader {
 	 * 2 = Solid Wall 3 = Spawnpoint 4 = Finishpoint 5 = WallWithFinishPoint
 	 * 
 	 * @param filename
-	 * @return
+	 * @return int
 	 */
 	public int parseForMultiplayer(String filename) {
 

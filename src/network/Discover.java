@@ -11,15 +11,40 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * @author Philipp
+ * 
+ */
 public class Discover extends Thread {
 
+	/**
+	 * Wait for response from Broadcast
+	 */
 	private DatagramSocket waitSocket;
+	/**
+	 * Found Servers
+	 */
 	public ArrayList<Server> servers;
+	/**
+	 * Broadcast connection
+	 */
 	private DatagramSocket broadcast;
+	/**
+	 * Broadcast packet
+	 */
 	private DatagramPacket broadcastPacket;
+	/**
+	 * 
+	 */
 	public boolean running = true;
+	/**
+	 * Wait for Callback from DiscoverServer on this Port
+	 */
 	public final static int CALLBACK_PORT = 1338;
 
+	/**
+	 * Constructor
+	 */
 	public Discover() {
 		try {
 			this.waitSocket = new DatagramSocket(Discover.CALLBACK_PORT);
@@ -39,6 +64,11 @@ public class Discover extends Thread {
 		}
 	}
 
+	/*
+	 * Search for Servers
+	 * 
+	 * @see java.lang.Thread#run()
+	 */
 	@Override
 	public void run() {
 		while (this.running) {

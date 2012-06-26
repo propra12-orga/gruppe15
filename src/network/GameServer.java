@@ -11,16 +11,48 @@ import level.Loader;
 import enums.GameServerStatus;
 import game.Debug;
 
+/**
+ * @author Philipp
+ * 
+ */
 public class GameServer implements Runnable {
 
+	/**
+	 * Port for a Gameserver
+	 */
 	public final static int GAME_PORT = 4242;
+	/**
+	 * Map of the Gameserver
+	 */
 	private String map;
+	/**
+	 * Number of player required to start game
+	 */
 	private int required_player;
+	/**
+	 * Array with Sockets of connected player
+	 */
 	private CopyOnWriteArrayList<ClientOnServer> connected_players;
+	/**
+	 * Socket to accept new player
+	 */
 	private ServerSocket welcomeSocket;
+	/**
+	 * Status of the Gameserver
+	 */
 	private GameServerStatus status;
+	/**
+	 * List with all incoming events
+	 */
 	private CopyOnWriteArrayList<Input> queue;
 
+	/**
+	 * Create a new Gameserver
+	 * 
+	 * @param map
+	 *            Mapfilename
+	 * @throws IOException
+	 */
 	public GameServer(String map) throws IOException {
 		this.map = map;
 		this.required_player = new Loader().parseForMultiplayer(map);
@@ -30,6 +62,12 @@ public class GameServer implements Runnable {
 		this.queue = new CopyOnWriteArrayList<Input>();
 	}
 
+	/*
+	 * 
+	 * Start the Gameserver
+	 * 
+	 * @see java.lang.Runnable#run()
+	 */
 	@Override
 	public void run() {
 		Debug.log(Debug.DEBUG, "Game Server starting");
@@ -72,6 +110,9 @@ public class GameServer implements Runnable {
 		}
 	}
 
+	/**
+	 * Send init to all player, when enough players are connected
+	 */
 	private void initGame() {
 		this.status = GameServerStatus.STARTING;
 		Debug.log(Debug.DEBUG, "Match starting");
@@ -87,6 +128,9 @@ public class GameServer implements Runnable {
 		Debug.log(Debug.DEBUG, "Match started");
 	}
 
+	/**
+	 * Send all events in queue to the players
+	 */
 	public void sendInputs() {
 		for (Input in : this.queue) {
 			for (ClientOnServer c : this.connected_players) {

@@ -1,8 +1,5 @@
 package network;
 
-import enums.NetworkInputType;
-import game.Debug;
-
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -10,14 +7,47 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import enums.NetworkInputType;
+import game.Debug;
+
+/**
+ * @author Philipp
+ * 
+ */
 public class ClientOnServer extends Thread {
 
+	/**
+	 * Playernumber
+	 */
 	public int playernumber;
+	/**
+	 * Socket to Client
+	 */
 	private Socket socket;
+	/**
+	 * Input Stream
+	 */
 	private BufferedReader inStream;
+	/**
+	 * Output Stream
+	 */
 	private DataOutputStream outStream;
+	/**
+	 * Queue of events from Gameserver
+	 */
 	private CopyOnWriteArrayList<Input> queue;
 
+	/**
+	 * Constructor
+	 * 
+	 * @param socket
+	 *            Socket from Serversocket.accept
+	 * @param playernumber
+	 *            Playernumer
+	 * @param queue
+	 *            Queue from Gameserver
+	 * @throws IOException
+	 */
 	public ClientOnServer(Socket socket, int playernumber, CopyOnWriteArrayList<Input> queue) throws IOException {
 		this.socket = socket;
 		this.socket.setSoTimeout(30);
@@ -27,17 +57,33 @@ public class ClientOnServer extends Thread {
 		this.queue = queue;
 	}
 
+	/**
+	 * Notify Client about Map and Playernumber
+	 * 
+	 * @param map
+	 * @throws IOException
+	 */
 	public void sendMap(String map) throws IOException {
 		this.outStream.write(("me:" + this.playernumber + ";\n").getBytes());
 		this.outStream.write(("m:" + map + ";\n").getBytes());
 	}
 
+	/**
+	 * Send Events to Client
+	 * 
+	 * @param in
+	 *            {@link Input}
+	 * @throws IOException
+	 */
 	public void sendInput(Input in) throws IOException {
 		this.outStream.write(("input:" + in.playerID + "," + in.type + "," + in.x + "," + in.y + ";\n").getBytes());
-		// Debug.log(Debug.VERBOSE, "Send data to " + this.playernumber);
-		// Debug.log(Debug.VERBOSE, in);
 	}
 
+	/*
+	 * Read input stream and handle incoming events
+	 * 
+	 * @see java.lang.Thread#run()
+	 */
 	@Override
 	public void run() {
 		while (true) {
@@ -45,7 +91,7 @@ public class ClientOnServer extends Thread {
 				String command = this.inStream.readLine();
 				Input in = null;
 				if (command != null) {
-					Debug.log(Debug.VERBOSE, "<< " + command);
+					// Debug.log(Debug.VERBOSE, "<< " + command);
 					if (command.startsWith("input")) {
 						in = new Input();
 						command = command.replace("input:", "").replace(";", "");
