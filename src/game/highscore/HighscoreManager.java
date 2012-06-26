@@ -108,7 +108,7 @@ public class HighscoreManager {
 				i++;
 			}
 		} else {
-			highscoreString = "Es sind bisher keine Einträge vorhanden!";
+			highscoreString = "Es sind bisher keine Eintr\u00E4ge vorhanden!";
 		}
 		return highscoreString;
 	}
