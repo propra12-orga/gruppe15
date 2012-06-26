@@ -140,6 +140,8 @@ public class Game extends Canvas {
 		this.requestFocus();
 		this.setFocusable(true);
 		this.init();
+		Sounds backgroundSound = new Sounds("rick_roll.wav", true);
+		backgroundSound.play();
 	}
 
 	/**
@@ -271,8 +273,7 @@ public class Game extends Canvas {
 
 		if (this.oldBackgroundElems != Game.staticBackground.size()) {
 
-			Game.background = new BufferedImage(Game.GAME_WIDTH,
-					Game.GAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+			Game.background = new BufferedImage(Game.GAME_WIDTH, Game.GAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
 			for (Entity e : Game.staticBackground) {
 				e.draw(Game.background.getGraphics());
 			}
@@ -290,9 +291,7 @@ public class Game extends Canvas {
 		g.setColor(Color.WHITE);
 		for (int i = 0; i < Game.players.size(); i++) {
 			this.drawPoints = (Player) Game.players.get(i);
-			g.drawString(
-					"Spieler " + (i + 1) + ":" + this.drawPoints.pm.getPoints(),
-					100 * (i + 1), 10);
+			g.drawString("Spieler " + (i + 1) + ":" + this.drawPoints.pm.getPoints(), 100 * (i + 1), 10);
 		}
 		g.drawString("FPS: " + this.fps_static, 0, 10);
 	}
@@ -340,8 +339,7 @@ public class Game extends Canvas {
 			}
 			index = Game.players.indexOf(p) + 1;
 			if (type == Gameend.finishReached) {
-				JOptionPane.showMessageDialog(this, "Spieler " + index
-						+ " ist im Ziel und hat gewonnen!");
+				JOptionPane.showMessageDialog(this, "Spieler " + index + " ist im Ziel und hat gewonnen!");
 				winner = JOptionPane
 						.showInputDialog(
 								this,
@@ -360,8 +358,7 @@ public class Game extends Canvas {
 				} else {
 					otherplayer = 1;
 				}
-				JOptionPane.showMessageDialog(this, "Spieler " + index
-						+ " ist tot. Somit hat Spieler " + otherplayer
+				JOptionPane.showMessageDialog(this, "Spieler " + index + " ist tot. Somit hat Spieler " + otherplayer
 						+ " gewonnen.");
 				winner = JOptionPane
 						.showInputDialog(
@@ -381,8 +378,7 @@ public class Game extends Canvas {
 				JOptionPane.showMessageDialog(this, "Du hast verloren!");
 			}
 		}
-		choice = JOptionPane.showConfirmDialog(this,
-				"M\u00F6chten Sie das Spiel neustarten ?", "Spielende",
+		choice = JOptionPane.showConfirmDialog(this, "M\u00F6chten Sie das Spiel neustarten ?", "Spielende",
 				JOptionPane.YES_NO_OPTION);
 
 		if (choice == 0) {

@@ -22,7 +22,7 @@ public class Bomb extends Entity {
 		this.box = new Box(this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE);
 		this.owner = owner;
 		this.explosionDelay = 50;
-		this.sound = new Sounds("Explosion.wav");
+		this.sound = new Sounds("Explosion.wav", false);
 	}
 
 	/**
