@@ -2,6 +2,7 @@ package entities;
 
 import enums.Gamemode;
 import enums.NetworkInputType;
+import game.Debug;
 import game.Game;
 import game.KeySettings;
 import graphics.Image;
@@ -37,8 +38,9 @@ public class Player extends Entity {
 	public Player(int x, int y) {
 		super(x + 1, y + 1);
 		this.facings = Sprite.load("bomberman.png", 55, 90);
-		this.width = 55 / (100 / Game.BLOCK_SIZE);
-		this.height = 90 / (100 / Game.BLOCK_SIZE);
+		this.width = (float) (55.0 / (100.0 / Game.BLOCK_SIZE));
+		this.height = (float) (90.0 / (100.0 / Game.BLOCK_SIZE));
+		Debug.log(Debug.VERBOSE, this.width + " " + this.height);
 		this.box = new Box(this.x, this.y, (int) this.width, (int) this.height);
 
 		this.speed = (int) Math.sqrt(Game.BLOCK_SIZE);

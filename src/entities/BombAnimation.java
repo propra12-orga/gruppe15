@@ -52,8 +52,8 @@ public class BombAnimation extends Entity {
 		this.explosionImages = Sprite.load("explosion_temp.png", 100, 100);
 		this.exposionTimeDefault = 40;
 		this.explosionTime = this.exposionTimeDefault;
-		this.collideMap = new int[][] { { 0, 0, 1, 0, 0 }, { 0, 0, 1, 0, 0 }, { 1, 1, 1, 1, 1 }, { 0, 0, 1, 0, 0 },
-				{ 0, 0, 1, 0, 0 } };
+		this.collideMap = new int[][] { { 0, 0, 1, 0, 0 }, { 0, 0, 1, 0, 0 },
+				{ 1, 1, 1, 1, 1 }, { 0, 0, 1, 0, 0 }, { 0, 0, 1, 0, 0 } };
 		this.playerKilled = null;
 		this.killDelay = 10;
 	}
@@ -70,7 +70,8 @@ public class BombAnimation extends Entity {
 			this.killDelay--;
 			if (this.killDelay == 0) {
 
-				if ((Game.gamemode == Gamemode.NETWORK) && (this.playerKilled.networkID == Game.network.playerID)) {
+				if ((Game.gamemode == Gamemode.NETWORK)
+						&& (this.playerKilled.networkID == Game.network.playerID)) {
 					Input in = new Input();
 					in.playerID = this.playerKilled.networkID;
 					in.type = NetworkInputType.PLAYER_DEAD;
@@ -92,17 +93,20 @@ public class BombAnimation extends Entity {
 
 		List<Entity> entities = null;
 
-		int x_tmp = this.x - (2 * Game.BLOCK_SIZE), y_tmp = this.y - (2 * Game.BLOCK_SIZE);
+		int x_tmp = this.x - (2 * Game.BLOCK_SIZE), y_tmp = this.y
+				- (2 * Game.BLOCK_SIZE);
 
 		entities = new ArrayList<Entity>();
 		if (this.explosionTime < (this.exposionTimeDefault * 0.7)) {
 			for (int x = 0; x < 5; x++) {
 				for (int y = 0; y < 5; y++) {
 					if (this.collideMap[y][x] == 1) {
-						entities.addAll(Game.getEntities(new Box(x_tmp + (x * Game.BLOCK_SIZE), this.y,
+						entities.addAll(Game.getEntities(new Box(x_tmp
+								+ (x * Game.BLOCK_SIZE), this.y,
 								Game.BLOCK_SIZE, Game.BLOCK_SIZE)));
-						entities.addAll(Game.getEntities(new Box(this.x, y_tmp + (y * Game.BLOCK_SIZE),
-								Game.BLOCK_SIZE, Game.BLOCK_SIZE)));
+						entities.addAll(Game.getEntities(new Box(this.x, y_tmp
+								+ (y * Game.BLOCK_SIZE), Game.BLOCK_SIZE,
+								Game.BLOCK_SIZE)));
 					}
 				}
 			}
@@ -110,15 +114,18 @@ public class BombAnimation extends Entity {
 			for (int x = 1; x < 4; x++) {
 				for (int y = 1; y < 4; y++) {
 					if (this.collideMap[y][x] == 1) {
-						entities.addAll(Game.getEntities(new Box(x_tmp + (x * Game.BLOCK_SIZE), this.y,
+						entities.addAll(Game.getEntities(new Box(x_tmp
+								+ (x * Game.BLOCK_SIZE), this.y,
 								Game.BLOCK_SIZE, Game.BLOCK_SIZE)));
-						entities.addAll(Game.getEntities(new Box(this.x, y_tmp + (y * Game.BLOCK_SIZE),
-								Game.BLOCK_SIZE, Game.BLOCK_SIZE)));
+						entities.addAll(Game.getEntities(new Box(this.x, y_tmp
+								+ (y * Game.BLOCK_SIZE), Game.BLOCK_SIZE,
+								Game.BLOCK_SIZE)));
 					}
 				}
 			}
 		} else {
-			entities = Game.getEntities(new Box(this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE));
+			entities = Game.getEntities(new Box(this.x, this.y,
+					Game.BLOCK_SIZE, Game.BLOCK_SIZE));
 		}
 
 		for (Entity e : entities) {
@@ -137,18 +144,21 @@ public class BombAnimation extends Entity {
 	@Override
 	public void draw(Graphics g) {
 
-		int x_tmp = this.x - (2 * Game.BLOCK_SIZE), y_tmp = this.y - (2 * Game.BLOCK_SIZE);
+		int x_tmp = this.x - (2 * Game.BLOCK_SIZE), y_tmp = this.y
+				- (2 * Game.BLOCK_SIZE);
 
 		if (this.explosionTime < (this.exposionTimeDefault * 0.7)) {
 
 			for (int x = 0; x < 5; x++) {
 				if (this.collideMap[2][x] == 1) {
-					g.drawImage((this.explosionImages[0][0]).image, x_tmp + (x * Game.BLOCK_SIZE), this.y,
-							Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
+					g.drawImage((this.explosionImages[0][0]).image, x_tmp
+							+ (x * Game.BLOCK_SIZE), this.y, Game.BLOCK_SIZE,
+							Game.BLOCK_SIZE, null);
 				}
 				if (this.collideMap[x][2] == 1) {
-					g.drawImage((this.explosionImages[2][0]).image, this.x, y_tmp + (x * Game.BLOCK_SIZE),
-							Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
+					g.drawImage((this.explosionImages[2][0]).image, this.x,
+							y_tmp + (x * Game.BLOCK_SIZE), Game.BLOCK_SIZE,
+							Game.BLOCK_SIZE, null);
 				}
 			}
 
@@ -158,17 +168,20 @@ public class BombAnimation extends Entity {
 
 			for (int x = 1; x < 4; x++) {
 				if (this.collideMap[2][x] == 1) {
-					g.drawImage((this.explosionImages[0][0]).image, x_tmp + (x * Game.BLOCK_SIZE), this.y,
-							Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
+					g.drawImage((this.explosionImages[0][0]).image, x_tmp
+							+ (x * Game.BLOCK_SIZE), this.y, Game.BLOCK_SIZE,
+							Game.BLOCK_SIZE, null);
 				}
 				if (this.collideMap[x][2] == 1) {
-					g.drawImage((this.explosionImages[2][0]).image, this.x, y_tmp + (x * Game.BLOCK_SIZE),
-							Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
+					g.drawImage((this.explosionImages[2][0]).image, this.x,
+							y_tmp + (x * Game.BLOCK_SIZE), Game.BLOCK_SIZE,
+							Game.BLOCK_SIZE, null);
 				}
 			}
 		}
 
-		g.drawImage((this.explosionImages[1][0]).image, this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
+		g.drawImage((this.explosionImages[1][0]).image, this.x, this.y,
+				Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
 
 	}
 
