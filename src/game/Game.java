@@ -206,7 +206,7 @@ public class Game extends Canvas {
 		Generator g1 = new Generator();
 		Loader l1 = new Loader();
 		g1.generateMap(10, 10);
-		l1.loadMap("DebugMap");
+		l1.loadMap("Map3");
 		Game.GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE) + 1;
 		Game.GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE) + 1;
 
