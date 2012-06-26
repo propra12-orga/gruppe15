@@ -9,34 +9,39 @@ public class Generator {
 	Loader l1 = new Loader();
 	FileWriter fw;
 	File file;
-	int fieldheight, fieldwith;
+	int fieldheight;
+	int fieldwith;
+	char maparray[][];
 
-	public Generator(int fieldheight, int fieldwith) {
+	public void generateMap(int fieldheight, int fieldwith) {
 		this.fieldheight = fieldheight;
 		this.fieldwith = fieldwith;
-	}
+		this.maparray = new char[this.fieldheight][this.fieldwith];
 
-	public void generateMap() {
-		this.file = new File("FileWriterTest.txt");
+		this.file = new File("src/ressources/maps/FileWriterTest.txt");
 		String test = "";
 		try {
 			this.fw = new FileWriter(this.file);
 
-			for (int j = 1; j <= this.fieldheight; j++) {
-				test += "2";
-				if ((j > this.fieldheight) || (j <= 1)) {
+			for (int j = 0; j < this.fieldheight; j++) {
+
+				this.maparray[j][0] = '2';
+				if ((j >= (this.fieldheight - 1)) || (j == 0)) {
 					for (int i = 1; i < (this.fieldwith - 1); i++) {
-						test += "2";
+						this.maparray[j][i] = '2';
 					}
 				} else {
 					for (int i = 1; i < (this.fieldwith - 1); i++) {
-						test += "0";
+						this.maparray[j][i] = '0';
 					}
 				}
-				test += "2";
-				if (!(j > (this.fieldheight - 1))) {
-					test += System.getProperty("line.separator");
+				this.maparray[j][this.fieldwith - 1] = '2';
+			}
+			for (int i = 0; i < (this.fieldheight); i++) {
+				for (int j = 0; j < (this.fieldwith); j++) {
+					this.fw.write(this.maparray[i][j]);
 				}
+				this.fw.write(System.getProperty("line.separator"));
 			}
 
 			this.fw.write(test);

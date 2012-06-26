@@ -203,9 +203,9 @@ public class Game extends Canvas {
 		Game.entities = new CopyOnWriteArrayList<Entity>();
 		Game.staticBackground = new CopyOnWriteArrayList<Entity>();
 		Game.players = new CopyOnWriteArrayList<Entity>();
-		Generator g1 = new Generator(200, 320);
+		Generator g1 = new Generator();
 		Loader l1 = new Loader();
-		g1.generateMap();
+		g1.generateMap(10, 10);
 		l1.loadMap("DebugMap");
 		Game.GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE) + 1;
 		Game.GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE) + 1;
