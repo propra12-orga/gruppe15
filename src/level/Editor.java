@@ -1,6 +1,5 @@
 package level;
 
-import game.Game;
 import game.Main;
 import game.MouseHandler;
 import graphics.Image;
@@ -8,7 +7,6 @@ import graphics.Sprite;
 
 import java.awt.Canvas;
 import java.awt.Container;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -75,17 +73,11 @@ public class Editor extends Canvas implements ActionListener {
 
 	private int element;
 
-	private Game game;
 	private String filename;
 	private Image images[][];
 	int x = 0, type, y = 0;
-	private Graphics g;
 
 	private Scanner maps;
-
-	private int oldBackgroundElems;
-
-	private String fps_static;
 
 	/**
 	 * default constructor for Editor, sets frame and buttons
@@ -177,12 +169,13 @@ public class Editor extends Canvas implements ActionListener {
 		if (arg0.getSource() == this.laden) {
 			JFileChooser fileChooser = new JFileChooser();
 
-			File f = new File(Main.class.getResource("/ressources/maps/").getPath());
+			File f = new File(Main.class.getResource("/ressources/maps/")
+					.getPath());
 			fileChooser.setCurrentDirectory(f);
 			int returnVal = fileChooser.showOpenDialog(this.editorframe);
 
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				// loadMap(chooser.getSelectedFile().getName());
+				this.loadMap(fileChooser.getSelectedFile().getName());
 			}
 
 		}
@@ -193,47 +186,48 @@ public class Editor extends Canvas implements ActionListener {
 
 			JFileChooser fileChooser = new JFileChooser();
 
-			File f = new File(Main.class.getResource("/ressources/maps/").getPath());
+			File f = new File(Main.class.getResource("/ressources/maps/")
+					.getPath());
 			fileChooser.setCurrentDirectory(f);
 			int returnVal = fileChooser.showSaveDialog(this.editorframe);
 
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				// save file
 			}
+
+			// if "neu" is pressed, load default Map
+			if (arg0.getSource() == this.neu) {
+				this.loadMap("Map1");
+
+			}
+
+			// if "unbreakable" is pressed
+
+			if (arg0.getSource() == this.unbreakable) {
+				this.element = 2;
+			}
+
+			// if "breakable" is pressed
+			if (arg0.getSource() == this.breakable) {
+				this.element = 1;
+			}
+
+			// if "player" is pressed
+			if (arg0.getSource() == this.player) {
+				this.element = 3;
+			}
+
+			// if "empty" is pressed
+			if (arg0.getSource() == this.empty) {
+				this.element = 0;
+			}
+
+			// if "finish" is pressed
+			if (arg0.getSource() == this.finish) {
+				this.element = 4;
+
+			}
 		}
-
-		// if "neu" is pressed, start reset()
-		if (arg0.getSource() == this.neu) {
-			this.loadMap("Map");
-
-		}
-
-		// if "unbreakable" is pressed
-
-		if (arg0.getSource() == this.unbreakable) {
-			this.element = 2;
-		}
-
-		// if "breakable" is pressed
-		if (arg0.getSource() == this.breakable) {
-			this.element = 1;
-		}
-
-		// if "player" is pressed
-		if (arg0.getSource() == this.player) {
-			this.element = 3;
-		}
-
-		// if "empty" is pressed
-		if (arg0.getSource() == this.empty) {
-			this.element = 0;
-		}
-
-		// if "finish" is pressed
-		if (arg0.getSource() == this.finish) {
-			this.element = 4;
-		}
-
 	}
 
 	/**
@@ -244,7 +238,9 @@ public class Editor extends Canvas implements ActionListener {
 
 		try {
 
-			this.maps = new Scanner(Main.class.getResourceAsStream("/ressources/maps/" + filename));
+			this.maps = new Scanner(
+					Main.class.getResourceAsStream("/ressources/maps/"
+							+ filename));
 			while (this.maps.hasNextLine()) {
 				String text = this.maps.nextLine();
 				for (this.x = 0; this.x < text.length(); this.x++) {
@@ -270,8 +266,6 @@ public class Editor extends Canvas implements ActionListener {
 				}
 				this.y++;
 			}
-			// Game.FIELD_HEIGHT = y;
-			// Game.FIELD_WIDTH = x;
 
 		} catch (Exception e) {
 			e.printStackTrace();
