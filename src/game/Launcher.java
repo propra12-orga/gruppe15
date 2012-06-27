@@ -20,7 +20,7 @@ public class Launcher extends JFrame {
 		JPanel panel = new JPanel(new GridLayout());
 		panel.add(this.game);
 
-		new GUI(this);
+		new GUI(this, this.game);
 
 		this.setContentPane(panel);
 

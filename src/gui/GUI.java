@@ -1,14 +1,17 @@
 package gui;
 
-import game.Launcher;
+import game.Game;
 import game.highscore.HighscoreGui;
 import game.highscore.HighscoreManager;
 
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JApplet;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -83,15 +86,17 @@ public class GUI implements ActionListener {
 	 * new item in Tab "leveleditor" named "offnen"
 	 */
 
-	private Launcher frame;
+	private Container frame;
 	private Discover discover;
 	private Object[] old_list;
 	private JButton connectButton;
+	private Game game;
 
 	/**
 	 * @param frame
 	 */
-	public GUI(Launcher frame) {
+	public GUI(Container frame, Game g) {
+		this.game = g;
 
 		this.frame = frame;
 
@@ -148,7 +153,11 @@ public class GUI implements ActionListener {
 		this.menubar.add(this.leveleditor);
 
 		// set Menubar
-		this.frame.setJMenuBar(this.menubar);
+		if (this.frame instanceof JFrame) {
+			((JFrame) this.frame).setJMenuBar(this.menubar);
+		} else {
+			((JApplet) this.frame).setJMenuBar(this.menubar);
+		}
 	}
 
 	/*
@@ -164,8 +173,7 @@ public class GUI implements ActionListener {
 		// If the "restart"-button is pressed the game asks to restart the game
 		if (arg0.getSource() == this.starten) {
 			Object[] options = { "Neustart", "Abbrechen" };
-			JOptionPane question = new JOptionPane(
-					"Spiel neustarten? Der aktuelle Fortschritt geht verloren");
+			JOptionPane question = new JOptionPane("Spiel neustarten? Der aktuelle Fortschritt geht verloren");
 			question.setOptions(options);
 			JDialog dialog = question.createDialog(this.frame, "Achtung");
 			dialog.setVisible(true);
@@ -173,16 +181,14 @@ public class GUI implements ActionListener {
 			if (obj.equals(options[0])) {
 				// restarts the game (not working yet)
 
-				this.frame.game.stop();
-				this.frame.game.start();
+				this.game.stop();
+				this.game.start();
 			}
 			dialog.dispose();
-			question.disable();
 			// If the exit-button is pressed the game asks to exit the game
 		} else if (arg0.getSource() == this.beenden) {
 			Object[] options = { "Beenden", "Abbrechen" };
-			JOptionPane question = new JOptionPane(
-					"Spiel beenden? Der aktuelle Fortschritt geht verloren");
+			JOptionPane question = new JOptionPane("Spiel beenden? Der aktuelle Fortschritt geht verloren");
 			question.setOptions(options);
 			JDialog dialog = question.createDialog(this.frame, "Achtung");
 			dialog.setVisible(true);
@@ -209,11 +215,9 @@ public class GUI implements ActionListener {
 		}
 		if (arg0.getSource() == this.delScore) {
 			int choice;
-			choice = JOptionPane
-					.showConfirmDialog(
-							this.frame,
-							"Sind Sie sicher, dass sie den Highscore l\u00F6schen m\u00F6chten?",
-							"Highscore l\u00F6schen", JOptionPane.YES_NO_OPTION);
+			choice = JOptionPane.showConfirmDialog(this.frame,
+					"Sind Sie sicher, dass sie den Highscore l\u00F6schen m\u00F6chten?", "Highscore l\u00F6schen",
+					JOptionPane.YES_NO_OPTION);
 			if (choice == 0) {
 				HighscoreManager hm = new HighscoreManager();
 				hm.getScores().clear();
@@ -222,7 +226,7 @@ public class GUI implements ActionListener {
 		}
 
 		else if (arg0.getSource() == this.findserver) {
-			new Serverbrowser();
+			new Serverbrowser(this.frame);
 		}
 
 	}

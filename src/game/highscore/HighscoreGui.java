@@ -1,6 +1,6 @@
 package game.highscore;
 
-import game.Launcher;
+import java.awt.Container;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -9,14 +9,14 @@ import javax.swing.JTextArea;
 public class HighscoreGui extends JPanel {
 
 	JFrame frame;
-	Launcher lframe;
+	Container lframe;
 
-	public HighscoreGui(Launcher lframe) {
+	public HighscoreGui(Container frame2) {
 		HighscoreManager hm = new HighscoreManager();
 		JTextArea text = new JTextArea(hm.getHighscoreString());
 		text.setEditable(false);
 		this.add(text);
-		this.lframe = lframe;
+		this.lframe = frame2;
 	}
 
 	public void createAndShowHighscore() {

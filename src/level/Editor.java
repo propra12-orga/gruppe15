@@ -1,13 +1,13 @@
 package level;
 
 import game.Game;
-import game.Launcher;
 import game.Main;
 import game.MouseHandler;
 import graphics.Image;
 import graphics.Sprite;
 
 import java.awt.Canvas;
+import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -91,7 +91,7 @@ public class Editor extends Canvas implements ActionListener {
 	 * default constructor for Editor, sets frame and buttons
 	 */
 
-	public Editor(Launcher lframe) {
+	public Editor(Container frame) {
 
 		/**
 		 * create new JFrame called "Leveleditor" and set properties
@@ -101,7 +101,7 @@ public class Editor extends Canvas implements ActionListener {
 
 		editorframe.setTitle("Leveleditor");
 		editorframe.setSize(500, 500);
-		editorframe.setLocationRelativeTo(lframe);
+		editorframe.setLocationRelativeTo(frame);
 		editorframe.setVisible(true);
 
 		MouseHandler mousehandler = new MouseHandler();
@@ -177,8 +177,7 @@ public class Editor extends Canvas implements ActionListener {
 		if (arg0.getSource() == this.laden) {
 			JFileChooser fileChooser = new JFileChooser();
 
-			File f = new File(Main.class.getResource("/ressources/maps/")
-					.getPath());
+			File f = new File(Main.class.getResource("/ressources/maps/").getPath());
 			fileChooser.setCurrentDirectory(f);
 			int returnVal = fileChooser.showOpenDialog(this.editorframe);
 
@@ -194,8 +193,7 @@ public class Editor extends Canvas implements ActionListener {
 
 			JFileChooser fileChooser = new JFileChooser();
 
-			File f = new File(Main.class.getResource("/ressources/maps/")
-					.getPath());
+			File f = new File(Main.class.getResource("/ressources/maps/").getPath());
 			fileChooser.setCurrentDirectory(f);
 			int returnVal = fileChooser.showSaveDialog(this.editorframe);
 
@@ -246,9 +244,7 @@ public class Editor extends Canvas implements ActionListener {
 
 		try {
 
-			this.maps = new Scanner(
-					Main.class.getResourceAsStream("/ressources/maps/"
-							+ filename));
+			this.maps = new Scanner(Main.class.getResourceAsStream("/ressources/maps/" + filename));
 			while (this.maps.hasNextLine()) {
 				String text = this.maps.nextLine();
 				for (this.x = 0; this.x < text.length(); this.x++) {
