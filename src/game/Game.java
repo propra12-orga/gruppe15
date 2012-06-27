@@ -223,7 +223,7 @@ public class Game extends Canvas {
 		Generator g1 = new Generator();
 		Loader l1 = new Loader();
 		g1.generateMap(10, 10);
-		l1.loadMap("genMap");
+		l1.loadMap("Map3");
 
 		Game.GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE) + 1;
 		Game.GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE) + 1;
@@ -290,7 +290,8 @@ public class Game extends Canvas {
 
 		if (this.oldBackgroundElems != Game.staticBackground.size()) {
 
-			Game.background = new BufferedImage(Game.GAME_WIDTH, Game.GAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+			Game.background = new BufferedImage(Game.GAME_WIDTH,
+					Game.GAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
 			for (Entity e : Game.staticBackground) {
 				e.draw(Game.background.getGraphics());
 			}
@@ -309,7 +310,9 @@ public class Game extends Canvas {
 
 		for (int i = 0; i < Game.players.size(); i++) {
 			Player drawPoints = (Player) Game.players.get(i);
-			g.drawString("Spieler " + (i + 1) + ":" + drawPoints.pm.getPoints(), 100 * (i + 1), 10);
+			g.drawString(
+					"Spieler " + (i + 1) + ":" + drawPoints.pm.getPoints(),
+					100 * (i + 1), 10);
 		}
 
 		g.drawString("FPS: " + this.fps_static, 0, 10);
@@ -351,7 +354,8 @@ public class Game extends Canvas {
 			if (type == Gameend.finishReached) {
 				question = new JOptionPane("Du hast gewonnen!");
 			} else if (type == Gameend.lastAlive) {
-				question = new JOptionPane("Alle anderen Spieler sind tot. Du hast gewonnen.");
+				question = new JOptionPane(
+						"Alle anderen Spieler sind tot. Du hast gewonnen.");
 			} else {
 				question = new JOptionPane("Du hast verloren.");
 			}
@@ -366,7 +370,8 @@ public class Game extends Canvas {
 				index = Game.players.indexOf(p) + 1;
 				String winner;
 				if (type == Gameend.finishReached) {
-					JOptionPane.showMessageDialog(this, "Spieler " + index + " ist im Ziel und hat gewonnen!");
+					JOptionPane.showMessageDialog(this, "Spieler " + index
+							+ " ist im Ziel und hat gewonnen!");
 					winner = JOptionPane
 							.showInputDialog(
 									this,
@@ -385,8 +390,9 @@ public class Game extends Canvas {
 					} else {
 						otherplayer = 1;
 					}
-					JOptionPane.showMessageDialog(this, "Spieler " + index + " ist tot. Somit hat Spieler "
-							+ otherplayer + " gewonnen.");
+					JOptionPane.showMessageDialog(this, "Spieler " + index
+							+ " ist tot. Somit hat Spieler " + otherplayer
+							+ " gewonnen.");
 					winner = JOptionPane
 							.showInputDialog(
 									this,
@@ -405,7 +411,8 @@ public class Game extends Canvas {
 					JOptionPane.showMessageDialog(this, "Du hast verloren!");
 				}
 			}
-			int choice = JOptionPane.showConfirmDialog(this, "M\u00F6chten Sie das Spiel neustarten ?", "Spielende",
+			int choice = JOptionPane.showConfirmDialog(this,
+					"M\u00F6chten Sie das Spiel neustarten ?", "Spielende",
 					JOptionPane.YES_NO_OPTION);
 
 			if (choice == 0) {
