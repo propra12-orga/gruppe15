@@ -6,12 +6,33 @@ import java.io.IOException;
 import java.util.Random;
 
 public class Generator {
+	/**
+	 * adds a filewriter
+	 */
 	FileWriter fw;
+	/**
+	 * adds a file
+	 */
 	File file;
+	/**
+	 * var for the height of the field
+	 */
 	int fieldheight;
+	/**
+	 * var for the with of the field
+	 */
 	int fieldwith;
+	/**
+	 * char-array for the generation of a map
+	 */
 	char maparray[][];
 
+	/**
+	 * generates a map based on the given fieldheight and fieldwith
+	 * 
+	 * @param fieldheight
+	 * @param fieldwith
+	 */
 	public void generateMap(int fieldheight, int fieldwith) {
 		this.fieldheight = fieldheight;
 		this.fieldwith = fieldwith;
