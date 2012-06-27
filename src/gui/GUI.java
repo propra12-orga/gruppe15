@@ -23,65 +23,65 @@ import network.Discover;
  */
 public class GUI implements ActionListener {
 	/**
-	 * Using the Java Actionlistener
+	 * new MenuBar which contains the menu-tabs and elements
 	 */
 	private JMenuBar menubar;
 	/**
-	 * new MenuBar which contains the menu-tabs and elements
+	 * new tab named "Spiel"
 	 */
 	private JMenu spiel;
 	/**
-	 * new tab named "Spiel"
+	 * new item in Tab "Spiel" named "starten"
 	 */
 	private JMenuItem starten;
 	/**
-	 * new item in Tab "Spiel" named "starten"
+	 * new item in Tab "Spiel" named "beenden"
 	 */
 	private JMenuItem beenden;
 	/**
-	 * new item in Tab "Spiel" named "beenden"
+	 * 
 	 */
 	private JMenuItem highscore;
-
+	/**
+	 * new tab named "Optionen"
+	 */
 	private JMenu optionen;
 	/**
 	 * new tab named "Optionen"
 	 */
 	private JMenuItem delScore;
-	private JMenuItem spname;
 	/**
 	 * new item in Tab "Optionen" named "spname"
 	 */
-	private JMenuItem groesse;
+	private JMenuItem spname;
 	/**
 	 * new item in Tab "Optionen" named "groesse"
 	 */
-	private JMenu netzwerk;
+	private JMenuItem groesse;
 	/**
 	 * new tab named "Netzwerk"
 	 */
-	private JMenuItem startserver;
+	private JMenu netzwerk;
 	/**
 	 * new item in Tab "Netzwerk" named "startserver"
 	 */
-	private JMenuItem stopserver;
+	private JMenuItem startserver;
 	/**
 	 * new item in Tab "Netzwerk" named "stopserver"
 	 */
-	private JMenuItem findserver;
+	private JMenuItem stopserver;
 	/**
 	 * new item in Tab "Netzwerk" named "findserver"
 	 */
-
-	private JMenu leveleditor;
+	private JMenuItem findserver;
 	/**
 	 * new tab named "leveleditor"
 	 */
-
-	private JMenuItem offnen;
+	private JMenu leveleditor;
 	/**
 	 * new item in Tab "leveleditor" named "offnen"
 	 */
+	private JMenuItem offnen;
 
 	private Launcher frame;
 	private Discover discover;
