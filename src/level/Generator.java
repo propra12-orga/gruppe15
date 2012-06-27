@@ -45,7 +45,7 @@ public class Generator {
 					if (new Random().nextBoolean() == true) {
 						this.maparray[j][i] = '2';
 					} else {
-						this.maparray[j][i] = '1';
+						this.maparray[j][i] = '0';
 					}
 				}
 			}
@@ -59,6 +59,20 @@ public class Generator {
 			this.maparray[this.fieldheight - 3][rnd] = '0';
 			// Ziel spawnen
 			this.maparray[this.fieldheight / 2][this.fieldwith / 2] = '5';
+
+			// Generiertes ueberpruefen
+			for (int j = 1; j < (this.fieldheight - 1); j++) {
+				for (int i = 1; i < (this.fieldwith - 1); i++) {
+					if (this.maparray[j][i] == '3') {
+						if (this.maparray[j + 1][i] == '0') {
+							this.maparray[j + 1][i] = '1';
+						} else if (this.maparray[j + -1][i] == '0') {
+							this.maparray[j + -1][i] = '1';
+						}
+					}
+
+				}
+			}
 
 			// generiertes Feld schreiben
 			for (int i = 0; i < (this.fieldheight); i++) {
