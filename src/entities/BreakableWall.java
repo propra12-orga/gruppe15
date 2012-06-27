@@ -1,11 +1,15 @@
 package entities;
 
+import java.util.Random;
+
+import entities.items.Item;
+import entities.items.Schuh;
 import game.Game;
 import graphics.Sprite;
 
-import java.util.Random;
-
 public class BreakableWall extends Wall {
+
+	private Item item;
 
 	/**
 	 * @param x
@@ -25,6 +29,9 @@ public class BreakableWall extends Wall {
 			this.images = Sprite.load("w3.png", 100, 100);
 		}
 
+		if (new Random().nextInt(10) > 8) {
+			this.item = new Schuh(x, y);
+		}
 	}
 
 	/*
@@ -39,6 +46,9 @@ public class BreakableWall extends Wall {
 			Game.staticBackground.add(new Background(this.x, this.y));
 			// this.p.addPoints(200);
 			((BombAnimation) e).owner.pm.addPoints(200);
+			if (this.item != null) {
+				Game.entities.add(this.item);
+			}
 		}
 	}
 

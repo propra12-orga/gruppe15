@@ -1,5 +1,6 @@
 package entities;
 
+import entities.items.Item;
 import enums.Gamemode;
 import enums.NetworkInputType;
 import game.Game;
@@ -24,12 +25,13 @@ public class Player extends Entity {
 
 	private float width;
 	private float height;
-	private int speed;
+	public int speed;
 	private KeySettings keys;
 	private Image[][] facings;
 	private int facing, facing1, drawdelay, defaultdrawdelay;
 	public PointManager pm = new PointManager();
 	public int networkID;
+	private Item item;
 
 	/**
 	 * Constructor for default Player sets position, speed, images, height and
@@ -47,6 +49,7 @@ public class Player extends Entity {
 		this.facing = 0;
 		this.facing1 = 0;
 		this.speed = (int) Math.sqrt(Game.BLOCK_SIZE);
+		this.item = null;
 	}
 
 	/**
@@ -297,6 +300,15 @@ public class Player extends Entity {
 				this.y = this.y + this.speed;
 			}
 
+		}
+		if (e instanceof Item) {
+			Item it = (Item) e;
+			if (this.item != null) {
+				this.item.remove(this);
+			}
+			this.item = it;
+			this.item.use(this);
+			it.removed = true;
 		}
 	}
 
