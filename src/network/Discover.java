@@ -11,18 +11,50 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Discover implements Runnable {
+/**
+ * @author Philipp
+ * 
+ */
+public class Discover extends Thread {
 
+	/**
+	 * Wait for response from Broadcast
+	 */
 	private DatagramSocket waitSocket;
+	/**
+	 * Found Servers
+	 */
 	public ArrayList<Server> servers;
+	/**
+	 * Broadcast connection
+	 */
 	private DatagramSocket broadcast;
+	/**
+	 * Broadcast packet
+	 */
 	private DatagramPacket broadcastPacket;
+	/**
+	 * 
+	 */
+	public boolean running = true;
+	/**
+	 * Wait for Callback from DiscoverServer on this Port
+	 */
 	public final static int CALLBACK_PORT = 1338;
 
-	public Discover() throws SocketException {
-		this.waitSocket = new DatagramSocket(Discover.CALLBACK_PORT);
+	/**
+	 * Constructor
+	 */
+	public Discover() {
+		try {
+			this.waitSocket = new DatagramSocket(Discover.CALLBACK_PORT);
+			this.broadcast = new DatagramSocket();
+			Debug.log(Debug.DEBUG, "Suche Server");
+		} catch (SocketException e1) {
+			Debug.log(Debug.DEBUG, "Can't create Datagram");
+			e1.printStackTrace();
+		}
 		this.servers = new ArrayList<Server>();
-		this.broadcast = new DatagramSocket();
 		byte[] buffer = new byte[1];
 		try {
 			InetAddress broadcastIP = InetAddress.getByName("255.255.255.255");
@@ -32,31 +64,41 @@ public class Discover implements Runnable {
 		}
 	}
 
+	/*
+	 * Search for Servers
+	 * 
+	 * @see java.lang.Thread#run()
+	 */
 	@Override
 	public void run() {
-		while (true) {
+		while (this.running) {
 			try {
 				this.broadcast.send(this.broadcastPacket);
 			} catch (IOException e1) {
 				Debug.log(Debug.DEBUG, "Can't send Discovery Broadcast");
 			}
 
-			byte[] buffer = new byte[DiscoverServer.KEYWORD_ANNOUNCE.length()];
+			byte[] buffer = new byte[255];
 			DatagramPacket wait = new DatagramPacket(buffer, buffer.length);
 			try {
+				// Immer nur 200 Millisekunden warten
+				this.waitSocket.setSoTimeout(200);
 				this.waitSocket.receive(wait);
+				String res = new String(wait.getData());
+				if (res.startsWith(DiscoverServer.KEYWORD_ANNOUNCE)) {
 
-				if (new String(wait.getData()).equals(DiscoverServer.KEYWORD_ANNOUNCE)) {
-
-					Server s = new Server(wait.getAddress(), GameServer.GAME_PORT);
+					Server s = new Server(wait.getAddress(), GameServer.GAME_PORT, res.replace(
+							DiscoverServer.KEYWORD_ANNOUNCE, ""));
 					if (this.servers.isEmpty() || (Collections.binarySearch(this.servers, s) < 0)) {
 						this.servers.add(s);
 						Debug.log(Debug.DEBUG, "Found new Server");
 					}
 				}
 			} catch (IOException e) {
-				e.printStackTrace();
+
 			}
 		}
+		this.broadcast.close();
+		this.waitSocket.close();
 	}
 }

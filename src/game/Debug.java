@@ -25,7 +25,7 @@ public class Debug {
 	/**
 	 * Set default mode
 	 */
-	private static int mode = Debug.NONE;
+	private static int mode = Debug.VERBOSE;
 
 	/**
 	 * Set the new mode

@@ -1,7 +1,9 @@
 package entities;
 
+import enums.Gameend;
+import enums.Gamemode;
+import enums.NetworkInputType;
 import game.Game;
-import game.Gameend;
 import graphics.Image;
 import graphics.Sprite;
 
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import level.Box;
+import network.Input;
 
 public class BombAnimation extends Entity {
 
@@ -39,8 +42,6 @@ public class BombAnimation extends Entity {
 	private int killDelay;
 
 	public Player owner;
-
-	private Player livingPlayers;
 
 	private ArrayList<Entity> toPlace = new ArrayList<Entity>();
 
@@ -74,10 +75,18 @@ public class BombAnimation extends Entity {
 			if (this.killDelay == 0) {
 				// this.playerKilled.removed = true;
 				for (int i = 0; i < Game.players.size(); i++) {
-					this.livingPlayers = (Player) Game.players.get(i);
-					if (this.playerKilled != this.livingPlayers) {
-						this.livingPlayers.pm.addPoints(1000);
+					Player livingPlayer = (Player) Game.players.get(i);
+					if (this.playerKilled != livingPlayer) {
+						livingPlayer.pm.addPoints(1000);
 					}
+				}
+				if ((Game.gamemode == Gamemode.NETWORK)
+						&& (this.playerKilled.networkID == Game.network.playerID)) {
+					Input in = new Input();
+					in.playerID = this.playerKilled.networkID;
+					in.type = NetworkInputType.PLAYER_DEAD;
+					Game.network.send(in);
+					this.playerKilled.removed = true;
 				}
 				Game.getInstance().gameEnd(this.playerKilled, Gameend.dead);
 			}

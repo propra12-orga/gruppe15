@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="create_run_jar" name="Create Runnable Jar for Project Programmierpraktikum with Jar-in-Jar Loader">
+    <!--this file was created by Eclipse Runnable JAR Export Wizard-->
+    <!--ANT 1.7 is required                                        -->
+    <target name="create_run_jar">
+        <jar destfile="C:/Users/Philipp/Desktop/DedicatedServer.jar">
+            <manifest>
+                <attribute name="Main-Class" value="org.eclipse.jdt.internal.jarinjarloader.JarRsrcLoader"/>
+                <attribute name="Rsrc-Main-Class" value="network.DedicatedServer"/>
+                <attribute name="Class-Path" value="."/>
+                <attribute name="Rsrc-Class-Path" value="./ junit.jar org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+            </manifest>
+            <zipfileset src="jar-in-jar-loader.zip"/>
+            <fileset dir="H:/Java/Projekte/Programmierpraktikum/bin"/>
+            <zipfileset dir="H:\Java\Eclipse\plugins\org.junit_4.8.2.v4_8_2_v20110321-1705" includes="junit.jar"/>
+            <zipfileset dir="H:\Java\Eclipse\plugins" includes="org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+        </jar>
+    </target>
+</project>

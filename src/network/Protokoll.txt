@@ -1,0 +1,10 @@
+Netzwerk Protokoll:
+
+Befehlsstruktur:
+
+<Befehl>:<Daten>; \n
+
+Befehle:
+
+m:<Dateiname> 		Map Laden
+me:<Int>			Spielposition festsetzen

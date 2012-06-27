@@ -1,5 +1,7 @@
 package game;
 
+import gui.GUI;
+
 import java.awt.GridLayout;
 
 import javax.swing.JFrame;
@@ -17,13 +19,12 @@ public class Launcher extends JFrame {
 		this.game = Game.getInstance();
 		JPanel panel = new JPanel(new GridLayout());
 		panel.add(this.game);
-		this.setLocation(500, 100);
 
 		new GUI(this);
 
 		this.setContentPane(panel);
 
-		this.setResizable(false);
+		// this.setResizable(false);
 
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.pack();

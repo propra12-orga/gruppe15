@@ -1,5 +1,7 @@
 package entities;
 
+import enums.Gamemode;
+import enums.NetworkInputType;
 import game.Game;
 import game.KeySettings;
 import game.highscore.PointManager;
@@ -11,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import level.Box;
+import network.Input;
 
 public class Player extends Entity {
 
@@ -26,6 +29,7 @@ public class Player extends Entity {
 	private Image[][] facings;
 	private int facing, facing1, drawdelay, defaultdrawdelay;
 	public PointManager pm = new PointManager();
+	public int networkID;
 
 	/**
 	 * Constructor for default Player sets position, speed, images, height and
@@ -35,13 +39,14 @@ public class Player extends Entity {
 	public Player(int x, int y) {
 		super(x + 1, y + 1);
 		this.facings = Sprite.load("player1.png", 67, 100);
-		this.width = (float) (53.6 / 2);
-		this.height = (80 / 2);
+		this.width = (float) (53.6 / (100.0 / Game.BLOCK_SIZE));
+		this.height = (float) (80.0 / (100.0 / Game.BLOCK_SIZE));
+
 		this.box = new Box(this.x, this.y, (int) this.width, (int) this.height);
 		this.defaultdrawdelay = 28;
 		this.facing = 0;
 		this.facing1 = 0;
-		this.speed = 6;
+		this.speed = (int) Math.sqrt(Game.BLOCK_SIZE);
 	}
 
 	/**
@@ -51,7 +56,8 @@ public class Player extends Entity {
 	@Override
 	public void draw(Graphics g) {
 		g.drawImage((this.facings[this.facing][this.facing1]).image, this.x,
-				this.y, (int) this.width, (int) this.height, null);
+				this.y + (int) ((Game.BLOCK_SIZE - this.height) / 2),
+				(int) this.width, (int) this.height, null);
 	}
 
 	/**
@@ -217,14 +223,33 @@ public class Player extends Entity {
 			}
 		}
 
+		if ((Game.gamemode == Gamemode.NETWORK)
+				&& (this.networkID == Game.network.playerID)) {
+			Input input = new Input();
+			input.x = this.x;
+			input.y = this.y;
+			input.type = NetworkInputType.PLAYER;
+			input.playerID = this.networkID;
+			Game.network.send(input);
+		}
+
 		/**
 		 * if key "bomb" is pressed
 		 */
 
 		if (this.keys.bomb.down) {
-			Game.entities.add(new Bomb(Box.fitToBlock(this.x), Box
-					.fitToBlock(this.y), this));
-
+			int b_x = Box.fitToBlock(this.x);
+			int b_y = Box.fitToBlock(this.y);
+			Game.entities.add(new Bomb(b_x, b_y, this));
+			if ((Game.gamemode == Gamemode.NETWORK)
+					&& (this.networkID == Game.network.playerID)) {
+				Input input_b = new Input();
+				input_b.x = b_x;
+				input_b.y = b_y;
+				input_b.type = NetworkInputType.BOMB;
+				input_b.playerID = this.networkID;
+				Game.network.send(input_b);
+			}
 		}
 	}
 
@@ -282,4 +307,8 @@ public class Player extends Entity {
 		this.keys = keys;
 	}
 
+	public void setPosition(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
 }

@@ -14,10 +14,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import javax.swing.JOptionPane;
 
 import level.Box;
-import level.Generator;
 import level.Loader;
+import network.Server;
 import entities.Entity;
 import entities.Player;
+import enums.Gameend;
+import enums.Gamemode;
 import game.highscore.HighscoreManager;
 
 /**
@@ -34,6 +36,8 @@ public class Game extends Canvas {
 	 * Size for each block
 	 */
 	public static final int BLOCK_SIZE = 50;
+
+	public static Gamemode gamemode = null;
 
 	/**
 	 * Width in "Blocks" for the game
@@ -100,7 +104,9 @@ public class Game extends Canvas {
 	 */
 	private int oldBackgroundElems;
 
-	HighscoreManager hm = new HighscoreManager();
+	public static NetworkManager network;
+
+	public HighscoreManager hm = new HighscoreManager();
 
 	/**
 	 * Key Listener
@@ -111,8 +117,6 @@ public class Game extends Canvas {
 	 * Buffered image for static elements
 	 */
 	public static BufferedImage background;
-
-	public Player drawPoints;
 
 	/**
 	 * Get Singleton-Instance
@@ -182,12 +186,17 @@ public class Game extends Canvas {
 			this.draw(g);
 			bs.show();
 			Toolkit.getDefaultToolkit().sync();
+
 			/**
 			 * Let the thread sleep
 			 */
 			sleepTime = (lastLoopTime - System.nanoTime()) / this.frameTimeNs;
 			if (sleepTime < this.minSleepTime) {
-				sleepTime = this.minSleepTime;
+				if (this.fps_static < 20) {
+					sleepTime = 0;
+				} else {
+					sleepTime = this.minSleepTime;
+				}
 			}
 			try {
 				Thread.sleep(sleepTime);
@@ -202,13 +211,16 @@ public class Game extends Canvas {
 	 * Create all arrays, load the map and set size of gamefield
 	 */
 	public void init() {
+		this.init("Map3");
+	}
+
+	public void init(String map) {
 		Game.entities = new CopyOnWriteArrayList<Entity>();
 		Game.staticBackground = new CopyOnWriteArrayList<Entity>();
 		Game.players = new CopyOnWriteArrayList<Entity>();
-		Generator g1 = new Generator();
+
 		Loader l1 = new Loader();
-		g1.generateMap(10, 10);
-		l1.loadMap("Map3");
+		l1.loadMap(map);
 		Game.GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE) + 1;
 		Game.GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE) + 1;
 
@@ -273,7 +285,8 @@ public class Game extends Canvas {
 
 		if (this.oldBackgroundElems != Game.staticBackground.size()) {
 
-			Game.background = new BufferedImage(Game.GAME_WIDTH, Game.GAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+			Game.background = new BufferedImage(Game.GAME_WIDTH,
+					Game.GAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
 			for (Entity e : Game.staticBackground) {
 				e.draw(Game.background.getGraphics());
 			}
@@ -289,10 +302,14 @@ public class Game extends Canvas {
 		}
 
 		g.setColor(Color.WHITE);
+
 		for (int i = 0; i < Game.players.size(); i++) {
-			this.drawPoints = (Player) Game.players.get(i);
-			g.drawString("Spieler " + (i + 1) + ":" + this.drawPoints.pm.getPoints(), 100 * (i + 1), 10);
+			Player drawPoints = (Player) Game.players.get(i);
+			g.drawString(
+					"Spieler " + (i + 1) + ":" + drawPoints.pm.getPoints(),
+					100 * (i + 1), 10);
 		}
+
 		g.drawString("FPS: " + this.fps_static, 0, 10);
 	}
 
@@ -326,67 +343,80 @@ public class Game extends Canvas {
 	 */
 	public void gameEnd(Player p, Gameend type) {
 		this.stop();
+		JOptionPane question;
 		int index;
-		Player otherP;
-		String winner;
-		int choice;
-
-		if (Game.players.size() == 2) {
-			if (p == (Player) Game.players.get(0)) {
-				otherP = (Player) Game.players.get(1);
-			} else {
-				otherP = (Player) Game.players.get(0);
-			}
-			index = Game.players.indexOf(p) + 1;
+		if (Game.gamemode == Gamemode.NETWORK) {
 			if (type == Gameend.finishReached) {
-				JOptionPane.showMessageDialog(this, "Spieler " + index + " ist im Ziel und hat gewonnen!");
-				winner = JOptionPane
-						.showInputDialog(
-								this,
-								"Spieler "
-										+ index
-										+ ", bitte geben Sie ihren Namen ein und best\u00E4tigen Sie ihre Eingabe mit einem Klick auf OK",
-								null, JOptionPane.PLAIN_MESSAGE);
-				if (winner != null) {
-					this.hm.addScore(winner, p.pm.getPoints());
-				}
+				question = new JOptionPane("Du hast gewonnen!");
+			} else if (type == Gameend.lastAlive) {
+				question = new JOptionPane(
+						"Alle anderen Spieler sind tot. Du hast gewonnen.");
 			} else {
-				int otherplayer;
-				if (index == 1) {
-					otherplayer = 2;
-
+				question = new JOptionPane("Du hast verloren.");
+			}
+		} else {
+			if (Game.players.size() == 2) {
+				Player otherP;
+				if (p == (Player) Game.players.get(0)) {
+					otherP = (Player) Game.players.get(1);
 				} else {
-					otherplayer = 1;
+					otherP = (Player) Game.players.get(0);
 				}
-				JOptionPane.showMessageDialog(this, "Spieler " + index + " ist tot. Somit hat Spieler " + otherplayer
-						+ " gewonnen.");
-				winner = JOptionPane
-						.showInputDialog(
-								this,
-								"Spieler "
-										+ otherplayer
-										+ ", bitte geben Sie ihren Namen ein und best\u00E4tigen Sie ihre Eingabe mit einem Klick auf OK",
-								null, JOptionPane.PLAIN_MESSAGE);
-				if (winner != null) {
-					this.hm.addScore(winner, otherP.pm.getPoints());
-				}
-			}
-		} else {
-			if (type == Gameend.finishReached) {
-				JOptionPane.showMessageDialog(this, "Du hast gewonnen!");
-			} else {
-				JOptionPane.showMessageDialog(this, "Du hast verloren!");
-			}
-		}
-		choice = JOptionPane.showConfirmDialog(this, "M\u00F6chten Sie das Spiel neustarten ?", "Spielende",
-				JOptionPane.YES_NO_OPTION);
+				index = Game.players.indexOf(p) + 1;
+				String winner;
+				if (type == Gameend.finishReached) {
+					JOptionPane.showMessageDialog(this, "Spieler " + index
+							+ " ist im Ziel und hat gewonnen!");
+					winner = JOptionPane
+							.showInputDialog(
+									this,
+									"Spieler "
+											+ index
+											+ ", bitte geben Sie ihren Namen ein und best\u00E4tigen Sie ihre Eingabe mit einem Klick auf OK",
+									null, JOptionPane.PLAIN_MESSAGE);
+					if (winner != null) {
+						this.hm.addScore(winner, p.pm.getPoints());
+					}
+				} else {
+					int otherplayer;
+					if (index == 1) {
+						otherplayer = 2;
 
-		if (choice == 0) {
-			// Spiel neustarten
-			this.restart();
-		} else {
-			// Spiel beenden;
-			System.exit(0);
+					} else {
+						otherplayer = 1;
+					}
+					JOptionPane.showMessageDialog(this, "Spieler " + index
+							+ " ist tot. Somit hat Spieler " + otherplayer
+							+ " gewonnen.");
+					winner = JOptionPane
+							.showInputDialog(
+									this,
+									"Spieler "
+											+ otherplayer
+											+ ", bitte geben Sie ihren Namen ein und best\u00E4tigen Sie ihre Eingabe mit einem Klick auf OK",
+									null, JOptionPane.PLAIN_MESSAGE);
+					if (winner != null) {
+						this.hm.addScore(winner, otherP.pm.getPoints());
+					}
+				}
+			} else {
+				if (type == Gameend.finishReached) {
+					JOptionPane.showMessageDialog(this, "Du hast gewonnen!");
+				} else {
+					JOptionPane.showMessageDialog(this, "Du hast verloren!");
+				}
+			}
+			int choice = JOptionPane.showConfirmDialog(this,
+					"M\u00F6chten Sie das Spiel neustarten ?", "Spielende",
+					JOptionPane.YES_NO_OPTION);
+
+			if (choice == 0) {
+				// Spiel neustarten
+				this.restart();
+			} else {
+				// Spiel beenden;
+				System.exit(0);
+			}
 		}
 	}
 
@@ -403,5 +433,18 @@ public class Game extends Canvas {
 		} else {
 			throw new Exception("Unknown key settings");
 		}
+	}
+
+	/**
+	 * Connect to a Gameserver (Multiplayer)
+	 * 
+	 * @param server
+	 */
+	public void connectServer(Server server) {
+		Debug.log(Debug.DEBUG, "Connecting to server");
+		Debug.log(Debug.DEBUG, server);
+		Game.network = new NetworkManager(server);
+		Game.network.connect();
+		Game.network.start();
 	}
 }

@@ -1,7 +1,7 @@
 package entities;
 
+import enums.Gameend;
 import game.Game;
-import game.Gameend;
 import graphics.Sprite;
 
 import java.awt.Graphics;
