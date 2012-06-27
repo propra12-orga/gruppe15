@@ -14,6 +14,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import javax.swing.JOptionPane;
 
 import level.Box;
+import level.Generator;
 import level.Loader;
 import network.Server;
 import entities.Entity;
@@ -218,9 +219,11 @@ public class Game extends Canvas {
 		Game.entities = new CopyOnWriteArrayList<Entity>();
 		Game.staticBackground = new CopyOnWriteArrayList<Entity>();
 		Game.players = new CopyOnWriteArrayList<Entity>();
-
+		Generator g1 = new Generator();
 		Loader l1 = new Loader();
-		l1.loadMap(map);
+		g1.generateMap(10, 10);
+		l1.loadMap("genMap");
+
 		Game.GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE) + 1;
 		Game.GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE) + 1;
 
