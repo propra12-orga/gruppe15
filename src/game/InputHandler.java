@@ -2,6 +2,7 @@ package game;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.HashMap;
 
 /**
  * @author Oktay
@@ -53,8 +54,23 @@ public class InputHandler implements KeyListener {
 	 * Key for pausing the game
 	 */
 	public Key pause = new Key();
+	private HashMap<Integer, Key> keys;
 
 	public InputHandler() {
+		this.keys = new HashMap<Integer, Key>();
+		// Keys for Player 1
+		this.keys.put(KeyEvent.VK_UP, new Key());
+		this.keys.put(KeyEvent.VK_DOWN, new Key());
+		this.keys.put(KeyEvent.VK_LEFT, new Key());
+		this.keys.put(KeyEvent.VK_RIGHT, new Key());
+		this.keys.put(KeyEvent.VK_L, new Key());
+
+		// Keys for Player 2
+		this.keys.put(KeyEvent.VK_W, new Key());
+		this.keys.put(KeyEvent.VK_S, new Key());
+		this.keys.put(KeyEvent.VK_A, new Key());
+		this.keys.put(KeyEvent.VK_D, new Key());
+		this.keys.put(KeyEvent.VK_T, new Key());
 
 	}
 
@@ -65,38 +81,8 @@ public class InputHandler implements KeyListener {
 	 * @param pressed
 	 */
 	private void toggle(KeyEvent ke, boolean pressed) {
-		if (ke.getKeyCode() == KeyEvent.VK_UP) {
-			this.up.toggle(pressed);
-		}
-		if (ke.getKeyCode() == KeyEvent.VK_DOWN) {
-			this.down.toggle(pressed);
-		}
-		if (ke.getKeyCode() == KeyEvent.VK_LEFT) {
-			this.left.toggle(pressed);
-		}
-		if (ke.getKeyCode() == KeyEvent.VK_RIGHT) {
-			this.right.toggle(pressed);
-		}
-		if (ke.getKeyCode() == KeyEvent.VK_L) {
-			this.bomb.toggle(pressed);
-		}
-		if (ke.getKeyCode() == KeyEvent.VK_W) {
-			this.up2.toggle(pressed);
-		}
-		if (ke.getKeyCode() == KeyEvent.VK_S) {
-			this.down2.toggle(pressed);
-		}
-		if (ke.getKeyCode() == KeyEvent.VK_A) {
-			this.left2.toggle(pressed);
-		}
-		if (ke.getKeyCode() == KeyEvent.VK_D) {
-			this.right2.toggle(pressed);
-		}
-		if (ke.getKeyCode() == KeyEvent.VK_T) {
-			this.bomb2.toggle(pressed);
-		}
-		if (ke.getKeyCode() == KeyEvent.VK_P) {
-			this.pause.toggle(pressed);
+		if (this.keys.containsKey(ke.getKeyCode())) {
+			this.keys.get(ke.getKeyCode()).toggle(pressed);
 		}
 	}
 
@@ -130,4 +116,13 @@ public class InputHandler implements KeyListener {
 		this.toggle(ke, true);
 	}
 
+	public Key getKey(Integer key) {
+		return this.keys.get(key);
+	}
+
+	public void resetKeys() {
+		for (Integer i : this.keys.keySet()) {
+			this.keys.get(i).toggle(false);
+		}
+	}
 }

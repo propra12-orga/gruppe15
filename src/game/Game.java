@@ -232,6 +232,7 @@ public class Game extends Canvas {
 		this.setPreferredSize(d);
 		this.setMinimumSize(d);
 		this.setMaximumSize(d);
+		Game.keys.resetKeys();
 	}
 
 	/**
