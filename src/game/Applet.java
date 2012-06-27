@@ -1,5 +1,7 @@
 package game;
 
+import gui.GUI;
+
 import javax.swing.JApplet;
 
 public class Applet extends JApplet {
@@ -12,6 +14,9 @@ public class Applet extends JApplet {
 		this.setVisible(true);
 		this.game = Game.getInstance();
 		this.add(this.game);
+
+		new GUI(this, this.game);
+
 		this.setSize(Game.GAME_WIDTH, Game.GAME_HEIGHT);
 		// Applet.this.setVisible(true);
 	}

@@ -1,13 +1,6 @@
 package game;
 
-import entities.Bomb;
-import entities.Entity;
-import entities.Player;
-import enums.Gameend;
-import enums.Gamemode;
-import enums.NetworkInputType;
-import gui.ServerJoinInfo;
-
+import java.awt.Container;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -22,6 +15,13 @@ import level.Loader;
 import level.Point;
 import network.Input;
 import network.Server;
+import entities.Bomb;
+import entities.Entity;
+import entities.Player;
+import enums.Gameend;
+import enums.Gamemode;
+import enums.NetworkInputType;
+import gui.ServerJoinInfo;
 
 public class NetworkManager extends Thread {
 
@@ -34,10 +34,11 @@ public class NetworkManager extends Thread {
 	public CopyOnWriteArrayList<NetworkPlayerKeys> networkplayer;
 	private JFrame infoWindow;
 
-	public NetworkManager(Server server) {
+	public NetworkManager(Server server, Container parentWindow) {
 		this.server = server;
 		this.out_queue = new CopyOnWriteArrayList<Input>();
 		this.networkplayer = new CopyOnWriteArrayList<NetworkPlayerKeys>();
+		this.infoWindow = new ServerJoinInfo(parentWindow);
 	}
 
 	public boolean connect() {
@@ -54,7 +55,6 @@ public class NetworkManager extends Thread {
 		} catch (IOException e) {
 			Debug.log(Debug.ERROR, "Can't get input/output stream");
 		}
-		this.infoWindow = new ServerJoinInfo();
 		return true;
 	}
 
@@ -139,7 +139,6 @@ public class NetworkManager extends Thread {
 						Game.players.add(p);
 						Game.entities.add(p);
 					}
-
 					this.infoWindow.setVisible(false);
 					this.infoWindow.dispose();
 					this.infoWindow = null;

@@ -1,5 +1,6 @@
 package game;
 
+import java.awt.event.KeyEvent;
 
 /**
  * @author Philipp
@@ -33,19 +34,20 @@ public class KeySettings {
 	 */
 	public static void createKeySettings() {
 		KeySettings s1 = new KeySettings();
-		s1.bomb = Game.keys.bomb;
-		s1.left = Game.keys.left;
-		s1.right = Game.keys.right;
-		s1.up = Game.keys.up;
-		s1.down = Game.keys.down;
+		s1.bomb = Game.keys.getKey(KeyEvent.VK_L);
+		s1.left = Game.keys.getKey(KeyEvent.VK_LEFT);
+		s1.right = Game.keys.getKey(KeyEvent.VK_RIGHT);
+		s1.up = Game.keys.getKey(KeyEvent.VK_UP);
+		s1.down = Game.keys.getKey(KeyEvent.VK_DOWN);
 		Game.key_settings.add(s1);
 
 		KeySettings s2 = new KeySettings();
-		s2.bomb = Game.keys.bomb2;
-		s2.left = Game.keys.left2;
-		s2.right = Game.keys.right2;
-		s2.up = Game.keys.up2;
-		s2.down = Game.keys.down2;
+		s2.bomb = Game.keys.getKey(KeyEvent.VK_T);
+		s2.left = Game.keys.getKey(KeyEvent.VK_A);
+		s2.right = Game.keys.getKey(KeyEvent.VK_D);
+		s2.up = Game.keys.getKey(KeyEvent.VK_W);
+		s2.down = Game.keys.getKey(KeyEvent.VK_S);
 		Game.key_settings.add(s2);
 	}
+
 }

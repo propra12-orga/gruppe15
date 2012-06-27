@@ -1,14 +1,12 @@
 package level;
 
-import game.Game;
-import game.Launcher;
 import game.Main;
 import game.MouseHandler;
 import graphics.Image;
 import graphics.Sprite;
 
 import java.awt.Canvas;
-import java.awt.Graphics;
+import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -75,23 +73,17 @@ public class Editor extends Canvas implements ActionListener {
 
 	private int element;
 
-	private Game game;
 	private String filename;
 	private Image images[][];
 	int x = 0, type, y = 0;
-	private Graphics g;
 
 	private Scanner maps;
-
-	private int oldBackgroundElems;
-
-	private String fps_static;
 
 	/**
 	 * default constructor for Editor, sets frame and buttons
 	 */
 
-	public Editor(Launcher lframe) {
+	public Editor(Container frame) {
 
 		/**
 		 * create new JFrame called "Leveleditor" and set properties
@@ -101,7 +93,7 @@ public class Editor extends Canvas implements ActionListener {
 
 		editorframe.setTitle("Leveleditor");
 		editorframe.setSize(500, 500);
-		editorframe.setLocationRelativeTo(lframe);
+		editorframe.setLocationRelativeTo(frame);
 		editorframe.setVisible(true);
 
 		MouseHandler mousehandler = new MouseHandler();
@@ -183,7 +175,7 @@ public class Editor extends Canvas implements ActionListener {
 			int returnVal = fileChooser.showOpenDialog(this.editorframe);
 
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				// loadMap(chooser.getSelectedFile().getName());
+				this.loadMap(fileChooser.getSelectedFile().getName());
 			}
 
 		}
@@ -202,40 +194,40 @@ public class Editor extends Canvas implements ActionListener {
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				// save file
 			}
+
+			// if "neu" is pressed, load default Map
+			if (arg0.getSource() == this.neu) {
+				this.loadMap("Map1");
+
+			}
+
+			// if "unbreakable" is pressed
+
+			if (arg0.getSource() == this.unbreakable) {
+				this.element = 2;
+			}
+
+			// if "breakable" is pressed
+			if (arg0.getSource() == this.breakable) {
+				this.element = 1;
+			}
+
+			// if "player" is pressed
+			if (arg0.getSource() == this.player) {
+				this.element = 3;
+			}
+
+			// if "empty" is pressed
+			if (arg0.getSource() == this.empty) {
+				this.element = 0;
+			}
+
+			// if "finish" is pressed
+			if (arg0.getSource() == this.finish) {
+				this.element = 4;
+
+			}
 		}
-
-		// if "neu" is pressed, start reset()
-		if (arg0.getSource() == this.neu) {
-			this.loadMap("Map");
-
-		}
-
-		// if "unbreakable" is pressed
-
-		if (arg0.getSource() == this.unbreakable) {
-			this.element = 2;
-		}
-
-		// if "breakable" is pressed
-		if (arg0.getSource() == this.breakable) {
-			this.element = 1;
-		}
-
-		// if "player" is pressed
-		if (arg0.getSource() == this.player) {
-			this.element = 3;
-		}
-
-		// if "empty" is pressed
-		if (arg0.getSource() == this.empty) {
-			this.element = 0;
-		}
-
-		// if "finish" is pressed
-		if (arg0.getSource() == this.finish) {
-			this.element = 4;
-		}
-
 	}
 
 	/**
@@ -274,8 +266,6 @@ public class Editor extends Canvas implements ActionListener {
 				}
 				this.y++;
 			}
-			// Game.FIELD_HEIGHT = y;
-			// Game.FIELD_WIDTH = x;
 
 		} catch (Exception e) {
 			e.printStackTrace();

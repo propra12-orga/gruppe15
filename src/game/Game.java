@@ -2,6 +2,7 @@ package game;
 
 import java.awt.Canvas;
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
@@ -222,7 +223,7 @@ public class Game extends Canvas {
 		Generator g1 = new Generator();
 		Loader l1 = new Loader();
 		g1.generateMap(10, 10);
-		l1.loadMap("genMap");
+		l1.loadMap("Map3");
 
 		Game.GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE) + 1;
 		Game.GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE) + 1;
@@ -231,6 +232,7 @@ public class Game extends Canvas {
 		this.setPreferredSize(d);
 		this.setMinimumSize(d);
 		this.setMaximumSize(d);
+		Game.keys.resetKeys();
 	}
 
 	/**
@@ -442,11 +444,12 @@ public class Game extends Canvas {
 	 * Connect to a Gameserver (Multiplayer)
 	 * 
 	 * @param server
+	 * @param parentWindow
 	 */
-	public void connectServer(Server server) {
+	public void connectServer(Server server, Container parentWindow) {
 		Debug.log(Debug.DEBUG, "Connecting to server");
 		Debug.log(Debug.DEBUG, server);
-		Game.network = new NetworkManager(server);
+		Game.network = new NetworkManager(server, parentWindow);
 		Game.network.connect();
 		Game.network.start();
 	}

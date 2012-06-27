@@ -3,6 +3,7 @@ package gui;
 import game.Debug;
 import game.Game;
 
+import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -30,9 +31,12 @@ public class Serverbrowser extends JFrame implements ActionListener, WindowListe
 	private JList list;
 	private JScrollPane listScroller;
 	private JPanel panel;
+	private Container parentWindow;
 
-	public Serverbrowser() {
+	public Serverbrowser(Container frame) {
 		super("Serverbrowser");
+		this.parentWindow = frame;
+		this.setLocationRelativeTo(this.parentWindow);
 
 		this.panel = new JPanel();
 		this.panel.setLayout(new GridBagLayout());
@@ -92,7 +96,7 @@ public class Serverbrowser extends JFrame implements ActionListener, WindowListe
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == this.connectButton) {
 			if (this.list.getSelectedValue() != null) {
-				Game.getInstance().connectServer((Server) this.list.getSelectedValue());
+				Game.getInstance().connectServer((Server) this.list.getSelectedValue(), this.parentWindow);
 				this.discover.running = false;
 				this.dispose();
 			} else {
