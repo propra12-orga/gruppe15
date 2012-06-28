@@ -1,15 +1,16 @@
 package entities;
 
 import game.Game;
-import game.Sounds;
 import graphics.Sprite;
 
 import java.awt.Graphics;
 
 import level.Box;
+import sound.Sound;
+import sound.Soundmanager;
 
 public class Bomb extends Entity {
-	private Sounds sound;
+	private Sound sound;
 
 	/**
 	 * @param x
@@ -23,7 +24,7 @@ public class Bomb extends Entity {
 				Game.BLOCK_SIZE / 2);
 		this.owner = owner;
 		this.explosionDelay = 50;
-		this.sound = new Sounds("Explosion.wav", false);
+		this.sound = Soundmanager.getInstance().load("Explosion.wav", false);
 	}
 
 	public Bomb(int x, int y, int playerID) {

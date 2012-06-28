@@ -1,6 +1,7 @@
 package gui;
 
 import game.Game;
+import game.Settings;
 import game.highscore.HighscoreGui;
 import game.highscore.HighscoreManager;
 
@@ -10,6 +11,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JApplet;
 import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -19,6 +21,7 @@ import javax.swing.JOptionPane;
 
 import level.Editor;
 import network.Discover;
+import sound.Soundmanager;
 
 /**
  * @author mauriceschleusinger
@@ -91,6 +94,7 @@ public class GUI implements ActionListener {
 	private Object[] old_list;
 	private JButton connectButton;
 	private Game game;
+	private JCheckBoxMenuItem sound;
 
 	/**
 	 * @param frame
@@ -135,6 +139,15 @@ public class GUI implements ActionListener {
 		this.optionen = new JMenu("Optionen");
 		this.delScore = new JMenuItem("Highscore l\u00F6schen");
 		this.delScore.addActionListener(this);
+
+		// Button for Sound
+		this.sound = new JCheckBoxMenuItem("Sound");
+		this.sound.addActionListener(this);
+		Settings s = Settings.getInstance();
+		this.sound.setSelected(Soundmanager.getInstance().enabled());
+
+		this.optionen.add(this.sound);
+
 		/*
 		 * this.spname = new JMenuItem("Spielername"); this.groesse = new
 		 * JMenuItem("Groesse"); this.optionen.add(this.spname);
@@ -229,5 +242,13 @@ public class GUI implements ActionListener {
 			new Serverbrowser(this.frame);
 		}
 
+		if (arg0.getSource() == this.sound) {
+			if (this.sound.isSelected()) {
+				Soundmanager.getInstance().enable();
+			} else {
+				Soundmanager.getInstance().disable();
+			}
+			Settings.getInstance().set("sound", this.sound.isSelected());
+		}
 	}
 }
