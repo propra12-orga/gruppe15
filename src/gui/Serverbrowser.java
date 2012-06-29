@@ -45,7 +45,6 @@ public class Serverbrowser extends JFrame implements ActionListener, WindowListe
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(10, 10, 5, 5);
 
-		Debug.log(Debug.VERBOSE, "Find server pressed");
 		this.discover = new Discover();
 		this.old_list = this.discover.servers.toArray();
 

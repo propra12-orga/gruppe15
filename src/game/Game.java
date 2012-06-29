@@ -25,6 +25,7 @@ import entities.Player;
 import enums.Gameend;
 import enums.Gamemode;
 import game.highscore.HighscoreManager;
+import gui.ServerNotFound;
 
 /**
  *
@@ -445,7 +446,10 @@ public class Game extends Canvas {
 		Debug.log(Debug.DEBUG, "Connecting to server");
 		Debug.log(Debug.DEBUG, server);
 		Game.network = new NetworkManager(server, parentWindow);
-		Game.network.connect();
-		Game.network.start();
+		if (Game.network.connect()) {
+			Game.network.start();
+		} else {
+			new ServerNotFound(this.getParent());
+		}
 	}
 }

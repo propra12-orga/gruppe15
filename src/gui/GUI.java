@@ -95,6 +95,7 @@ public class GUI implements ActionListener {
 	private JButton connectButton;
 	private Game game;
 	private JCheckBoxMenuItem sound;
+	private JMenuItem connectIP;
 
 	/**
 	 * @param frame
@@ -132,7 +133,12 @@ public class GUI implements ActionListener {
 		 */
 		this.findserver = new JMenuItem("Server suchen");
 		this.findserver.addActionListener(this);
+
+		this.connectIP = new JMenuItem("Internet");
+		this.connectIP.addActionListener(this);
+
 		this.netzwerk.add(this.findserver);
+		this.netzwerk.add(this.connectIP);
 		this.menubar.add(this.netzwerk);
 
 		// Buttons for "Optionen"
@@ -238,10 +244,12 @@ public class GUI implements ActionListener {
 			}
 		}
 
-		else if (arg0.getSource() == this.findserver) {
+		if (arg0.getSource() == this.findserver) {
 			new Serverbrowser(this.frame);
 		}
-
+		if (arg0.getSource() == this.connectIP) {
+			new ConnectToIp(this.frame);
+		}
 		if (arg0.getSource() == this.sound) {
 			if (this.sound.isSelected()) {
 				Soundmanager.getInstance().enable();
