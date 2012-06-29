@@ -12,7 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import javax.swing.JApplet;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import level.Box;
 import level.Loader;
@@ -113,6 +116,8 @@ public class Game extends Canvas {
 	public HighscoreManager hm = new HighscoreManager();
 
 	private String map;
+
+	private Container frame;
 
 	/**
 	 * Key Listener
@@ -236,6 +241,9 @@ public class Game extends Canvas {
 		this.setMinimumSize(d);
 		this.setMaximumSize(d);
 		Game.keys.resetKeys();
+		if (this.frame != null) {
+			this.repack();
+		}
 	}
 
 	/**
@@ -450,6 +458,25 @@ public class Game extends Canvas {
 			Game.network.start();
 		} else {
 			new ServerNotFound(this.getParent());
+		}
+	}
+
+	public void setFrame(Container frame) {
+		this.frame = frame;
+	}
+
+	public void repack() {
+		JPanel panel;
+		if (this.frame instanceof JFrame) {
+			panel = (JPanel) ((JFrame) this.frame).getContentPane();
+		} else {
+			panel = (JPanel) ((JApplet) this.frame).getContentPane();
+		}
+		panel.setSize(panel.getPreferredSize());
+		panel.revalidate();
+		this.frame.setSize(this.frame.getPreferredSize());
+		if (this.frame instanceof JFrame) {
+			((JFrame) this.frame).pack();
 		}
 	}
 }
