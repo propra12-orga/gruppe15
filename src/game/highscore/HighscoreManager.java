@@ -11,27 +11,59 @@ import java.util.Collections;
 
 public class HighscoreManager {
 
+	/**
+	 * Arraylist which contains the highscore
+	 */
 	private ArrayList<Score> scores;
 
+	/**
+	 * Path and filename for highscore file
+	 */
 	private static final String HIGHSCORE_FILE = "src/ressources/scores.dat";
 
+	/**
+	 * Stream which writes into file
+	 */
 	ObjectOutputStream outputStream = null;
+	/**
+	 * Stream which reads from file
+	 */
 	ObjectInputStream inputStream = null;
 
+	/**
+	 * Arralist scores is initialized
+	 */
 	public HighscoreManager() {
 		this.scores = new ArrayList<Score>();
 	}
 
+	/**
+	 * Returns the arraylist if method is used
+	 * 
+	 * @return Arraylist scores
+	 */
 	public ArrayList<Score> getScores() {
 		this.loadScoreFile();
 		return this.scores;
 	}
 
+	/**
+	 * Sorts the arraylist
+	 */
 	private void sort() {
 		ScoreComparator comparator = new ScoreComparator();
 		Collections.sort(this.scores, comparator);
 	}
 
+	/**
+	 * Adds a score to the arraylist. If then there more than 10 entries the
+	 * last one is deleted after the list was sorted.
+	 * 
+	 * @param name
+	 *            Name of the player
+	 * @param score
+	 *            Score of the player
+	 */
 	public void addScore(String name, int score) {
 		this.loadScoreFile();
 		this.scores.add(new Score(name, score));
@@ -42,6 +74,9 @@ public class HighscoreManager {
 		this.updateScoreFile();
 	}
 
+	/**
+	 * Loads the scores from file to the arraylist
+	 */
 	public void loadScoreFile() {
 		try {
 			this.inputStream = new ObjectInputStream(new FileInputStream(
@@ -68,6 +103,9 @@ public class HighscoreManager {
 		}
 	}
 
+	/**
+	 * Prints the entries of the Arraylist into file
+	 */
 	public void updateScoreFile() {
 		try {
 			this.outputStream = new ObjectOutputStream(new FileOutputStream(
@@ -89,6 +127,12 @@ public class HighscoreManager {
 		}
 	}
 
+	/**
+	 * Returns the highscore as a String if there are entries. Else a message is
+	 * returned.
+	 * 
+	 * @return Highscore as a String
+	 */
 	public String getHighscoreString() {
 		String highscoreString = "";
 		int max = 10;

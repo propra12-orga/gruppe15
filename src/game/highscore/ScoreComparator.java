@@ -2,7 +2,16 @@ package game.highscore;
 
 import java.util.Comparator;
 
+/**
+ * @author Oktay
+ * 
+ */
 public class ScoreComparator implements Comparator<Score> {
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
+	 */
 	@Override
 	public int compare(Score score1, Score score2) {
 
