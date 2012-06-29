@@ -4,6 +4,8 @@ package level;
  * @author mauriceschleusinger
  * 
  */
+import game.Main;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -41,7 +43,7 @@ public class Generator {
 		this.fieldheight = fieldheight;
 		this.fieldwith = fieldwith;
 		this.maparray = new char[this.fieldheight][this.fieldwith];
-		this.file = new File("src/ressources/maps/genMap");
+		this.file = new File(Main.class.getResource("/ressources/maps/genMap").getPath());
 		try {
 			this.fw = new FileWriter(this.file);
 

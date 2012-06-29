@@ -15,7 +15,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import javax.swing.JOptionPane;
 
 import level.Box;
-import level.Generator;
 import level.Loader;
 import network.Server;
 import sound.Sound;
@@ -112,6 +111,8 @@ public class Game extends Canvas {
 	public static NetworkManager network;
 
 	public HighscoreManager hm = new HighscoreManager();
+
+	private String map;
 
 	/**
 	 * Key Listener
@@ -220,13 +221,12 @@ public class Game extends Canvas {
 	}
 
 	public void init(String map) {
+		this.map = map;
 		Game.entities = new CopyOnWriteArrayList<Entity>();
 		Game.staticBackground = new CopyOnWriteArrayList<Entity>();
 		Game.players = new CopyOnWriteArrayList<Entity>();
-		Generator g1 = new Generator();
 		Loader l1 = new Loader();
-		g1.generateMap(10, 10);
-		l1.loadMap("Map3");
+		l1.loadMap(map);
 
 		Game.GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE) + 1;
 		Game.GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE) + 1;
@@ -242,7 +242,7 @@ public class Game extends Canvas {
 	 * Restart the current map
 	 */
 	public void restart() {
-		this.init();
+		this.init(this.map);
 		this.running = true;
 		this.run();
 	}

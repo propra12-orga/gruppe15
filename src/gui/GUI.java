@@ -20,6 +20,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import level.Editor;
+import level.Generator;
 import network.Discover;
 import sound.Soundmanager;
 
@@ -96,6 +97,7 @@ public class GUI implements ActionListener {
 	private Game game;
 	private JCheckBoxMenuItem sound;
 	private JMenuItem connectIP;
+	private JMenuItem generate;
 
 	/**
 	 * @param frame
@@ -117,8 +119,12 @@ public class GUI implements ActionListener {
 		this.highscore = new JMenuItem("Highscore");
 		this.highscore.addActionListener(this);
 
+		this.generate = new JMenuItem("Map generieren");
+		this.generate.addActionListener(this);
+
 		// this.spiel.add(this.starten);
 		this.spiel.add(this.highscore);
+		this.spiel.add(this.generate);
 		this.spiel.add(this.beenden);
 		this.menubar.add(this.spiel);
 
@@ -257,6 +263,12 @@ public class GUI implements ActionListener {
 				Soundmanager.getInstance().disable();
 			}
 			Settings.getInstance().set("sound", this.sound.isSelected());
+		}
+
+		if (arg0.getSource() == this.generate) {
+			Generator g = new Generator();
+			g.generateMap(15, 15);
+			this.game.init("genMap");
 		}
 	}
 }
