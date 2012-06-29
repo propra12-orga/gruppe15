@@ -33,7 +33,7 @@ public class BombAnimation extends Entity {
 	 */
 	private int[][] collideMap;
 	/**
-	 * 
+	 * Player who has been killed
 	 */
 	private Player playerKilled;
 	/**
@@ -41,6 +41,9 @@ public class BombAnimation extends Entity {
 	 */
 	private int killDelay;
 
+	/**
+	 * Owner of the explosion
+	 */
 	public Player owner;
 
 	private ArrayList<Entity> toPlace = new ArrayList<Entity>();
