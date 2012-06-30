@@ -7,6 +7,9 @@ import entities.items.Schuh;
 import game.Game;
 import graphics.Sprite;
 
+/**
+ * Wall which can be destroyed by Bomb
+ */
 public class BreakableWall extends Wall {
 
 	private Item item;

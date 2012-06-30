@@ -8,6 +8,9 @@ import java.util.List;
 
 import level.Box;
 
+/**
+ * Main Class for all Entities Needs to be extended by all Entities
+ */
 public class Entity {
 	public Box box;
 	protected int y;

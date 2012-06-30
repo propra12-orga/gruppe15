@@ -6,6 +6,9 @@ import graphics.Sprite;
 import java.awt.Color;
 import java.awt.Graphics;
 
+/**
+ * Normal Wall
+ */
 public class Wall extends Entity {
 
 	/**
@@ -25,8 +28,7 @@ public class Wall extends Entity {
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(Color.RED);
-		g.drawImage((this.images[0][0]).image, this.x, this.y, Game.BLOCK_SIZE,
-				Game.BLOCK_SIZE, null);
+		g.drawImage((this.images[0][0]).image, this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
 	}
 
 }

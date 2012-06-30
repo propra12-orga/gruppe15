@@ -9,6 +9,9 @@ import level.Box;
 import sound.Sound;
 import sound.Soundmanager;
 
+/**
+ * Bomb Entity to manage Explosion
+ */
 public class Bomb extends Entity {
 	private Sound sound;
 
@@ -23,8 +26,7 @@ public class Bomb extends Entity {
 	public Bomb(int x, int y, Player owner) {
 		super(x, y);
 		this.images = Sprite.load("bomb_small.png", 50, 49);
-		this.box = new Box(this.x + (Game.BLOCK_SIZE / 4), this.y
-				+ (Game.BLOCK_SIZE / 4), Game.BLOCK_SIZE / 2,
+		this.box = new Box(this.x + (Game.BLOCK_SIZE / 4), this.y + (Game.BLOCK_SIZE / 4), Game.BLOCK_SIZE / 2,
 				Game.BLOCK_SIZE / 2);
 		this.owner = owner;
 		this.explosionDelay = 50;
@@ -68,9 +70,8 @@ public class Bomb extends Entity {
 	 */
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage((this.images[0][0]).image, this.x + (Game.BLOCK_SIZE / 4),
-				this.y + (Game.BLOCK_SIZE / 4), Game.BLOCK_SIZE / 2,
-				Game.BLOCK_SIZE / 2, null);
+		g.drawImage((this.images[0][0]).image, this.x + (Game.BLOCK_SIZE / 4), this.y + (Game.BLOCK_SIZE / 4),
+				Game.BLOCK_SIZE / 2, Game.BLOCK_SIZE / 2, null);
 	}
 
 	/**
