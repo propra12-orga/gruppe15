@@ -154,7 +154,7 @@ public class Editor extends Canvas implements ActionListener {
 
 		editorframe.setJMenuBar(this.menubar);
 
-		this.loadMap("Map3");
+		// this.loadMap("Map3");
 
 	}
 
@@ -177,7 +177,6 @@ public class Editor extends Canvas implements ActionListener {
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
 				this.loadMap(fileChooser.getSelectedFile().getName());
 			}
-			System.out.println(fileChooser.getSelectedFile().getName());
 
 		}
 
