@@ -98,6 +98,7 @@ public class GUI implements ActionListener {
 	private JCheckBoxMenuItem sound;
 	private JMenuItem connectIP;
 	private JMenuItem generate;
+	private JMenuItem about;
 
 	/**
 	 * @param frame
@@ -177,6 +178,10 @@ public class GUI implements ActionListener {
 
 		this.menubar.add(this.leveleditor);
 
+		this.about = new JMenuItem("Über");
+		this.about.addActionListener(this);
+		this.menubar.add(this.about);
+
 		// set Menubar
 		if (this.frame instanceof JFrame) {
 			((JFrame) this.frame).setJMenuBar(this.menubar);
@@ -198,8 +203,7 @@ public class GUI implements ActionListener {
 		// If the "restart"-button is pressed the game asks to restart the game
 		if (arg0.getSource() == this.starten) {
 			Object[] options = { "Neustart", "Abbrechen" };
-			JOptionPane question = new JOptionPane(
-					"Spiel neustarten? Der aktuelle Fortschritt geht verloren");
+			JOptionPane question = new JOptionPane("Spiel neustarten? Der aktuelle Fortschritt geht verloren");
 			question.setOptions(options);
 			JDialog dialog = question.createDialog(this.frame, "Achtung");
 			dialog.setVisible(true);
@@ -214,8 +218,7 @@ public class GUI implements ActionListener {
 			// If the exit-button is pressed the game asks to exit the game
 		} else if (arg0.getSource() == this.beenden) {
 			Object[] options = { "Beenden", "Abbrechen" };
-			JOptionPane question = new JOptionPane(
-					"Spiel beenden? Der aktuelle Fortschritt geht verloren");
+			JOptionPane question = new JOptionPane("Spiel beenden? Der aktuelle Fortschritt geht verloren");
 			question.setOptions(options);
 			JDialog dialog = question.createDialog(this.frame, "Achtung");
 			dialog.setVisible(true);
@@ -242,11 +245,9 @@ public class GUI implements ActionListener {
 		}
 		if (arg0.getSource() == this.delScore) {
 			int choice;
-			choice = JOptionPane
-					.showConfirmDialog(
-							this.frame,
-							"Sind Sie sicher, dass sie den Highscore l\u00F6schen m\u00F6chten?",
-							"Highscore l\u00F6schen", JOptionPane.YES_NO_OPTION);
+			choice = JOptionPane.showConfirmDialog(this.frame,
+					"Sind Sie sicher, dass sie den Highscore l\u00F6schen m\u00F6chten?", "Highscore l\u00F6schen",
+					JOptionPane.YES_NO_OPTION);
 			if (choice == 0) {
 				HighscoreManager hm = new HighscoreManager();
 				hm.getScores().clear();
@@ -273,6 +274,10 @@ public class GUI implements ActionListener {
 			Generator g = new Generator();
 			g.generateMap(15, 15);
 			this.game.init("genMap");
+		}
+
+		if (arg0.getSource() == this.about) {
+			new About(this.frame);
 		}
 	}
 }
