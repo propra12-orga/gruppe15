@@ -4,10 +4,11 @@ import entities.items.Item;
 import enums.Gamemode;
 import enums.NetworkInputType;
 import game.Game;
-import game.KeySettings;
 import game.highscore.PointManager;
 import graphics.Image;
 import graphics.Sprite;
+
+import input.KeySettings;
 
 import java.awt.Graphics;
 import java.util.ArrayList;

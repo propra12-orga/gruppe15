@@ -8,8 +8,9 @@ import entities.Wall;
 import entities.WallWithFinishingPoint;
 import enums.Gamemode;
 import game.Game;
-import game.KeySettings;
 import game.Main;
+
+import input.KeySettings;
 
 import java.util.ArrayList;
 import java.util.Scanner;

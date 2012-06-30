@@ -1,4 +1,4 @@
-package game;
+package network;
 
 import entities.Bomb;
 import entities.Entity;
@@ -6,7 +6,12 @@ import entities.Player;
 import enums.Gameend;
 import enums.Gamemode;
 import enums.NetworkInputType;
+import game.Debug;
+import game.Game;
 import gui.ServerJoinInfo;
+
+import input.KeySettings;
+import input.NetworkPlayerKeys;
 
 import java.awt.Container;
 import java.io.BufferedReader;
@@ -21,8 +26,6 @@ import javax.swing.JFrame;
 
 import level.Loader;
 import level.Point;
-import network.Input;
-import network.Server;
 
 public class NetworkManager extends Thread {
 

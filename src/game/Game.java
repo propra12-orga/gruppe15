@@ -1,5 +1,8 @@
 package game;
 
+import input.InputHandler;
+import input.KeySettings;
+
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Container;
@@ -19,6 +22,7 @@ import javax.swing.JPanel;
 
 import level.Box;
 import level.Loader;
+import network.NetworkManager;
 import network.Server;
 import sound.Sound;
 import sound.Soundmanager;

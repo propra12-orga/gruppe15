@@ -1,4 +1,6 @@
-package game;
+package input;
+
+import game.Game;
 
 import java.awt.event.KeyEvent;
 
