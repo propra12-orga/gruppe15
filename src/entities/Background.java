@@ -9,7 +9,9 @@ public class Background extends Entity {
 
 	/**
 	 * @param x
+	 *            Upper Left Corner of the background tile
 	 * @param y
+	 *            Upper Left Corner of the background tile
 	 */
 	public Background(int x, int y) {
 		super(x, y);

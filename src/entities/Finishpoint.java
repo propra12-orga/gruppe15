@@ -19,7 +19,9 @@ public class Finishpoint extends Entity {
 
 	/**
 	 * @param x
+	 *            Upper Left Corner of the finish point
 	 * @param y
+	 *            Upper Left Corner of the finish point
 	 */
 	public Finishpoint(int x, int y) {
 		super(x, y);

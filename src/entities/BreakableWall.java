@@ -13,7 +13,9 @@ public class BreakableWall extends Wall {
 
 	/**
 	 * @param x
+	 *            Upper Left Corner of the wall
 	 * @param y
+	 *            Upper Left Corner of the wall
 	 */
 	// PointManager p = new PointManager();
 

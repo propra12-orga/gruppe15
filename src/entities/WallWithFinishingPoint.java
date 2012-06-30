@@ -3,7 +3,6 @@ package entities;
 import game.Game;
 
 public class WallWithFinishingPoint extends BreakableWall {
-	// PointManager p = new PointManager();
 
 	/*
 	 * @param x
@@ -27,7 +26,6 @@ public class WallWithFinishingPoint extends BreakableWall {
 			Game.staticBackground.add(new Background(this.x, this.y));
 			((BombAnimation) e).addAfterExplosion(new Finishpoint(this.x,
 					this.y));
-			// this.p.addPoints(200);
 			((BombAnimation) e).owner.pm.addPoints(200);
 		}
 	}

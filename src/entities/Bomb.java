@@ -14,13 +14,17 @@ public class Bomb extends Entity {
 
 	/**
 	 * @param x
+	 *            Upper Left Corner of the bomb
 	 * @param y
+	 *            Upper Left Corner of the bomb
 	 * @param owner
+	 *            Player who drops the bomb
 	 */
 	public Bomb(int x, int y, Player owner) {
 		super(x, y);
 		this.images = Sprite.load("bomb_small.png", 50, 49);
-		this.box = new Box(this.x + (Game.BLOCK_SIZE / 4), this.y + (Game.BLOCK_SIZE / 4), Game.BLOCK_SIZE / 2,
+		this.box = new Box(this.x + (Game.BLOCK_SIZE / 4), this.y
+				+ (Game.BLOCK_SIZE / 4), Game.BLOCK_SIZE / 2,
 				Game.BLOCK_SIZE / 2);
 		this.owner = owner;
 		this.explosionDelay = 50;
@@ -64,8 +68,9 @@ public class Bomb extends Entity {
 	 */
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage((this.images[0][0]).image, this.x + (Game.BLOCK_SIZE / 4), this.y + (Game.BLOCK_SIZE / 4),
-				Game.BLOCK_SIZE / 2, Game.BLOCK_SIZE / 2, null);
+		g.drawImage((this.images[0][0]).image, this.x + (Game.BLOCK_SIZE / 4),
+				this.y + (Game.BLOCK_SIZE / 4), Game.BLOCK_SIZE / 2,
+				Game.BLOCK_SIZE / 2, null);
 	}
 
 	/**
