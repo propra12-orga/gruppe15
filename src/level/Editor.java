@@ -154,7 +154,7 @@ public class Editor extends Canvas implements ActionListener {
 
 		editorframe.setJMenuBar(this.menubar);
 
-		// this.loadMap("Map3");
+		this.loadMap("Map3");
 
 	}
 

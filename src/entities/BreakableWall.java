@@ -20,7 +20,6 @@ public class BreakableWall extends Wall {
 	 * @param y
 	 *            Upper Left Corner of the wall
 	 */
-	// PointManager p = new PointManager();
 
 	public BreakableWall(int x, int y) {
 		super(x, y);
@@ -49,7 +48,6 @@ public class BreakableWall extends Wall {
 		if (e instanceof BombAnimation) {
 			this.removed = true;
 			Game.staticBackground.add(new Background(this.x, this.y));
-			// this.p.addPoints(200);
 			((BombAnimation) e).owner.pm.addPoints(200);
 			if (this.item != null) {
 				Game.entities.add(this.item);
