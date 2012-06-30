@@ -38,7 +38,7 @@ public class DiscoverServer implements Runnable {
 	public DiscoverServer(String name) throws SocketException {
 		this.announceSocket = new DatagramSocket(DiscoverServer.BROADCAST_PORT);
 		this.name = name;
-		Debug.log(Debug.ERROR, "DiscoverServer started");
+		Debug.log(Debug.DEBUG, "DiscoverServer started");
 	}
 
 	/*

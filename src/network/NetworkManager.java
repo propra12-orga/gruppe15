@@ -9,7 +9,6 @@ import enums.NetworkInputType;
 import game.Debug;
 import game.Game;
 import gui.ServerJoinInfo;
-
 import input.KeySettings;
 import input.NetworkPlayerKeys;
 
@@ -74,7 +73,6 @@ public class NetworkManager extends Thread {
 			try {
 				String command = this.inStream.readLine();
 				Input in = null;
-				// Debug.log(Debug.VERBOSE, command);
 				if (command.startsWith("input:")) {
 					in = new Input();
 					command = command.replace("input:", "").replace(";", "");
@@ -84,11 +82,8 @@ public class NetworkManager extends Thread {
 					in.x = Integer.valueOf(parts[2]);
 					in.y = Integer.valueOf(parts[3]);
 
-					// Debug.log(Debug.VERBOSE, in);
-
 					if (in.type == NetworkInputType.BOMB) {
 						Game.entities.add(new Bomb(in.x, in.y, in.playerID));
-						Debug.log(Debug.VERBOSE, "Bomb received");
 					} else if (in.type == NetworkInputType.PLAYER) {
 						for (Entity e : Game.players) {
 							Player player = (Player) e;
@@ -97,7 +92,6 @@ public class NetworkManager extends Thread {
 								break;
 							}
 						}
-						// Debug.log(Debug.VERBOSE, "Position received");
 					} else if (in.type == NetworkInputType.PLAYER_DEAD) {
 						ArrayList<Player> alive = new ArrayList<Player>();
 						for (Entity e : Game.players) {
@@ -118,7 +112,7 @@ public class NetworkManager extends Thread {
 					}
 				} else if (command.startsWith("me:")) {
 					this.playerID = Integer.valueOf(command.replace("me:", "").replace(";", ""));
-					Debug.log(Debug.VERBOSE, "PlayerID: " + this.playerID);
+					Debug.log(Debug.DEBUG, "PlayerID: " + this.playerID);
 				} else if (command.startsWith("m:")) {
 					Game.gamemode = Gamemode.NETWORK;
 
@@ -139,7 +133,6 @@ public class NetworkManager extends Thread {
 							p = new Player(po.x * Game.BLOCK_SIZE, po.y * Game.BLOCK_SIZE);
 							p.setKeys(keys);
 						}
-						Debug.log(Debug.VERBOSE, "Player " + i + " spawned at " + po);
 						p.setKeys(keys);
 						p.networkID = i;
 						Game.players.add(p);
@@ -169,10 +162,7 @@ public class NetworkManager extends Thread {
 			try {
 				this.outStream.write(("input:" + this.playerID + "," + in.type + "," + in.x + "," + in.y + ";\n")
 						.getBytes());
-				// Debug.log(Debug.VERBOSE, in);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				// e.printStackTrace();
 				Debug.log(Debug.ERROR, "Can't send to Server. Server down ?");
 			}
 		}

@@ -1,6 +1,5 @@
 package gui;
 
-import game.Debug;
 import game.Game;
 
 import java.awt.Container;
@@ -82,7 +81,6 @@ public class Serverbrowser extends JFrame implements ActionListener, WindowListe
 				if (Serverbrowser.this.old_list.length != l.length) {
 					Serverbrowser.this.list.setListData(l);
 					Serverbrowser.this.old_list = l;
-					Debug.log(Debug.DEBUG, "New server found");
 				}
 			}
 		});
