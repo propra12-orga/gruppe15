@@ -53,7 +53,7 @@ public class Bomb extends Entity {
 	 */
 	@Override
 	public void action(double delta) {
-		if (this.explosionDelay <= 0) {
+		if ((this.explosionDelay == 0)) {
 			this.removed = true;
 			Game.entities.add(new BombAnimation(this.x, this.y, this.owner));
 			this.sound.play();

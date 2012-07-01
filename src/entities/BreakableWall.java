@@ -50,9 +50,8 @@ public class BreakableWall extends Wall {
 			Game.staticBackground.add(new Background(this.x, this.y));
 			((BombAnimation) e).owner.pm.addPoints(200);
 			if (this.item != null) {
-				Game.entities.add(this.item);
+				((BombAnimation) e).addAfterExplosion(this.item);
 			}
 		}
 	}
-
 }

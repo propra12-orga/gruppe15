@@ -1,8 +1,10 @@
 package entities;
 
+import entities.items.Item;
 import enums.Gameend;
 import enums.Gamemode;
 import enums.NetworkInputType;
+import game.Debug;
 import game.Game;
 import graphics.Image;
 import graphics.Sprite;
@@ -94,6 +96,7 @@ public class BombAnimation extends Entity {
 					this.playerKilled.removed = true;
 				}
 				Game.getInstance().gameEnd(this.playerKilled, Gameend.dead);
+				return;
 			}
 		}
 
@@ -104,6 +107,7 @@ public class BombAnimation extends Entity {
 			for (Entity e : this.toPlace) {
 				Game.entities.add(e);
 			}
+			return;
 		}
 
 		List<Entity> entities = null;
@@ -136,6 +140,8 @@ public class BombAnimation extends Entity {
 		} else {
 			entities = Game.getEntities(new Box(this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE));
 		}
+
+		entities = Game.unique(entities);
 
 		for (Entity e : entities) {
 			if (e != this) {
@@ -230,6 +236,13 @@ public class BombAnimation extends Entity {
 				this.collideMap[2][4] = 0;
 			} else if (x > 2) {
 				this.collideMap[2][4] = 0;
+			}
+		}
+		if (e instanceof Item) {
+			if (this.toPlace.contains(e) == false) {
+				e.removed = true;
+				Debug.log(Debug.DEBUG, e.box);
+				Debug.log(Debug.DEBUG, "item removed");
 			}
 		}
 	}
