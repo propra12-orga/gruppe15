@@ -315,9 +315,15 @@ public class Game extends Canvas {
 		g.drawImage(Game.background, 0, 0, null);
 
 		for (Entity e : Game.entities) {
-			if (e.removed == false) {
-				e.draw(g);
+			if ((e instanceof Player) == false) {
+				if (e.removed == false) {
+					e.draw(g);
+				}
 			}
+		}
+
+		for (int i = 0; i < Game.players.size(); i++) {
+			Game.players.get(i).draw(g);
 		}
 
 		g.setColor(Color.WHITE);

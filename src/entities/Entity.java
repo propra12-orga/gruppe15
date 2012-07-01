@@ -13,8 +13,8 @@ import level.Box;
  */
 public class Entity {
 	public Box box;
-	protected int y;
-	protected int x;
+	public int y;
+	public int x;
 	public boolean isBlocking = true;
 	public boolean needsStep = true;
 	protected Image[][] images;

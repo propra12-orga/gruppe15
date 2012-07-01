@@ -1,6 +1,7 @@
 package entities;
 
 import entities.items.Item;
+import enums.Gameend;
 import enums.Gamemode;
 import enums.NetworkInputType;
 import game.Game;
@@ -34,7 +35,7 @@ public class Player extends Entity {
 	private int facing, facing1, drawdelay, defaultdrawdelay;
 	public PointManager pm = new PointManager();
 	public int networkID;
-	private Item item;
+	public Item item;
 
 	/**
 	 * Constructor for default Player sets position, speed, images, height and
@@ -255,6 +256,13 @@ public class Player extends Entity {
 				Game.network.send(input_b);
 			}
 		}
+
+		if (this.keys.item.down) {
+			if (this.item != null) {
+				this.keys.bomb.toggle(false);
+				this.item.action(this);
+			}
+		}
 	}
 
 	/**
@@ -323,5 +331,22 @@ public class Player extends Entity {
 	public void setPosition(int x, int y) {
 		this.x = x;
 		this.y = y;
+	}
+
+	public void killed(Entity by) {
+		for (int i = 0; i < Game.players.size(); i++) {
+			Player livingPlayer = (Player) Game.players.get(i);
+			if (this != livingPlayer) {
+				livingPlayer.pm.addPoints(1000);
+			}
+		}
+		if ((Game.gamemode == Gamemode.NETWORK) && (this.networkID == Game.network.playerID)) {
+			Input in = new Input();
+			in.playerID = this.networkID;
+			in.type = NetworkInputType.PLAYER_DEAD;
+			Game.network.send(in);
+			this.removed = true;
+		}
+		Game.getInstance().gameEnd(this, Gameend.dead);
 	}
 }

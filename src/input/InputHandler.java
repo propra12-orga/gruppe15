@@ -23,6 +23,7 @@ public class InputHandler implements KeyListener {
 		this.keys.put(KeyEvent.VK_LEFT, new Key());
 		this.keys.put(KeyEvent.VK_RIGHT, new Key());
 		this.keys.put(KeyEvent.VK_L, new Key());
+		this.keys.put(KeyEvent.VK_K, new Key());
 
 		// Keys for Player 2
 		this.keys.put(KeyEvent.VK_W, new Key());
@@ -30,6 +31,7 @@ public class InputHandler implements KeyListener {
 		this.keys.put(KeyEvent.VK_A, new Key());
 		this.keys.put(KeyEvent.VK_D, new Key());
 		this.keys.put(KeyEvent.VK_T, new Key());
+		this.keys.put(KeyEvent.VK_R, new Key());
 
 	}
 

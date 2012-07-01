@@ -14,4 +14,6 @@ public abstract class Item extends Entity {
 
 	public abstract void remove(Player p);
 
+	public abstract void action(Player p);
+
 }

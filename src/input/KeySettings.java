@@ -31,6 +31,8 @@ public class KeySettings {
 	 */
 	public Key down;
 
+	public Key item;
+
 	/**
 	 * Create key sets for every player
 	 */
@@ -41,6 +43,7 @@ public class KeySettings {
 		s1.right = Game.keys.getKey(KeyEvent.VK_RIGHT);
 		s1.up = Game.keys.getKey(KeyEvent.VK_UP);
 		s1.down = Game.keys.getKey(KeyEvent.VK_DOWN);
+		s1.item = Game.keys.getKey(KeyEvent.VK_K);
 		Game.key_settings.add(s1);
 
 		KeySettings s2 = new KeySettings();
@@ -49,6 +52,7 @@ public class KeySettings {
 		s2.right = Game.keys.getKey(KeyEvent.VK_D);
 		s2.up = Game.keys.getKey(KeyEvent.VK_W);
 		s2.down = Game.keys.getKey(KeyEvent.VK_S);
+		s2.item = Game.keys.getKey(KeyEvent.VK_R);
 		Game.key_settings.add(s2);
 	}
 

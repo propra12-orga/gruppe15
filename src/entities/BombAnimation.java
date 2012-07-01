@@ -1,9 +1,6 @@
 package entities;
 
 import entities.items.Item;
-import enums.Gameend;
-import enums.Gamemode;
-import enums.NetworkInputType;
 import game.Game;
 import graphics.Image;
 import graphics.Sprite;
@@ -13,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import level.Box;
-import network.Input;
 
 /**
  * Entity to control the Bomb Explosion
@@ -80,21 +76,7 @@ public class BombAnimation extends Entity {
 		if ((this.playerKilled != null)) {
 			this.killDelay--;
 			if (this.killDelay == 0) {
-				// this.playerKilled.removed = true;
-				for (int i = 0; i < Game.players.size(); i++) {
-					Player livingPlayer = (Player) Game.players.get(i);
-					if (this.playerKilled != livingPlayer) {
-						livingPlayer.pm.addPoints(1000);
-					}
-				}
-				if ((Game.gamemode == Gamemode.NETWORK) && (this.playerKilled.networkID == Game.network.playerID)) {
-					Input in = new Input();
-					in.playerID = this.playerKilled.networkID;
-					in.type = NetworkInputType.PLAYER_DEAD;
-					Game.network.send(in);
-					this.playerKilled.removed = true;
-				}
-				Game.getInstance().gameEnd(this.playerKilled, Gameend.dead);
+				this.playerKilled.killed(this.owner);
 				return;
 			}
 		}

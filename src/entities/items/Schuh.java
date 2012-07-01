@@ -30,7 +30,12 @@ public class Schuh extends Item {
 	 */
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage((this.images[0][0]).image, this.x, this.y, Game.BLOCK_SIZE,
-				Game.BLOCK_SIZE, null);
+		g.drawImage((this.images[0][0]).image, this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
+	}
+
+	@Override
+	public void action(Player p) {
+		// TODO Auto-generated method stub
+
 	}
 }
