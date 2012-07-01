@@ -84,6 +84,7 @@ public class Entity {
 	 */
 	public void action(double delta) {
 		List<Entity> es = Game.getEntities(this.box);
+		es = Game.unique(es);
 		for (Entity e : es) {
 			if (e != this) {
 				e.collide(this);
@@ -91,5 +92,4 @@ public class Entity {
 			}
 		}
 	}
-
 }

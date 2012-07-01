@@ -4,7 +4,6 @@ import entities.items.Item;
 import enums.Gameend;
 import enums.Gamemode;
 import enums.NetworkInputType;
-import game.Debug;
 import game.Game;
 import graphics.Image;
 import graphics.Sprite;
@@ -241,8 +240,6 @@ public class BombAnimation extends Entity {
 		if (e instanceof Item) {
 			if (this.toPlace.contains(e) == false) {
 				e.removed = true;
-				Debug.log(Debug.DEBUG, e.box);
-				Debug.log(Debug.DEBUG, "item removed");
 			}
 		}
 	}
