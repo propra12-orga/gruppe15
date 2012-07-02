@@ -8,6 +8,8 @@ import game.highscore.HighscoreManager;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
 
 import javax.swing.JApplet;
 import javax.swing.JButton;
@@ -99,6 +101,8 @@ public class GUI implements ActionListener {
 	private JMenuItem connectIP;
 	private JMenuItem generate;
 	private JMenuItem about;
+	private ArrayList<String> map_names;
+	private JMenu maps;
 
 	/**
 	 * @param frame
@@ -128,6 +132,24 @@ public class GUI implements ActionListener {
 		this.spiel.add(this.generate);
 		this.spiel.add(this.beenden);
 		this.menubar.add(this.spiel);
+
+		File folder = new File("src/ressources/maps");
+
+		File[] maps = folder.listFiles();
+		this.map_names = new ArrayList<String>();
+
+		this.maps = new JMenu("Maps");
+		this.maps.addActionListener(this);
+		for (File map : maps) {
+
+			if (map.isFile()) {
+				JMenuItem elem = new JMenuItem(map.getName());
+				elem.addActionListener(this);
+				this.map_names.add(map.getName());
+				this.maps.add(elem);
+			}
+		}
+		this.menubar.add(this.maps);
 
 		// Buttons for "Netzwerk"
 		this.netzwerk = new JMenu("Netzwerk");
@@ -278,6 +300,10 @@ public class GUI implements ActionListener {
 
 		if (arg0.getSource() == this.about) {
 			new About(this.frame);
+		}
+
+		if (this.map_names.contains(((JMenuItem) arg0.getSource()).getText())) {
+			this.game.init(((JMenuItem) arg0.getSource()).getText());
 		}
 	}
 }
