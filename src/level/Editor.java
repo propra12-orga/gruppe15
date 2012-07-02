@@ -1,5 +1,6 @@
 package level;
 
+import game.Game;
 import game.Main;
 import game.MouseHandler;
 import graphics.Image;
@@ -7,9 +8,12 @@ import graphics.Sprite;
 
 import java.awt.Canvas;
 import java.awt.Container;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 import javax.swing.JFileChooser;
@@ -71,13 +75,16 @@ public class Editor extends Canvas implements ActionListener {
 	 */
 	private JFrame editorframe;
 
-	private int element;
+	protected int element;
 
 	private String filename;
 	private Image images[][];
+	private int position[][];
 	int x = 0, type, y = 0;
 
 	private Scanner maps;
+	private Container frame;
+	private Graphics g;
 
 	/**
 	 * default constructor for Editor, sets frame and buttons
@@ -88,7 +95,6 @@ public class Editor extends Canvas implements ActionListener {
 		/**
 		 * create new JFrame called "Leveleditor" and set properties
 		 */
-
 		JFrame editorframe = new JFrame("Leveleditor");
 
 		editorframe.setTitle("Leveleditor");
@@ -96,7 +102,7 @@ public class Editor extends Canvas implements ActionListener {
 		editorframe.setLocationRelativeTo(frame);
 		editorframe.setVisible(true);
 
-		MouseHandler mousehandler = new MouseHandler();
+		MouseHandler mousehandler = new MouseHandler(frame);
 		editorframe.addMouseListener(mousehandler);
 
 		/**
@@ -154,8 +160,6 @@ public class Editor extends Canvas implements ActionListener {
 
 		editorframe.setJMenuBar(this.menubar);
 
-		this.loadMap("Map3");
-
 	}
 
 	/**
@@ -192,7 +196,7 @@ public class Editor extends Canvas implements ActionListener {
 			int returnVal = fileChooser.showSaveDialog(this.editorframe);
 
 			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				// save file
+				this.saveMap();
 			}
 
 			// if "neu" is pressed, load default Map
@@ -262,8 +266,9 @@ public class Editor extends Canvas implements ActionListener {
 						//
 
 					}
-
+					this.draw(this.g);
 				}
+
 				this.y++;
 			}
 
@@ -274,10 +279,10 @@ public class Editor extends Canvas implements ActionListener {
 	}
 
 	public void setComponent(int x, int y) {
+
 		this.x = x;
 		this.y = y;
 
-		// set position
 		if (this.element == 0) {
 			this.images = Sprite.load("background.png", 100, 100);
 		} else if (this.element == 1) {
@@ -289,10 +294,61 @@ public class Editor extends Canvas implements ActionListener {
 		} else if (this.element == 4) {
 			this.images = Sprite.load("finish.png", 100, 100);
 		} else if (this.element == 5) {
-			//
 
 		}
 
+		this.draw(this.g);
+	}
+
+	public void draw(Graphics g) {
+		g.drawImage((this.images[this.x][this.y]).image, this.x, this.y,
+				Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
+	}
+
+	/**
+	 * Method to save Map
+	 */
+	public void saveMap() {
+
+		int x = 0;
+		int y = 0;
+		try {
+			FileWriter fw = new FileWriter(this.getName() + ".txt");
+
+			while (y < Game.FIELD_HEIGHT) {
+				while (x < Game.FIELD_WIDTH) {
+
+					try {
+						if (this.images == Sprite.load("background.png", 100,
+								100)) {
+							this.element = 0;
+						} else if (this.images == Sprite.load("w1.png", 100,
+								100)) {
+							this.element = 1;
+						} else if (this.images == Sprite.load("wall.png", 100,
+								100)) {
+							this.element = 2;
+						} else if (this.images == Sprite.load("bomberman.png",
+								55, 90)) {
+							this.element = 3;
+						} else if (this.images == Sprite.load("finish.png",
+								100, 100)) {
+							this.element = 4;
+						}
+
+						fw.write(this.element);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					x++;
+				}
+				y++;
+			}
+			fw.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
