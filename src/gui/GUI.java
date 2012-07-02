@@ -178,7 +178,7 @@ public class GUI implements ActionListener {
 
 		this.menubar.add(this.leveleditor);
 
-		this.about = new JMenuItem("\u00FCber");
+		this.about = new JMenuItem("\u00DCber");
 		this.about.addActionListener(this);
 		this.menubar.add(this.about);
 

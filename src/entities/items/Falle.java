@@ -13,7 +13,7 @@ public class Falle extends Item {
 
 	public Falle(int x, int y) {
 		super(x, y);
-		this.images = Sprite.load("items/falle.png", 48, 48);
+		this.images = Sprite.load("items/trap_n.png", 100, 100);
 	}
 
 	@Override
@@ -38,7 +38,8 @@ public class Falle extends Item {
 
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage((this.images[0][0]).image, this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
+		g.drawImage((this.images[0][0]).image, this.x, this.y, Game.BLOCK_SIZE,
+				Game.BLOCK_SIZE, null);
 	}
 
 }
