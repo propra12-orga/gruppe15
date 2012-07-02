@@ -234,31 +234,14 @@ public class Game extends Canvas {
 	}
 
 	public void init(String map) {
-		this.map = map;
-		Game.entities = new CopyOnWriteArrayList<Entity>();
-		Game.staticBackground = new CopyOnWriteArrayList<Entity>();
-		Game.players = new CopyOnWriteArrayList<Entity>();
-		Loader l1 = new Loader();
-		l1.loadMap(map);
-
-		Game.GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE) + 1;
-		Game.GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE) + 1;
-
-		Dimension d = new Dimension(Game.GAME_WIDTH, Game.GAME_HEIGHT);
-		this.setPreferredSize(d);
-		this.setMinimumSize(d);
-		this.setMaximumSize(d);
-		Game.keys.resetKeys();
-		if (this.frame != null) {
-			this.repack();
-		}
+		this.initFromString(new Loader().loadMap(map));
 	}
 
 	/**
 	 * Restart the current map
 	 */
 	public void restart() {
-		this.init(this.map);
+		this.initFromString(this.map);
 		this.running = true;
 		this.run();
 	}
@@ -504,6 +487,28 @@ public class Game extends Canvas {
 		entities2.clear();
 		entities2.addAll(hs);
 		return entities2;
+
+	}
+
+	public void initFromString(String mapString) {
+		this.map = mapString;
+		Game.entities = new CopyOnWriteArrayList<Entity>();
+		Game.staticBackground = new CopyOnWriteArrayList<Entity>();
+		Game.players = new CopyOnWriteArrayList<Entity>();
+		Loader l1 = new Loader();
+		l1.loadMapFromString(this.map);
+
+		Game.GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE) + 1;
+		Game.GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE) + 1;
+
+		Dimension d = new Dimension(Game.GAME_WIDTH, Game.GAME_HEIGHT);
+		this.setPreferredSize(d);
+		this.setMinimumSize(d);
+		this.setMaximumSize(d);
+		Game.keys.resetKeys();
+		if (this.frame != null) {
+			this.repack();
+		}
 
 	}
 }
