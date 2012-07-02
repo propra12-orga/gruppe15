@@ -1,4 +1,5 @@
-package game;
+package input;
+
 
 public class NetworkPlayerKeys extends KeySettings {
 

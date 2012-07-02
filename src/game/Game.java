@@ -1,5 +1,10 @@
 package game;
 
+import game.highscore.HighscoreManager;
+import gui.ServerNotFound;
+import input.InputHandler;
+import input.KeySettings;
+
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Container;
@@ -9,20 +14,25 @@ import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import javax.swing.JApplet;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 import level.Box;
-import level.Generator;
 import level.Loader;
+import network.NetworkManager;
 import network.Server;
+import sound.Sound;
+import sound.Soundmanager;
 import entities.Entity;
 import entities.Player;
 import enums.Gameend;
 import enums.Gamemode;
-import game.highscore.HighscoreManager;
 
 /**
  *
@@ -108,7 +118,14 @@ public class Game extends Canvas {
 
 	public static NetworkManager network;
 
+	/**
+	 * Highscore manager
+	 */
 	public HighscoreManager hm = new HighscoreManager();
+
+	private String map;
+
+	private Container frame;
 
 	/**
 	 * Key Listener
@@ -146,7 +163,7 @@ public class Game extends Canvas {
 		this.requestFocus();
 		this.setFocusable(true);
 		this.init();
-		Sounds backgroundSound = new Sounds("rick_roll.wav", true);
+		Sound backgroundSound = Soundmanager.getInstance().load("rick_roll.wav", true);
 		backgroundSound.play();
 	}
 
@@ -217,13 +234,12 @@ public class Game extends Canvas {
 	}
 
 	public void init(String map) {
+		this.map = map;
 		Game.entities = new CopyOnWriteArrayList<Entity>();
 		Game.staticBackground = new CopyOnWriteArrayList<Entity>();
 		Game.players = new CopyOnWriteArrayList<Entity>();
-		Generator g1 = new Generator();
 		Loader l1 = new Loader();
-		g1.generateMap(10, 10);
-		l1.loadMap("Map3");
+		l1.loadMap(map);
 
 		Game.GAME_WIDTH = (Game.FIELD_WIDTH * Game.BLOCK_SIZE) + 1;
 		Game.GAME_HEIGHT = (Game.FIELD_HEIGHT * Game.BLOCK_SIZE) + 1;
@@ -233,13 +249,16 @@ public class Game extends Canvas {
 		this.setMinimumSize(d);
 		this.setMaximumSize(d);
 		Game.keys.resetKeys();
+		if (this.frame != null) {
+			this.repack();
+		}
 	}
 
 	/**
 	 * Restart the current map
 	 */
 	public void restart() {
-		this.init();
+		this.init(this.map);
 		this.running = true;
 		this.run();
 	}
@@ -273,10 +292,6 @@ public class Game extends Canvas {
 			}
 		}
 
-		/*
-		 * for (Entity e : Game.players) { if (e.removed) { this.gameEnd(false);
-		 * break; } }
-		 */
 	}
 
 	/**
@@ -290,8 +305,7 @@ public class Game extends Canvas {
 
 		if (this.oldBackgroundElems != Game.staticBackground.size()) {
 
-			Game.background = new BufferedImage(Game.GAME_WIDTH,
-					Game.GAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+			Game.background = new BufferedImage(Game.GAME_WIDTH, Game.GAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
 			for (Entity e : Game.staticBackground) {
 				e.draw(Game.background.getGraphics());
 			}
@@ -301,18 +315,22 @@ public class Game extends Canvas {
 		g.drawImage(Game.background, 0, 0, null);
 
 		for (Entity e : Game.entities) {
-			if (e.removed == false) {
-				e.draw(g);
+			if ((e instanceof Player) == false) {
+				if (e.removed == false) {
+					e.draw(g);
+				}
 			}
+		}
+
+		for (int i = 0; i < Game.players.size(); i++) {
+			Game.players.get(i).draw(g);
 		}
 
 		g.setColor(Color.WHITE);
 
 		for (int i = 0; i < Game.players.size(); i++) {
 			Player drawPoints = (Player) Game.players.get(i);
-			g.drawString(
-					"Spieler " + (i + 1) + ":" + drawPoints.pm.getPoints(),
-					100 * (i + 1), 10);
+			g.drawString("Spieler " + (i + 1) + ":" + drawPoints.pm.getPoints(), 100 * (i + 1), 10);
 		}
 
 		g.drawString("FPS: " + this.fps_static, 0, 10);
@@ -354,8 +372,7 @@ public class Game extends Canvas {
 			if (type == Gameend.finishReached) {
 				question = new JOptionPane("Du hast gewonnen!");
 			} else if (type == Gameend.lastAlive) {
-				question = new JOptionPane(
-						"Alle anderen Spieler sind tot. Du hast gewonnen.");
+				question = new JOptionPane("Alle anderen Spieler sind tot. Du hast gewonnen.");
 			} else {
 				question = new JOptionPane("Du hast verloren.");
 			}
@@ -370,8 +387,7 @@ public class Game extends Canvas {
 				index = Game.players.indexOf(p) + 1;
 				String winner;
 				if (type == Gameend.finishReached) {
-					JOptionPane.showMessageDialog(this, "Spieler " + index
-							+ " ist im Ziel und hat gewonnen!");
+					JOptionPane.showMessageDialog(this, "Spieler " + index + " ist im Ziel und hat gewonnen!");
 					winner = JOptionPane
 							.showInputDialog(
 									this,
@@ -390,9 +406,8 @@ public class Game extends Canvas {
 					} else {
 						otherplayer = 1;
 					}
-					JOptionPane.showMessageDialog(this, "Spieler " + index
-							+ " ist tot. Somit hat Spieler " + otherplayer
-							+ " gewonnen.");
+					JOptionPane.showMessageDialog(this, "Spieler " + index + " ist tot. Somit hat Spieler "
+							+ otherplayer + " gewonnen.");
 					winner = JOptionPane
 							.showInputDialog(
 									this,
@@ -411,8 +426,7 @@ public class Game extends Canvas {
 					JOptionPane.showMessageDialog(this, "Du hast verloren!");
 				}
 			}
-			int choice = JOptionPane.showConfirmDialog(this,
-					"M\u00F6chten Sie das Spiel neustarten ?", "Spielende",
+			int choice = JOptionPane.showConfirmDialog(this, "M\u00F6chten Sie das Spiel neustarten ?", "Spielende",
 					JOptionPane.YES_NO_OPTION);
 
 			if (choice == 0) {
@@ -450,7 +464,46 @@ public class Game extends Canvas {
 		Debug.log(Debug.DEBUG, "Connecting to server");
 		Debug.log(Debug.DEBUG, server);
 		Game.network = new NetworkManager(server, parentWindow);
-		Game.network.connect();
-		Game.network.start();
+		if (Game.network.connect()) {
+			Game.network.start();
+		} else {
+			new ServerNotFound(this.getParent());
+		}
+	}
+
+	/**
+	 * Set the parent Container of the Game
+	 * 
+	 * @param frame
+	 */
+	public void setFrame(Container frame) {
+		this.frame = frame;
+	}
+
+	/**
+	 * Resize the parent Container when a new map is loaded
+	 */
+	public void repack() {
+		JPanel panel;
+		if (this.frame instanceof JFrame) {
+			panel = (JPanel) ((JFrame) this.frame).getContentPane();
+		} else {
+			panel = (JPanel) ((JApplet) this.frame).getContentPane();
+		}
+		panel.setSize(panel.getPreferredSize());
+		panel.revalidate();
+		this.frame.setSize(this.frame.getPreferredSize());
+		if (this.frame instanceof JFrame) {
+			((JFrame) this.frame).pack();
+		}
+	}
+
+	public static List<Entity> unique(List<Entity> entities2) {
+		HashSet<Entity> hs = new HashSet<Entity>();
+		hs.addAll(entities2);
+		entities2.clear();
+		entities2.addAll(hs);
+		return entities2;
+
 	}
 }

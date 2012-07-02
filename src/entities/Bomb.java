@@ -1,20 +1,27 @@
 package entities;
 
 import game.Game;
-import game.Sounds;
 import graphics.Sprite;
 
 import java.awt.Graphics;
 
 import level.Box;
+import sound.Sound;
+import sound.Soundmanager;
 
+/**
+ * Bomb Entity to manage Explosion
+ */
 public class Bomb extends Entity {
-	private Sounds sound;
+	private Sound sound;
 
 	/**
 	 * @param x
+	 *            Upper Left Corner of the bomb
 	 * @param y
+	 *            Upper Left Corner of the bomb
 	 * @param owner
+	 *            Player who drops the bomb
 	 */
 	public Bomb(int x, int y, Player owner) {
 		super(x, y);
@@ -23,7 +30,7 @@ public class Bomb extends Entity {
 				Game.BLOCK_SIZE / 2);
 		this.owner = owner;
 		this.explosionDelay = 50;
-		this.sound = new Sounds("Explosion.wav", false);
+		this.sound = Soundmanager.getInstance().load("Explosion.wav", false);
 	}
 
 	public Bomb(int x, int y, int playerID) {
@@ -46,7 +53,7 @@ public class Bomb extends Entity {
 	 */
 	@Override
 	public void action(double delta) {
-		if (this.explosionDelay <= 0) {
+		if ((this.explosionDelay == 0)) {
 			this.removed = true;
 			Game.entities.add(new BombAnimation(this.x, this.y, this.owner));
 			this.sound.play();

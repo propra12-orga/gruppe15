@@ -2,20 +2,24 @@ package entities;
 
 import java.util.Random;
 
+import entities.items.Falle;
 import entities.items.Item;
-import entities.items.Schuh;
 import game.Game;
 import graphics.Sprite;
 
+/**
+ * Wall which can be destroyed by Bomb
+ */
 public class BreakableWall extends Wall {
 
 	private Item item;
 
 	/**
 	 * @param x
+	 *            Upper Left Corner of the wall
 	 * @param y
+	 *            Upper Left Corner of the wall
 	 */
-	// PointManager p = new PointManager();
 
 	public BreakableWall(int x, int y) {
 		super(x, y);
@@ -30,8 +34,9 @@ public class BreakableWall extends Wall {
 		}
 
 		if (new Random().nextInt(10) > 8) {
-			this.item = new Schuh(x, y);
+			this.item = new Falle(x, y);
 		}
+
 	}
 
 	/*
@@ -44,12 +49,10 @@ public class BreakableWall extends Wall {
 		if (e instanceof BombAnimation) {
 			this.removed = true;
 			Game.staticBackground.add(new Background(this.x, this.y));
-			// this.p.addPoints(200);
 			((BombAnimation) e).owner.pm.addPoints(200);
 			if (this.item != null) {
-				Game.entities.add(this.item);
+				((BombAnimation) e).addAfterExplosion(this.item);
 			}
 		}
 	}
-
 }

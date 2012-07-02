@@ -5,11 +5,16 @@ import graphics.Sprite;
 
 import java.awt.Graphics;
 
+/**
+ * Entity to display the default background
+ */
 public class Background extends Entity {
 
 	/**
 	 * @param x
+	 *            Upper Left Corner of the background tile
 	 * @param y
+	 *            Upper Left Corner of the background tile
 	 */
 	public Background(int x, int y) {
 		super(x, y);
@@ -25,8 +30,7 @@ public class Background extends Entity {
 	 */
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage((this.images[0][0]).image, this.x, this.y, Game.BLOCK_SIZE,
-				Game.BLOCK_SIZE, null);
+		g.drawImage((this.images[0][0]).image, this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
 	}
 
 }

@@ -1,9 +1,12 @@
 package network;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -72,7 +75,8 @@ public class GameServer implements Runnable {
 	public void run() {
 		Debug.log(Debug.DEBUG, "Game Server starting");
 		try {
-			Debug.log(Debug.DEBUG, "Server IP: " + InetAddress.getLocalHost().getHostAddress());
+			Debug.log(Debug.DEBUG, "Local Server IP: " + InetAddress.getLocalHost().getHostAddress());
+			Debug.log(Debug.DEBUG, "External Server IP: " + GameServer.getExternalIP());
 		} catch (UnknownHostException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -144,5 +148,16 @@ public class GameServer implements Runnable {
 			}
 		}
 		this.queue.clear();
+	}
+
+	public static String getExternalIP() {
+		String url = "http://privat.p-rehs.de/uni/ip.php";
+		try {
+			String ip = new BufferedReader(new InputStreamReader(new URL(url).openStream())).readLine();
+			return ip + " (Needs Port " + GameServer.GAME_PORT + " to be forwared)";
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "unknown (maybe no connection to internet)";
+		}
 	}
 }

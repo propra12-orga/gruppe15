@@ -15,7 +15,7 @@ public class DedicatedServer {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Debug.setMode(Debug.VERBOSE);
+		Debug.setMode(Debug.DEBUG);
 		GameServer gameserver;
 		try {
 			gameserver = new GameServer("Map2");

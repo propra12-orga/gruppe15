@@ -14,10 +14,6 @@ public class Debug {
 	 */
 	public static int DEBUG = 2;
 	/**
-	 * Constant for all messages
-	 */
-	public static int VERBOSE = 3;
-	/**
 	 * Constant for no messages
 	 */
 	public static int NONE = 0;
@@ -25,7 +21,7 @@ public class Debug {
 	/**
 	 * Set default mode
 	 */
-	private static int mode = Debug.VERBOSE;
+	private static int mode = Debug.DEBUG;
 
 	/**
 	 * Set the new mode

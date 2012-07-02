@@ -6,6 +6,9 @@ import graphics.Sprite;
 
 import java.awt.Graphics;
 
+/**
+ * Finishpoint for the game
+ */
 public class Finishpoint extends Entity {
 
 	/**
@@ -19,7 +22,9 @@ public class Finishpoint extends Entity {
 
 	/**
 	 * @param x
+	 *            Upper Left Corner of the finish point
 	 * @param y
+	 *            Upper Left Corner of the finish point
 	 */
 	public Finishpoint(int x, int y) {
 		super(x, y);
@@ -66,8 +71,7 @@ public class Finishpoint extends Entity {
 	 */
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage((this.images[0][0]).image, this.x, this.y, Game.BLOCK_SIZE,
-				Game.BLOCK_SIZE, null);
+		g.drawImage((this.images[0][0]).image, this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
 
 	}
 

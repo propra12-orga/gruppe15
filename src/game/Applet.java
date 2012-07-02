@@ -13,6 +13,7 @@ public class Applet extends JApplet {
 		this.setIgnoreRepaint(true);
 		this.setVisible(true);
 		this.game = Game.getInstance();
+		this.game.setFrame(this);
 		this.add(this.game);
 
 		new GUI(this, this.game);

@@ -126,10 +126,10 @@ public class Editor extends Canvas implements ActionListener {
 
 		this.komponente = new JMenu("Komponente");
 
-		this.breakable = new JMenuItem("Zerstörbare Wand");
+		this.breakable = new JMenuItem("Zerst\u00F6rbare Wand");
 		this.breakable.addActionListener(this);
 
-		this.unbreakable = new JMenuItem("Unzerstörbare Wand");
+		this.unbreakable = new JMenuItem("Unzerst\u00F6rbare Wand");
 		this.unbreakable.addActionListener(this);
 
 		this.finish = new JMenuItem("Ziel");

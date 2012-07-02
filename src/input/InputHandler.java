@@ -1,4 +1,4 @@
-package game;
+package input;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -11,49 +11,8 @@ import java.util.HashMap;
 public class InputHandler implements KeyListener {
 
 	/**
-	 * Key for moving up for player 1
+	 * Array with all known Keys
 	 */
-	public Key up = new Key();
-	/**
-	 * Key for moving down for player 1
-	 */
-	public Key down = new Key();
-	/**
-	 * Key for moving left for player 1
-	 */
-	public Key left = new Key();
-	/**
-	 * Key for moving right for player 1
-	 */
-	public Key right = new Key();
-	/**
-	 * Key for planting bomb for player 1
-	 */
-	public Key bomb = new Key();
-	/**
-	 * Key for moving up for player 2
-	 */
-	public Key up2 = new Key();
-	/**
-	 * Key for moving down for player 2
-	 */
-	public Key down2 = new Key();
-	/**
-	 * Key for moving left for player 2
-	 */
-	public Key left2 = new Key();
-	/**
-	 * Key for moving right for player 2
-	 */
-	public Key right2 = new Key();
-	/**
-	 * Key for planting bomb for player 2
-	 */
-	public Key bomb2 = new Key();
-	/**
-	 * Key for pausing the game
-	 */
-	public Key pause = new Key();
 	private HashMap<Integer, Key> keys;
 
 	public InputHandler() {
@@ -64,6 +23,7 @@ public class InputHandler implements KeyListener {
 		this.keys.put(KeyEvent.VK_LEFT, new Key());
 		this.keys.put(KeyEvent.VK_RIGHT, new Key());
 		this.keys.put(KeyEvent.VK_L, new Key());
+		this.keys.put(KeyEvent.VK_K, new Key());
 
 		// Keys for Player 2
 		this.keys.put(KeyEvent.VK_W, new Key());
@@ -71,6 +31,7 @@ public class InputHandler implements KeyListener {
 		this.keys.put(KeyEvent.VK_A, new Key());
 		this.keys.put(KeyEvent.VK_D, new Key());
 		this.keys.put(KeyEvent.VK_T, new Key());
+		this.keys.put(KeyEvent.VK_R, new Key());
 
 	}
 

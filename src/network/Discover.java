@@ -49,9 +49,8 @@ public class Discover extends Thread {
 		try {
 			this.waitSocket = new DatagramSocket(Discover.CALLBACK_PORT);
 			this.broadcast = new DatagramSocket();
-			Debug.log(Debug.DEBUG, "Suche Server");
 		} catch (SocketException e1) {
-			Debug.log(Debug.DEBUG, "Can't create Datagram");
+			Debug.log(Debug.ERROR, "Can't create Datagram");
 			e1.printStackTrace();
 		}
 		this.servers = new ArrayList<Server>();
@@ -60,7 +59,7 @@ public class Discover extends Thread {
 			InetAddress broadcastIP = InetAddress.getByName("255.255.255.255");
 			this.broadcastPacket = new DatagramPacket(buffer, buffer.length, broadcastIP, DiscoverServer.BROADCAST_PORT);
 		} catch (UnknownHostException e) {
-			Debug.log(Debug.DEBUG, "Can't create Broadcast");
+			Debug.log(Debug.ERROR, "Can't create Broadcast");
 		}
 	}
 
@@ -75,7 +74,7 @@ public class Discover extends Thread {
 			try {
 				this.broadcast.send(this.broadcastPacket);
 			} catch (IOException e1) {
-				Debug.log(Debug.DEBUG, "Can't send Discovery Broadcast");
+				Debug.log(Debug.ERROR, "Can't send Discovery Broadcast");
 			}
 
 			byte[] buffer = new byte[255];

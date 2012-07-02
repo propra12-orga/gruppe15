@@ -1,6 +1,7 @@
 package gui;
 
 import game.Game;
+import game.Settings;
 import game.highscore.HighscoreGui;
 import game.highscore.HighscoreManager;
 
@@ -10,6 +11,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JApplet;
 import javax.swing.JButton;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -18,7 +20,9 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import level.Editor;
+import level.Generator;
 import network.Discover;
+import sound.Soundmanager;
 
 /**
  * @author mauriceschleusinger
@@ -42,7 +46,7 @@ public class GUI implements ActionListener {
 	 */
 	private JMenuItem beenden;
 	/**
-	 * 
+	 * new item in tab "Spiel" named highscore
 	 */
 	private JMenuItem highscore;
 	/**
@@ -91,6 +95,10 @@ public class GUI implements ActionListener {
 	private Object[] old_list;
 	private JButton connectButton;
 	private Game game;
+	private JCheckBoxMenuItem sound;
+	private JMenuItem connectIP;
+	private JMenuItem generate;
+	private JMenuItem about;
 
 	/**
 	 * @param frame
@@ -112,8 +120,12 @@ public class GUI implements ActionListener {
 		this.highscore = new JMenuItem("Highscore");
 		this.highscore.addActionListener(this);
 
+		this.generate = new JMenuItem("Map generieren");
+		this.generate.addActionListener(this);
+
 		// this.spiel.add(this.starten);
 		this.spiel.add(this.highscore);
+		this.spiel.add(this.generate);
 		this.spiel.add(this.beenden);
 		this.menubar.add(this.spiel);
 
@@ -128,13 +140,27 @@ public class GUI implements ActionListener {
 		 */
 		this.findserver = new JMenuItem("Server suchen");
 		this.findserver.addActionListener(this);
+
+		this.connectIP = new JMenuItem("Internet");
+		this.connectIP.addActionListener(this);
+
 		this.netzwerk.add(this.findserver);
+		this.netzwerk.add(this.connectIP);
 		this.menubar.add(this.netzwerk);
 
 		// Buttons for "Optionen"
 		this.optionen = new JMenu("Optionen");
 		this.delScore = new JMenuItem("Highscore l\u00F6schen");
 		this.delScore.addActionListener(this);
+
+		// Button for Sound
+		this.sound = new JCheckBoxMenuItem("Sound");
+		this.sound.addActionListener(this);
+		Settings s = Settings.getInstance();
+		this.sound.setSelected(Soundmanager.getInstance().enabled());
+
+		this.optionen.add(this.sound);
+
 		/*
 		 * this.spname = new JMenuItem("Spielername"); this.groesse = new
 		 * JMenuItem("Groesse"); this.optionen.add(this.spname);
@@ -151,6 +177,10 @@ public class GUI implements ActionListener {
 		this.leveleditor.add(this.offnen);
 
 		this.menubar.add(this.leveleditor);
+
+		this.about = new JMenuItem("Über");
+		this.about.addActionListener(this);
+		this.menubar.add(this.about);
 
 		// set Menubar
 		if (this.frame instanceof JFrame) {
@@ -225,9 +255,29 @@ public class GUI implements ActionListener {
 			}
 		}
 
-		else if (arg0.getSource() == this.findserver) {
+		if (arg0.getSource() == this.findserver) {
 			new Serverbrowser(this.frame);
 		}
+		if (arg0.getSource() == this.connectIP) {
+			new ConnectToIp(this.frame);
+		}
+		if (arg0.getSource() == this.sound) {
+			if (this.sound.isSelected()) {
+				Soundmanager.getInstance().enable();
+			} else {
+				Soundmanager.getInstance().disable();
+			}
+			Settings.getInstance().set("sound", this.sound.isSelected());
+		}
 
+		if (arg0.getSource() == this.generate) {
+			Generator g = new Generator();
+			g.generateMap(15, 15);
+			this.game.init("genMap");
+		}
+
+		if (arg0.getSource() == this.about) {
+			new About(this.frame);
+		}
 	}
 }

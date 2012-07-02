@@ -8,10 +8,13 @@ import java.util.List;
 
 import level.Box;
 
+/**
+ * Main Class for all Entities Needs to be extended by all Entities
+ */
 public class Entity {
 	public Box box;
-	protected int y;
-	protected int x;
+	public int y;
+	public int x;
 	public boolean isBlocking = true;
 	public boolean needsStep = true;
 	protected Image[][] images;
@@ -81,6 +84,7 @@ public class Entity {
 	 */
 	public void action(double delta) {
 		List<Entity> es = Game.getEntities(this.box);
+		es = Game.unique(es);
 		for (Entity e : es) {
 			if (e != this) {
 				e.collide(this);
@@ -88,5 +92,4 @@ public class Entity {
 			}
 		}
 	}
-
 }

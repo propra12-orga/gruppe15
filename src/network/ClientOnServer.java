@@ -91,7 +91,6 @@ public class ClientOnServer extends Thread {
 				String command = this.inStream.readLine();
 				Input in = null;
 				if (command != null) {
-					// Debug.log(Debug.VERBOSE, "<< " + command);
 					if (command.startsWith("input")) {
 						in = new Input();
 						command = command.replace("input:", "").replace(";", "");
@@ -111,8 +110,6 @@ public class ClientOnServer extends Thread {
 			} catch (java.net.SocketTimeoutException ex) {
 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				// e.printStackTrace();
 				Debug.log(Debug.ERROR, "Can't read from Client. Disconnected?");
 			}
 			try {
