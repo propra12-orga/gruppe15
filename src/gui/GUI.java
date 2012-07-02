@@ -178,7 +178,7 @@ public class GUI implements ActionListener {
 
 		this.menubar.add(this.leveleditor);
 
-		this.about = new JMenuItem("/u00FCber");
+		this.about = new JMenuItem("\u00FCber");
 		this.about.addActionListener(this);
 		this.menubar.add(this.about);
 
@@ -277,6 +277,7 @@ public class GUI implements ActionListener {
 		if (arg0.getSource() == this.generate) {
 			Generator g = new Generator();
 			g.generateMap(11, 11);
+
 			this.game.init("genMap");
 		}
 
