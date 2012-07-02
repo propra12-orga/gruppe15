@@ -14,6 +14,7 @@ public class WallWithFinishingPoint extends BreakableWall {
 	 */
 	public WallWithFinishingPoint(int x, int y) {
 		super(x, y);
+		this.item = null;
 	}
 
 	/*
