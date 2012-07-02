@@ -2,7 +2,6 @@ package level;
 
 import game.Game;
 import game.Main;
-import game.MouseHandler;
 import graphics.Image;
 import graphics.Sprite;
 
@@ -11,6 +10,8 @@ import java.awt.Container;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -28,7 +29,7 @@ import javax.swing.JMenuItem;
  * 
  */
 
-public class Editor extends Canvas implements ActionListener {
+public class Editor extends Canvas implements ActionListener, MouseListener {
 
 	/**
 	 * new MenuBar named "menubar"
@@ -79,7 +80,7 @@ public class Editor extends Canvas implements ActionListener {
 
 	private String filename;
 	private Image images[][];
-	private int position[][];
+	private int arr[][];
 	int x = 0, type, y = 0;
 
 	private Scanner maps;
@@ -102,8 +103,7 @@ public class Editor extends Canvas implements ActionListener {
 		editorframe.setLocationRelativeTo(frame);
 		editorframe.setVisible(true);
 
-		MouseHandler mousehandler = new MouseHandler(frame);
-		editorframe.addMouseListener(mousehandler);
+		editorframe.addMouseListener(this);
 
 		/**
 		 * create new JMenuBar
@@ -132,10 +132,10 @@ public class Editor extends Canvas implements ActionListener {
 
 		this.komponente = new JMenu("Komponente");
 
-		this.breakable = new JMenuItem("Zerst\u00F6rbare Wand");
+		this.breakable = new JMenuItem("Zerstörbare Wand");
 		this.breakable.addActionListener(this);
 
-		this.unbreakable = new JMenuItem("Unzerst\u00F6rbare Wand");
+		this.unbreakable = new JMenuItem("Unzerstörbare Wand");
 		this.unbreakable.addActionListener(this);
 
 		this.finish = new JMenuItem("Ziel");
@@ -159,6 +159,7 @@ public class Editor extends Canvas implements ActionListener {
 		 */
 
 		editorframe.setJMenuBar(this.menubar);
+		this.loadMap("Map1");
 
 	}
 
@@ -250,7 +251,9 @@ public class Editor extends Canvas implements ActionListener {
 				for (this.x = 0; this.x < text.length(); this.x++) {
 					this.element = Integer.parseInt("" + text.charAt(this.x));
 					if (this.element == 0) {
-						this.images = Sprite.load("background.png", 100, 100);
+						System.out.print("0");
+						// this.images = Sprite.load("background.png", 100,
+						// 100);
 					} else if (this.element == 1) {
 						this.images = Sprite.load("w1.png", 100, 100);
 					} else if (this.element == 2) {
@@ -339,6 +342,7 @@ public class Editor extends Canvas implements ActionListener {
 						fw.write(this.element);
 					} catch (IOException e) {
 						e.printStackTrace();
+						fw.write("Fehler");
 					}
 					x++;
 				}
@@ -349,6 +353,50 @@ public class Editor extends Canvas implements ActionListener {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * determine what happens if mouse is clicked
+	 */
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		this.setComponent(arg0.getX(), arg0.getY());
+	}
+
+	/**
+	 * determine what happens if mouse enters field
+	 */
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * determines what happens if mouse exits field
+	 */
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * determines what happens if mouse is pressed
+	 */
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/**
+	 * determines what happens if mouse is released
+	 */
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
