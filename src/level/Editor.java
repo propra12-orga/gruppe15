@@ -80,7 +80,7 @@ public class Editor extends Canvas implements ActionListener, MouseListener {
 
 	private String filename;
 	private Image images[][];
-	private int position[][];
+	private int arr[][];
 	int x = 0, type, y = 0;
 
 	private Scanner maps;
@@ -132,10 +132,10 @@ public class Editor extends Canvas implements ActionListener, MouseListener {
 
 		this.komponente = new JMenu("Komponente");
 
-		this.breakable = new JMenuItem("Zerst\u00F6rbare Wand");
+		this.breakable = new JMenuItem("Zerstörbare Wand");
 		this.breakable.addActionListener(this);
 
-		this.unbreakable = new JMenuItem("Unzerst\u00F6rbare Wand");
+		this.unbreakable = new JMenuItem("Unzerstörbare Wand");
 		this.unbreakable.addActionListener(this);
 
 		this.finish = new JMenuItem("Ziel");
@@ -251,7 +251,9 @@ public class Editor extends Canvas implements ActionListener, MouseListener {
 				for (this.x = 0; this.x < text.length(); this.x++) {
 					this.element = Integer.parseInt("" + text.charAt(this.x));
 					if (this.element == 0) {
-						this.images = Sprite.load("background.png", 100, 100);
+						System.out.print("0");
+						// this.images = Sprite.load("background.png", 100,
+						// 100);
 					} else if (this.element == 1) {
 						this.images = Sprite.load("w1.png", 100, 100);
 					} else if (this.element == 2) {
