@@ -102,7 +102,7 @@ public class Editor extends Canvas implements ActionListener {
 		editorframe.setLocationRelativeTo(frame);
 		editorframe.setVisible(true);
 
-		MouseHandler mousehandler = new MouseHandler(frame);
+		MouseHandler mousehandler = new MouseHandler();
 		editorframe.addMouseListener(mousehandler);
 
 		/**

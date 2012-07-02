@@ -1,10 +1,7 @@
 package game;
 
-import java.awt.Container;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
-import level.Editor;
 
 /**
  * 
@@ -12,19 +9,14 @@ import level.Editor;
  * 
  */
 
-public class MouseHandler extends Editor implements MouseListener {
-
-	public MouseHandler(Container frame) {
-		super(frame);
-		// TODO Auto-generated constructor stub
-	}
+public class MouseHandler implements MouseListener {
 
 	/**
 	 * determine what happens if mouse is clicked
 	 */
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		this.setComponent(arg0.getX(), arg0.getY());
+		// this.setComponent(arg0.getX(), arg0.getY());
 	}
 
 	/**
