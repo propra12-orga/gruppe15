@@ -44,7 +44,6 @@ public class Generator {
 		this.file = new File("src/ressources/maps/genMap");
 		try {
 			this.fw = new FileWriter(this.file);
-
 			// create map-frame
 			for (int j = 0; j < this.fieldheight; j++) {
 				this.maparray[j][0] = '2';
