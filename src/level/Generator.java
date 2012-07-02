@@ -93,7 +93,7 @@ public class Generator {
 				}
 			}
 			// create the players
-			int rnd = new Random().nextInt((this.fieldheight - 3)) + 1;
+			int rnd = new Random().nextInt((this.fieldheight - 4)) + 2;
 			this.maparray[1][rnd - 1] = '3';
 			this.maparray[this.fieldheight - 2][rnd - 1] = '3';
 			// create some space around the players
@@ -102,7 +102,7 @@ public class Generator {
 			this.maparray[this.fieldheight - 2][rnd] = '0';
 			this.maparray[this.fieldheight - 3][rnd - 1] = '0';
 			// create a goal
-			int rnd2 = new Random().nextInt(this.fieldwith - 3) + 1;
+			int rnd2 = new Random().nextInt(this.fieldwith - 4) + 2;
 			this.maparray[this.fieldheight / 2][rnd2] = '5';
 			// write the generated map
 			for (int i = 0; i < (this.fieldheight); i++) {
