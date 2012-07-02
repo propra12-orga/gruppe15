@@ -10,7 +10,7 @@ public class Schuh extends Item {
 
 	public Schuh(int x, int y) {
 		super(x, y);
-		this.images = Sprite.load("items/speed_n.png", 100, 100);
+		this.images = Sprite.load("items/speed_n.png", 48, 48);
 	}
 
 	@Override

@@ -13,7 +13,7 @@ public class Falle extends Item {
 
 	public Falle(int x, int y) {
 		super(x, y);
-		this.images = Sprite.load("items/trap_n.png", 100, 100);
+		this.images = Sprite.load("items/trap_n.png", 48, 48);
 	}
 
 	@Override
