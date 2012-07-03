@@ -138,7 +138,6 @@ public class GUI implements ActionListener {
 			folder = new File(this.getClass().getResource("/ressources/maps")
 					.getPath());
 		}
-		System.out.println(folder.getPath());
 
 		File[] maps = folder.listFiles();
 		this.map_names = new ArrayList<String>();
