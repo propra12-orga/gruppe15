@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project default="javadoc">
     <target name="javadoc">
-        <javadoc access="private" author="true" classpath="C:\Program Files\eclipse\plugins\org.hamcrest.core_1.1.0.v20090501071000.jar;C:\Program Files\eclipse\plugins\org.junit_4.8.2.v4_8_2_v20110321-1705\junit.jar" destdir="doc" doctitle="Bomberman Dokumentation" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="entities,level,graphics,game,network" source="1.6" sourcefiles="tests/ImageTest.java,tests/SpriteTest.java,tests/NetworkTest.java" sourcepath="tests;src" splitindex="true" use="true" version="true"/>
+        <javadoc access="public" author="true" classpath="H:\Java\Eclipse\plugins\org.hamcrest.core_1.1.0.v20090501071000.jar;H:\Java\Eclipse\plugins\org.junit_4.8.2.v4_8_2_v20110321-1705\junit.jar" destdir="doc" doctitle="Bomberman" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="input,level,gui,game.highscore,entities,graphics,sound,game,network,entities.items,enums" source="1.6" sourcepath="src" splitindex="true" use="true" version="true"/>
     </target>
 </project>

@@ -33,6 +33,11 @@ public class Bomb extends Entity {
 		this.sound = Soundmanager.getInstance().load("Explosion.wav", false);
 	}
 
+	/**
+	 * Alternate Constructor for Multiplayer
+	 * 
+	 * @see Bomb
+	 */
 	public Bomb(int x, int y, int playerID) {
 		this(x, y, (Player) Game.players.get(playerID));
 	}

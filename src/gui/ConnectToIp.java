@@ -88,6 +88,12 @@ public class ConnectToIp extends JFrame implements ActionListener {
 
 	}
 
+	/**
+	 * Check if it is a real IPv4
+	 * 
+	 * @param ip
+	 * @return
+	 */
 	public static boolean validate(final String ip) {
 		String PATTERN = "^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\."
 				+ "([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." + "([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";

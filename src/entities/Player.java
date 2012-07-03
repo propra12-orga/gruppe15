@@ -328,11 +328,25 @@ public class Player extends Entity {
 		this.keys = keys;
 	}
 
+	/**
+	 * Set the position of the player Used for network gaming
+	 * 
+	 * @param x
+	 *            int
+	 * @param y
+	 *            int
+	 */
 	public void setPosition(int x, int y) {
 		this.x = x;
 		this.y = y;
 	}
 
+	/**
+	 * Gets called when a player died
+	 * 
+	 * @param by
+	 *            Entity
+	 */
 	public void killed(Entity by) {
 		for (int i = 0; i < Game.players.size(); i++) {
 			Player livingPlayer = (Player) Game.players.get(i);

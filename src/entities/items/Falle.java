@@ -28,6 +28,11 @@ public class Falle extends Item {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see entities.items.Item#action(entities.Player)
+	 */
 	@Override
 	public void action(Player p) {
 		int b_x = Box.fitToBlock(p.x);
@@ -36,10 +41,14 @@ public class Falle extends Item {
 		p.item = null;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see entities.Entity#draw(java.awt.Graphics)
+	 */
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage((this.images[0][0]).image, this.x, this.y, Game.BLOCK_SIZE,
-				Game.BLOCK_SIZE, null);
+		g.drawImage((this.images[0][0]).image, this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
 	}
 
 }

@@ -35,6 +35,9 @@ public class Settings {
 
 	private Document doc;
 
+	/**
+	 * Constructor to load settings
+	 */
 	private Settings() {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder;
@@ -46,6 +49,12 @@ public class Settings {
 		}
 	}
 
+	/**
+	 * Get a String from settings
+	 * 
+	 * @param key
+	 * @return String
+	 */
 	public String getString(String key) {
 		NodeList list = this.doc.getDocumentElement().getElementsByTagName(key);
 		if (list.getLength() > 0) {
@@ -55,6 +64,12 @@ public class Settings {
 		}
 	}
 
+	/**
+	 * Get a boolean from settings
+	 * 
+	 * @param key
+	 * @return boolean
+	 */
 	public boolean getBoolean(String key) {
 		NodeList list = this.doc.getDocumentElement().getElementsByTagName(key);
 		if (list.getLength() > 0) {
@@ -64,6 +79,12 @@ public class Settings {
 		}
 	}
 
+	/**
+	 * Set a setting
+	 * 
+	 * @param key
+	 * @param value
+	 */
 	public void set(String key, Object value) {
 		NodeList list = this.doc.getDocumentElement().getElementsByTagName(key);
 		if (list.getLength() > 0) {
@@ -76,11 +97,12 @@ public class Settings {
 		this.save();
 	}
 
+	/**
+	 * Save the settings, gets called after set()
+	 */
 	public void save() {
 		DOMSource source = new DOMSource(this.doc);
 
-		// PrintStream will be responsible for writing
-		// the text data to the file
 		PrintStream ps;
 		try {
 			ps = new PrintStream(Main.class.getResource(this.file).getPath());

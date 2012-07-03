@@ -77,10 +77,19 @@ public class InputHandler implements KeyListener {
 		this.toggle(ke, true);
 	}
 
+	/**
+	 * Return a key
+	 * 
+	 * @param key
+	 * @return
+	 */
 	public Key getKey(Integer key) {
 		return this.keys.get(key);
 	}
 
+	/**
+	 * Sets all keys to false
+	 */
 	public void resetKeys() {
 		for (Integer i : this.keys.keySet()) {
 			this.keys.get(i).toggle(false);

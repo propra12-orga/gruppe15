@@ -21,10 +21,11 @@ public class Wall extends Entity {
 
 	}
 
-	/**
-	 * draws Wall on canvas
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see entities.Entity#draw(java.awt.Graphics)
 	 */
-
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(Color.RED);

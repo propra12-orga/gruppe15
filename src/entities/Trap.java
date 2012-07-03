@@ -28,6 +28,11 @@ public class Trap extends Entity {
 		g.drawImage((this.images[0][0]).image, this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see entities.Entity#collide(entities.Entity)
+	 */
 	@Override
 	public void collide(Entity e) {
 		if (e instanceof Player) {

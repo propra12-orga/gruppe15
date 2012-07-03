@@ -35,7 +35,7 @@ public class Generator {
 	 * 
 	 * @param fieldheight
 	 * @param fieldwith
-	 * @return
+	 * @return String
 	 */
 	public String generateMap(int fieldheight, int fieldwith) {
 		this.fieldheight = fieldheight;

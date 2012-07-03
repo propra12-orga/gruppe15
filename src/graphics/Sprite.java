@@ -10,6 +10,8 @@ import javax.imageio.ImageIO;
 public class Sprite {
 
 	/**
+	 * Loads an Image and splits it into parts
+	 * 
 	 * @param filename
 	 * @param w
 	 * @param h

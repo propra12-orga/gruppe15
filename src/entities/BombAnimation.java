@@ -46,6 +46,9 @@ public class BombAnimation extends Entity {
 	 */
 	public Player owner;
 
+	/**
+	 * Array with elements which are placed after explosion
+	 */
 	private ArrayList<Entity> toPlace = new ArrayList<Entity>();
 
 	/**
@@ -226,6 +229,12 @@ public class BombAnimation extends Entity {
 		}
 	}
 
+	/**
+	 * Adds an entity to be placed after explosion
+	 * 
+	 * @param e
+	 *            Entity
+	 */
 	public void addAfterExplosion(Entity e) {
 		this.toPlace.add(e);
 	}

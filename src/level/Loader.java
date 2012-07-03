@@ -140,6 +140,12 @@ public class Loader {
 		return player_count;
 	}
 
+	/**
+	 * Return the positions of all Spawnpoints
+	 * 
+	 * @param filename
+	 * @return
+	 */
 	public ArrayList<Point> getSpawnPoints(String filename) {
 		int x = 0, type, y = 0;
 		ArrayList<Point> spawnpoints = new ArrayList<Point>();

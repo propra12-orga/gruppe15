@@ -49,6 +49,11 @@ public class Game extends Canvas {
 	 */
 	public static final int BLOCK_SIZE = 50;
 
+	/**
+	 * Current Gamemode
+	 * 
+	 * @see Gamemode
+	 */
 	public static Gamemode gamemode = null;
 
 	/**
@@ -116,6 +121,9 @@ public class Game extends Canvas {
 	 */
 	private int oldBackgroundElems = 0;
 
+	/**
+	 * Holds the NetworkManager when Multiplayer
+	 */
 	public static NetworkManager network;
 
 	/**
@@ -123,8 +131,14 @@ public class Game extends Canvas {
 	 */
 	public HighscoreManager hm = new HighscoreManager();
 
+	/**
+	 * String of the current Map Used for restart
+	 */
 	private String map;
 
+	/**
+	 * Parent Element of the Gamecanvas,used on resize
+	 */
 	private Container frame;
 
 	/**
@@ -163,8 +177,7 @@ public class Game extends Canvas {
 		this.requestFocus();
 		this.setFocusable(true);
 		this.init();
-		Sound backgroundSound = Soundmanager.getInstance().load(
-				"rick_roll.wav", true);
+		Sound backgroundSound = Soundmanager.getInstance().load("rick_roll.wav", true);
 		backgroundSound.play();
 	}
 
@@ -289,8 +302,7 @@ public class Game extends Canvas {
 
 		if (this.oldBackgroundElems != Game.staticBackground.size()) {
 
-			Game.background = new BufferedImage(Game.GAME_WIDTH,
-					Game.GAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+			Game.background = new BufferedImage(Game.GAME_WIDTH, Game.GAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
 			for (Entity e : Game.staticBackground) {
 				e.draw(Game.background.getGraphics());
 			}
@@ -315,9 +327,7 @@ public class Game extends Canvas {
 
 		for (int i = 0; i < Game.players.size(); i++) {
 			Player drawPoints = (Player) Game.players.get(i);
-			g.drawString(
-					"Spieler " + (i + 1) + ":" + drawPoints.pm.getPoints(),
-					100 * (i + 1), 10);
+			g.drawString("Spieler " + (i + 1) + ":" + drawPoints.pm.getPoints(), 100 * (i + 1), 10);
 		}
 
 		g.drawString("FPS: " + this.fps_static, 0, 10);
@@ -359,8 +369,7 @@ public class Game extends Canvas {
 			if (type == Gameend.finishReached) {
 				question = new JOptionPane("Du hast gewonnen!");
 			} else if (type == Gameend.lastAlive) {
-				question = new JOptionPane(
-						"Alle anderen Spieler sind tot. Du hast gewonnen.");
+				question = new JOptionPane("Alle anderen Spieler sind tot. Du hast gewonnen.");
 			} else {
 				question = new JOptionPane("Du hast verloren.");
 			}
@@ -375,8 +384,7 @@ public class Game extends Canvas {
 				index = Game.players.indexOf(p) + 1;
 				String winner;
 				if (type == Gameend.finishReached) {
-					JOptionPane.showMessageDialog(this, "Spieler " + index
-							+ " ist im Ziel und hat gewonnen!");
+					JOptionPane.showMessageDialog(this, "Spieler " + index + " ist im Ziel und hat gewonnen!");
 					winner = JOptionPane
 							.showInputDialog(
 									this,
@@ -395,9 +403,8 @@ public class Game extends Canvas {
 					} else {
 						otherplayer = 1;
 					}
-					JOptionPane.showMessageDialog(this, "Spieler " + index
-							+ " ist tot. Somit hat Spieler " + otherplayer
-							+ " gewonnen.");
+					JOptionPane.showMessageDialog(this, "Spieler " + index + " ist tot. Somit hat Spieler "
+							+ otherplayer + " gewonnen.");
 					winner = JOptionPane
 							.showInputDialog(
 									this,
@@ -416,8 +423,7 @@ public class Game extends Canvas {
 					JOptionPane.showMessageDialog(this, "Du hast verloren!");
 				}
 			}
-			int choice = JOptionPane.showConfirmDialog(this,
-					"M\u00F6chten Sie das Spiel neustarten ?", "Spielende",
+			int choice = JOptionPane.showConfirmDialog(this, "M\u00F6chten Sie das Spiel neustarten ?", "Spielende",
 					JOptionPane.YES_NO_OPTION);
 
 			if (choice == 0) {
@@ -489,6 +495,12 @@ public class Game extends Canvas {
 		}
 	}
 
+	/**
+	 * Return the array with just unique elements
+	 * 
+	 * @param entities2
+	 * @return List<Entity>
+	 */
 	public static List<Entity> unique(List<Entity> entities2) {
 		HashSet<Entity> hs = new HashSet<Entity>();
 		hs.addAll(entities2);
@@ -498,6 +510,12 @@ public class Game extends Canvas {
 
 	}
 
+	/**
+	 * Init Method to load map and set Game size
+	 * 
+	 * @param mapString
+	 *            Content of the Map file
+	 */
 	public void initFromString(String mapString) {
 		this.map = mapString;
 		Game.entities = new CopyOnWriteArrayList<Entity>();
