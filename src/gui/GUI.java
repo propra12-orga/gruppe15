@@ -8,7 +8,6 @@ import game.highscore.HighscoreManager;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.ArrayList;
 
 import javax.swing.JApplet;
@@ -130,17 +129,17 @@ public class GUI implements ActionListener {
 
 		// this.spiel.add(this.starten);
 		this.spiel.add(this.highscore);
-		this.spiel.add(this.beenden);
+		if ((this.frame instanceof JApplet) == false) {
+			this.spiel.add(this.beenden);
+		}
 		this.menubar.add(this.spiel);
 
-		File folder = new File("src/ressources/maps");
-		if (folder.exists() == false) {
-			folder = new File(this.getClass().getResource("/ressources/maps")
-					.getPath());
-		}
-
-		File[] maps = folder.listFiles();
 		this.map_names = new ArrayList<String>();
+		this.map_names.add("Map1");
+		this.map_names.add("Map2");
+		this.map_names.add("Map3");
+		this.map_names.add("Map4");
+		this.map_names.add("Map5");
 
 		this.maps = new JMenu("Maps");
 
@@ -148,31 +147,19 @@ public class GUI implements ActionListener {
 		this.generate.addActionListener(this);
 		this.maps.add(this.generate);
 
-		if (maps != null) {
-			this.maps.add(new JSeparator());
-			this.maps.addActionListener(this);
-			for (File map : maps) {
+		this.maps.add(new JSeparator());
+		this.maps.addActionListener(this);
+		for (String map : this.map_names) {
+			JMenuItem elem = new JMenuItem(map);
+			elem.addActionListener(this);
+			this.maps.add(elem);
 
-				if (map.isFile()) {
-					JMenuItem elem = new JMenuItem(map.getName());
-					elem.addActionListener(this);
-					this.map_names.add(map.getName());
-					this.maps.add(elem);
-				}
-			}
 		}
 
 		this.menubar.add(this.maps);
 
 		// Buttons for "Netzwerk"
 		this.netzwerk = new JMenu("Netzwerk");
-		/*
-		 * this.startserver = new JMenuItem("Server starten"); this.stopserver =
-		 * new JMenuItem("Server beenden"); this.findserver = new
-		 * JMenuItem("Server suchen"); this.netzwerk.add(this.startserver);
-		 * this.netzwerk.add(this.stopserver);
-		 * this.netzwerk.add(this.findserver);
-		 */
 		this.findserver = new JMenuItem("Server suchen");
 		this.findserver.addActionListener(this);
 
@@ -191,7 +178,6 @@ public class GUI implements ActionListener {
 		// Button for Sound
 		this.sound = new JCheckBoxMenuItem("Sound");
 		this.sound.addActionListener(this);
-		Settings s = Settings.getInstance();
 		this.sound.setSelected(Soundmanager.getInstance().enabled());
 
 		this.optionen.add(this.sound);
@@ -238,8 +224,7 @@ public class GUI implements ActionListener {
 		// If the "restart"-button is pressed the game asks to restart the game
 		if (arg0.getSource() == this.starten) {
 			Object[] options = { "Neustart", "Abbrechen" };
-			JOptionPane question = new JOptionPane(
-					"Spiel neustarten? Der aktuelle Fortschritt geht verloren");
+			JOptionPane question = new JOptionPane("Spiel neustarten? Der aktuelle Fortschritt geht verloren");
 			question.setOptions(options);
 			JDialog dialog = question.createDialog(this.frame, "Achtung");
 			dialog.setVisible(true);
@@ -254,8 +239,7 @@ public class GUI implements ActionListener {
 			// If the exit-button is pressed the game asks to exit the game
 		} else if (arg0.getSource() == this.beenden) {
 			Object[] options = { "Beenden", "Abbrechen" };
-			JOptionPane question = new JOptionPane(
-					"Spiel beenden? Der aktuelle Fortschritt geht verloren");
+			JOptionPane question = new JOptionPane("Spiel beenden? Der aktuelle Fortschritt geht verloren");
 			question.setOptions(options);
 			JDialog dialog = question.createDialog(this.frame, "Achtung");
 			dialog.setVisible(true);
@@ -282,11 +266,9 @@ public class GUI implements ActionListener {
 		}
 		if (arg0.getSource() == this.delScore) {
 			int choice;
-			choice = JOptionPane
-					.showConfirmDialog(
-							this.frame,
-							"Sind Sie sicher, dass sie den Highscore l\u00F6schen m\u00F6chten?",
-							"Highscore l\u00F6schen", JOptionPane.YES_NO_OPTION);
+			choice = JOptionPane.showConfirmDialog(this.frame,
+					"Sind Sie sicher, dass sie den Highscore l\u00F6schen m\u00F6chten?", "Highscore l\u00F6schen",
+					JOptionPane.YES_NO_OPTION);
 			if (choice == 0) {
 				HighscoreManager hm = new HighscoreManager();
 				hm.getScores().clear();

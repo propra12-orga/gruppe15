@@ -42,8 +42,7 @@ public class Settings {
 			builder = factory.newDocumentBuilder();
 			this.doc = builder.parse(Main.class.getResourceAsStream(this.file));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Debug.log(Debug.ERROR, "Can't load settings");
 		}
 	}
 
@@ -90,7 +89,7 @@ public class Settings {
 			Transformer transformer = transformerFactory.newTransformer();
 			transformer.transform(source, result);
 		} catch (Exception e) {
-			e.printStackTrace();
+			Debug.log(Debug.ERROR, "Can't write settings");
 		}
 	}
 }
