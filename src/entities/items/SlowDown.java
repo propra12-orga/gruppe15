@@ -1,15 +1,16 @@
 package entities.items;
 
-import java.awt.Graphics;
-
 import entities.Player;
 import game.Game;
+import graphics.Sprite;
+
+import java.awt.Graphics;
 
 public class SlowDown extends Item {
 
 	public SlowDown(int x, int y) {
 		super(x, y);
-		// (image missing) this.images = Sprite.load("items/", 100, 100);
+		this.images = Sprite.load("items/freeze.png", 48, 48);
 	}
 
 	@Override

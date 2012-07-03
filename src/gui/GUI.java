@@ -144,15 +144,17 @@ public class GUI implements ActionListener {
 		this.generate.addActionListener(this);
 		this.maps.add(this.generate);
 
-		this.maps.add(new JSeparator());
-		this.maps.addActionListener(this);
-		for (File map : maps) {
+		if (maps != null) {
+			this.maps.add(new JSeparator());
+			this.maps.addActionListener(this);
+			for (File map : maps) {
 
-			if (map.isFile()) {
-				JMenuItem elem = new JMenuItem(map.getName());
-				elem.addActionListener(this);
-				this.map_names.add(map.getName());
-				this.maps.add(elem);
+				if (map.isFile()) {
+					JMenuItem elem = new JMenuItem(map.getName());
+					elem.addActionListener(this);
+					this.map_names.add(map.getName());
+					this.maps.add(elem);
+				}
 			}
 		}
 
@@ -232,7 +234,8 @@ public class GUI implements ActionListener {
 		// If the "restart"-button is pressed the game asks to restart the game
 		if (arg0.getSource() == this.starten) {
 			Object[] options = { "Neustart", "Abbrechen" };
-			JOptionPane question = new JOptionPane("Spiel neustarten? Der aktuelle Fortschritt geht verloren");
+			JOptionPane question = new JOptionPane(
+					"Spiel neustarten? Der aktuelle Fortschritt geht verloren");
 			question.setOptions(options);
 			JDialog dialog = question.createDialog(this.frame, "Achtung");
 			dialog.setVisible(true);
@@ -247,7 +250,8 @@ public class GUI implements ActionListener {
 			// If the exit-button is pressed the game asks to exit the game
 		} else if (arg0.getSource() == this.beenden) {
 			Object[] options = { "Beenden", "Abbrechen" };
-			JOptionPane question = new JOptionPane("Spiel beenden? Der aktuelle Fortschritt geht verloren");
+			JOptionPane question = new JOptionPane(
+					"Spiel beenden? Der aktuelle Fortschritt geht verloren");
 			question.setOptions(options);
 			JDialog dialog = question.createDialog(this.frame, "Achtung");
 			dialog.setVisible(true);
@@ -274,9 +278,11 @@ public class GUI implements ActionListener {
 		}
 		if (arg0.getSource() == this.delScore) {
 			int choice;
-			choice = JOptionPane.showConfirmDialog(this.frame,
-					"Sind Sie sicher, dass sie den Highscore l\u00F6schen m\u00F6chten?", "Highscore l\u00F6schen",
-					JOptionPane.YES_NO_OPTION);
+			choice = JOptionPane
+					.showConfirmDialog(
+							this.frame,
+							"Sind Sie sicher, dass sie den Highscore l\u00F6schen m\u00F6chten?",
+							"Highscore l\u00F6schen", JOptionPane.YES_NO_OPTION);
 			if (choice == 0) {
 				HighscoreManager hm = new HighscoreManager();
 				hm.getScores().clear();

@@ -5,6 +5,7 @@ import java.util.Random;
 import entities.items.Falle;
 import entities.items.Item;
 import entities.items.Schuh;
+import entities.items.SlowDown;
 import game.Game;
 import graphics.Sprite;
 
@@ -38,6 +39,8 @@ public class BreakableWall extends Wall {
 			this.item = new Falle(x, y);
 		} else if (new Random().nextInt(10) > 8) {
 			this.item = new Schuh(x, y);
+		} else if (new Random().nextInt(10) > 8) {
+			this.item = new SlowDown(x, y);
 		}
 
 	}
