@@ -300,7 +300,7 @@ public class Game extends Canvas {
 		g.setColor(this.getBackground());
 		g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
 
-		if (this.oldBackgroundElems != Game.staticBackground.size()) {
+		if ((this.oldBackgroundElems != Game.staticBackground.size()) || (Game.background == null)) {
 
 			Game.background = new BufferedImage(Game.GAME_WIDTH, Game.GAME_HEIGHT, BufferedImage.TYPE_INT_ARGB);
 			for (Entity e : Game.staticBackground) {
@@ -363,15 +363,14 @@ public class Game extends Canvas {
 	 */
 	public void gameEnd(Player p, Gameend type) {
 		this.stop();
-		JOptionPane question;
 		int index;
 		if (Game.gamemode == Gamemode.NETWORK) {
 			if (type == Gameend.finishReached) {
-				question = new JOptionPane("Du hast gewonnen!");
+				JOptionPane.showMessageDialog(this, "Du hast gewonnen!");
 			} else if (type == Gameend.lastAlive) {
-				question = new JOptionPane("Alle anderen Spieler sind tot. Du hast gewonnen.");
+				JOptionPane.showMessageDialog(this, "Alle anderen Spieler sind tot. Du hast gewonnen.");
 			} else {
-				question = new JOptionPane("Du hast verloren.");
+				JOptionPane.showMessageDialog(this, "Du hast verloren.");
 			}
 		} else {
 			if (Game.players.size() == 2) {
@@ -423,17 +422,18 @@ public class Game extends Canvas {
 					JOptionPane.showMessageDialog(this, "Du hast verloren!");
 				}
 			}
-			int choice = JOptionPane.showConfirmDialog(this, "M\u00F6chten Sie das Spiel neustarten ?", "Spielende",
-					JOptionPane.YES_NO_OPTION);
-
-			if (choice == 0) {
-				// Spiel neustarten
-				this.restart();
-			} else {
-				// Spiel beenden;
-				System.exit(0);
-			}
 		}
+		int choice = JOptionPane.showConfirmDialog(this, "M\u00F6chten Sie das Spiel neustarten ?", "Spielende",
+				JOptionPane.YES_NO_OPTION);
+
+		if (choice == 0) {
+			// Spiel neustarten
+			this.restart();
+		} else {
+			// Spiel beenden;
+			System.exit(0);
+		}
+
 	}
 
 	/**
@@ -493,6 +493,7 @@ public class Game extends Canvas {
 		if (this.frame instanceof JFrame) {
 			((JFrame) this.frame).pack();
 		}
+		Game.background = null;
 	}
 
 	/**
