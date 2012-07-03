@@ -134,6 +134,11 @@ public class GUI implements ActionListener {
 		this.menubar.add(this.spiel);
 
 		File folder = new File("src/ressources/maps");
+		if (folder.exists() == false) {
+			folder = new File(this.getClass().getResource("/ressources/maps")
+					.getPath());
+		}
+		System.out.println(folder.getPath());
 
 		File[] maps = folder.listFiles();
 		this.map_names = new ArrayList<String>();
