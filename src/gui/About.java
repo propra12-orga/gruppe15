@@ -14,7 +14,7 @@ public class About extends JFrame {
 	private JPanel panel;
 
 	public About(Container parentWindow) {
-		super("‹ber");
+		super("√úber");
 		this.setAlwaysOnTop(true);
 		this.setLocationRelativeTo(parentWindow);
 
@@ -28,7 +28,7 @@ public class About extends JFrame {
 		JLabel info = new JLabel(
 				"<html>Dieses Programm steht unter GNU GPL v3.<br/>Der Lizenztext steht in der Lizenz.txt Datei.<br/>Autoren:<ul>"
 						+ "<li>Kyra Mooren</li>" + "<li>Philipp Rehs</li>" + "<li>Pakan Sabbaghi</li>"
-						+ "<li>Oktay Sarier</li>" + "<li>Maurice Schleuﬂinger</li></ul></html>");
+						+ "<li>Oktay Sarier</li>" + "<li>Maurice Schleu√üinger</li></ul></html>");
 		this.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
 		c.gridx = 0;
 		c.gridy = 0;

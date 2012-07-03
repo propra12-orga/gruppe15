@@ -97,7 +97,7 @@ public class Serverbrowser extends JFrame implements ActionListener, WindowListe
 				this.discover.running = false;
 				this.dispose();
 			} else {
-				JOptionPane.showMessageDialog(this, "Bitte Server ausw‰hlen", "Fehler!", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(this, "Bitte Server ausw√§hlen", "Fehler!", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
