@@ -75,8 +75,10 @@ public class GameServer implements Runnable {
 	public void run() {
 		Debug.log(Debug.DEBUG, "Game Server starting");
 		try {
-			Debug.log(Debug.DEBUG, "Local Server IP: " + InetAddress.getLocalHost().getHostAddress());
-			Debug.log(Debug.DEBUG, "External Server IP: " + GameServer.getExternalIP());
+			Debug.log(Debug.DEBUG, "Local Server IP: "
+					+ InetAddress.getLocalHost().getHostAddress());
+			Debug.log(Debug.DEBUG,
+					"External Server IP: " + GameServer.getExternalIP());
 		} catch (UnknownHostException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -86,10 +88,12 @@ public class GameServer implements Runnable {
 			try {
 				if (this.connected_players.size() < this.required_player) {
 					Socket connectionSocket = this.welcomeSocket.accept();
-					ClientOnServer c = new ClientOnServer(connectionSocket, this.connected_players.size(), this.queue);
+					ClientOnServer c = new ClientOnServer(connectionSocket,
+							this.connected_players.size(), this.queue);
 					c.start();
 					this.connected_players.add(c);
-					Debug.log(Debug.DEBUG, "New Client connected (" + connectionSocket.getInetAddress() + ")");
+					Debug.log(Debug.DEBUG, "New Client connected ("
+							+ connectionSocket.getInetAddress() + ")");
 				}
 
 				if ((this.connected_players.size() == this.required_player)
@@ -125,7 +129,8 @@ public class GameServer implements Runnable {
 			try {
 				c.sendMap(this.map);
 			} catch (IOException e) {
-				Debug.log(Debug.ERROR, "Can't send Data to player, maybe disconnected");
+				Debug.log(Debug.ERROR,
+						"Can't send Data to player, maybe disconnected");
 			}
 		}
 		this.status = GameServerStatus.RUNNING;
@@ -142,7 +147,8 @@ public class GameServer implements Runnable {
 					try {
 						c.sendInput(in);
 					} catch (IOException e) {
-						Debug.log(Debug.ERROR, "Can't send Data to player, maybe disconnected");
+						Debug.log(Debug.ERROR,
+								"Can't send Data to player, maybe disconnected");
 					}
 				}
 			}
@@ -151,10 +157,12 @@ public class GameServer implements Runnable {
 	}
 
 	public static String getExternalIP() {
-		String url = "http://privat.p-rehs.de/uni/ip.php";
+		String url = "http://wtfismyip.com/text";
 		try {
-			String ip = new BufferedReader(new InputStreamReader(new URL(url).openStream())).readLine();
-			return ip + " (Needs Port " + GameServer.GAME_PORT + " to be forwared)";
+			String ip = new BufferedReader(new InputStreamReader(
+					new URL(url).openStream())).readLine();
+			return ip + " (Needs Port " + GameServer.GAME_PORT
+					+ " to be forwared)";
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "unknown (maybe no connection to internet)";
