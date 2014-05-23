@@ -6,6 +6,7 @@ import graphics.Image;
 import graphics.Sprite;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,11 +58,12 @@ public class BombAnimation extends Entity {
 	 */
 	public BombAnimation(int x, int y, Player owner) {
 		super(x, y);
-		this.explosionImages = Sprite.load("explosion_temp.png", 100, 100);
+		this.explosionImages = Sprite.load("explosion_temp.png", 100, 100,
+				BufferedImage.TYPE_INT_ARGB);
 		this.exposionTimeDefault = 40;
 		this.explosionTime = this.exposionTimeDefault;
-		this.collideMap = new int[][] { { 0, 0, 1, 0, 0 }, { 0, 0, 1, 0, 0 }, { 1, 1, 1, 1, 1 }, { 0, 0, 1, 0, 0 },
-				{ 0, 0, 1, 0, 0 } };
+		this.collideMap = new int[][] { { 0, 0, 1, 0, 0 }, { 0, 0, 1, 0, 0 },
+				{ 1, 1, 1, 1, 1 }, { 0, 0, 1, 0, 0 }, { 0, 0, 1, 0, 0 } };
 		this.playerKilled = null;
 		this.killDelay = 10;
 		this.owner = owner;
@@ -96,17 +98,20 @@ public class BombAnimation extends Entity {
 
 		List<Entity> entities = null;
 
-		int x_tmp = this.x - (2 * Game.BLOCK_SIZE), y_tmp = this.y - (2 * Game.BLOCK_SIZE);
+		int x_tmp = this.x - (2 * Game.BLOCK_SIZE), y_tmp = this.y
+				- (2 * Game.BLOCK_SIZE);
 
 		entities = new ArrayList<Entity>();
 		if (this.explosionTime < (this.exposionTimeDefault * 0.7)) {
 			for (int x = 0; x < 5; x++) {
 				for (int y = 0; y < 5; y++) {
 					if (this.collideMap[y][x] == 1) {
-						entities.addAll(Game.getEntities(new Box(x_tmp + (x * Game.BLOCK_SIZE), this.y,
+						entities.addAll(Game.getEntities(new Box(x_tmp
+								+ (x * Game.BLOCK_SIZE), this.y,
 								Game.BLOCK_SIZE, Game.BLOCK_SIZE)));
-						entities.addAll(Game.getEntities(new Box(this.x, y_tmp + (y * Game.BLOCK_SIZE),
-								Game.BLOCK_SIZE, Game.BLOCK_SIZE)));
+						entities.addAll(Game.getEntities(new Box(this.x, y_tmp
+								+ (y * Game.BLOCK_SIZE), Game.BLOCK_SIZE,
+								Game.BLOCK_SIZE)));
 					}
 				}
 			}
@@ -114,15 +119,18 @@ public class BombAnimation extends Entity {
 			for (int x = 1; x < 4; x++) {
 				for (int y = 1; y < 4; y++) {
 					if (this.collideMap[y][x] == 1) {
-						entities.addAll(Game.getEntities(new Box(x_tmp + (x * Game.BLOCK_SIZE), this.y,
+						entities.addAll(Game.getEntities(new Box(x_tmp
+								+ (x * Game.BLOCK_SIZE), this.y,
 								Game.BLOCK_SIZE, Game.BLOCK_SIZE)));
-						entities.addAll(Game.getEntities(new Box(this.x, y_tmp + (y * Game.BLOCK_SIZE),
-								Game.BLOCK_SIZE, Game.BLOCK_SIZE)));
+						entities.addAll(Game.getEntities(new Box(this.x, y_tmp
+								+ (y * Game.BLOCK_SIZE), Game.BLOCK_SIZE,
+								Game.BLOCK_SIZE)));
 					}
 				}
 			}
 		} else {
-			entities = Game.getEntities(new Box(this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE));
+			entities = Game.getEntities(new Box(this.x, this.y,
+					Game.BLOCK_SIZE, Game.BLOCK_SIZE));
 		}
 
 		entities = Game.unique(entities);
@@ -143,18 +151,21 @@ public class BombAnimation extends Entity {
 	@Override
 	public void draw(Graphics g) {
 
-		int x_tmp = this.x - (2 * Game.BLOCK_SIZE), y_tmp = this.y - (2 * Game.BLOCK_SIZE);
+		int x_tmp = this.x - (2 * Game.BLOCK_SIZE), y_tmp = this.y
+				- (2 * Game.BLOCK_SIZE);
 
 		if (this.explosionTime < (this.exposionTimeDefault * 0.7)) {
 
 			for (int x = 0; x < 5; x++) {
 				if (this.collideMap[2][x] == 1) {
-					g.drawImage((this.explosionImages[0][0]).image, x_tmp + (x * Game.BLOCK_SIZE), this.y,
-							Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
+					g.drawImage((this.explosionImages[0][0]).image, x_tmp
+							+ (x * Game.BLOCK_SIZE), this.y, Game.BLOCK_SIZE,
+							Game.BLOCK_SIZE, null);
 				}
 				if (this.collideMap[x][2] == 1) {
-					g.drawImage((this.explosionImages[2][0]).image, this.x, y_tmp + (x * Game.BLOCK_SIZE),
-							Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
+					g.drawImage((this.explosionImages[2][0]).image, this.x,
+							y_tmp + (x * Game.BLOCK_SIZE), Game.BLOCK_SIZE,
+							Game.BLOCK_SIZE, null);
 				}
 			}
 
@@ -164,17 +175,20 @@ public class BombAnimation extends Entity {
 
 			for (int x = 1; x < 4; x++) {
 				if (this.collideMap[2][x] == 1) {
-					g.drawImage((this.explosionImages[0][0]).image, x_tmp + (x * Game.BLOCK_SIZE), this.y,
-							Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
+					g.drawImage((this.explosionImages[0][0]).image, x_tmp
+							+ (x * Game.BLOCK_SIZE), this.y, Game.BLOCK_SIZE,
+							Game.BLOCK_SIZE, null);
 				}
 				if (this.collideMap[x][2] == 1) {
-					g.drawImage((this.explosionImages[2][0]).image, this.x, y_tmp + (x * Game.BLOCK_SIZE),
-							Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
+					g.drawImage((this.explosionImages[2][0]).image, this.x,
+							y_tmp + (x * Game.BLOCK_SIZE), Game.BLOCK_SIZE,
+							Game.BLOCK_SIZE, null);
 				}
 			}
 		}
 
-		g.drawImage((this.explosionImages[1][0]).image, this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
+		g.drawImage((this.explosionImages[1][0]).image, this.x, this.y,
+				Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
 
 	}
 

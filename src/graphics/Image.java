@@ -13,10 +13,10 @@ public class Image {
 	 * @param w
 	 * @param h
 	 */
-	public Image(int w, int h) {
+	public Image(int w, int h, int type) {
 		this.w = w;
 		this.h = h;
-		this.image = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+		this.image = new BufferedImage(w, h, type);
 		this.pixels = ((DataBufferInt) this.image.getRaster().getDataBuffer())
 				.getData();
 	}

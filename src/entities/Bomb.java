@@ -4,6 +4,7 @@ import game.Game;
 import graphics.Sprite;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 import level.Box;
 import sound.Sound;
@@ -25,8 +26,10 @@ public class Bomb extends Entity {
 	 */
 	public Bomb(int x, int y, Player owner) {
 		super(x, y);
-		this.images = Sprite.load("bomb_small.png", 50, 49);
-		this.box = new Box(this.x + (Game.BLOCK_SIZE / 4), this.y + (Game.BLOCK_SIZE / 4), Game.BLOCK_SIZE / 2,
+		this.images = Sprite.load("bomb_small.png", 50, 49,
+				BufferedImage.TYPE_INT_ARGB);
+		this.box = new Box(this.x + (Game.BLOCK_SIZE / 4), this.y
+				+ (Game.BLOCK_SIZE / 4), Game.BLOCK_SIZE / 2,
 				Game.BLOCK_SIZE / 2);
 		this.owner = owner;
 		this.explosionDelay = 50;
@@ -75,8 +78,9 @@ public class Bomb extends Entity {
 	 */
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage((this.images[0][0]).image, this.x + (Game.BLOCK_SIZE / 4), this.y + (Game.BLOCK_SIZE / 4),
-				Game.BLOCK_SIZE / 2, Game.BLOCK_SIZE / 2, null);
+		g.drawImage((this.images[0][0]).image, this.x + (Game.BLOCK_SIZE / 4),
+				this.y + (Game.BLOCK_SIZE / 4), Game.BLOCK_SIZE / 2,
+				Game.BLOCK_SIZE / 2, null);
 	}
 
 	/**

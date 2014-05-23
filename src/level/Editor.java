@@ -12,6 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -255,16 +256,20 @@ public class Editor extends Canvas implements ActionListener, MouseListener {
 						// this.images = Sprite.load("background.png", 100,
 						// 100);
 					} else if (this.element == 1) {
-						this.images = Sprite.load("w1.png", 100, 100);
+						this.images = Sprite.load("w1.png", 100, 100,
+								BufferedImage.TYPE_INT_RGB);
 					} else if (this.element == 2) {
-						this.images = Sprite.load("wall.png", 100, 100);
+						this.images = Sprite.load("wall.png", 100, 100,
+								BufferedImage.TYPE_INT_RGB);
 					} else if (this.element == 3) {
-						this.images = Sprite.load("bomberman.png", 55, 90);
+						this.images = Sprite.load("bomberman.png", 55, 90,
+								BufferedImage.TYPE_INT_RGB);
 
 						// Game.staticBackground.add(this.images =
 						// Sprite.load("background.png", 100, 100));
 					} else if (this.element == 4) {
-						this.images = Sprite.load("finish.png", 100, 100);
+						this.images = Sprite.load("finish.png", 100, 100,
+								BufferedImage.TYPE_INT_RGB);
 					} else if (this.element == 5) {
 						//
 
@@ -287,15 +292,20 @@ public class Editor extends Canvas implements ActionListener, MouseListener {
 		this.y = y;
 
 		if (this.element == 0) {
-			this.images = Sprite.load("background.png", 100, 100);
+			this.images = Sprite.load("background.png", 100, 100,
+					BufferedImage.TYPE_INT_RGB);
 		} else if (this.element == 1) {
-			this.images = Sprite.load("w1.png", 100, 100);
+			this.images = Sprite.load("w1.png", 100, 100,
+					BufferedImage.TYPE_INT_RGB);
 		} else if (this.element == 2) {
-			this.images = Sprite.load("wall.png", 100, 100);
+			this.images = Sprite.load("wall.png", 100, 100,
+					BufferedImage.TYPE_INT_RGB);
 		} else if (this.element == 3) {
-			this.images = Sprite.load("bomberman.png", 55, 90);
+			this.images = Sprite.load("bomberman.png", 55, 90,
+					BufferedImage.TYPE_INT_ARGB);
 		} else if (this.element == 4) {
-			this.images = Sprite.load("finish.png", 100, 100);
+			this.images = Sprite.load("finish.png", 100, 100,
+					BufferedImage.TYPE_INT_RGB);
 		} else if (this.element == 5) {
 
 		}
@@ -323,19 +333,19 @@ public class Editor extends Canvas implements ActionListener, MouseListener {
 
 					try {
 						if (this.images == Sprite.load("background.png", 100,
-								100)) {
+								100, BufferedImage.TYPE_INT_RGB)) {
 							this.element = 0;
 						} else if (this.images == Sprite.load("w1.png", 100,
-								100)) {
+								100, BufferedImage.TYPE_INT_RGB)) {
 							this.element = 1;
 						} else if (this.images == Sprite.load("wall.png", 100,
-								100)) {
+								100, BufferedImage.TYPE_INT_RGB)) {
 							this.element = 2;
 						} else if (this.images == Sprite.load("bomberman.png",
-								55, 90)) {
+								55, 90, BufferedImage.TYPE_INT_ARGB)) {
 							this.element = 3;
 						} else if (this.images == Sprite.load("finish.png",
-								100, 100)) {
+								100, 100, BufferedImage.TYPE_INT_ARGB)) {
 							this.element = 4;
 						}
 

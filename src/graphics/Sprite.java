@@ -17,15 +17,16 @@ public class Sprite {
 	 * @param h
 	 * @return Image[][]
 	 */
-	public static Image[][] load(String filename, int w, int h) {
+	public static Image[][] load(String filename, int w, int h, int type) {
 		try {
-			BufferedImage image = ImageIO.read(Main.class.getResource("/ressources/" + filename));
+			BufferedImage image = ImageIO.read(Main.class
+					.getResource("/ressources/" + filename));
 			int partsX = image.getWidth() / w;
 			int partsY = image.getHeight() / h;
 			Image[][] parts = new Image[partsX][partsY];
 			for (int x = 0; x < partsX; x++) {
 				for (int y = 0; y < partsY; y++) {
-					parts[x][y] = new Image(w, h);
+					parts[x][y] = new Image(w, h, type);
 					image.getRGB(x * w, y * h, w, h, parts[x][y].pixels, 0, w);
 				}
 			}

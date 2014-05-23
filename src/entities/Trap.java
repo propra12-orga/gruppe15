@@ -4,6 +4,7 @@ import game.Game;
 import graphics.Sprite;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 public class Trap extends Entity {
 
@@ -14,7 +15,8 @@ public class Trap extends Entity {
 	public Trap(int x, int y, Player p) {
 		super(x, y);
 		this.owner = p;
-		this.images = Sprite.load("falle.png", 100, 100);
+		this.images = Sprite.load("falle.png", 100, 100,
+				BufferedImage.TYPE_INT_ARGB);
 		this.killDelay = 10;
 	}
 
@@ -25,7 +27,8 @@ public class Trap extends Entity {
 	 */
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage((this.images[0][0]).image, this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
+		g.drawImage((this.images[0][0]).image, this.x, this.y, Game.BLOCK_SIZE,
+				Game.BLOCK_SIZE, null);
 	}
 
 	/*

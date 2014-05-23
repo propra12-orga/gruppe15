@@ -5,6 +5,7 @@ import game.Game;
 import graphics.Sprite;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 
 /**
  * Finishpoint for the game
@@ -30,7 +31,8 @@ public class Finishpoint extends Entity {
 		super(x, y);
 		this.isBlocking = false;
 		this.needsStep = true;
-		this.images = Sprite.load("finish.png", 100, 100);
+		this.images = Sprite.load("finish.png", 100, 100,
+				BufferedImage.TYPE_INT_RGB);
 		this.player = null;
 
 	}
@@ -71,7 +73,8 @@ public class Finishpoint extends Entity {
 	 */
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage((this.images[0][0]).image, this.x, this.y, Game.BLOCK_SIZE, Game.BLOCK_SIZE, null);
+		g.drawImage((this.images[0][0]).image, this.x, this.y, Game.BLOCK_SIZE,
+				Game.BLOCK_SIZE, null);
 
 	}
 

@@ -1,5 +1,6 @@
 package entities;
 
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
 import entities.items.Falle;
@@ -28,11 +29,14 @@ public class BreakableWall extends Wall {
 		int z = new Random().nextInt(12);
 		// int z = (int) (Math.random() * 10);
 		if (z < 4) {
-			this.images = Sprite.load("w1.png", 100, 100);
+			this.images = Sprite.load("w1.png", 100, 100,
+					BufferedImage.TYPE_INT_RGB);
 		} else if (z < 8) {
-			this.images = Sprite.load("w2.png", 100, 100);
+			this.images = Sprite.load("w2.png", 100, 100,
+					BufferedImage.TYPE_INT_RGB);
 		} else {
-			this.images = Sprite.load("w3.png", 100, 100);
+			this.images = Sprite.load("w3.png", 100, 100,
+					BufferedImage.TYPE_INT_RGB);
 		}
 
 		if (new Random().nextInt(10) > 8) {

@@ -11,6 +11,7 @@ import graphics.Sprite;
 import input.KeySettings;
 
 import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,8 @@ public class Player extends Entity {
 
 	public Player(int x, int y) {
 		super(x + 1, y + 1);
-		this.facings = Sprite.load("player1.png", 67, 100);
+		this.facings = Sprite.load("player1.png", 67, 100,
+				BufferedImage.TYPE_INT_ARGB);
 		this.width = (float) (53.6 / (100.0 / Game.BLOCK_SIZE));
 		this.height = (float) (80.0 / (100.0 / Game.BLOCK_SIZE));
 
@@ -62,8 +64,9 @@ public class Player extends Entity {
 
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage((this.facings[this.facing][this.facing1]).image, this.x, this.y
-				+ (int) ((Game.BLOCK_SIZE - this.height) / 2), (int) this.width, (int) this.height, null);
+		g.drawImage((this.facings[this.facing][this.facing1]).image, this.x,
+				this.y + (int) ((Game.BLOCK_SIZE - this.height) / 2),
+				(int) this.width, (int) this.height, null);
 	}
 
 	/**
@@ -229,7 +232,8 @@ public class Player extends Entity {
 			}
 		}
 
-		if ((Game.gamemode == Gamemode.NETWORK) && (this.networkID == Game.network.playerID)) {
+		if ((Game.gamemode == Gamemode.NETWORK)
+				&& (this.networkID == Game.network.playerID)) {
 			Input input = new Input();
 			input.x = this.x;
 			input.y = this.y;
@@ -247,7 +251,8 @@ public class Player extends Entity {
 			int b_x = Box.fitToBlock(this.x);
 			int b_y = Box.fitToBlock(this.y);
 			Game.entities.add(new Bomb(b_x, b_y, this));
-			if ((Game.gamemode == Gamemode.NETWORK) && (this.networkID == Game.network.playerID)) {
+			if ((Game.gamemode == Gamemode.NETWORK)
+					&& (this.networkID == Game.network.playerID)) {
 				Input input_b = new Input();
 				input_b.x = b_x;
 				input_b.y = b_y;
@@ -354,7 +359,8 @@ public class Player extends Entity {
 				livingPlayer.pm.addPoints(1000);
 			}
 		}
-		if ((Game.gamemode == Gamemode.NETWORK) && (this.networkID == Game.network.playerID)) {
+		if ((Game.gamemode == Gamemode.NETWORK)
+				&& (this.networkID == Game.network.playerID)) {
 			Input in = new Input();
 			in.playerID = this.networkID;
 			in.type = NetworkInputType.PLAYER_DEAD;
